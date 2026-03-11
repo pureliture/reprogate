@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Local AI runtime state
+.claude/
+.codex/
+.ai-ops/
+.omc/
+.omx/
+
+# Misc
+*.log
