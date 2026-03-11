@@ -1,0 +1,42 @@
+# AI Ops Adapter Rules for {{ project_name }}
+
+Use the AI Ops framework as the source of truth for process-driven work in this repository.
+
+## Required References
+
+Read these files before starting substantial work:
+
+1. `WORKSPACE-PROFILE.md`
+2. `docs/constitution.md`
+3. `docs/operating-model.md`
+4. `docs/process-catalog/README.md`
+5. `{{ wp_path }}/index.md`
+6. `{{ changelog_path }}`
+
+## Operating Rules
+
+1. Start with `G0`, then recommend one process and one or two alternatives.
+2. Wait for explicit user process selection before implementation work.
+3. Record the selected process with:
+
+```bash
+python3 scripts/set_process_context.py --process <PROCESS> --wp <WP-ID> --team-mode auto
+```
+
+4. For team-capable processes (`P3`, `P4`, `S3`, optional `S1`), resolve `team` or `single` before code changes.
+5. Use `single` fallback only when one worker can still perform `executor -> verifier -> recorder` responsibilities sequentially.
+6. Update `{{ wp_path }}`, `{{ adr_path }}`, and `{{ changelog_path }}` as required by the selected process.
+7. Before ending a process, summarize:
+   - `current_process`
+   - work performed
+   - artifact paths
+   - checklist status
+   - `next_process`
+
+## Codex / JetBrains / OMX Notes
+
+{{ codex_notes_block }}
+
+## Claude Notes
+
+{{ claude_notes_block }}
