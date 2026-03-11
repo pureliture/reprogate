@@ -1,0 +1,34 @@
+# AI Ops Rules for Claude in {{ project_name }}
+
+Use the framework documents as the source of truth:
+
+1. `WORKSPACE-PROFILE.md`
+2. `docs/constitution.md`
+3. `docs/operating-model.md`
+4. `docs/process-catalog/README.md`
+5. `{{ wp_path }}/index.md`
+6. `{{ changelog_path }}`
+
+## Required Flow
+
+1. Run a `G0` alignment check.
+2. Recommend one process plus alternatives.
+3. Wait for explicit user selection.
+4. Record the selected process:
+
+```bash
+python3 scripts/set_process_context.py --process <PROCESS> --wp <WP-ID> --team-mode auto
+```
+
+5. For team-capable processes, resolve `team` vs `single` before implementation.
+6. Keep work packet, changelog, and decision records synchronized with the active process.
+7. At process end, report:
+   - `current_process`
+   - work performed
+   - artifact paths
+   - checklist status
+   - `next_process`
+
+## Hook Enforcement
+
+{{ claude_hook_block }}

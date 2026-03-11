@@ -1,0 +1,12 @@
+# AI Ops Entry Flow for Claude
+
+Use the copied framework docs as the source of truth.
+
+## Required Flow
+
+1. Run `G0`.
+2. Recommend one process plus one or two alternatives.
+3. Wait for explicit user selection.
+4. Record the selected process with `python3 scripts/set_process_context.py --process <PROCESS> --wp <WP-ID> --team-mode auto`.
+5. Resolve `team` vs `single` before implementation on team-capable processes.
+6. Use `{{ wp_path }}` and `{{ changelog_path }}` for process records.
