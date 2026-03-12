@@ -23,6 +23,7 @@
 | [WP-AIOPS-2026-03-001](./WP-AIOPS-2026-03-001-ai-ops-bootstrap.md) | AI 협업 운영체계 구축 부트스트랩 | IN_REFINEMENT | P1 | P3 | P0 | 2026-03-07 |
 | [WP-AIOPS-2026-03-008](./WP-AIOPS-2026-03-008-codex-omx-alignment.md) | Codex+OMX 조합 정렬 | IN_DEVELOPMENT | P3 | S1 | P0 | 2026-03-09 |
 | [WP-AIOPS-2026-03-011](./WP-AIOPS-2026-03-011-public-history-replay-plan.md) | ai-ops public repo replay history plan | IN_REFINEMENT | P1 | P3 | P1 | 2026-03-11 |
+| [WP-AIOPS-2026-03-013](./WP-AIOPS-2026-03-013-public-strategy-docs.md) | external ai-ops public strategy docs | IN_DEVELOPMENT | P3 | S1 | P1 | 2026-03-12 |
 | [WP-AIOPS-2026-03-012](./WP-AIOPS-2026-03-012-external-canonical-migration-inventory.md) | external ai-ops canonical migration inventory | IN_REFINEMENT | P1 | P3 | P0 | 2026-03-12 |
 
 ## 2. On Hold

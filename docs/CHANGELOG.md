@@ -7,6 +7,15 @@ Scope:
 
 ## 2026-03-12
 
+- **STARTED**: [WP-AIOPS-2026-03-013](./work-packets/WP-AIOPS-2026-03-013-public-strategy-docs.md) external public strategy docs
+  - added first public-facing strategy layer:
+    - `docs/vision.md`
+    - `docs/roadmap.md`
+    - `docs/why-ai-ops.md`
+  - linked the strategy docs from `README.md` and `docs/README.md`
+  - next process: `S1`
+    - review whether the curated strategy layer is sufficient for the external canonical repo
+
 - **UPDATED**: [WP-AIOPS-2026-03-012](./work-packets/WP-AIOPS-2026-03-012-external-canonical-migration-inventory.md) P1 fixes the external canonical migration policy
   - fixed external repo target structure:
     - framework surface

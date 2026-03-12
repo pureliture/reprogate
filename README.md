@@ -66,6 +66,12 @@ python3 scripts/launch_ai_ops_session.py --launcher omx -- --model gpt-5
 
 For a fuller walkthrough, see [docs/installation.md](./docs/installation.md).
 
+For the product direction and positioning of the framework, see:
+
+- [docs/vision.md](./docs/vision.md)
+- [docs/roadmap.md](./docs/roadmap.md)
+- [docs/why-ai-ops.md](./docs/why-ai-ops.md)
+
 ## Repository Layout
 
 ```text

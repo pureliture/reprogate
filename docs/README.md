@@ -17,6 +17,7 @@ This directory contains the portable framework documents that describe the AI Op
 - `commands/` — named entrypoint and command references
 - `portability/` — boundaries between framework, adapters, and local runtime
 - `omc-config/` — optional OMC policy templates
+- strategy docs — `vision.md`, `roadmap.md`, `why-ai-ops.md`
 
 ## Portability Notes
 
