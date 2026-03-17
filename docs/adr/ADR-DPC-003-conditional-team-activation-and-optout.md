@@ -122,6 +122,6 @@ PreToolUse 가드는 `--members`가 없거나 필수 역할이 누락된 경우 
 ## Related
 
 - [WP-DPC-2026-03-005](../archive/ai-ops/work-packets/WP-DPC-2026-03-005-process-based-collaboration.md)
-- [ops-bootstrap-master-plan.md](../ops-bootstrap-master-plan.md)
+- [ops-bootstrap-master-plan.md](../governance/ops-bootstrap-master-plan.md)
 - [ADR-DPC-002](./ADR-DPC-002-goal-alignment-process.md)
 - [ai-ops command](../commands/ai-ops.md)

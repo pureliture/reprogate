@@ -57,10 +57,10 @@ last_updated: "2026-03-12"
 
 ## 7. Related References
 ### 7.1 Related Docs
-- [AI Ops Constitution](../constitution.md)
+- [AI Ops Constitution](../governance/constitution.md)
 - [AI 협업 가이드](../../project-ops/ai-collaboration-guide.md)
 - [ADR-DPC-001: 요구사항 변경 동기화 강제 규칙](../adr/ADR-DPC-001-bootstrap-requirement-change-sync.md)
-- [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
+- [운영체계 구축 상위 계획](../governance/ops-bootstrap-master-plan.md)
 - [work-packets index](./index.md)
 - [AI Ops CHANGELOG](../CHANGELOG.md)
 

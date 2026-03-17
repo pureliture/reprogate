@@ -142,6 +142,6 @@ def evaluate_rules(trigger: str, context: dict) -> dict:
 ## Related
 
 - [WP-DPC-2026-03-008](../work-packets/WP-DPC-2026-03-008-rules-dsl-design.md) - Rules DSL 설계 (superseded)
-- [rules-dsl-spec.md](../rules-dsl-spec.md) - 자체 DSL 명세 (deprecated)
+- [rules-dsl-spec.md](../design/rules-dsl-spec.md) - 자체 DSL 명세 (deprecated)
 - [OPA 공식 문서](https://www.openpolicyagent.org/docs)
 - [Rego 언어 레퍼런스](https://www.openpolicyagent.org/docs/latest/policy-language/)

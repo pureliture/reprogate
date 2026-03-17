@@ -86,8 +86,8 @@ last_updated: "2026-03-09"
 - [WP-DPC-2026-03-005](./WP-DPC-2026-03-005-process-based-collaboration.md)
 - [WP-DPC-2026-03-006](./WP-DPC-2026-03-006-pilot-verification.md)
 - [WP-DPC-2026-03-007](./WP-DPC-2026-03-007-ai-tool-artifact-separation.md)
-- [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
-- [AI Ops Constitution](../constitution.md)
+- [운영체계 구축 상위 계획](../governance/ops-bootstrap-master-plan.md)
+- [AI Ops Constitution](../governance/constitution.md)
 
 ### 7.2 Related Code
 - `AGENTS.md`

@@ -70,7 +70,7 @@ track: "external canonical migration"
 - [WP-DPC-2026-03-003](./WP-DPC-2026-03-003-framework-extraction.md)
 - [WP-DPC-2026-03-004](./WP-DPC-2026-03-004-public-history-replay-plan.md)
 - [AI Ops CHANGELOG](../CHANGELOG.md)
-- [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
+- [운영체계 구축 상위 계획](../governance/ops-bootstrap-master-plan.md)
 - [future-direction discussion archive](../archive/ai-ops/discussions/future-direction-discussion-2026-03-09.md)
 
 ### 7.2 Related Code

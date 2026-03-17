@@ -66,7 +66,7 @@ presets 시스템의 구체적인 설계를 정의한다:
 
 ## 6. Design
 
-설계 문서: **[presets-spec.md](../presets-spec.md)**
+설계 문서: **[presets-spec.md](../design/presets-spec.md)**
 
 ### 요약
 
@@ -80,6 +80,6 @@ presets 시스템의 구체적인 설계를 정의한다:
 
 ## 7. Related
 
-- [architecture.md](../architecture.md)
+- [architecture.md](../design/architecture.md)
 - [ADR-DPC-007](../adr/ADR-DPC-007-rules-engine-selection.md) - OPA/Rego 채택 (WP-015 대체)
 - [ADR-DPC-006](../adr/ADR-DPC-006-dpc-config-schema.md)

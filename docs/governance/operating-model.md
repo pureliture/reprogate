@@ -83,5 +83,5 @@ The core AI Ops framework should stay portable across repositories and organizat
 
 ## Related Documents
 
-- [Constitution](./constitution.md)
+- [Constitution](./governance/constitution.md)
 - [Process Catalog](./process-catalog/README.md)

@@ -5,8 +5,8 @@
 
 ## 0. Program Plan
 
-- [dpc Constitution](../constitution.md)
-- [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
+- [dpc Constitution](../governance/constitution.md)
+- [운영체계 구축 상위 계획](../governance/ops-bootstrap-master-plan.md)
 - [ADR-DPC-003](../adr/ADR-DPC-003-conditional-team-activation-and-optout.md)
 - [ADR-DPC-005](../adr/ADR-DPC-005-codex-entrypoint-ownership-and-ai-assistant-decoupling.md)
 - [ADR-DPC-006](../adr/ADR-DPC-006-dpc-config-schema.md)

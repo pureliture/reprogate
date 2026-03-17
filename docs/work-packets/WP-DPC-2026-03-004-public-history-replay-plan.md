@@ -73,7 +73,7 @@ track: "public-history replay"
 - [WP-DPC-2026-03-002](./WP-DPC-2026-03-002-codex-omx-alignment.md)
 - [WP-DPC-2026-03-003](./WP-DPC-2026-03-003-framework-extraction.md)
 - [AI Ops CHANGELOG](../CHANGELOG.md)
-- [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
+- [운영체계 구축 상위 계획](../governance/ops-bootstrap-master-plan.md)
 - [ADR-DPC-001](../adr/ADR-DPC-001-bootstrap-requirement-change-sync.md)
 - [ADR-DPC-002](../adr/ADR-DPC-002-goal-alignment-process.md)
 - [ADR-DPC-003](../adr/ADR-DPC-003-conditional-team-activation-and-optout.md)

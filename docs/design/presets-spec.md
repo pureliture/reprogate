@@ -335,7 +335,7 @@ deny contains msg if {
 
 ## 7. 관련 문서
 
-- [architecture.md](./architecture.md) - dpc 전체 아키텍처
+- [architecture.md](./design/architecture.md) - dpc 전체 아키텍처
 - [ADR-DPC-007](./adr/ADR-DPC-007-rules-engine-selection.md) - OPA/Rego 채택 결정
 - [OPA 공식 문서](https://www.openpolicyagent.org/docs) - Rego 언어 레퍼런스
 - [ADR-DPC-006](./adr/ADR-DPC-006-dpc-config-schema.md) - config.yaml 스키마

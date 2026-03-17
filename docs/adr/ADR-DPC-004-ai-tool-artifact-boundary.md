@@ -50,4 +50,4 @@
 
 - [WP-DPC-2026-03-007](../work-packets/WP-DPC-2026-03-007-ai-tool-artifact-separation.md)
 - [WP-DPC-2026-03-005](../work-packets/WP-DPC-2026-03-005-process-based-collaboration.md)
-- [ops-bootstrap-master-plan.md](../ops-bootstrap-master-plan.md)
+- [ops-bootstrap-master-plan.md](../governance/ops-bootstrap-master-plan.md)

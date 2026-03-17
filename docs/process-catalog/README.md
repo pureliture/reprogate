@@ -52,5 +52,5 @@ Execution should begin by choosing the right process and then following its inpu
 
 ## Related Documents
 
-- [Constitution](../constitution.md)
-- [Operating Model](../operating-model.md)
+- [Constitution](../governance/constitution.md)
+- [Operating Model](../governance/operating-model.md)

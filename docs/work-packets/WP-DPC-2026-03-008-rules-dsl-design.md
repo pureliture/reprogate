@@ -75,7 +75,7 @@ rules DSL의 구체적인 설계를 정의한다:
 
 ## 6. Design
 
-설계 문서: **[rules-dsl-spec.md](../rules-dsl-spec.md)**
+설계 문서: **[rules-dsl-spec.md](../design/rules-dsl-spec.md)**
 
 ### 요약
 
@@ -89,6 +89,6 @@ rules DSL의 구체적인 설계를 정의한다:
 
 ## 7. Related
 
-- [architecture.md](../architecture.md)
+- [architecture.md](../design/architecture.md)
 - [WP-DPC-2026-03-007](./WP-DPC-2026-03-007-presets-system-design.md)
 - [claude_pretooluse_guard.py](../../scripts/hooks/claude_pretooluse_guard.py)

@@ -4,7 +4,7 @@
 > Last Updated: 2026-03-11  
 > Parent WP: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md)  
 > Governing ADR: [ADR-DPC-001](./adr/ADR-DPC-001-bootstrap-requirement-change-sync.md)  
-> Constitution: [AI Ops Constitution](./constitution.md)  
+> Constitution: [AI Ops Constitution](./governance/constitution.md)  
  
 ## 1. 목적
 
@@ -180,7 +180,7 @@
 
 요구사항 변경 시 반드시 같은 세션에서 아래를 함께 갱신한다.
 
-1. [constitution.md](./constitution.md) (불변 목표/규칙 변경 시)
+1. [constitution.md](./governance/constitution.md) (불변 목표/규칙 변경 시)
 2. 관련 WP(부모/자식)
 3. [work-packets/index.md](./work-packets/index.md)
 4. [CHANGELOG.md](./CHANGELOG.md)

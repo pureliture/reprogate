@@ -19,10 +19,10 @@ Scope:
   - OPA/Rego 반영: `rules.yaml` → `rules.rego`
   - status: DONE
 
-- **UPDATED**: [presets-spec.md](./presets-spec.md) OPA/Rego 반영
+- **UPDATED**: [presets-spec.md](./design/presets-spec.md) OPA/Rego 반영
   - 섹션 3: rules.rego 스키마 및 Gate 호출 예시 추가
 
-- **UPDATED**: [architecture.md](./architecture.md) OPA/Rego 반영
+- **UPDATED**: [architecture.md](./design/architecture.md) OPA/Rego 반영
   - gate-engine 설명 변경: `rules → Gate 변환` → `OPA eval 호출`
   - 모든 `rules.yaml` → `rules.rego`
   - 섹션 9 요약: DSL → Rego
@@ -613,7 +613,7 @@ Scope:
 - Updated: 프로세스 종료 시 커밋 여부 질의 규칙 추가
   - 다음 프로세스 전이 전 현재 변경을 별도 커밋으로 남길지 사용자에게 반드시 확인
   - 프로세스 종료 보고에 커밋 후보 범위를 함께 제시하도록 Codex adapter 규칙 보강
-  - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md), [work-packets/index.md](./work-packets/index.md)
+  - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./governance/ops-bootstrap-master-plan.md), [work-packets/index.md](./work-packets/index.md)
 - Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P1 설계 완료
   - 상태 반영: `IN_ANALYSIS/P0` -> `IN_REFINEMENT/P1`, `next_process=P3`
   - 목표 구조 확정:
@@ -625,12 +625,12 @@ Scope:
 - Updated: capability-first 문서화 원칙 반영
   - `ai-ops` 운영 규칙은 도구 고유 기능명/명령어보다 capability 계약 중심으로 기술
   - Codex/Claude adapter 문서는 현재 기능 매핑을 예시/adapter 수준으로만 유지
-  - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md), [work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md)
+  - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./governance/ops-bootstrap-master-plan.md), [work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md)
 - Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) 방향성 메모 기록
   - 현재 우선순위를 `Codex+OMX` 정렬/G6 완료 우선으로 명시
   - `CLAUDE.md` 개편 및 marker block / sync script / installer / marketplace 전략은 후순위로 보류
   - 장기 방향: `ai-ops`를 오픈소스 + 간단 명령/마켓플레이스형 프로덕트로 발전
-  - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md), [work-packets/index.md](./work-packets/index.md)
+  - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./governance/ops-bootstrap-master-plan.md), [work-packets/index.md](./work-packets/index.md)
 - Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P0 분석 완료
   - 상태 반영: `READY` -> `IN_ANALYSIS`, `current_process=P0`, `next_process=P1` 유지
   - Codex+OMX vs Claude+OMC 비교 결과 4개 핵심 gap 식별
@@ -642,7 +642,7 @@ Scope:
 - Added: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) (READY)
   - Codex 도구 조합을 `codex + omx`로 정렬하고 `claude + omc` 성공패턴 이식 범위를 정의
   - WP-008 범위 한정 임시 프로세스(2회) 체크리스트 추가
-- Updated: [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md)
+- Updated: [ops-bootstrap-master-plan.md](./governance/ops-bootstrap-master-plan.md)
   - Track 7 / Phase 6 (G6) 추가: Codex+OMX 운영 정렬 및 임시 프로세스 sunset 판정 기준 반영
 - Updated: [work-packets/index.md](./work-packets/index.md)
   - WP-008 Active/High Priority/Parent-Child 토폴로지 반영
@@ -774,7 +774,7 @@ Scope:
 - Added: [ADR-DPC-003](./adr/ADR-DPC-003-conditional-team-activation-and-optout.md) (Accepted)
   - Team 필수 강제에서 조건부 활성화로 정책 개정
   - `/ai-ops` mode safety(`cancel --force`) 규칙 추가
-- Updated: [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md)
+- Updated: [ops-bootstrap-master-plan.md](./governance/ops-bootstrap-master-plan.md)
   - Track 4에 `NONE` 분기 및 조건부 Team 활성화 정책 반영
   - Phase 3 완료 기준에 "사용자 선택 전 Team 자동 활성화 방지" 추가
 - Updated: Team command/rules sync
@@ -829,7 +829,7 @@ Scope:
   - Goal에 "AI 도구가 참조할 운영 문서 체계 구축" 추가
   - Scope에 프로세스 선택 가이드, 세션 시작 프로토콜 추가
   - Done Criteria 확장
-- Updated: [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md)
+- Updated: [ops-bootstrap-master-plan.md](./governance/ops-bootstrap-master-plan.md)
   - Track 4 (프로세스 기반 협업 전환) 추가
   - Phase 테이블 재정의 (Phase 2/3/4)
   - Phase 완료 기준 섹션 추가
@@ -867,7 +867,7 @@ Scope:
   - Phase 2 (G2) 주관 WP
   - ai-collaboration-guide.md 분해 + G0 프로세스 신설
   - Track 3 핵심 작업
-- Updated: [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md)
+- Updated: [ops-bootstrap-master-plan.md](./governance/ops-bootstrap-master-plan.md)
   - Phase 2 목표에 G0 프로세스 신설 명시
   - Track 3에 ADR-DPC-002 연결
   - 망각 방지 규칙에 G0 점검 시점 추가
@@ -899,9 +899,9 @@ Scope:
   - 상위 계획 문서 산출물 반영
 - Updated: [WP-DPC-2026-03-002](./archive/ai-ops/work-packets/WP-DPC-2026-03-002-ai-tool-hook-enforcement.md), [WP-DPC-2026-03-003](./archive/ai-ops/work-packets/WP-DPC-2026-03-003-git-hook-output-compliance-gate.md)
   - 트랙1/트랙2 훅 지속 개선 정책 명시
-- Added: [운영체계 구축 상위 계획](./ops-bootstrap-master-plan.md)
+- Added: [운영체계 구축 상위 계획](./governance/ops-bootstrap-master-plan.md)
   - 단위 작업 망각 방지용 목표/트랙/게이트/변경관리 기준 고정
-- Added: [AI Ops Constitution](./constitution.md)
+- Added: [AI Ops Constitution](./governance/constitution.md)
   - 불변 목표(Goal IDs)와 변경 통제 규칙 고정
 - Added: tool-level enforcement assets
   - `AGENTS.md`, `.codex/jetbrains-ai-assistant-rules.md`

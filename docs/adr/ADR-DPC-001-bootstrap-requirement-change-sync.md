@@ -93,6 +93,6 @@
 
 ## Related
 
-- [AI Ops Constitution](../constitution.md)
+- [AI Ops Constitution](../governance/constitution.md)
 - [WP-DPC-2026-03-001: AI 협업 운영체계 구축 부트스트랩](../work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md)
 - [AI 협업 가이드](../../project-ops/ai-collaboration-guide.md)

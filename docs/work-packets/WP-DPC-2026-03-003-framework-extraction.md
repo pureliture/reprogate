@@ -1379,4 +1379,4 @@ ai-ops/
 
 - [future-direction-discussion-2026-03-09.md](../ai-ops/future-direction-discussion-2026-03-09.md)
 - [AI Tool Artifact Boundary](../portability/ai-tool-artifact-boundary.md)
-- [constitution.md](../constitution.md)
+- [constitution.md](../governance/constitution.md)

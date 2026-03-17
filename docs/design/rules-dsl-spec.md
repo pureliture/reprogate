@@ -394,5 +394,5 @@ class GateResult:
 
 ## 12. 관련 문서
 
-- [presets-spec.md](./presets-spec.md) - 프리셋 시스템 명세
-- [architecture.md](./architecture.md) - dpc 전체 아키텍처
+- [presets-spec.md](./design/presets-spec.md) - 프리셋 시스템 명세
+- [architecture.md](./design/architecture.md) - dpc 전체 아키텍처

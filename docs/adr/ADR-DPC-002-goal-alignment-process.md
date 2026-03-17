@@ -160,8 +160,8 @@ Phase 2 (WP-004)에서 ai-collaboration-guide.md를 분해할 때:
 
 ## Related
 
-- [AI Ops Constitution](../constitution.md)
-- [ops-bootstrap-master-plan.md](../ops-bootstrap-master-plan.md)
+- [AI Ops Constitution](../governance/constitution.md)
+- [ops-bootstrap-master-plan.md](../governance/ops-bootstrap-master-plan.md)
 - [ai-collaboration-guide.md](../ai-collaboration-guide.md)
 - [ADR-DPC-001](./ADR-DPC-001-bootstrap-requirement-change-sync.md)
 - [WP-DPC-2026-03-004](../work-packets/WP-DPC-2026-03-004-document-structure-transition.md) (예정)
