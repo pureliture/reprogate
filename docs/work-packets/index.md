@@ -16,6 +16,7 @@
 | Packet ID | Title | Status | Priority | Updated |
 |-----------|-------|--------|----------|---------|
 | [WP-001](./WP-DPC-2026-03-001-ai-ops-bootstrap.md) | 운영체계 구축 부트스트랩 | IN_PROGRESS | P0 | 2026-03-17 |
+| [WP-009](./WP-DPC-2026-03-009-gate-engine-implementation.md) | Gate 엔진 구현 | IN_ANALYSIS | P0 | 2026-03-17 |
 
 ## 2. Done
 
