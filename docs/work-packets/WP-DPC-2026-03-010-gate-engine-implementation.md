@@ -1,5 +1,5 @@
 ---
-packet_id: "WP-DPC-2026-03-009"
+packet_id: "WP-DPC-2026-03-010"
 title: "Gate 엔진 구현"
 goal_ids: ["DPC-G1"]
 status: "IN_ANALYSIS"
@@ -16,7 +16,7 @@ parent: "WP-DPC-2026-03-001"
 track: "dpc core implementation"
 ---
 
-# WP-DPC-2026-03-009: Gate 엔진 구현
+# WP-DPC-2026-03-010: Gate 엔진 구현
 
 ## 1. Background
 
