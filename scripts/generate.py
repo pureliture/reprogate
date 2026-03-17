@@ -10,15 +10,15 @@ import yaml
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-CONFIG_PATH = ROOT / "dpc.config.yaml"
+CONFIG_PATH = ROOT / "reprogate.yaml"
 TEMPLATES_DIR = ROOT / "templates"
 
-FRAMEWORK_DIRECTORIES = ("docs", "scripts", "config", "templates")
+FRAMEWORK_DIRECTORIES = ("docs", "scripts", "skills", "templates")
 
 
 def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate adapter files from dpc.config.yaml.")
-    parser.add_argument("--config", default=str(CONFIG_PATH), help="Path to dpc.config.yaml.")
+    parser = argparse.ArgumentParser(description="Generate adapter files from reprogate.yaml.")
+    parser.add_argument("--config", default=str(CONFIG_PATH), help="Path to reprogate.yaml.")
     parser.add_argument(
         "--output-root",
         default=str(ROOT),
@@ -173,7 +173,7 @@ def render_outputs(
     force: bool,
 ) -> Sequence[pathlib.Path]:
     rendered_outputs: List[Tuple[pathlib.Path, pathlib.Path]] = [
-        (output_root / "dpc.config.yaml", config_path),
+        (output_root / "reprogate.yaml", config_path),
         (output_root / "AGENTS.md", TEMPLATES_DIR / "AGENTS.md.j2"),
         (output_root / "WORKSPACE-PROFILE.md", TEMPLATES_DIR / "WORKSPACE-PROFILE.md.j2"),
         (output_root / ".dpc" / "README.md", TEMPLATES_DIR / "project-ops" / "README.md.j2"),
@@ -234,7 +234,7 @@ def main(argv: List[str] | None = None) -> int:
     context = context_from_config(config)
 
     copy_framework_tree(output_root, force=args.force)
-    print("Copied framework directories: docs/, scripts/, config/, templates/")
+    print("Copied framework directories: docs/, scripts/, skills/, templates/")
 
     for output_path in render_outputs(output_root, config_path, config, context, force=args.force):
         try:

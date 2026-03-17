@@ -6,94 +6,77 @@ Methodology compiler and gatekeeper for record-backed AI engineering.
 
 ## Purpose
 
-ReproGate turns AI work from memory-dependent coding into reproducible engineering by making work records mandatory, accumulating durable Skills from those records, and enforcing them through gates.
+ReproGate turns AI work from memory-dependent coding into reproducible engineering by making work records mandatory, accumulating durable Skills from those records, and enforcing them through gates (OPA/Rego).
 
-The repository still contains legacy `dpc` names in scripts, IDs, and configuration while the product identity transitions to ReproGate.
+Rather than being a heavy state-tracking orchestrator, it is an **artifact-driven compiler/gatekeeper**. It is designed as an **installable software framework** that can be ported directly into target projects.
 
 ## Included in This Repository
 
-- Canonical product definition and strategy docs
-- Record-backed gating and enforcement surfaces
-- Tool-hook enforcement and compliance checks
-- Config-driven project initialization and template generation
-- Portable templates for Claude, Codex, workspace metadata, and work-record scaffolds
-- Bootstrap copy of framework docs/scripts/config/templates into a target repository during `generate`
+- Canonical product definition and strategy docs (`docs/strategy/`, `docs/design/`)
+- Record-backed gating and enforcement tools (`scripts/gatekeeper.py`)
+- Config-driven project initialization and template generation (`scripts/init.py`, `scripts/generate.py`)
+- Gate mechanics driven by OPA/Rego policies
 
 ## Requirements
 
 - Python 3.10+
 - Git
+- OPA (Open Policy Agent) (Required for Rego evaluation)
 
 Verified in this workspace with Python `3.13.3`.
 
 ## Quick Start
 
-Create a starter config:
+Create a starter config in your target project:
 
 ```bash
-python3 scripts/cli.py init --project-name sample-app --force
+python3 scripts/init.py --project-name sample-app --force
 ```
 
-Generate adapter files from the config:
+Generate adapter files and port the ReproGate framework into the repository:
 
 ```bash
-python3 scripts/cli.py generate --force
+python3 scripts/generate.py --force
 ```
 
-That command now copies the framework payload needed by the adapters into the target repository:
+This command copies the framework payload needed by the adapters into the target repository:
 
 - `docs/`
 - `scripts/`
 - `config/`
 - `templates/`
 - `dpc.config.yaml`
-- generated adapter files such as `AGENTS.md`, `WORKSPACE-PROFILE.md`, `.codex/README.md`, `.claude/*`, and project record scaffolds
+- generated adapter files such as `AGENTS.md`, `WORKSPACE-PROFILE.md`
 
-Run the compliance checker:
-
-```bash
-python3 scripts/cli.py check --mode none
-```
-
-Record process context:
+Validate the records against defined Skills/Gates:
 
 ```bash
-python3 scripts/set_process_context.py --process P3 --wp WP-DEMO --team-mode single
+python3 scripts/gatekeeper.py
 ```
-
-Optional helpers:
-
-```bash
-./scripts/install_git_hooks.sh
-./scripts/sync_omc_policy.sh
-python3 scripts/launch_dpc_session.py --launcher omx -- --model gpt-5
-```
-
-For a fuller walkthrough, see [docs/installation.md](./docs/installation.md).
 
 For the canonical product definition and direction, see:
 
 - [docs/strategy/final-definition.md](./docs/strategy/final-definition.md)
 - [docs/strategy/vision.md](./docs/strategy/vision.md)
 - [docs/strategy/roadmap.md](./docs/strategy/roadmap.md)
-- [docs/guide/why-dpc.md](./docs/guide/why-dpc.md)
+- [docs/design/architecture.md](./docs/design/architecture.md)
 
 ## Core Ideas
 
 - **Work records are mandatory**: intent, scope, decisions, and verification must survive beyond chat context.
-- **Skills accumulate from records**: repeated patterns become durable text assets instead of disappearing into prior sessions.
+- **Skills accumulate from records**: repeated patterns become durable text assets (`guidelines.md`, `rules.rego`) instead of disappearing into prior sessions.
 - **Rules enforce the pattern**: records and artifacts give gates something concrete to inspect.
 - **Artifact-driven workflow beats fragile state tracking**: the presence or absence of required outputs drives the next step.
-- **Personal patterns can scale to team standards**: the same Skills and gates can be shared across a repository.
+- **Personal patterns can scale to team standards**: the same Skills and gates can be shared across a repository via ported configurations.
 
 ## Repository Layout
 
 ```text
 reprogate/
-├── docs/
-├── scripts/
-├── config/
-└── templates/
+├── docs/       # Strategy, Design, and Governance docs
+├── scripts/    # Framework bootstrap (init, generate) and Gatekeeper engine
+├── config/     # Configuration schemas
+└── templates/  # Templates for generation
 ```
 
 ## License

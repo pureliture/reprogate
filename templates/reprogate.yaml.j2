@@ -1,0 +1,16 @@
+# ReproGate Configuration
+# 이 파일은 대상 프로젝트의 루트에 위치하며, 프레임워크 동작을 제어합니다.
+
+project_name: "{{ project_name }}"
+reprogate_version: "1.0.0"
+
+# 강제할 규칙(Skill)들이 위치한 경로 (기본값: 저장소 내 skills/)
+skills_dir: "skills"
+
+# 작업 기록(Record)이 저장되는 경로 (기본값: 저장소 내 records/)
+records_dir: "records"
+
+# Gatekeeper 설정
+gatekeeper:
+  engine: "opa" # 추후 rego/opa 엔진 연동
+  strict_mode: true # 검증 실패 시 파이프라인/커밋 차단 여부

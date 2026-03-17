@@ -1,44 +1,26 @@
-# dpc Adapter Rules for dev-ps-cast
+# ReproGate Adapter Rules for dev-ps-cast
 
-Use the dpc framework as the source of truth for process-driven work in this repository.
+Use the ReproGate framework as the source of truth for all AI-assisted work in this repository.
 
 ## Required References
 
 Read these files before starting substantial work:
 
 1. `WORKSPACE-PROFILE.md`
-2. `docs/constitution.md`
-3. `docs/operating-model.md`
-4. `docs/process-catalog/README.md`
-5. `docs/work-packets/index.md`
-6. `docs/CHANGELOG.md`
+2. `docs/governance/constitution.md`
+3. `docs/governance/operating-model.md`
+4. `docs/strategy/final-definition.md`
 
 ## Operating Rules
 
-1. Start with `G0`, then recommend one process and one or two alternatives.
-2. Wait for explicit user process selection before implementation work.
-3. Record the selected process with:
+ReproGate is an **artifact-driven compiler/gatekeeper**, not a state-tracking orchestrator. Your execution must be record-backed.
 
-```bash
-python3 scripts/set_process_context.py --process <PROCESS> --wp <WP-ID> --team-mode auto
-```
+1. **Record-First Work**: Before implementing code changes, ensure there is a clear work record (e.g., plan, intent, scope).
+2. **Explainable Decisions**: Document any significant technical decisions, alternative approaches discarded, and the reasoning behind them.
+3. **Verification over Completion**: Implementation alone is not completion. Always include explicit verification steps and document the results.
+4. **Skills and Gates**: Rely on explicitly recorded rules (`rules.rego`) and guidelines (`guidelines.md`) when they exist in the repository to guide your workflow.
 
-4. For team-capable processes (`P3`, `P4`, `S3`, optional `S1`), resolve `team` or `single` before code changes.
-5. Use `single` fallback only when one worker can still perform `executor -> verifier -> recorder` responsibilities sequentially.
-6. Update `docs/work-packets`, `docs/adr`, and `docs/CHANGELOG.md` as required by the selected process.
-7. Before ending a process, summarize:
-   - `current_process`
-   - work performed
-   - artifact paths
-   - checklist status
-   - `next_process`
+## Expected Behavior
 
-## Codex / JetBrains / OMX Notes
-
-- Follow this file and the framework docs for Codex or JetBrains AI Assistant work.
-- Prefer `scripts/launch_dpc_session.py` for new writable sessions when appropriate.
-
-## Claude Notes
-
-- Claude adapters should follow the same process flow and use the same tracking artifacts.
-- The local `.claude/settings.json` and hook wrapper should point to `scripts/hooks/claude_pretooluse_guard.py` when enabled.
+- Do not rely solely on conversational memory; if it matters, it should exist as an inspectable artifact.
+- Follow the workflow dictated by the presence or absence of required outputs (Artifact-Driven Workflow). If a required artifact (like a design doc) is missing, create or request it before proceeding.

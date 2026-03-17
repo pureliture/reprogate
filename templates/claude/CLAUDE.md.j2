@@ -1,33 +1,26 @@
-# dpc Rules for Claude in {{ project_name }}
+# ReproGate Rules for Claude in {{ project_name }}
 
 Use the framework documents as the source of truth:
 
 1. `WORKSPACE-PROFILE.md`
-2. `docs/constitution.md`
-3. `docs/operating-model.md`
-4. `docs/process-catalog/README.md`
-5. `{{ wp_path }}/index.md`
-6. `{{ changelog_path }}`
+2. `docs/governance/constitution.md`
+3. `docs/governance/operating-model.md`
+4. `docs/strategy/final-definition.md`
 
 ## Required Flow
 
-1. Run a `G0` alignment check.
-2. Recommend one process plus alternatives.
-3. Wait for explicit user selection.
-4. Record the selected process:
+ReproGate is an **artifact-driven compiler/gatekeeper**.
 
-```bash
-python3 scripts/set_process_context.py --process <PROCESS> --wp <WP-ID> --team-mode auto
-```
+1. **Record-First Work**: Make sure a durable work record exists before implementing changes.
+2. **Explainable Decisions**: Document your reasoning and alternative paths considered.
+3. **Verification**: After implementation, verify against the work record checklist.
+4. **Skills and Gates**: Check `skills/` for active rules/gates in this repository.
 
-5. For team-capable processes, resolve `team` vs `single` before implementation.
-6. Keep work packet, changelog, and decision records synchronized with the active process.
-7. At process end, report:
-   - `current_process`
-   - work performed
-   - artifact paths
-   - checklist status
-   - `next_process`
+## Expected Behavior
+
+- Treat AI sessions as transient. 
+- State should live in markdown/yaml/rego artifacts, not in context memory.
+- If a gate/rule blocks you, adjust the artifacts or request a rule change; do not bypass.
 
 ## Hook Enforcement
 
