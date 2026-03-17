@@ -15,7 +15,7 @@ dist/
 # Local AI runtime state
 .claude/
 .codex/
-.ai-ops/
+.dpc/
 .omc/
 .omx/
 

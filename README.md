@@ -1,10 +1,10 @@
-# ai-ops
+# dev-ps-cast (dpc)
 
 Process-based AI collaboration framework for planning, implementation, verification, and traceability.
 
 ## Purpose
 
-`ai-ops` separates reusable AI collaboration assets from project-specific adapters so the framework can be ported into other repositories without copying product history.
+`dev-ps-cast` (dpc) separates reusable AI collaboration assets from project-specific adapters so the framework can be ported into other repositories without copying product history.
 
 ## Included in This Repository
 
@@ -41,7 +41,7 @@ That command now copies the framework payload needed by the adapters into the ta
 - `scripts/`
 - `config/`
 - `templates/`
-- `ai-ops.config.yaml`
+- `dpc.config.yaml`
 - generated adapter files such as `AGENTS.md`, `WORKSPACE-PROFILE.md`, `.codex/README.md`, `.claude/*`, and project record scaffolds
 
 Run the compliance checker:
@@ -61,7 +61,7 @@ Optional helpers:
 ```bash
 ./scripts/install_git_hooks.sh
 ./scripts/sync_omc_policy.sh
-python3 scripts/launch_ai_ops_session.py --launcher omx -- --model gpt-5
+python3 scripts/launch_dpc_session.py --launcher omx -- --model gpt-5
 ```
 
 For a fuller walkthrough, see [docs/installation.md](./docs/installation.md).
@@ -70,12 +70,12 @@ For the product direction and positioning of the framework, see:
 
 - [docs/vision.md](./docs/vision.md)
 - [docs/roadmap.md](./docs/roadmap.md)
-- [docs/why-ai-ops.md](./docs/why-ai-ops.md)
+- [docs/why-dpc.md](./docs/why-dpc.md)
 
 ## Repository Layout
 
 ```text
-ai-ops/
+dev-ps-cast/
 ├── docs/
 ├── scripts/
 ├── config/

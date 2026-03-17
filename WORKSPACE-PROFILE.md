@@ -1,4 +1,4 @@
-# Workspace Profile: ai-ops
+# Workspace Profile: dev-ps-cast
 
 ## Identity
 

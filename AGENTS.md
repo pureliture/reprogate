@@ -1,6 +1,6 @@
-# AI Ops Adapter Rules for ai-ops
+# dpc Adapter Rules for dev-ps-cast
 
-Use the AI Ops framework as the source of truth for process-driven work in this repository.
+Use the dpc framework as the source of truth for process-driven work in this repository.
 
 ## Required References
 
@@ -36,7 +36,7 @@ python3 scripts/set_process_context.py --process <PROCESS> --wp <WP-ID> --team-m
 ## Codex / JetBrains / OMX Notes
 
 - Follow this file and the framework docs for Codex or JetBrains AI Assistant work.
-- Prefer `scripts/launch_ai_ops_session.py` for new writable sessions when appropriate.
+- Prefer `scripts/launch_dpc_session.py` for new writable sessions when appropriate.
 
 ## Claude Notes
 
