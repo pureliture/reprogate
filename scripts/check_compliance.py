@@ -6,17 +6,19 @@ import subprocess
 import sys
 from typing import Any, Dict, Iterable, List, Set
 
+import yaml
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DOCS_DIR = ROOT / "docs"
 CONSTITUTION = DOCS_DIR / "constitution.md"
 OPERATING_MODEL = DOCS_DIR / "operating-model.md"
 PROCESS_CATALOG = DOCS_DIR / "process-catalog" / "README.md"
-CONFIG_FILE = ROOT / "ai-ops.config.yaml"
+CONFIG_FILE = ROOT / "dpc.config.yaml"
 DEFAULT_CHANGELOG = DOCS_DIR / "CHANGELOG.md"
 DEFAULT_WORK_PACKET_DIR = DOCS_DIR / "work-packets"
 DEFAULT_ADR_DIR = DOCS_DIR / "adr"
-LOCAL_RUNTIME_PREFIXES = (".claude/", ".codex/", ".omc/", ".omx/")
+LOCAL_RUNTIME_PREFIXES = (".claude/", ".codex/", ".omc/", ".omx/", ".dpc/")
 
 VALID_STATUSES = {
     "DRAFT",
@@ -52,58 +54,30 @@ REQUIRED_FRONTMATTER_FIELDS = [
 ]
 
 
-def parse_scalar(raw: str) -> Any:
-    value = raw.strip()
-    if value.startswith(("\"", "'")) and value.endswith(("\"", "'")):
-        return value[1:-1]
-    if value.lower() == "true":
-        return True
-    if value.lower() == "false":
-        return False
-    return value
-
-
 def load_config(path: pathlib.Path) -> Dict[str, Any]:
-    data: Dict[str, Any] = {
+    """Load YAML configuration using PyYAML.
+
+    Returns a dictionary with default values for missing sections to maintain
+    backward compatibility with existing code.
+    """
+    default_data: Dict[str, Any] = {
         "records": {},
     }
+
     if not path.exists():
-        return data
+        return default_data
 
-    section: List[str] = []
-    for raw_line in path.read_text(encoding="utf-8").splitlines():
-        if not raw_line.strip():
-            continue
-        indent = len(raw_line) - len(raw_line.lstrip(" "))
-        line = raw_line.strip()
+    text = path.read_text(encoding="utf-8")
+    loaded = yaml.safe_load(text)
 
-        if line.startswith("- "):
-            continue
+    if loaded is None:
+        return default_data
 
-        if line.endswith(":"):
-            key = line[:-1]
-            if indent == 0:
-                section = [key]
-            elif indent == 2:
-                section = [section[0], key]
-            elif indent == 4:
-                section = [section[0], section[1], key]
-            continue
+    # Ensure records section exists
+    if "records" not in loaded:
+        loaded["records"] = {}
 
-        key, raw_value = line.split(":", 1)
-        value = parse_scalar(raw_value)
-
-        if indent == 0:
-            data[key] = value
-            section = []
-        elif indent == 2 and len(section) == 1:
-            data.setdefault(section[0], {})[key] = value
-        elif indent == 4 and len(section) == 2:
-            data.setdefault(section[0], {}).setdefault(section[1], {})[key] = value
-        elif indent == 6 and len(section) == 3:
-            data.setdefault(section[0], {}).setdefault(section[1], {}).setdefault(section[2], {})[key] = value
-
-    return data
+    return loaded
 
 
 CONFIG = load_config(CONFIG_FILE)
@@ -150,7 +124,7 @@ def load_goal_ids_from_constitution() -> Set[str]:
     if not CONSTITUTION.exists():
         return set()
     text = CONSTITUTION.read_text(encoding="utf-8")
-    return set(re.findall(r"^###\s+(AIOPS-G\d+)\b", text, flags=re.MULTILINE))
+    return set(re.findall(r"^###\s+(DPC-G\d+)\b", text, flags=re.MULTILINE))
 
 
 def load_goal_ids_from_wp(path: pathlib.Path) -> Set[str]:
@@ -158,7 +132,7 @@ def load_goal_ids_from_wp(path: pathlib.Path) -> Set[str]:
     frontmatter = get_frontmatter(text)
     if not frontmatter:
         return set()
-    return set(re.findall(r"\bAIOPS-G\d+\b", frontmatter))
+    return set(re.findall(r"\bDPC-G\d+\b", frontmatter))
 
 
 def iter_wp_files() -> Iterable[pathlib.Path]:
@@ -229,11 +203,11 @@ def validate_namespace(files: Set[str], errors: List[str]) -> None:
         if path.startswith(wp_prefix) and path.endswith(".md"):
             if name == "index.md":
                 continue
-            if not name.startswith("WP-AIOPS-"):
-                errors.append(f"{path}: AI Ops work packets must use the 'WP-AIOPS-' prefix.")
+            if not name.startswith("WP-DPC-"):
+                errors.append(f"{path}: dpc work packets must use the 'WP-DPC-' prefix.")
         if path.startswith(adr_prefix) and path.endswith(".md"):
-            if not name.startswith("ADR-AIOPS-"):
-                errors.append(f"{path}: AI Ops decision records must use the 'ADR-AIOPS-' prefix.")
+            if not name.startswith("ADR-DPC-"):
+                errors.append(f"{path}: dpc decision records must use the 'ADR-DPC-' prefix.")
 
 
 def validate_change_sync(files: Set[str], errors: List[str]) -> None:
@@ -250,7 +224,7 @@ def validate_change_sync(files: Set[str], errors: List[str]) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Validate portable AI Ops compliance.")
+    parser = argparse.ArgumentParser(description="Validate portable dpc compliance.")
     parser.add_argument(
         "--mode",
         choices=["none", "staged", "working_tree"],
@@ -281,12 +255,12 @@ def main() -> int:
         errors.append(f"Compliance checker runtime error: {exc}")
 
     if errors:
-        print("AI Ops compliance check failed:")
+        print("dpc compliance check failed:")
         for error in errors:
             print(f"- {error}")
         return 1
 
-    print("AI Ops compliance check passed.")
+    print("dpc compliance check passed.")
     return 0
 
 

@@ -6,17 +6,19 @@ import sys
 from datetime import date
 from typing import Any, Dict, Iterable, List, Sequence, Tuple
 
+import yaml
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-CONFIG_PATH = ROOT / "ai-ops.config.yaml"
+CONFIG_PATH = ROOT / "dpc.config.yaml"
 TEMPLATES_DIR = ROOT / "templates"
 
 FRAMEWORK_DIRECTORIES = ("docs", "scripts", "config", "templates")
 
 
 def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate adapter files from ai-ops.config.yaml.")
-    parser.add_argument("--config", default=str(CONFIG_PATH), help="Path to ai-ops.config.yaml.")
+    parser = argparse.ArgumentParser(description="Generate adapter files from dpc.config.yaml.")
+    parser.add_argument("--config", default=str(CONFIG_PATH), help="Path to dpc.config.yaml.")
     parser.add_argument(
         "--output-root",
         default=str(ROOT),
@@ -26,62 +28,36 @@ def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def parse_scalar(raw: str) -> Any:
-    value = raw.strip()
-    if value.startswith(("\"", "'")) and value.endswith(("\"", "'")):
-        return value[1:-1]
-    if value.lower() == "true":
-        return True
-    if value.lower() == "false":
-        return False
-    return value
-
-
 def load_config(path: pathlib.Path) -> Dict[str, Any]:
-    data: Dict[str, Any] = {
+    """Load YAML configuration using PyYAML.
+
+    Returns a dictionary with default values for missing sections to maintain
+    backward compatibility with existing code.
+    """
+    default_data: Dict[str, Any] = {
         "project": {},
         "workspaces": {"primary": {}},
         "processes": {"enabled": []},
         "tools": {"claude": {}, "codex": {}},
         "records": {},
     }
-    section: List[str] = []
 
-    for raw_line in path.read_text(encoding="utf-8").splitlines():
-        if not raw_line.strip():
-            continue
-        indent = len(raw_line) - len(raw_line.lstrip(" "))
-        line = raw_line.strip()
+    text = path.read_text(encoding="utf-8")
+    loaded = yaml.safe_load(text)
 
-        if line.startswith("- "):
-            if section == ["processes", "enabled"]:
-                data["processes"]["enabled"].append(parse_scalar(line[2:]))
-            continue
+    if loaded is None:
+        return default_data
 
-        if line.endswith(":"):
-            key = line[:-1]
-            if indent == 0:
-                section = [key]
-            elif indent == 2:
-                section = [section[0], key]
-            elif indent == 4:
-                section = [section[0], section[1], key]
-            continue
+    # Merge loaded data with defaults
+    for key, default_value in default_data.items():
+        if key not in loaded:
+            loaded[key] = default_value
+        elif isinstance(default_value, dict) and isinstance(loaded.get(key), dict):
+            for sub_key, sub_default in default_value.items():
+                if sub_key not in loaded[key]:
+                    loaded[key][sub_key] = sub_default
 
-        key, raw_value = line.split(":", 1)
-        value = parse_scalar(raw_value)
-
-        if indent == 0:
-            data[key] = value
-            section = []
-        elif indent == 2 and len(section) == 1:
-            data[section[0]][key] = value
-        elif indent == 4 and len(section) == 2:
-            data[section[0]][section[1]][key] = value
-        elif indent == 6 and len(section) == 3:
-            data[section[0]][section[1]][section[2]][key] = value
-
-    return data
+    return loaded
 
 
 def render_template(text: str, context: Dict[str, str]) -> str:
@@ -145,7 +121,7 @@ def context_from_config(config: Dict[str, Any]) -> Dict[str, str]:
         ),
         "claude_hook_block": (
             "When Claude hook enforcement is enabled, the generated `.claude/settings.json` and "
-            "`.claude/hooks/pretooluse-ai-ops-guard.py` route to `scripts/hooks/claude_pretooluse_guard.py`."
+            "`.claude/hooks/pretooluse-dpc-guard.py` route to `scripts/hooks/claude_pretooluse_guard.py`."
             if claude_hook_enabled
             else "Claude hook enforcement is disabled in this project configuration."
         ),
@@ -197,10 +173,10 @@ def render_outputs(
     force: bool,
 ) -> Sequence[pathlib.Path]:
     rendered_outputs: List[Tuple[pathlib.Path, pathlib.Path]] = [
-        (output_root / "ai-ops.config.yaml", config_path),
+        (output_root / "dpc.config.yaml", config_path),
         (output_root / "AGENTS.md", TEMPLATES_DIR / "AGENTS.md.j2"),
         (output_root / "WORKSPACE-PROFILE.md", TEMPLATES_DIR / "WORKSPACE-PROFILE.md.j2"),
-        (output_root / ".ai-ops" / "README.md", TEMPLATES_DIR / "project-ops" / "README.md.j2"),
+        (output_root / ".dpc" / "README.md", TEMPLATES_DIR / "project-ops" / "README.md.j2"),
         (output_root / pathlib.Path(config["records"]["changelog_path"]), TEMPLATES_DIR / "project-ops" / "CHANGELOG.md.j2"),
         (
             output_root / pathlib.Path(config["records"]["wp_path"]) / "index.md",
@@ -219,15 +195,15 @@ def render_outputs(
         rendered_outputs.extend(
             [
                 (output_root / ".claude" / "CLAUDE.md", TEMPLATES_DIR / "claude" / "CLAUDE.md.j2"),
-                (output_root / ".claude" / "commands" / "ai-ops.md", TEMPLATES_DIR / "claude" / "commands" / "ai-ops.md.j2"),
+                (output_root / ".claude" / "commands" / "dpc.md", TEMPLATES_DIR / "claude" / "commands" / "dpc.md.j2"),
                 (output_root / ".claude" / "settings.json", TEMPLATES_DIR / "claude" / "settings.json.j2"),
             ]
         )
         if bool(config["tools"].get("claude", {}).get("hook_enforcement", True)):
             rendered_outputs.append(
                 (
-                    output_root / ".claude" / "hooks" / "pretooluse-ai-ops-guard.py",
-                    TEMPLATES_DIR / "claude" / "hooks" / "pretooluse-ai-ops-guard.py.j2",
+                    output_root / ".claude" / "hooks" / "pretooluse-dpc-guard.py",
+                    TEMPLATES_DIR / "claude" / "hooks" / "pretooluse-dpc-guard.py.j2",
                 )
             )
 

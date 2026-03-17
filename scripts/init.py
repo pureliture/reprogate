@@ -6,13 +6,13 @@ from typing import Dict, List
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-TEMPLATE_PATH = ROOT / "templates" / "ai-ops.config.yaml.j2"
-OUTPUT_PATH = ROOT / "ai-ops.config.yaml"
+TEMPLATE_PATH = ROOT / "templates" / "dpc.config.yaml.j2"
+OUTPUT_PATH = ROOT / "dpc.config.yaml"
 DEFAULT_PROCESSES = ["P0", "P1", "P3", "P4", "S1", "S2", "S4"]
 
 
 def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Create a starter ai-ops.config.yaml file.")
+    parser = argparse.ArgumentParser(description="Create a starter dpc.config.yaml file.")
     parser.add_argument("--output", default=str(OUTPUT_PATH), help="Output config path.")
     parser.add_argument("--project-name", default=ROOT.name, help="Project name.")
     parser.add_argument("--project-description", default="", help="Optional project description.")

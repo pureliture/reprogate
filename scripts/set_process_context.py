@@ -7,7 +7,7 @@ from typing import Dict, List
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-CONTEXT_FILE = ROOT / ".ai-ops" / "process-context.json"
+CONTEXT_FILE = ROOT / ".dpc" / "process-context.json"
 
 VALID_PROCESSES = {"G0", "P0", "P1", "P2", "P3", "P4", "S1", "S2", "S3", "S4", "NONE"}
 TEAM_ELIGIBLE_PROCESSES = {"P3", "P4", "S3", "S1"}
@@ -42,7 +42,7 @@ def now_iso() -> str:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Set AI Ops selected process context.")
+    parser = argparse.ArgumentParser(description="Set dpc selected process context.")
     parser.add_argument("--process", required=False, help="Selected process id (G0, P0~P4, S1~S4, NONE)")
     parser.add_argument("--wp", required=False, help="Target WP id (optional)")
     parser.add_argument(

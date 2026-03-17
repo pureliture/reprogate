@@ -14,9 +14,18 @@ def run_script(script_name: str, args: List[str]) -> int:
     return proc.returncode
 
 
+def run_search(args: List[str]) -> int:
+    """Run the document search script."""
+    return run_script("search_docs.py", args)
+
+
 def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="AI Ops helper CLI.")
-    parser.add_argument("command", choices=["init", "generate", "check"], help="Subcommand to run.")
+    parser = argparse.ArgumentParser(description="dpc helper CLI.")
+    parser.add_argument(
+        "command",
+        choices=["init", "generate", "check", "search", "search-content", "print"],
+        help="Subcommand to run.",
+    )
     parser.add_argument("extra", nargs=argparse.REMAINDER)
     return parser.parse_args(argv)
 
@@ -33,6 +42,12 @@ def main(argv: List[str] | None = None) -> int:
         return run_script("generate.py", extra)
     if args.command == "check":
         return run_script("check_compliance.py", extra)
+    if args.command == "search":
+        return run_search(["search", *extra])
+    if args.command == "search-content":
+        return run_search(["search-content", *extra])
+    if args.command == "print":
+        return run_search(["print", *extra])
     return 1
 
 
