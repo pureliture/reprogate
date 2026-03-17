@@ -1,29 +1,29 @@
-# AI Ops Constitution
+# dpc Constitution
 
-> Document ID: `AIOPS-CONSTITUTION`
+> Document ID: `DPC-CONSTITUTION`
 > Version: `1.0.0`
 > Status: Active
 
 ## Purpose
 
-This document defines the non-negotiable foundation of the AI Ops framework.
+This document defines the non-negotiable foundation of the dpc framework.
 Its goals and guardrails remain stable even when prompts, tools, or project contexts change.
 
 ## Immutable Goals
 
-### AIOPS-G1 Goal Stability
+### DPC-G1 Goal Stability
 Each unit of work should preserve its higher-level intent while refining only the implementation details.
 
-### AIOPS-G2 Dual Enforcement
+### DPC-G2 Dual Enforcement
 Process compliance should be enforced both during execution and at final artifact boundaries.
 
-### AIOPS-G3 Traceability First
+### DPC-G3 Traceability First
 Major changes should remain traceable through work packets, decision records, indexes, changelogs, and program-level plans.
 
-### AIOPS-G4 Hook Lifecycle
+### DPC-G4 Hook Lifecycle
 Hooks are not one-time setup artifacts. They should evolve with the operating model.
 
-### AIOPS-G5 Domain Separation
+### DPC-G5 Domain Separation
 Framework assets and project-specific adapter assets must remain physically and conceptually separated.
 
 ## Non-Negotiable Rules

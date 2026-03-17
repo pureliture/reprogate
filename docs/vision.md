@@ -1,5 +1,11 @@
 # AI Ops Vision
 
+## Tagline
+
+> **"ai-ops는 개발 방법론을 LLM에게 이식해, LLM이 당신처럼 일하게 만든다"**
+>
+> ai-ops transplants your development methodology into LLMs, making them work like you do.
+
 ## Purpose
 
 AI Ops exists to make AI-assisted engineering work reproducible, reviewable, and portable across tools.
@@ -14,13 +20,25 @@ AI coding has three structural failure modes:
 2. skipped supporting work
 3. weak traceability
 
-AI Ops addresses those failures by combining three capabilities:
+AI Ops addresses those failures by transplanting development methodology into LLMs:
 
-- external memory
-- explicit process definition
-- enforcement mechanisms
+- **Process definition**: Define how your team works once
+- **Automatic records**: ai-ops generates WP, ADR, and change logs automatically
+- **Enforcement**: Gates ensure the process is followed
 
-The framework is strongest when all three are present together.
+The key insight: CI/CD manages output quality at the team/system level. AI Ops manages process quality at the individual developer level — the methodology each developer follows (TDD, documentation, design review) is now transplanted into LLMs.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Team/System Level: CI/CD, code review, linters             │
+│  → "Does the output meet standards?"                        │
+├─────────────────────────────────────────────────────────────┤
+│  Individual Developer Level: TDD, docs, design reviews      │
+│  → "How does each developer work?"                          │
+├─────────────────────────────────────────────────────────────┤
+│  ai-ops: Transplants this methodology into LLMs             │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## What Success Looks Like
 

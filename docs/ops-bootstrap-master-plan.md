@@ -2,8 +2,8 @@
 
 > Status: Active
 > Last Updated: 2026-03-11
-> Parent WP: [WP-AIOPS-2026-03-001](./work-packets/WP-AIOPS-2026-03-001-ai-ops-bootstrap.md)
-> Governing ADR: [ADR-AIOPS-001](./adr/ADR-AIOPS-001-bootstrap-requirement-change-sync.md)
+> Parent WP: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md)
+> Governing ADR: [ADR-DPC-001](./adr/ADR-DPC-001-bootstrap-requirement-change-sync.md)
 > Constitution: [AI Ops Constitution](./constitution.md)
 
 ## 1. 목적
@@ -26,20 +26,20 @@
 ### Track 1. 작업 과정 강제 (AI tool별 훅)
 - Codex CLI + OMX: 런타임 어댑터 규칙 + 프로세스 진입점 강제
 - Claude Code + OMC: `PreToolUse` 중심 차단/질의 게이트 + `quality gates`, `Ultra QA` 검증 루프
-- 작업 WP: [WP-AIOPS-2026-03-002](./archive/ai-ops/work-packets/WP-AIOPS-2026-03-002-ai-tool-hook-enforcement.md)
+- 작업 WP: [WP-DPC-2026-03-002](./archive/ai-ops/work-packets/WP-DPC-2026-03-002-ai-tool-hook-enforcement.md)
 - 도구 훅 레퍼런스: [tool-hooks/README.md](./tool-hooks/README.md)
 
 ### Track 2. 최종 산출물 강제 (Git hook)
 - pre-commit/pre-push 단계에서 운영체계 준수 흔적 점검
 - 준수 의심 시 차단 또는 리뷰 요구
-- 작업 WP: [WP-AIOPS-2026-03-003](./archive/ai-ops/work-packets/WP-AIOPS-2026-03-003-git-hook-output-compliance-gate.md)
+- 작업 WP: [WP-DPC-2026-03-003](./archive/ai-ops/work-packets/WP-DPC-2026-03-003-git-hook-output-compliance-gate.md)
 
 ### Track 3. 문서 구조 전환/운영 파일 정착
 - ai-collaboration-guide.md 분해 → 독립 운영 문서 체계 구축
 - 허브/진입점/인덱스 체계 정착
 - 기존 문서 재배치 및 deprecated 처리
-- **G0 프로세스 신설 및 프로세스 카탈로그 확장** (ADR-AIOPS-002)
-- 작업 WP: [WP-AIOPS-2026-03-004](./archive/ai-ops/work-packets/WP-AIOPS-2026-03-004-document-structure-transition.md)
+- **G0 프로세스 신설 및 프로세스 카탈로그 확장** (ADR-DPC-002)
+- 작업 WP: [WP-DPC-2026-03-004](./archive/ai-ops/work-packets/WP-DPC-2026-03-004-document-structure-transition.md)
 
 ### Track 4. 프로세스 기반 협업 전환
 - 모든 작업 시작 시 **프로세스 선택 질의** 강제
@@ -55,7 +55,7 @@
   - 프로세스 선택 완료
   - 다중 역할 검증이 필요한 작업(다중 파일/고위험 변경/사용자 명시 요청)
 - ai-collaboration-guide.md는 설계 문서로 보존, 운영 문서는 별도 분해본 참조
-- 작업 WP: [WP-AIOPS-2026-03-005](./archive/ai-ops/work-packets/WP-AIOPS-2026-03-005-process-based-collaboration.md)
+- 작업 WP: [WP-DPC-2026-03-005](./archive/ai-ops/work-packets/WP-DPC-2026-03-005-process-based-collaboration.md)
 
 ### Track 5. 물리 워크스페이스 분리 운영 정착
 - `master`와 `wafful4(java8)`를 디렉토리 단위로 분리 운영
@@ -67,7 +67,7 @@
 - 숨김 도구 디렉토리(`.claude/.codex/.omc`)를 로컬 전용으로 고정
 - 원격 관리 정책/지침을 `docs/`/`scripts/` 비숨김 경로로 이관
 - ai-ops Framework 자산과 타겟 프로젝트 Adapter 자산의 경계를 명시
-- 작업 WP: [WP-AIOPS-2026-03-007](./archive/ai-ops/work-packets/WP-AIOPS-2026-03-007-ai-tool-artifact-separation.md)
+- 작업 WP: [WP-DPC-2026-03-007](./archive/ai-ops/work-packets/WP-DPC-2026-03-007-ai-tool-artifact-separation.md)
 
 ### Track 7. Codex+OMX 운영 정렬 (Claude+OMC 성공패턴 이식)
 - Codex 도구 조합을 `codex + omx` 기준으로 표준화
@@ -83,38 +83,38 @@
 - 외부 소규모 Codex wrapper 프로젝트는 직접 의존성으로 들이지 않고, 개념 참고 후 OMX 중심 설계로 흡수한다.
 - 현 단계의 1순위 전략은 OMX-centered process-aware launch wrapper / gateway이며, native hook parity는 장기 추적 대상으로 둔다.
 - Codex+OMX에서 먼저 정립한 얇은 어댑터 + SoT 중심 구조는 후속 Claude+OMC 개편 시에도 동일한 방향으로 적용한다.
-- 작업 WP: [WP-AIOPS-2026-03-008](./work-packets/WP-AIOPS-2026-03-008-codex-omx-alignment.md)
+- 작업 WP: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md)
 
 ### Track 8. ai-ops framework extraction / legacy surface sunset
 - source repo의 canonical AI Ops surface를 root `docs/*`, `scripts/*`로 고정한다.
 - legacy `docs/ai-ops/*`, `scripts/ai-ops/*`는 sunset 대상이었고, P3에서 제거 후 historical trace만 `docs/archive/ai-ops/*`에 남긴다.
 - discussion helper / frozen discussion / migration-review docs / shim / hook-source의 최종 처리 정책을 분리한다.
 - P3에서 legacy bridge/shim 제거와 archive relocation을 수행했고, 다음 S1에서 최종 deletion readiness PASS/NO-GO를 판정한다.
-- 작업 WP: [WP-AIOPS-2026-03-010](./work-packets/WP-AIOPS-2026-03-010-framework-extraction.md)
+- 작업 WP: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md)
 
 ### Track 9. public repository history replay
 - external `ai-ops` repo의 file contents 정리와 별도로, public-facing git history를 framework evolution narrative 기준으로 재구성한다.
 - source repo의 기존 WP/ADR 의미 단위를 external repo commit sequence(`wp001`, `adr001`, ...)로 replay한다.
 - product-specific pilot/migration 흔적은 제외하고 framework-only 서사를 유지한다.
-- 작업 WP: [WP-AIOPS-2026-03-011](./work-packets/WP-AIOPS-2026-03-011-public-history-replay-plan.md)
+- 작업 WP: [WP-DPC-2026-03-011](./work-packets/WP-DPC-2026-03-011-public-history-replay-plan.md)
 
 ### Track 10. external canonical migration inventory
 - external `ai-ops` repo를 future canonical workspace로 채택한다고 가정하고, source repo에만 남아 있는 ai-ops 관련 자산을 다시 분류한다.
 - framework surface만이 아니라 control-board, ADR, changelog, roadmap, repo-local adapters까지 포함해 must-move / archive-only / do-not-move를 정한다.
 - cutover 이후 source repo는 archive/source-of-origin only로 두고, live AI Ops control-board는 external repo로 옮긴다.
-- 작업 WP: [WP-AIOPS-2026-03-012](./work-packets/WP-AIOPS-2026-03-012-external-canonical-migration-inventory.md)
+- 작업 WP: [WP-DPC-2026-03-012](./work-packets/WP-DPC-2026-03-012-external-canonical-migration-inventory.md)
 
 ## 4. 단계 및 게이트
 
 | Phase | Gate | 핵심 목표 | 주관 WP |
 |------|------|----------|--------|
-| Phase 0 | G0 | 기존 WP/ADR 템플릿 동결 + 동기화 강제 규칙 확정 | WP-AIOPS-2026-03-001 |
-| Phase 1 | G1 | 트랙1/트랙2 강제 메커니즘 분리 및 착수 | WP-AIOPS-2026-03-002, WP-AIOPS-2026-03-003 |
-| Phase 2 | G2 | 문서 구조 전환: ai-collaboration-guide.md 분해 → AI 도구 참조용 운영 문서 생성 | WP-AIOPS-2026-03-004 |
-| Phase 3 | G3 | 프로세스 기반 협업 전환: 프로세스 선택 질의 강제 + 도구 설정 연결 | WP-AIOPS-2026-03-005 |
-| Phase 4 | G4 | 파일럿 검증: 실제 product-ops 작업 3건을 프로세스 기반으로 수행 | WP-AIOPS-2026-03-006 |
-| Phase 5 | G5 | AI 도구 산출물 원격/로컬 경계 정렬 및 포팅 경계 고정 | WP-AIOPS-2026-03-007 |
-| Phase 6 | G6 | Codex+OMX 운영 정렬: 임시 프로세스 2회 검증 및 상시화 판정 | WP-AIOPS-2026-03-008 |
+| Phase 0 | G0 | 기존 WP/ADR 템플릿 동결 + 동기화 강제 규칙 확정 | WP-DPC-2026-03-001 |
+| Phase 1 | G1 | 트랙1/트랙2 강제 메커니즘 분리 및 착수 | WP-DPC-2026-03-002, WP-DPC-2026-03-003 |
+| Phase 2 | G2 | 문서 구조 전환: ai-collaboration-guide.md 분해 → AI 도구 참조용 운영 문서 생성 | WP-DPC-2026-03-004 |
+| Phase 3 | G3 | 프로세스 기반 협업 전환: 프로세스 선택 질의 강제 + 도구 설정 연결 | WP-DPC-2026-03-005 |
+| Phase 4 | G4 | 파일럿 검증: 실제 product-ops 작업 3건을 프로세스 기반으로 수행 | WP-DPC-2026-03-006 |
+| Phase 5 | G5 | AI 도구 산출물 원격/로컬 경계 정렬 및 포팅 경계 고정 | WP-DPC-2026-03-007 |
+| Phase 6 | G6 | Codex+OMX 운영 정렬: 임시 프로세스 2회 검증 및 상시화 판정 | WP-DPC-2026-03-008 |
 
 ### Phase 완료 기준
 
@@ -160,9 +160,9 @@
 3. 세션 시작 시 아래 3개를 우선 확인한다.
    - `work-packets/index.md`
    - 본 문서(상위 계획)
-   - 부모 WP(현재는 WP-AIOPS-2026-03-001)
+   - 부모 WP(현재는 WP-DPC-2026-03-001)
 4. 세션 종료 전 `next_process`와 후속 WP 연결을 확인한다.
-5. **G0 목표 정합성 점검**을 다음 시점에 수행한다 (ADR-AIOPS-002):
+5. **G0 목표 정합성 점검**을 다음 시점에 수행한다 (ADR-DPC-002):
    - 세션 시작 시 (필수)
    - Phase/Track 전환 시 (필수)
    - 마일스톤 완료 시 (필수)

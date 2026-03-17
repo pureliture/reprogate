@@ -61,7 +61,7 @@ Recommended status values:
 
 ## Naming Guidance
 
-- Framework packets: `WP-AIOPS-YYYY-MM-NNN-short-title.md`
+- Framework packets: `WP-DPC-YYYY-MM-NNN-short-title.md`
 - Project packets: `WP-YYYY-MM-NNN-short-title.md`
 
 ## Minimal Template
