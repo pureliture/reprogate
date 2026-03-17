@@ -1,7 +1,7 @@
 ---
-packet_id: "WP-AIOPS-2026-03-013"
+packet_id: "WP-DPC-2026-03-013"
 title: "external ai-ops public strategy docs"
-goal_ids: ["AIOPS-G1", "AIOPS-G4", "AIOPS-G5"]
+goal_ids: ["DPC-G1", "DPC-G4", "DPC-G5"]
 status: "IN_DEVELOPMENT"
 work_type: "DOCUMENTATION"
 priority: "P1"
@@ -12,11 +12,11 @@ next_process: "S1"
 owner: "SHARED"
 created_at: "2026-03-12"
 last_updated: "2026-03-12"
-parent: "WP-AIOPS-2026-03-001"
+parent: "WP-DPC-2026-03-001"
 track: "public strategy docs"
 ---
 
-# WP-AIOPS-2026-03-013: external ai-ops public strategy docs
+# WP-DPC-2026-03-013: external ai-ops public strategy docs
 
 ## 1. Background
 

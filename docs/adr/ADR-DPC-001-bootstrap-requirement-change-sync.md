@@ -1,4 +1,4 @@
-# ADR-AIOPS-001: 운영체계 구축 중 요구사항 변경 동기화 강제
+# ADR-DPC-001: 운영체계 구축 중 요구사항 변경 동기화 강제
 
 ## Status
 
@@ -94,5 +94,5 @@
 ## Related
 
 - [AI Ops Constitution](../constitution.md)
-- [WP-AIOPS-2026-03-001: AI 협업 운영체계 구축 부트스트랩](../work-packets/WP-AIOPS-2026-03-001-ai-ops-bootstrap.md)
+- [WP-DPC-2026-03-001: AI 협업 운영체계 구축 부트스트랩](../work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md)
 - [AI 협업 가이드](../../project-ops/ai-collaboration-guide.md)

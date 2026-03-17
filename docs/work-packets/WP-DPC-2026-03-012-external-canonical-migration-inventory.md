@@ -1,7 +1,7 @@
 ---
-packet_id: "WP-AIOPS-2026-03-012"
+packet_id: "WP-DPC-2026-03-012"
 title: "external ai-ops canonical migration inventory"
-goal_ids: ["AIOPS-G1", "AIOPS-G4", "AIOPS-G5"]
+goal_ids: ["DPC-G1", "DPC-G4", "DPC-G5"]
 status: "IN_REFINEMENT"
 work_type: "MIGRATION"
 priority: "P0"
@@ -12,11 +12,11 @@ next_process: "P3"
 owner: "SHARED"
 created_at: "2026-03-11"
 last_updated: "2026-03-11"
-parent: "WP-AIOPS-2026-03-001"
+parent: "WP-DPC-2026-03-001"
 track: "external canonical migration"
 ---
 
-# WP-AIOPS-2026-03-012: external ai-ops canonical migration inventory
+# WP-DPC-2026-03-012: external ai-ops canonical migration inventory
 
 ## 1. Background
 
@@ -66,9 +66,9 @@ track: "external canonical migration"
 ## 7. Related References
 
 ### 7.1 Related Docs
-- [WP-AIOPS-2026-03-001](./WP-AIOPS-2026-03-001-ai-ops-bootstrap.md)
-- [WP-AIOPS-2026-03-010](./WP-AIOPS-2026-03-010-framework-extraction.md)
-- [WP-AIOPS-2026-03-011](./WP-AIOPS-2026-03-011-public-history-replay-plan.md)
+- [WP-DPC-2026-03-001](./WP-DPC-2026-03-001-ai-ops-bootstrap.md)
+- [WP-DPC-2026-03-010](./WP-DPC-2026-03-010-framework-extraction.md)
+- [WP-DPC-2026-03-011](./WP-DPC-2026-03-011-public-history-replay-plan.md)
 - [AI Ops CHANGELOG](../CHANGELOG.md)
 - [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
 - [future-direction discussion archive](../archive/ai-ops/discussions/future-direction-discussion-2026-03-09.md)
@@ -156,7 +156,7 @@ track: "external canonical migration"
      - `docs/why-ai-ops.md` 또는 `docs/positioning.md`
 2. **replay-history plan의 external-facing subset**
    - source raw material:
-     - `docs/work-packets/WP-AIOPS-2026-03-011-public-history-replay-plan.md`
+     - `docs/work-packets/WP-DPC-2026-03-011-public-history-replay-plan.md`
    - target shape:
      - release note / history note / maintainers doc
 
@@ -166,7 +166,7 @@ track: "external canonical migration"
 #### C. source archive에만 남겨야 하는 것 (Archive Only)
 
 1. source repo 내부 migration history 자체
-   - `WP-AIOPS-2026-03-010` source cleanup detail
+   - `WP-DPC-2026-03-010` source cleanup detail
    - old legacy sunset review traces
 2. raw discussion transcript
    - `docs/archive/ai-ops/discussions/future-direction-discussion-2026-03-09.md`
@@ -242,8 +242,8 @@ external repo는 아래 구조를 가져야 한다.
 #### B. 추가되어야 하는 live control-board
 
 - `docs/work-packets/index.md`
-- `docs/work-packets/WP-AIOPS-*.md` (external canonical live packets)
-- `docs/adr/ADR-AIOPS-*.md`
+- `docs/work-packets/WP-DPC-*.md` (external canonical live packets)
+- `docs/adr/ADR-DPC-*.md`
 - `docs/CHANGELOG.md`
 - `docs/ops-bootstrap-master-plan.md`
 
@@ -265,12 +265,12 @@ external repo는 아래 구조를 가져야 한다.
 #### Live control-board
 - `docs/work-packets/index.md`
 - active/future AI Ops WP files
-  - `WP-AIOPS-2026-03-001`
-  - `WP-AIOPS-2026-03-008`
-  - `WP-AIOPS-2026-03-011`
-  - `WP-AIOPS-2026-03-012`
+  - `WP-DPC-2026-03-001`
+  - `WP-DPC-2026-03-008`
+  - `WP-DPC-2026-03-011`
+  - `WP-DPC-2026-03-012`
 - `docs/CHANGELOG.md`
-- `docs/adr/ADR-AIOPS-001..005`
+- `docs/adr/ADR-DPC-001..005`
 - `docs/ops-bootstrap-master-plan.md`
 
 #### Repo-local adapters
@@ -294,7 +294,7 @@ external repo는 아래 구조를 가져야 한다.
 
 #### Replay/public history explanation
 - source material:
-  - `docs/work-packets/WP-AIOPS-2026-03-011-public-history-replay-plan.md`
+  - `docs/work-packets/WP-DPC-2026-03-011-public-history-replay-plan.md`
 - target docs:
   - `docs/history.md` 또는 maintainer-facing replay note
 
@@ -306,7 +306,7 @@ external repo는 아래 구조를 가져야 한다.
 
 다음은 source repo archive에만 남긴다.
 
-- `WP-AIOPS-2026-03-010` source cleanup / legacy sunset 상세 trace
+- `WP-DPC-2026-03-010` source cleanup / legacy sunset 상세 trace
 - raw discussion transcript 원본
 - source repo 내부에서만 의미 있는 migration review detail
 - legacy namespace sunset review/decision trace 원본
@@ -340,7 +340,7 @@ external repo는 아래 구조를 가져야 한다.
 
 1. external repo에 live control-board 신설
 2. active WP 4건 이관
-3. ADR-AIOPS-001..005 이관
+3. ADR-DPC-001..005 이관
 4. external `docs/CHANGELOG.md` / `docs/ops-bootstrap-master-plan.md` 생성
 5. external tracked `AGENTS.md` / `WORKSPACE-PROFILE.md` 추가
 6. source repo archive-only cutoff note 반영
@@ -374,7 +374,7 @@ external repo는 아래 구조를 가져야 한다.
 | live control-board 처리 | must move | canonical workspace면 상태/ADR/changelog도 함께 있어야 함 |
 | source migration trace 처리 | archive-only | 결과 repo에는 과거 이관 trace 전체가 필요하지 않음 |
 | active AI Ops packets 처리 | external live migration | source repo archive-only 전제와 일관 |
-| ADR-AIOPS-001..005 처리 | external live migration | framework 정책은 canonical repo에도 live로 존재해야 함 |
+| ADR-DPC-001..005 처리 | external live migration | framework 정책은 canonical repo에도 live로 존재해야 함 |
 | source repo cutoff date | 2026-03-12 | canonical workspace 전환 시점 명시 |
 
 ## 14. Follow-ups

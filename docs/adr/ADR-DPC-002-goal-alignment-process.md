@@ -1,10 +1,10 @@
-# ADR-AIOPS-002: 목표 점검 프로세스(G0) 신설 및 프로세스 카탈로그 확장
+# ADR-DPC-002: 목표 점검 프로세스(G0) 신설 및 프로세스 카탈로그 확장
 
 ## Status
 
 **Accepted** (2026-03-07)
 
-> Note (2026-03-08): Team 활성화 정책은 [ADR-AIOPS-003](./ADR-AIOPS-003-conditional-team-activation-and-optout.md)로 부분 개정되었다.
+> Note (2026-03-08): Team 활성화 정책은 [ADR-DPC-003](./ADR-DPC-003-conditional-team-activation-and-optout.md)로 부분 개정되었다.
 
 ## Context
 
@@ -163,5 +163,5 @@ Phase 2 (WP-004)에서 ai-collaboration-guide.md를 분해할 때:
 - [AI Ops Constitution](../constitution.md)
 - [ops-bootstrap-master-plan.md](../ops-bootstrap-master-plan.md)
 - [ai-collaboration-guide.md](../ai-collaboration-guide.md)
-- [ADR-AIOPS-001](./ADR-AIOPS-001-bootstrap-requirement-change-sync.md)
-- [WP-AIOPS-2026-03-004](../work-packets/WP-AIOPS-2026-03-004-document-structure-transition.md) (예정)
+- [ADR-DPC-001](./ADR-DPC-001-bootstrap-requirement-change-sync.md)
+- [WP-DPC-2026-03-004](../work-packets/WP-DPC-2026-03-004-document-structure-transition.md) (예정)

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ai-ops.dev/schema/ai-ops.schema.json",
-  "title": "AI Ops Configuration",
+  "$id": "https://dev-ps-cast.dev/schema/dpc.schema.json",
+  "title": "dev-ps-cast Configuration",
   "type": "object",
   "additionalProperties": false,
   "required": [

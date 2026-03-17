@@ -1,4 +1,4 @@
-# ADR-AIOPS-003: 조건부 Team 활성화 및 프로세스 미적용(NONE) 분기 허용
+# ADR-DPC-003: 조건부 Team 활성화 및 프로세스 미적용(NONE) 분기 허용
 
 ## Status
 
@@ -121,7 +121,7 @@ PreToolUse 가드는 `--members`가 없거나 필수 역할이 누락된 경우 
 
 ## Related
 
-- [WP-AIOPS-2026-03-005](../archive/ai-ops/work-packets/WP-AIOPS-2026-03-005-process-based-collaboration.md)
+- [WP-DPC-2026-03-005](../archive/ai-ops/work-packets/WP-DPC-2026-03-005-process-based-collaboration.md)
 - [ops-bootstrap-master-plan.md](../ops-bootstrap-master-plan.md)
-- [ADR-AIOPS-002](./ADR-AIOPS-002-goal-alignment-process.md)
+- [ADR-DPC-002](./ADR-DPC-002-goal-alignment-process.md)
 - [ai-ops command](../commands/ai-ops.md)

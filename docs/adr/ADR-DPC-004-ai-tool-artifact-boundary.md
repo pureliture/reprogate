@@ -1,4 +1,4 @@
-# ADR-AIOPS-004: AI 도구 산출물 경계 분리 (Remote-managed vs Local-only)
+# ADR-DPC-004: AI 도구 산출물 경계 분리 (Remote-managed vs Local-only)
 
 ## Status
 
@@ -48,6 +48,6 @@
 
 ## Related
 
-- [WP-AIOPS-2026-03-007](../work-packets/WP-AIOPS-2026-03-007-ai-tool-artifact-separation.md)
-- [WP-AIOPS-2026-03-005](../work-packets/WP-AIOPS-2026-03-005-process-based-collaboration.md)
+- [WP-DPC-2026-03-007](../work-packets/WP-DPC-2026-03-007-ai-tool-artifact-separation.md)
+- [WP-DPC-2026-03-005](../work-packets/WP-DPC-2026-03-005-process-based-collaboration.md)
 - [ops-bootstrap-master-plan.md](../ops-bootstrap-master-plan.md)

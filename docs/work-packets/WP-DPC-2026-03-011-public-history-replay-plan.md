@@ -1,7 +1,7 @@
 ---
-packet_id: "WP-AIOPS-2026-03-011"
+packet_id: "WP-DPC-2026-03-011"
 title: "ai-ops public repository replay history plan"
-goal_ids: ["AIOPS-G1", "AIOPS-G4", "AIOPS-G5"]
+goal_ids: ["DPC-G1", "DPC-G4", "DPC-G5"]
 status: "IN_REFINEMENT"
 work_type: "MIGRATION"
 priority: "P1"
@@ -12,15 +12,15 @@ next_process: "P3"
 owner: "SHARED"
 created_at: "2026-03-11"
 last_updated: "2026-03-11"
-parent: "WP-AIOPS-2026-03-001"
+parent: "WP-DPC-2026-03-001"
 track: "public-history replay"
 ---
 
-# WP-AIOPS-2026-03-011: ai-ops public repository replay history plan
+# WP-DPC-2026-03-011: ai-ops public repository replay history plan
 
 ## 1. Background
 
-- `WP-AIOPS-2026-03-010`을 통해 source repo의 legacy namespace sunset과 external `ai-ops` framework repo bootstrap completeness는 완료되었다.
+- `WP-DPC-2026-03-010`을 통해 source repo의 legacy namespace sunset과 external `ai-ops` framework repo bootstrap completeness는 완료되었다.
 - 그러나 external repo ``ai-ops` (this repository)`의 현재 git history는 `C1~C7 + bootstrap completion` 중심이며,
   **"ai-ops를 처음부터 독립 framework로 구축해온 것 같은 서사"**를 충분히 보여주지 못한다.
 - 사용자 의도는 단순한 추출 이력 보존이 아니라, 기존 ai-ops의 framework 진화 과정을
@@ -69,16 +69,16 @@ track: "public-history replay"
 ## 7. Related References
 
 ### 7.1 Related Docs
-- [WP-AIOPS-2026-03-001](./WP-AIOPS-2026-03-001-ai-ops-bootstrap.md)
-- [WP-AIOPS-2026-03-008](./WP-AIOPS-2026-03-008-codex-omx-alignment.md)
-- [WP-AIOPS-2026-03-010](./WP-AIOPS-2026-03-010-framework-extraction.md)
+- [WP-DPC-2026-03-001](./WP-DPC-2026-03-001-ai-ops-bootstrap.md)
+- [WP-DPC-2026-03-008](./WP-DPC-2026-03-008-codex-omx-alignment.md)
+- [WP-DPC-2026-03-010](./WP-DPC-2026-03-010-framework-extraction.md)
 - [AI Ops CHANGELOG](../CHANGELOG.md)
 - [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
-- [ADR-AIOPS-001](../adr/ADR-AIOPS-001-bootstrap-requirement-change-sync.md)
-- [ADR-AIOPS-002](../adr/ADR-AIOPS-002-goal-alignment-process.md)
-- [ADR-AIOPS-003](../adr/ADR-AIOPS-003-conditional-team-activation-and-optout.md)
-- [ADR-AIOPS-004](../adr/ADR-AIOPS-004-ai-tool-artifact-boundary.md)
-- [ADR-AIOPS-005](../adr/ADR-AIOPS-005-codex-entrypoint-ownership-and-ai-assistant-decoupling.md)
+- [ADR-DPC-001](../adr/ADR-DPC-001-bootstrap-requirement-change-sync.md)
+- [ADR-DPC-002](../adr/ADR-DPC-002-goal-alignment-process.md)
+- [ADR-DPC-003](../adr/ADR-DPC-003-conditional-team-activation-and-optout.md)
+- [ADR-DPC-004](../adr/ADR-DPC-004-ai-tool-artifact-boundary.md)
+- [ADR-DPC-005](../adr/ADR-DPC-005-codex-entrypoint-ownership-and-ai-assistant-decoupling.md)
 
 ### 7.2 Related Code
 - external framework repo: ``ai-ops` (this repository)`
@@ -117,24 +117,24 @@ Replay commit은 source repo의 WP/ADR **문서 자체**를 옮기는 것이 아
 
 #### 포함 대상
 
-- `WP-AIOPS-2026-03-001` bootstrap foundation
-- `ADR-AIOPS-001` requirement change sync rule
-- `WP-AIOPS-2026-03-002` tool hook enforcement
-- `WP-AIOPS-2026-03-003` git hook compliance gate
-- `WP-AIOPS-2026-03-004` document structure transition
-- `ADR-AIOPS-002` goal alignment process
-- `WP-AIOPS-2026-03-005` process-based collaboration
-- `ADR-AIOPS-003` conditional team activation / opt-out
-- `WP-AIOPS-2026-03-007` AI tool artifact boundary preparation
-- `ADR-AIOPS-004` AI tool artifact boundary
-- `WP-AIOPS-2026-03-008` Codex+OMX alignment (framework-relevant subset)
-- `WP-AIOPS-2026-03-009` Claude+OMC SoT application (template/adapter-relevant subset)
-- `ADR-AIOPS-005` codex entrypoint ownership / AI assistant decoupling
-- `WP-AIOPS-2026-03-010` framework extraction + portable bootstrap completion
+- `WP-DPC-2026-03-001` bootstrap foundation
+- `ADR-DPC-001` requirement change sync rule
+- `WP-DPC-2026-03-002` tool hook enforcement
+- `WP-DPC-2026-03-003` git hook compliance gate
+- `WP-DPC-2026-03-004` document structure transition
+- `ADR-DPC-002` goal alignment process
+- `WP-DPC-2026-03-005` process-based collaboration
+- `ADR-DPC-003` conditional team activation / opt-out
+- `WP-DPC-2026-03-007` AI tool artifact boundary preparation
+- `ADR-DPC-004` AI tool artifact boundary
+- `WP-DPC-2026-03-008` Codex+OMX alignment (framework-relevant subset)
+- `WP-DPC-2026-03-009` Claude+OMC SoT application (template/adapter-relevant subset)
+- `ADR-DPC-005` codex entrypoint ownership / AI assistant decoupling
+- `WP-DPC-2026-03-010` framework extraction + portable bootstrap completion
 
 #### 제외 대상
 
-- `WP-AIOPS-2026-03-006` pilot verification
+- `WP-DPC-2026-03-006` pilot verification
   - 이유: product WP와 backport trace가 섞인 검증 round라 public framework history로 replay하기 부적절
 - source repo migration cleanup only records
   - legacy namespace sunset의 source-repo cleanup detail 자체는 external repo 공개 히스토리의 본류가 아님

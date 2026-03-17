@@ -1,7 +1,7 @@
 ---
-packet_id: "WP-AIOPS-2026-03-001"
+packet_id: "WP-DPC-2026-03-001"
 title: "AI 협업 운영체계 구축 부트스트랩"
-goal_ids: ["AIOPS-G1", "AIOPS-G2", "AIOPS-G3", "AIOPS-G4", "AIOPS-G5"]
+goal_ids: ["DPC-G1", "DPC-G2", "DPC-G3", "DPC-G4", "DPC-G5"]
 status: "IN_REFINEMENT"
 work_type: "DOCUMENTATION"
 priority: "P0"
@@ -13,7 +13,7 @@ owner: "SHARED"
 created_at: "2026-03-07"
 last_updated: "2026-03-12"
 ---
-# WP-AIOPS-2026-03-001 AI 협업 운영체계 구축 부트스트랩
+# WP-DPC-2026-03-001 AI 협업 운영체계 구축 부트스트랩
 
 ## 1. Background
 - `ai-collaboration-guide.md`에 운영 원칙이 집중되어 있어 실행 시 참조 비용이 높다.
@@ -59,7 +59,7 @@ last_updated: "2026-03-12"
 ### 7.1 Related Docs
 - [AI Ops Constitution](../constitution.md)
 - [AI 협업 가이드](../../project-ops/ai-collaboration-guide.md)
-- [ADR-AIOPS-001: 요구사항 변경 동기화 강제 규칙](../adr/ADR-AIOPS-001-bootstrap-requirement-change-sync.md)
+- [ADR-DPC-001: 요구사항 변경 동기화 강제 규칙](../adr/ADR-DPC-001-bootstrap-requirement-change-sync.md)
 - [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
 - [work-packets index](./index.md)
 - [AI Ops CHANGELOG](../CHANGELOG.md)
@@ -76,7 +76,7 @@ last_updated: "2026-03-12"
 ## 8. Process Plan
 - **Phase 0 (정합성 고정 / Gate G0):** 현재 템플릿과 기록 체계를 기준선으로 동결한다.
   - 작업 1번: 기존 WP/ADR 템플릿을 `v1 표준`으로 채택
-  - 산출물: 본 WP, ADR-AIOPS-001, index, CHANGELOG
+  - 산출물: 본 WP, ADR-DPC-001, index, CHANGELOG
 - **Phase 1 (강제 메커니즘 분리 / Gate G1):**
   - 트랙 1: AI tool별 실행 중 강제 훅
     - Codex(JetBrains AI Assistant): `AGENTS.md` 중심 진입 규칙 연결
@@ -112,15 +112,15 @@ last_updated: "2026-03-12"
 ### 9.3 훅 수명주기 관리 규칙
 - 트랙1/트랙2 훅은 고정 규칙이 아니라 운영체계 성숙도에 따라 지속 갱신한다.
 - 신규 규칙 추가, 오탐/미탐 발견, 우회 사례 확인 시 훅 갱신 WP를 생성 또는 기존 훅 WP를 갱신한다.
-- 훅 변경이 발생하면 `ADR-AIOPS-001`, `index.md`, `CHANGELOG.md`, 상위 계획 문서를 같은 세션에서 동기화한다.
+- 훅 변경이 발생하면 `ADR-DPC-001`, `index.md`, `CHANGELOG.md`, 상위 계획 문서를 같은 세션에서 동기화한다.
 
 ## 10. Deliverables
-- `docs/ai-ops/work-packets/WP-AIOPS-2026-03-001-ai-ops-bootstrap.md`
+- `docs/ai-ops/work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md`
 - `docs/ai-ops/ops-bootstrap-master-plan.md`
 - `docs/ai-ops/constitution.md`
-- `docs/ai-ops/work-packets/WP-AIOPS-2026-03-002-ai-tool-hook-enforcement.md`
-- `docs/ai-ops/work-packets/WP-AIOPS-2026-03-003-git-hook-output-compliance-gate.md`
-- `docs/ai-ops/adr/ADR-AIOPS-001-bootstrap-requirement-change-sync.md`
+- `docs/ai-ops/work-packets/WP-DPC-2026-03-002-ai-tool-hook-enforcement.md`
+- `docs/ai-ops/work-packets/WP-DPC-2026-03-003-git-hook-output-compliance-gate.md`
+- `docs/ai-ops/adr/ADR-DPC-001-bootstrap-requirement-change-sync.md`
 - `docs/ai-ops/work-packets/index.md`
 - `docs/ai-ops/CHANGELOG.md`
 - `scripts/ai-ops/check_ai_ops_compliance.py`
@@ -142,16 +142,16 @@ last_updated: "2026-03-12"
 | Codex entrypoint ownership | `$ai-ops`는 Codex+OMX 전용, JetBrains AI Assistant는 `AGENTS.md` 일반 진입 | 행동 parity는 유지하되 hidden local rule-pack 의존과 과잉 토큰 비용을 줄이기 위함 |
 
 ## 13. Follow-ups
-- WP-AIOPS-2026-03-002: 작업 중 준수/품질 강제용 AI tool별 훅 적용(트랙1)
-- WP-AIOPS-2026-03-003: 최종 산출물 준수 검토 Git hook 적용(트랙2)
-- WP-AIOPS-2026-03-004: 문서 재배치/분해 실행(Phase 2)
-- WP-AIOPS-2026-03-005: 파일럿 운영 사이클 검증(Phase 3)
-- WP-AIOPS-2026-03-008: Codex+OMX 운영 정렬 임시 프로세스(2회) 수행 및 G6 판정(Phase 6)
-- WP-AIOPS-2026-03-008: soft baseline 이후 Codex+OMX hard guarantee feasibility와 외부 wrapper/native hook 의존 경계 재분석
-- WP-AIOPS-2026-03-008: OMX-centered launch wrapper/gateway 요구사항 정의 및 구현 반영
-- WP-AIOPS-2026-03-011: external `ai-ops` public repo history를 framework evolution narrative 기준으로 replay
-- WP-AIOPS-2026-03-012: external canonical 전제하에 must-move / archive-only 자산 재분류
-- WP-AIOPS-2026-03-012: source archive-only cutoff와 external live control-board 이관 정책 실행
+- WP-DPC-2026-03-002: 작업 중 준수/품질 강제용 AI tool별 훅 적용(트랙1)
+- WP-DPC-2026-03-003: 최종 산출물 준수 검토 Git hook 적용(트랙2)
+- WP-DPC-2026-03-004: 문서 재배치/분해 실행(Phase 2)
+- WP-DPC-2026-03-005: 파일럿 운영 사이클 검증(Phase 3)
+- WP-DPC-2026-03-008: Codex+OMX 운영 정렬 임시 프로세스(2회) 수행 및 G6 판정(Phase 6)
+- WP-DPC-2026-03-008: soft baseline 이후 Codex+OMX hard guarantee feasibility와 외부 wrapper/native hook 의존 경계 재분석
+- WP-DPC-2026-03-008: OMX-centered launch wrapper/gateway 요구사항 정의 및 구현 반영
+- WP-DPC-2026-03-011: external `ai-ops` public repo history를 framework evolution narrative 기준으로 replay
+- WP-DPC-2026-03-012: external canonical 전제하에 must-move / archive-only 자산 재분류
+- WP-DPC-2026-03-012: source archive-only cutoff와 external live control-board 이관 정책 실행
 - 장기적으로는 오픈소스 + 간단 명령/마켓플레이스형 프로덕트 방향을 유지하되, 현재는 운영체계 레이어 정렬을 우선한다.
 
 ## 14. Timeline
@@ -160,10 +160,10 @@ last_updated: "2026-03-12"
 - [2026-03-07] 강제 동기화 ADR 등록
 - [2026-03-07] index/CHANGELOG 생성 및 관제 시작
 - [2026-03-07] 강제 메커니즘을 트랙1/트랙2로 분리 확정
-- [2026-03-08] WP-AIOPS-2026-03-008 추가: Codex+OMX 운영 정렬(Track 7, Phase 6/G6)
+- [2026-03-08] WP-DPC-2026-03-008 추가: Codex+OMX 운영 정렬(Track 7, Phase 6/G6)
 - [2026-03-08] `ai-ops` 정체성 보강: 엔진 재구현이 아닌 운영체계 레이어 + 장기 제품화 방향 메모 반영
-- [2026-03-08] WP-AIOPS-2026-03-008 재개: soft guarantee baseline 이후 hard guarantee feasibility를 별도 분석하도록 범위 보강
-- [2026-03-08] WP-AIOPS-2026-03-008 설계 보강: 외부 소규모 wrapper는 개념 참고만 하고 OMX-centered hard gate 요구사항으로 정리
-- [2026-03-09] WP-AIOPS-2026-03-008 설계 보강: `$ai-ops`를 Codex+OMX 전용으로 유지하고, JetBrains AI Assistant 일반 경로는 `AGENTS.md` + SoT로 정리하는 방향과 ADR-AIOPS-005를 추가
-- [2026-03-09] WP-AIOPS-2026-03-008 구현 반영: `.codex/jetbrains-ai-assistant-rules.md` 제거, `$ai-ops` skill 참조 축소, Codex 선택 전 Team 금지 규칙을 직접 반영
-- [2026-03-09] WP-AIOPS-2026-03-008 round 기록 고정: Codex entrypoint ownership 재정렬 round를 `S4`까지 완료
+- [2026-03-08] WP-DPC-2026-03-008 재개: soft guarantee baseline 이후 hard guarantee feasibility를 별도 분석하도록 범위 보강
+- [2026-03-08] WP-DPC-2026-03-008 설계 보강: 외부 소규모 wrapper는 개념 참고만 하고 OMX-centered hard gate 요구사항으로 정리
+- [2026-03-09] WP-DPC-2026-03-008 설계 보강: `$ai-ops`를 Codex+OMX 전용으로 유지하고, JetBrains AI Assistant 일반 경로는 `AGENTS.md` + SoT로 정리하는 방향과 ADR-DPC-005를 추가
+- [2026-03-09] WP-DPC-2026-03-008 구현 반영: `.codex/jetbrains-ai-assistant-rules.md` 제거, `$ai-ops` skill 참조 축소, Codex 선택 전 Team 금지 규칙을 직접 반영
+- [2026-03-09] WP-DPC-2026-03-008 round 기록 고정: Codex entrypoint ownership 재정렬 round를 `S4`까지 완료

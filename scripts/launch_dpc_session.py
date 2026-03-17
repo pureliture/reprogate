@@ -11,7 +11,7 @@ from typing import Dict, List
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-CONTEXT_FILE = ROOT / ".ai-ops" / "process-context.json"
+CONTEXT_FILE = ROOT / ".dpc" / "process-context.json"
 
 READ_ONLY_PROCESSES = {"G0", "P0", "P1", "P2", "S2", "S4"}
 TEAM_CAPABLE_PROCESSES = {"P3", "P4", "S3", "S1"}
@@ -27,7 +27,7 @@ class LaunchPlan:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Launch Codex/OMX with AI Ops-aware defaults from the recorded process context."
+        description="Launch Codex/OMX with dpc-aware defaults from the recorded process context."
     )
     parser.add_argument("--launcher", choices=["omx", "codex"], default="omx")
     parser.add_argument("--allow-none-write", action="store_true")
@@ -39,7 +39,7 @@ def parse_args() -> argparse.Namespace:
 def load_context() -> Dict[str, object]:
     if not CONTEXT_FILE.exists():
         raise SystemExit(
-            "Missing .ai-ops/process-context.json. Record a process first with scripts/set_process_context.py."
+            "Missing .dpc/process-context.json. Record a process first with scripts/set_process_context.py."
         )
     return json.loads(CONTEXT_FILE.read_text(encoding="utf-8"))
 
@@ -75,7 +75,7 @@ def replace_or_append_sandbox(args: List[str], mode: str) -> List[str]:
 def resolve_plan(parsed: argparse.Namespace, context: Dict[str, object]) -> LaunchPlan:
     process = str(context.get("selected_process") or "").strip().upper()
     if not process:
-        raise SystemExit("selected_process is missing from .ai-ops/process-context.json")
+        raise SystemExit("selected_process is missing from .dpc/process-context.json")
 
     team_mode = str(context.get("team_mode") or "auto").strip().lower()
     args = normalize_launch_args(parsed.launch_args)
@@ -89,7 +89,7 @@ def resolve_plan(parsed: argparse.Namespace, context: Dict[str, object]) -> Laun
             raise SystemExit("team_mode=team currently requires launcher=omx.")
         if not args or args[0] != TEAM_COMMAND:
             raise SystemExit("team_mode=team requires `omx team ...` launch arguments.")
-        notes.append("Using team-capable launch path from recorded AI Ops context.")
+        notes.append("Using team-capable launch path from recorded dpc context.")
         return LaunchPlan(launcher=parsed.launcher, args=args, notes=notes)
 
     sandbox = get_sandbox(args)

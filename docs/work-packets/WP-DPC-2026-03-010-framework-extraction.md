@@ -1,7 +1,7 @@
 ---
-packet_id: "WP-AIOPS-2026-03-010"
+packet_id: "WP-DPC-2026-03-010"
 title: "ai-ops 프레임워크 추출 및 오픈소스화"
-goal_ids: ["AIOPS-G1", "AIOPS-G4", "AIOPS-G5"]
+goal_ids: ["DPC-G1", "DPC-G4", "DPC-G5"]
 status: "DONE"
 work_type: "FRAMEWORK"
 priority: "P0"
@@ -12,11 +12,11 @@ next_process: "-"
 owner: "SHARED"
 created_at: "2026-03-10"
 last_updated: "2026-03-11"
-parent: "WP-AIOPS-2026-03-001"
+parent: "WP-DPC-2026-03-001"
 track: "프레임워크 독립화"
 ---
 
-# WP-AIOPS-2026-03-010: ai-ops 프레임워크 추출 및 오픈소스화
+# WP-DPC-2026-03-010: ai-ops 프레임워크 추출 및 오픈소스화
 
 ## 1. Goal
 
@@ -385,7 +385,7 @@ ai-ops/
 
 ### 7.8 P3 착수 상태 (2026-03-10)
 
-- `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-AIOPS-2026-03-010 --team-mode single`로 Single fallback 확정
+- `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-010 --team-mode single`로 Single fallback 확정
 - 새 레포지토리 ``ai-ops` (this repository)` 진행 현황:
   - `C1` 완료: `README.md`, `LICENSE`, `.gitignore`, `docs/`, `scripts/`, `config/`, `templates/` 스켈레톤 생성
   - `C2` 완료: `constitution.md`, `operating-model.md`, `process-catalog/*` 일반화 문서 추가
@@ -448,8 +448,8 @@ ai-ops/
 #### 실행 경로
 
 - current repo context 기록:
-  - `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-AIOPS-2026-03-010 --team-mode auto`
-  - `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-AIOPS-2026-03-010 --team-mode single`
+  - `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-010 --team-mode auto`
+  - `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-010 --team-mode single`
 - external framework repo: ``ai-ops` (this repository)`
 
 #### 구현 내용
@@ -623,8 +623,8 @@ ai-ops/
 #### 실행 경로
 
 - context 기록:
-  - `python3 scripts/set_process_context.py --process P3 --wp WP-AIOPS-2026-03-010 --team-mode auto`
-  - `python3 scripts/set_process_context.py --process P3 --wp WP-AIOPS-2026-03-010 --team-mode single`
+  - `python3 scripts/set_process_context.py --process P3 --wp WP-DPC-2026-03-010 --team-mode auto`
+  - `python3 scripts/set_process_context.py --process P3 --wp WP-DPC-2026-03-010 --team-mode single`
 
 #### 구현 내용
 
@@ -685,7 +685,7 @@ ai-ops/
 
 #### 검증 결과
 
-- `python3 scripts/set_process_context.py --process S1 --wp WP-AIOPS-2026-03-010 --team-mode single` → pass
+- `python3 scripts/set_process_context.py --process S1 --wp WP-DPC-2026-03-010 --team-mode single` → pass
 - `python3 scripts/check_compliance.py --mode none` → pass
 - `python3 scripts/launch_ai_ops_session.py --dry-run --launcher omx -- --model gpt-5` → pass
 - active adapter 직접 참조 점검:
@@ -908,17 +908,17 @@ ai-ops/
    - root canonical 경로를 실제 live record로 채움:
      - `docs/CHANGELOG.md`
      - `docs/work-packets/index.md`
-     - `docs/work-packets/WP-AIOPS-2026-03-001-ai-ops-bootstrap.md`
-     - `docs/work-packets/WP-AIOPS-2026-03-008-codex-omx-alignment.md`
-     - `docs/work-packets/WP-AIOPS-2026-03-010-framework-extraction.md`
-     - `docs/adr/ADR-AIOPS-001..005`
+     - `docs/work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md`
+     - `docs/work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md`
+     - `docs/work-packets/WP-DPC-2026-03-010-framework-extraction.md`
+     - `docs/adr/ADR-DPC-001..005`
    - active board는 root 경로를 기준으로 읽고 갱신하도록 정렬했다.
 2. **legacy live-path bridge 전환**
    - 기존 active legacy path를 thin bridge/stub로 전환:
      - `docs/ai-ops/CHANGELOG.md`
      - `docs/ai-ops/work-packets/index.md`
      - active legacy WP 3건
-     - `docs/ai-ops/adr/ADR-AIOPS-001..005`
+     - `docs/ai-ops/adr/ADR-DPC-001..005`
    - closed historical packets는 당분간 `docs/ai-ops/work-packets/`에 retained archive로 남긴다.
 3. **user-facing stable command path 정렬**
    - command / hook / policy / README 계열 문서의 operator-facing examples를 root `scripts/*` 기준으로 변경:
@@ -945,9 +945,9 @@ ai-ops/
 
 #### 검증 결과
 
-- `python3 scripts/check_compliance.py --mode none --wp-file docs/work-packets/WP-AIOPS-2026-03-010-framework-extraction.md` → pass
+- `python3 scripts/check_compliance.py --mode none --wp-file docs/work-packets/WP-DPC-2026-03-010-framework-extraction.md` → pass
 - `python3 -m py_compile scripts/ai-ops/check_ai_ops_compliance.py scripts/ai-ops/claude_pretooluse_guard.py .claude/hooks/pretooluse-ai-ops-guard.py` → pass
-- `python3 scripts/set_process_context.py --process P3 --wp WP-AIOPS-2026-03-010 --team-mode single` → pass
+- `python3 scripts/set_process_context.py --process P3 --wp WP-DPC-2026-03-010 --team-mode single` → pass
 - `python3 scripts/launch_ai_ops_session.py --dry-run --launcher omx -- --model gpt-5` → pass
 
 #### 후속 권장 프로세스
@@ -1041,10 +1041,10 @@ ai-ops/
 
 3. **historical archive disposition 확정**
    - closed historical WP canonical archive:
-     - `docs/archive/ai-ops/work-packets/WP-AIOPS-2026-03-002..007,009`
+     - `docs/archive/ai-ops/work-packets/WP-DPC-2026-03-002..007,009`
    - historical design source archive:
      - `docs/archive/ai-ops/ai-collaboration-guide.md`
-   - legacy `docs/ai-ops/work-packets/WP-AIOPS-2026-03-002..007,009`는 archive redirect stub로 축소
+   - legacy `docs/ai-ops/work-packets/WP-DPC-2026-03-002..007,009`는 archive redirect stub로 축소
    - `docs/ai-ops/CONTINUE-DISCUSSION-PROMPT.md`,
      `docs/ai-ops/future-direction-discussion-2026-03-09.md`는 이번 라운드 사용자 제약에 따라 frozen in-place exception으로 명시
 
@@ -1066,7 +1066,7 @@ ai-ops/
 #### 검증 결과
 
 - `python3 scripts/check_compliance.py --mode none` → pass
-- `python3 scripts/check_compliance.py --mode none --wp-file docs/work-packets/WP-AIOPS-2026-03-010-framework-extraction.md` → pass
+- `python3 scripts/check_compliance.py --mode none --wp-file docs/work-packets/WP-DPC-2026-03-010-framework-extraction.md` → pass
 - `python3 -m py_compile scripts/check_compliance.py scripts/set_process_context.py scripts/launch_ai_ops_session.py scripts/ai-ops/check_ai_ops_compliance.py scripts/ai-ops/set_process_context.py scripts/ai-ops/launch_ai_ops_session.py scripts/ai-ops/claude_pretooluse_guard.py` → pass
 - `python3 scripts/launch_ai_ops_session.py --dry-run --launcher omx -- --model gpt-5` → pass
 - `python3 scripts/ai-ops/launch_ai_ops_session.py --dry-run --launcher omx -- --model gpt-5` → pass
@@ -1084,11 +1084,11 @@ ai-ops/
 
 - live-path consistency fixes:
   - `docs/CHANGELOG.md`
-  - `docs/work-packets/WP-AIOPS-2026-03-010-framework-extraction.md` references
+  - `docs/work-packets/WP-DPC-2026-03-010-framework-extraction.md` references
   - `WORKSPACE-PROFILE.md`
   - `docs/omc-config/AI-OPS-POLICY.template.md` / `.omc/AI-OPS-POLICY.md`
-  - `docs/adr/ADR-AIOPS-003-conditional-team-activation-and-optout.md`
-  - `docs/adr/ADR-AIOPS-005-codex-entrypoint-ownership-and-ai-assistant-decoupling.md`
+  - `docs/adr/ADR-DPC-003-conditional-team-activation-and-optout.md`
+  - `docs/adr/ADR-DPC-005-codex-entrypoint-ownership-and-ai-assistant-decoupling.md`
 - root / legacy / archive split after the latest P3 fixes
 - remaining compatibility / discussion-exception surfaces
 
@@ -1241,7 +1241,7 @@ ai-ops/
 
 - 제거:
   - `docs/ai-ops/CONTINUE-DISCUSSION-PROMPT.md`
-  - `docs/ai-ops/work-packets/WP-AIOPS-2026-03-010-CONTINUE-P3-PROMPT.md`
+  - `docs/ai-ops/work-packets/WP-DPC-2026-03-010-CONTINUE-P3-PROMPT.md`
   - remaining legacy bridge/stub docs
   - five redirect-only legacy shim scripts
 - archive 이동:
@@ -1260,7 +1260,7 @@ ai-ops/
 
 - `bash scripts/install_git_hooks.sh` → pass
 - `python3 scripts/check_compliance.py --mode none` → pass
-- `python3 scripts/check_compliance.py --mode none --wp-file docs/work-packets/WP-AIOPS-2026-03-010-framework-extraction.md` → pass
+- `python3 scripts/check_compliance.py --mode none --wp-file docs/work-packets/WP-DPC-2026-03-010-framework-extraction.md` → pass
 - `python3 -m py_compile scripts/check_compliance.py scripts/set_process_context.py scripts/launch_ai_ops_session.py scripts/hooks/claude_pretooluse_guard.py` → pass
 - `python3 scripts/launch_ai_ops_session.py --dry-run --launcher omx -- --model gpt-5` → pass
 - `rg -n "docs/ai-ops/|scripts/ai-ops/" .claude .codex .agents AGENTS.md docs scripts -g '!docs/archive/**' -g '!docs/CHANGELOG.md' -g '!docs/work-packets/**' -g '!**/.omx/**'`
@@ -1319,7 +1319,7 @@ ai-ops/
 1. root canonical AI Ops surface는 `docs/*`, `scripts/*`로 정착되었다.
 2. legacy `docs/ai-ops/*`, `scripts/ai-ops/*`는 source repo live namespace에서 제거되었다.
 3. 필요한 historical trace는 `docs/archive/ai-ops/*`에만 남긴다.
-4. `WP-AIOPS-2026-03-010`의 final deletion readiness는 **PASS**다.
+4. `WP-DPC-2026-03-010`의 final deletion readiness는 **PASS**다.
 5. single-agent S4 기록은 reviewer/verifier evidence를 같은 세션에서 순차 수행한 검증 결과를 근거로 남긴다.
 
 #### 최종 상태
