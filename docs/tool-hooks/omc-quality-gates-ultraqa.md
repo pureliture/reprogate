@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Some toolchains enforce AI Ops primarily through verification stages and repeated quality loops rather than pre-execution denial hooks.
+Some toolchains enforce ReproGate primarily through verification stages and repeated quality loops rather than pre-execution denial hooks.
 This document defines that portable model.
 
 ## Core Idea

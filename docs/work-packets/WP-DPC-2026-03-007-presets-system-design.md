@@ -1,6 +1,6 @@
 ---
 packet_id: "WP-DPC-2026-03-007"
-title: "presets 시스템 설계"
+title: "ReproGate presets / Skills 시스템 설계"
 goal_ids: ["DPC-G1", "DPC-G4"]
 status: "DONE"
 work_type: "DESIGN"
@@ -13,14 +13,16 @@ owner: "SHARED"
 created_at: "2026-03-13"
 last_updated: "2026-03-17"
 parent: null
-track: "dpc core design"
+track: "reprogate core design"
 ---
 
-# WP-DPC-2026-03-007: presets 시스템 설계
+# WP-DPC-2026-03-007: ReproGate presets / Skills 시스템 설계
+
+> Current interpretation: 이 설계는 단순 preset 로더 설계가 아니라, **기록 기반 패턴을 Skill로 자산화하고 preset/workflow로 묶는 ReproGate 구조**를 정의한 문서다.
 
 ## 1. Background
 
-dpc architecture.md에서 presets 시스템을 정의했으나 구체적인 설계가 없다.
+ReproGate architecture에서 presets / Skills 시스템을 정의했으나 구체적인 설계가 없다.
 
 ```
 presets/
@@ -34,7 +36,7 @@ presets/
 
 ## 2. Goal
 
-presets 시스템의 구체적인 설계를 정의한다:
+presets / Skills 시스템의 구체적인 설계를 정의한다:
 
 - 프리셋 디렉토리 구조
 - guidelines.md 포맷

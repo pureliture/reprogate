@@ -11,9 +11,11 @@ current_process: "P3"
 next_process: "S1"
 owner: "SHARED"
 created_at: "2026-03-08"
-last_updated: "2026-03-09"
+last_updated: "2026-03-17"
 ---
 # WP-DPC-2026-03-002 Codex+OMX 조합 정렬 및 Claude+OMC 성공패턴 이식
+
+> Historical interpretation note: 이 문서는 `dpc/ai-ops` 시기의 adapter 정렬 기록이다. 현재 ReproGate 관점에서는 **record-backed enforcement surface를 Codex+OMX 경로에 어떻게 이식할지 검토한 historical packet**으로 읽는다. 본문의 사실 관계는 유지한다.
 
 ## 1. Background
 - `AGENTS.md`가 `oh-my-codex` 템플릿으로 교체되며 프로젝트 어댑터 규칙과 런타임 템플릿 간 경계가 불명확해졌다.

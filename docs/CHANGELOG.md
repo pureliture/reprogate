@@ -7,12 +7,30 @@ Scope:
 
 ## 2026-03-17
 
+- **UPDATED**: Wave 5 residual legacy wording cleanup for ReproGate alignment
+  - normalized support docs under `docs/commands/*`, `docs/tool-hooks/*`, `docs/guide/dpc-intro.md`, `docs/omc-config/*`
+  - replaced remaining AI Ops phrasing with ReproGate phrasing where documents are live guidance surfaces
+  - kept legacy identifiers only where compatibility is intentional (e.g., `dpc` command alias, `AI-OPS-POLICY.template.md` filename)
+  - fixed config-file wording in OMC policy template: `ai-ops.config.yaml` → `dpc.config.yaml`
+  - S1/S4 review decision: preserve historical work-packet narratives as-is; record only new alignment events
+
+- **UPDATED**: final-definition injection planning artifact closed and removed
+  - confirmed Wave 1~5 completion and removed `docs/strategy/final-definition-injection-plan.md`
+  - replaced remaining references with completion note in governance/work-packet surfaces
+
+- **UPDATED**: Wave 4 execution-plan alignment for ReproGate
+  - updated `docs/work-packets/index.md` to read as a ReproGate control-board
+  - reinterpreted active packets (`WP-001`, `WP-006`, `WP-007`, `WP-009`, `WP-010`) in ReproGate terms
+  - added historical interpretation notes to migration/alignment packets (`WP-002`~`WP-005`)
+  - refreshed ADR-DPC-007 language so the decision reads as valid under ReproGate naming
+  - removed stale references to deleted rules DSL artifacts from active planning surfaces
+
 - **ACCEPTED**: [ADR-DPC-007](./adr/ADR-DPC-007-rules-engine-selection.md) OPA/Rego 채택
   - 자체 rules DSL 대신 검증된 정책 엔진(OPA/Rego) 사용 결정
   - 파서 구현 부담 제거, 테스트 프레임워크 내장
   - `rules.yaml` → `rules.rego`로 전환
 
-- **SUPERSEDED**: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-008-rules-dsl-design.md) rules DSL 설계
+- **SUPERSEDED**: `WP-DPC-2026-03-008` rules DSL 설계
   - ADR-DPC-007 채택으로 자체 DSL 설계 대체됨
 
 - **UPDATED**: [WP-DPC-2026-03-007](./work-packets/WP-DPC-2026-03-007-presets-system-design.md) presets 시스템 설계
@@ -31,6 +49,11 @@ Scope:
   - 완료된 WP-002~009 및 migration-review 문서 제거
   - 핵심 결정은 ADR/CHANGELOG에 보존됨
   - 퍼블릭 릴리스용 클린업
+
+- **REMOVED**: deprecated rules DSL artifacts
+  - deleted `docs/design/rules-dsl-spec.md`
+  - deleted `docs/work-packets/WP-DPC-2026-03-008-rules-dsl-design.md`
+  - removed stale references from ADR/index/governance docs
 
 ## 2026-03-12
 

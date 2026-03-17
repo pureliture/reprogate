@@ -1,7 +1,7 @@
 # dpc 구현 진척 현황
 
 > Last Updated: 2026-03-17
-> Overall Progress: ~40%
+> Overall Progress: ~45%
 
 ## 1. CLI Commands
 
@@ -50,6 +50,7 @@
 |------|------|------|
 | architecture.md | 100% | 완료 |
 | presets-spec.md | 100% | 완료 |
+| product-spec.md | 100% | 완료 (WP-009) |
 | ADR-007 (OPA/Rego) | 100% | 완료 |
 
 ---
@@ -70,3 +71,8 @@
 - 초기 진척 현황 문서 생성
 - 설계 완료: architecture.md, presets-spec.md, ADR-007
 - 마이그레이션 완료: WP-002~007 DONE
+- **WP-009 완료**: product-spec.md 최종 정리
+  - 철학 & Scope 정의 (dpc=파이프라인, LLM=내용물)
+  - CLI: init, apply, status, preset create/validate
+  - Gate: hooks 내부 로직, LLM이 rules.rego 작성
+  - 구조 제어: 템플릿, 스키마 검증, 경로 제한

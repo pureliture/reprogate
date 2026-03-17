@@ -4,7 +4,7 @@ This directory contains optional policy templates for repositories that also use
 
 ## Included Files
 
-- `AI-OPS-POLICY.template.md` — portable policy text that can be copied into `.omc/AI-OPS-POLICY.md`
+- `AI-OPS-POLICY.template.md` — portable policy text that can be copied into `.omc/AI-OPS-POLICY.md` (legacy filename, reusable for ReproGate)
 
 ## Apply
 

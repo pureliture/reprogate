@@ -1,16 +1,16 @@
-# dpc Command Contract
+# ReproGate Entry Command Contract (`dpc` Legacy Alias)
 
 > Status: Active
 > Version: `1.0.0`
 
 ## Purpose
 
-The dpc command is the process-first entrypoint for framework-guided work.
+The ReproGate entry command (often exposed as `dpc` for backward compatibility) is the process-first entrypoint for framework-guided work.
 Its job is to prevent immediate execution before the work is classified.
 
 ## Required Behavior
 
-An adapter that exposes an dpc command should enforce this sequence:
+An adapter that exposes this entry command should enforce this sequence:
 
 1. receive a task description,
 2. recommend one process and one or two alternatives,
@@ -58,7 +58,7 @@ See [Minimum Logical Role Set](../process-catalog/minimum-logical-role-set.md).
 
 ## Output Contract
 
-A conforming dpc entry command should leave these outcomes:
+A conforming ReproGate entry command should leave these outcomes:
 
 1. a chosen process or `NONE`,
 2. a stated execution path,

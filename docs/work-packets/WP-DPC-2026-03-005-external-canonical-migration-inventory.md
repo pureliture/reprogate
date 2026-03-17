@@ -11,12 +11,14 @@ current_process: "P1"
 next_process: "P3"
 owner: "SHARED"
 created_at: "2026-03-11"
-last_updated: "2026-03-11"
+last_updated: "2026-03-17"
 parent: "WP-DPC-2026-03-001"
 track: "external canonical migration"
 ---
 
 # WP-DPC-2026-03-005: external ai-ops canonical migration inventory
+
+> Historical interpretation note: 이 문서는 external canonical migration 시기의 inventory 기록이다. 현재 ReproGate 관점에서는 **control-board / strategy / adapter surface가 canonical repo로 어떻게 옮겨졌는지 설명하는 historical migration packet**으로 유지한다.
 
 ## 1. Background
 

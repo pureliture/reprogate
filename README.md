@@ -1,17 +1,22 @@
-# dev-ps-cast (dpc)
+# ReproGate
 
-Process-based AI collaboration framework for planning, implementation, verification, and traceability.
+> **AI 협업을 대화 기반 감각 작업에서 재현 가능한 엔지니어링 체계로**
+
+Methodology compiler and gatekeeper for record-backed AI engineering.
 
 ## Purpose
 
-`dev-ps-cast` (dpc) separates reusable AI collaboration assets from project-specific adapters so the framework can be ported into other repositories without copying product history.
+ReproGate turns AI work from memory-dependent coding into reproducible engineering by making work records mandatory, accumulating durable Skills from those records, and enforcing them through gates.
+
+The repository still contains legacy `dpc` names in scripts, IDs, and configuration while the product identity transitions to ReproGate.
 
 ## Included in This Repository
 
-- Process catalog for `G0`, `P0`-`P4`, `S1`-`S4`
+- Canonical product definition and strategy docs
+- Record-backed gating and enforcement surfaces
 - Tool-hook enforcement and compliance checks
 - Config-driven project initialization and template generation
-- Portable templates for Claude, Codex, workspace metadata, and project record scaffolds
+- Portable templates for Claude, Codex, workspace metadata, and work-record scaffolds
 - Bootstrap copy of framework docs/scripts/config/templates into a target repository during `generate`
 
 ## Requirements
@@ -66,16 +71,25 @@ python3 scripts/launch_dpc_session.py --launcher omx -- --model gpt-5
 
 For a fuller walkthrough, see [docs/installation.md](./docs/installation.md).
 
-For the product direction and positioning of the framework, see:
+For the canonical product definition and direction, see:
 
-- [docs/vision.md](./docs/vision.md)
-- [docs/roadmap.md](./docs/roadmap.md)
-- [docs/why-dpc.md](./docs/why-dpc.md)
+- [docs/strategy/final-definition.md](./docs/strategy/final-definition.md)
+- [docs/strategy/vision.md](./docs/strategy/vision.md)
+- [docs/strategy/roadmap.md](./docs/strategy/roadmap.md)
+- [docs/guide/why-dpc.md](./docs/guide/why-dpc.md)
+
+## Core Ideas
+
+- **Work records are mandatory**: intent, scope, decisions, and verification must survive beyond chat context.
+- **Skills accumulate from records**: repeated patterns become durable text assets instead of disappearing into prior sessions.
+- **Rules enforce the pattern**: records and artifacts give gates something concrete to inspect.
+- **Artifact-driven workflow beats fragile state tracking**: the presence or absence of required outputs drives the next step.
+- **Personal patterns can scale to team standards**: the same Skills and gates can be shared across a repository.
 
 ## Repository Layout
 
 ```text
-dev-ps-cast/
+reprogate/
 ├── docs/
 ├── scripts/
 ├── config/

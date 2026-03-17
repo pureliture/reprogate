@@ -1,249 +1,233 @@
-# dev-ps-cast (dpc) 아키텍처
+# ReproGate 아키텍처
 
-> **슬로건**: "dev-ps-cast는 개발 방법론을 LLM에게 이식해, LLM이 당신처럼 일하게 만든다"
+> Canonical Definition: [final-definition.md](../strategy/final-definition.md)
+> Tagline: **AI 협업을 대화 기반 감각 작업에서 재현 가능한 엔지니어링 체계로**
 
 ---
 
 ## 1. 핵심 정체성
 
-```
-dev-ps-cast = 개발(dev) 프로세스(ps)를 캐스팅(cast)한다
-            = 방법론 이식 엔진
-            = guidelines(의도) + rules(보장)의 하이브리드
+ReproGate는 무거운 상태 추적 오케스트레이터가 아니다.
+
+ReproGate는 다음 네 요소로 구성되는 **artifact-driven compiler / gatekeeper**다.
+
+1. **작업 기록**
+   - 의도, 범위, 결정, 완료조건, 검증 근거를 남기는 공학적 기록
+2. **Skills**
+   - 반복되는 작업 패턴을 텍스트 자산으로 누적한 단위
+3. **Rules / Gates**
+   - 기록과 산출물을 검사하여 누락/이탈을 물리적으로 차단하는 강제층
+4. **Adapters**
+   - 각 AI 도구가 같은 기록과 규칙을 읽고 실행하도록 연결하는 표면
+
+핵심 인과는 다음과 같다.
+
+```text
+작업 기록 → 반복 패턴 발견 → Skill 축적 → Rule/Gate 강제
 ```
 
-| 항목 | 설명 |
-|------|------|
-| **타겟** | 바이브코딩 (AI 도구로 코딩하는 개발자) |
-| **목적** | LLM을 내 분신처럼 동작하게 만듦 |
-| **방식** | 개발 프로세스/방법론을 LLM에게 이식 |
+즉, ReproGate는 **기억에 의존하는 작업을 기록 위의 작업으로 바꾸고**, 그 기록을 바탕으로 패턴을 누적하고 강제한다.
 
 ---
 
-## 2. 배포 방식
+## 2. 아키텍처 원칙
 
-```bash
-# 설치
-npm install -g dev-ps-cast
+### 2.1 Record-first
+강제 가능한 작업은 기록 가능한 작업이어야 한다.
+대화 맥락이나 런타임 상태만으로는 규칙을 안정적으로 집행할 수 없다.
 
-# 사용
-dpc init
-dpc generate
-dpc check
-```
+### 2.2 Skill accumulation
+좋은 패턴은 휘발성 프롬프트가 아니라 재사용 가능한 Skill로 승격되어야 한다.
+
+### 2.3 Gate enforcement
+Rules는 기록과 산출물을 검사하고, 필요한 증거가 없으면 차단한다.
+
+### 2.4 Artifact-driven workflow
+“지금 몇 단계인가”보다 “필수 산출물이 존재하는가”가 다음 행동을 결정한다.
+
+### 2.5 Team portability
+개인이 다듬은 패턴은 저장소에 커밋되어 팀 표준으로 확장될 수 있어야 한다.
 
 ---
 
-## 3. 패키지 구조
+## 3. 시스템 구조
 
+```text
+reprogate/
+├── strategy/                 # 제품 정체성, 비전, 로드맵
+├── governance/               # 저장소 운영 원칙, master plan, record spec
+├── design/                   # 설계 문서
+├── scripts/                  # bootstrap / validation / helper scripts
+├── config/                   # config schema and defaults
+├── templates/                # adapter / record / bootstrap templates
+└── adapters/                 # 도구 연결 표면(개념적)
 ```
-dev-ps-cast/                         # npm 패키지
-│
-├── cli/                             # CLI 명령어
-│   ├── init                         # .dpc/ 생성
-│   ├── generate                     # 어댑터 생성
-│   └── check                        # 규칙 검증
-│
-├── core/                            # 이식 엔진
-│   ├── gate-engine/                 # OPA/Rego 규칙 평가 (opa eval)
-│   ├── template-engine/             # 문서 자동 생성
-│   └── context-engine/              # 컨텍스트 유지
-│
-├── presets/                         # 공식 프리셋
-│   ├── tdd/
-│   │   ├── guidelines.md            # TDD 방법론 설명
-│   │   └── rules.rego               # TDD 강제 규칙 (OPA/Rego)
-│   ├── google-practices/
-│   ├── adr-driven/
-│   └── minimal/
-│
-├── adapters/                        # 도구 어댑터
-│   ├── claude/                      # 공식: 코드 기반
-│   │   ├── settings.json
-│   │   └── hooks/pretooluse.js
-│   │
-│   └── prompts/                     # 프롬프트 기반 (다른 도구용)
-│       ├── universal.md             # 범용 어댑팅 가이드
-│       └── hints/
-│           ├── kiro.md
-│           ├── cursor.md
-│           └── codex.md
-│
-└── guides/                          # 사용 가이드 (LLM 도우미)
-    ├── methodology-setup.md         # 방법론 정의 도우미
-    ├── preset-selection.md          # 프리셋 선택 도우미
-    └── rules-writing.md             # 규칙 작성 도우미
-```
+
+> 현재 저장소에는 legacy `dpc` 명칭, 경로, CLI 예시가 남아 있을 수 있다.  
+> 이는 점진적으로 ReproGate 정체성에 맞춰 정렬한다.
 
 ---
 
 ## 4. 사용자 프로젝트 구조
 
+```text
+my-project/
+├── .dpc/                     # legacy config namespace (current compatibility surface)
+│   ├── config.yaml
+│   ├── methodology/
+│   │   ├── guidelines.md
+│   │   └── rules.rego
+│   ├── presets/
+│   └── context/              # runtime support only
+├── docs/                     # 작업 기록 / 설계 / 의사결정 / 변경 기록
+├── .claude/
+├── .codex/
+└── src/
 ```
-my-project/                          # 사용자 프로젝트
-│
-├── .dpc/
-│   ├── config.yaml                  # 메인 설정
-│   ├── methodology/                 # 커스텀 방법론 (선택)
-│   │   ├── guidelines.md            # 방법론 정의 (의도)
-│   │   └── rules.rego               # 강제 규칙 - OPA/Rego (보장)
-│   └── context/                     # 런타임 상태
-│
-├── .claude/                         # Claude 어댑터 (generate로 생성)
-│   ├── settings.json
-│   └── hooks/
-│
-├── src/
-└── ...
-```
+
+중요한 구분:
+
+- `.dpc/context/` 같은 런타임 상태는 **재개용 보조 정보**
+- `docs/`나 동등한 경로의 작업 기록은 **판단과 강제를 위한 증거**
 
 ---
 
-## 5. 하이브리드 방법론 구조
+## 5. 핵심 객체 모델
 
-### 개념
+### 5.1 Work Records
 
-| 레이어 | 역할 | 누가 해석 | 강제 수준 |
-|--------|------|----------|----------|
-| `guidelines` | 방법론 정의 (의도) | LLM | Soft |
-| `rules` | 준수 강제 (보장) | Gate 엔진 | Hard |
+ReproGate가 강제를 위해 필요로 하는 핵심 증거 모델.
 
-### 설정 예시
+예:
+- 작업 계획 기록
+- 의사결정 기록
+- 설계 기록
+- 변경 기록
+- 검증 기록
 
-```yaml
-# .dpc/config.yaml
+### 5.2 Skill
 
-# 옵션 A: 프리셋 사용
-preset: "tdd"
+하나의 재사용 가능한 작업 패턴 단위.
 
-# 옵션 B: 프리셋 + 오버라이드
-preset: "tdd"
-override:
-  guidelines: |
-    TDD 따르되, 유틸 함수는 테스트 생략 허용.
+구성:
+- `guidelines.md` — 의도, 원칙, 기대 행동
+- `rules.rego` — 강제 조건
 
-# 옵션 C: 완전 커스텀
-methodology:
-  guidelines: |
-    테스트 먼저 작성하고 구현해.
-    문서는 README만 관리하고, ADR은 필요 없어.
-    커밋 메시지는 conventional commits 형식.
+### 5.3 Preset / Workflow
 
-  rules: |
-    # rules.rego (OPA/Rego)
-    package dpc.rules
-    import rego.v1
+특정 작업 유형에서 함께 적용할 Skill 묶음.
 
-    deny contains msg if {
-        input.trigger == "write"
-        regex.match(`src/.*\.py$`, input.file)
-        not file_exists(test_file_for(input.file))
-        msg := "테스트 파일이 필요합니다"
-    }
+예:
+- 신규 기능 개발
+- 버그 수정
+- 리팩토링
+- 설계 변경
 
-# 옵션 D: 조직 공유 프리셋
-preset: "@mycompany/our-methodology"
-```
+### 5.4 Gate
 
-### 흐름
+Rules를 평가하는 집행 계층.
 
-```
-guidelines: "TDD 따르고 싶어"
-                ↓
-         LLM이 이해하고 TDD 방식으로 작업
-                ↓
-rules: "테스트 없으면 차단"
-                ↓
-         혹시 안 따르면 Gate가 막음
-```
-
-**guidelines = 의도**, **rules = 보장**
+Gate는 다음을 본다:
+- 지금 어떤 작업이 시도되는가
+- 관련 기록이 존재하는가
+- 필수 산출물이 충족되었는가
+- 누락된 증거가 있는가
 
 ---
 
-## 6. 어댑터 전략
+## 6. 논리 흐름
 
-| 도구 | 지원 방식 | 상세 |
-|------|----------|------|
-| **Claude Code** | 공식: 코드 기반 | Hook이 rules 강제 |
-| **Kiro, Cursor 등** | 프롬프트 기반 | LLM이 해당 도구 문서 보고 어댑팅 |
-
-### 흐름
-
+```text
+사용자/팀이 AI와 작업
+    ↓
+작업의 의도/결정/검증이 기록으로 남음
+    ↓
+반복되는 좋은 패턴을 Skill로 승격
+    ↓
+rules.rego가 그 패턴을 검사 가능하게 만듦
+    ↓
+Gate가 다음 작업/커밋/변경을 허용 또는 차단
 ```
-dpc generate 실행 시:
 
-Claude → .claude/hooks/ 생성 (코드)
-Kiro   → LLM이 adapters/prompts/ 참조 → Kiro용 설정 생성
-```
+결과:
+- 기억 의존 작업 감소
+- 누락된 보조 작업 감소
+- 설명 가능한 의사결정 증가
+- 팀 간 결과물 편차 감소
 
 ---
 
-## 7. 공유 방식
+## 7. Artifact-Driven Workflow 예시
 
-| 범위 | 방법 |
-|------|------|
-| **팀** | `.dpc/` 디렉토리 커밋 |
-| **조직** | npm 패키지 (`@company/dpc-preset`) |
-| **커뮤니티** | 공개 npm (`dpc-preset-tdd`) |
+```text
+코드 작성 시도
+  → 설계 기록 없음
+  → Gate 차단
+
+코드 수정 완료
+  → 검증 기록 없음
+  → Gate 차단
+
+마무리/공유 시도
+  → 변경/의사결정 기록 없음
+  → Gate 차단
+```
+
+ReproGate는 내부적으로는 단순히 규칙을 검사하지만,
+밖에서 보면 **작업 순서가 자연스럽게 강제되는 효과**를 만든다.
 
 ---
 
-## 8. 사용 흐름
+## 8. Adapter 전략
+
+| 계층 | 역할 |
+|---|---|
+| 공식 adapter | 도구별 설정/훅/entrypoint 연결 |
+| prompt adapter | 비공식 도구에 대한 힌트/생성 가이드 |
+| record adapter | 저장소마다 기록 위치와 규칙 연결 |
+
+Adapter의 책임은:
+- 도구에 기록/규칙 표면을 연결하고
+- 기록 기반 강제가 실행되도록 만들며
+- 제품 철학을 특정 벤더 기능명에 종속시키지 않는 것이다.
+
+---
+
+## 9. 배포 / 실행 표면
+
+현재 설계상 노출되는 핵심 표면은 다음과 같다.
 
 ```bash
-# 1. 설치
-npm install -g dev-ps-cast
-
-# 2. 초기화 (LLM 도우미와 대화하며 설정 가능)
-cd my-project
+# legacy compatibility examples
 dpc init
-
-# 3. 방법론 선택/정의
-#    - 프리셋 선택, 또는
-#    - guidelines + rules 직접 작성, 또는
-#    - LLM과 대화하며 정의
-
-# 4. 어댑터 생성
 dpc generate
-
-# 5. 개발 시작
-claude  # guidelines 따르고, rules가 강제
+dpc check
 ```
+
+이 명령 표면은 현재 legacy 이름을 유지할 수 있지만,
+제품 의미는 다음과 같이 읽어야 한다.
+
+- `init` — 기록/Skill/Gate 적용을 위한 초기 구조 생성
+- `generate` — adapter와 bootstrap surface 생성
+- `check` — 기록과 규칙의 정합성 검증
 
 ---
 
-## 9. 요약
+## 10. 아키텍처 요약
 
 ```mermaid
 flowchart TB
-    subgraph DPC["dev-ps-cast (dpc) = 방법론 이식 엔진"]
-        subgraph Hybrid["하이브리드 방법론"]
-            subgraph Guidelines["guidelines (의도)"]
-                G1["자연어로 방법론 정의"]
-                G2["LLM이 이해하고 따름"]
-                G3["Soft"]
-            end
-            subgraph Rules["rules (보장)"]
-                R1["Rego로 규칙 정의 (OPA)"]
-                R2["Gate가 물리적 차단"]
-                R3["Hard"]
-            end
-        end
-
-        subgraph Adapters["adapters"]
-            A1["claude/ (공식, 코드)"]
-            A2["prompts/ (LLM이 어댑팅)"]
-        end
-
-        subgraph Presets["presets"]
-            P1["공식: tdd, google-practices, minimal"]
-            P2["커스텀: 프로젝트 내 정의 또는 npm"]
-        end
-    end
-
-    Guidelines --> |"의도 전달"| LLM["LLM"]
-    Rules --> |"규칙 평가"| Gate["Gate (OPA)"]
-    LLM --> |"작업 시도"| Gate
-    Gate --> |"허용/차단"| Result["결과"]
+    R[Work Records] --> S[Skill Accumulation]
+    S --> G[Rules / Gates]
+    G --> A[Adapters]
+    A --> T[AI Tool Execution]
+    T --> R
 ```
+
+핵심 요약:
+
+- **기록은 증거**
+- **Skill은 축적된 패턴**
+- **Gate는 강제 메커니즘**
+- **Adapter는 도구 연결 표면**
+- **ReproGate는 기록 기반 엔지니어링을 만드는 compiler / gatekeeper**

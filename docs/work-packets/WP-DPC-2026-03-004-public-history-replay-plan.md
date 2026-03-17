@@ -18,6 +18,8 @@ track: "public-history replay"
 
 # WP-DPC-2026-03-004: ai-ops public repository replay history plan
 
+> Historical interpretation note: 이 문서는 external public repo history를 framework narrative로 재구성하려던 계획 기록이다. 현재 ReproGate 관점에서는 **브랜드/역사 정렬을 준비한 historical replay packet**으로 읽는다.
+
 ## 1. Background
 
 - `WP-DPC-2026-03-003`을 통해 source repo의 legacy namespace sunset과 external `ai-ops` framework repo bootstrap completeness는 완료되었다.

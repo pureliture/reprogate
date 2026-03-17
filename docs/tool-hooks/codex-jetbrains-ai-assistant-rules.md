@@ -6,13 +6,13 @@
 ## Purpose
 
 Some toolchains do not provide a hard pre-execution hook for every tool call.
-In that case, AI Ops relies on session-entry guidance, durable context, and final repository gates.
+In that case, ReproGate relies on session-entry guidance, durable context, and final repository gates.
 
 ## Core Model
 
 A session-entry enforcement path should combine these layers:
 
-1. startup instructions that point to AI Ops source documents,
+1. startup instructions that point to ReproGate source documents,
 2. a process-first entry command or equivalent prompt routine,
 3. adapter-owned context recording,
 4. execution-path resolution for team-capable processes,

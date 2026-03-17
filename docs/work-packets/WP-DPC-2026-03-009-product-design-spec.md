@@ -1,8 +1,8 @@
 ---
 packet_id: "WP-DPC-2026-03-009"
-title: "dpc 제품 설계 구체화"
+title: "ReproGate 제품 설계 구체화"
 goal_ids: ["DPC-G1"]
-status: "READY"
+status: "DONE"
 work_type: "DESIGN"
 priority: "P0"
 target_environment: "master"
@@ -13,21 +13,23 @@ owner: "SHARED"
 created_at: "2026-03-17"
 last_updated: "2026-03-17"
 parent: "WP-DPC-2026-03-001"
-track: "dpc core design"
+track: "reprogate core design"
 ---
 
-# WP-DPC-2026-03-009: dpc 제품 설계 구체화
+# WP-DPC-2026-03-009: ReproGate 제품 설계 구체화
+
+> Current interpretation: 이 WP는 legacy `dpc` 제품 설계 문서를 넘어, **ReproGate의 기록 기반 UX / Skill 축적 / Gate 강제**를 구현 가능한 수준으로 구체화한 설계 패킷이다.
 
 ## 1. Background
 
-architecture.md, presets-spec.md, ADR-006/007로 기본 개념과 구조는 정의되었으나,
+architecture.md, presets-spec.md, ADR-006/007, final-definition.md로 기본 개념과 구조는 정의되었으나,
 실제 구현에 필요한 상세 설계가 부족하다.
 
 구현 전에 사용자 여정, UX, 상세 메커니즘을 구체화해야 한다.
 
 ## 2. Goal
 
-dpc 제품의 구현 가능한 수준의 상세 설계 문서를 작성한다.
+ReproGate 제품의 구현 가능한 수준의 상세 설계 문서를 작성한다.
 
 ## 3. Scope
 
@@ -46,12 +48,12 @@ dpc 제품의 구현 가능한 수준의 상세 설계 문서를 작성한다.
 
 ## 5. Done Criteria
 
-- [ ] 사용자 여정 문서
-- [ ] CLI 명령어별 상세 스펙 (init, generate, check)
-- [ ] 프리셋 로딩/머지 알고리즘
-- [ ] 어댑터 생성 상세 (파일 목록, 템플릿 로직)
-- [ ] 에러/피드백 메시지 설계
-- [ ] 첫 사용 경험 시나리오
+- [x] 사용자 여정 문서 → [product-spec.md §1](../design/product-spec.md#1-사용자-여정)
+- [x] CLI 명령어별 상세 스펙 (init, generate, check) → [product-spec.md §2](../design/product-spec.md#2-cli-명령어-상세-스펙)
+- [x] 프리셋 로딩/머지 알고리즘 → [product-spec.md §3](../design/product-spec.md#3-프리셋-로딩-메커니즘)
+- [x] 어댑터 생성 상세 (파일 목록, 템플릿 로직) → [product-spec.md §4](../design/product-spec.md#4-어댑터-생성-상세)
+- [x] 에러/피드백 메시지 설계 → [product-spec.md §5](../design/product-spec.md#5-에러피드백-메시지-설계)
+- [x] 첫 사용 경험 시나리오 → [product-spec.md §6](../design/product-spec.md#6-첫-사용-경험-시나리오)
 
 ---
 

@@ -1,58 +1,58 @@
-# AI Ops Roadmap
+# ReproGate Roadmap
 
 ## Current Stage
 
-AI Ops is now at the point where:
+ReproGate is now at the point where:
 
 - the framework surface exists as an independent repository
 - the repository can bootstrap a self-contained target project
-- the external repository can serve as the canonical workspace for future framework work
+- the canonical definition exists in `docs/strategy/final-definition.md`
+- the remaining work is to align the rest of the living docs and implementation surface to that definition
 
 ## Near-Term Priorities
 
-### 1. Public-facing strategy layer
+### 1. Canonical definition injection
 
-Add the missing strategy documents that explain:
-
-- why AI Ops exists
-- who it is for
-- what it will and will not try to become
-
-Planned outputs:
-
-- `docs/vision.md`
-- `docs/roadmap.md`
-- `docs/why-ai-ops.md`
-
-### 2. Canonical external control-board maturity
-
-Harden the external repository as the only live control-board for framework work.
+Inject the final definition into the living documentation surface so the product reads consistently everywhere.
 
 Focus areas:
 
-- keep work packets and ADRs current in the external repo
-- keep adapter and workspace surfaces aligned with the control-board
-- reduce remaining dependence on source-of-origin archive context
+- README and strategy docs
+- governance and master-plan docs
+- design and implementation planning docs
+- historical alignment notes where needed
 
-### 3. Public release readiness
+### 2. Record-backed core implementation
 
-Before broad publication:
+Harden the core around the final ReproGate thesis:
 
-- confirm branch strategy
-- keep bootstrap smoke tests green
-- document maintainer expectations
-- decide how much archive material remains public-facing versus maintainer-only
+Focus areas:
+
+- work records as mandatory artifacts
+- Skill accumulation as a first-class product concept
+- Rego-based gate enforcement
+- artifact-driven workflow instead of heavy state tracking
+
+### 3. ReproGate identity transition
+
+Complete the outward transition from legacy `dpc` wording to ReproGate while preserving historical IDs where needed.
+
+Focus areas:
+
+- product-facing naming updates
+- clear explanation of legacy `dpc` identifiers in code and records
+- docs and package surface consistency
 
 ## Mid-Term Direction
 
-### AI Ops Lite
+### Lightweight adoption path
 
-Define a lighter entry path for teams or individuals that do not want the full framework surface on day one.
+Define a lighter path for teams or individuals that want record-backed enforcement without the full surrounding framework surface on day one.
 
 Expected characteristics:
 
-- fewer processes
-- fewer required artifacts
+- fewer default records
+- fewer default Skills
 - smaller adapter footprint
 - lower adoption friction
 
@@ -62,24 +62,24 @@ Improve first-class support for:
 
 - Codex and OMX
 - Claude and OMC
-- future toolchains through the same framework boundary model
+- future toolchains through the same record-and-gate boundary model
 
 ## Longer-Term Direction
 
 ### Team operating standard
 
-AI Ops should become usable as a shared team operating standard rather than only a solo workflow.
+ReproGate should become usable as a shared team operating standard rather than only a solo workflow.
 
 This requires:
 
-- reusable records
-- predictable review points
-- explicit extension rules
-- stable framework semantics across repositories
+- reusable work records
+- predictable gate points
+- explicit Skill extension rules
+- stable semantics across repositories
 
 ### Optional integrations
 
-Once the framework core is stable, AI Ops may grow optional integrations with:
+Once the framework core is stable, ReproGate may grow optional integrations with:
 
 - external knowledge systems
 - pipelines
@@ -90,8 +90,8 @@ Those are downstream integrations, not the current center of gravity.
 
 ## Non-Roadmap Warning
 
-AI Ops should not expand by chasing every tool feature. The roadmap should stay anchored to the framework's core promise:
+ReproGate should not expand by chasing every tool feature. The roadmap should stay anchored to the product's core promise:
 
-- preserve intent
-- structure work
-- enforce completion discipline
+- make work records mandatory
+- turn repeated patterns into durable Skills
+- enforce those patterns through inspectable gates

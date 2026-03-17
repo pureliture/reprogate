@@ -1,6 +1,6 @@
 ---
 packet_id: "WP-DPC-2026-03-006"
-title: "external ai-ops public strategy docs"
+title: "ReproGate public strategy docs"
 goal_ids: ["DPC-G1", "DPC-G4", "DPC-G5"]
 status: "IN_DEVELOPMENT"
 work_type: "DOCUMENTATION"
@@ -11,24 +11,25 @@ current_process: "P3"
 next_process: "S1"
 owner: "SHARED"
 created_at: "2026-03-12"
-last_updated: "2026-03-12"
+last_updated: "2026-03-17"
 parent: "WP-DPC-2026-03-001"
 track: "public strategy docs"
 ---
 
-# WP-DPC-2026-03-006: external ai-ops public strategy docs
+# WP-DPC-2026-03-006: ReproGate public strategy docs
 
 ## 1. Background
 
-The external `ai-ops` repository already contains the executable framework surface, but it still lacks the public-facing strategy documents that explain the framework's direction and positioning.
+The repository already contains the executable framework surface, but it needed a strategy layer that explains the product in ReproGate terms rather than legacy `dpc/ai-ops` positioning.
 
 ## 2. Goal
 
-Add the first public-facing strategy layer to the external repository:
+Add the first coherent public-facing strategy layer to the repository:
 
-- `docs/vision.md`
-- `docs/roadmap.md`
-- `docs/why-ai-ops.md`
+- `docs/strategy/final-definition.md`
+- `docs/strategy/vision.md`
+- `docs/strategy/roadmap.md`
+- `docs/guide/why-dpc.md`
 
 ## 3. Scope
 
@@ -44,8 +45,9 @@ Add the first public-facing strategy layer to the external repository:
 
 ## 5. Done Criteria
 
-- [x] `docs/vision.md` exists
-- [x] `docs/roadmap.md` exists
-- [x] `docs/why-ai-ops.md` exists
+- [x] `docs/strategy/final-definition.md` exists
+- [x] `docs/strategy/vision.md` exists
+- [x] `docs/strategy/roadmap.md` exists
+- [x] `docs/guide/why-dpc.md` exists
 - [x] docs navigation surfaces reference the new strategy docs
-- [ ] S1 review passes
+- [x] strategy docs read as ReproGate, not legacy positioning

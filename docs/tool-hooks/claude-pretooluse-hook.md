@@ -6,7 +6,7 @@
 ## Purpose
 
 Some AI tools support a hook immediately before a tool call or file mutation.
-This document defines the portable AI Ops model for that kind of guard.
+This document defines the portable ReproGate model for that kind of guard.
 
 ## When It Runs
 

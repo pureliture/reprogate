@@ -1,67 +1,71 @@
-# AI Ops Vision
+# ReproGate Vision
+
+## Summary
+
+> **작업 기록을 기반으로 AI 협업을 재현 가능한 엔지니어링 체계로 바꾸는 방법론 컴파일러이자 Gatekeeper**
 
 ## Tagline
 
-> **"ai-ops는 개발 방법론을 LLM에게 이식해, LLM이 당신처럼 일하게 만든다"**
->
-> ai-ops transplants your development methodology into LLMs, making them work like you do.
+> **AI 협업을 대화 기반 감각 작업에서 재현 가능한 엔지니어링 체계로**
 
 ## Purpose
 
-AI Ops exists to make AI-assisted engineering work reproducible, reviewable, and portable across tools.
+ReproGate exists to make AI-assisted work reproducible, explainable, and enforceable through work records.
 
-Its long-term vision is not to become a single-vendor assistant feature. It is to become a stable operating layer that teams can keep even while models, IDEs, shells, and agent runtimes keep changing.
+Its long-term vision is not to become a chat-memory product or a heavy state orchestrator. It is to become the stable layer that teams keep while models, IDEs, shells, and runtimes keep changing.
 
 ## Core Thesis
 
 AI coding has three structural failure modes:
 
 1. context loss
-2. skipped supporting work
-3. weak traceability
+2. decisions that are hard to explain later
+3. skipped supporting work because nothing concrete proves they happened
 
-AI Ops addresses those failures by transplanting development methodology into LLMs:
+ReproGate addresses those failures by moving AI work onto record-backed artifacts:
 
-- **Process definition**: Define how your team works once
-- **Automatic records**: ai-ops generates WP, ADR, and change logs automatically
-- **Enforcement**: Gates ensure the process is followed
+- **Work records**: intent, scope, decisions, and verification are preserved as inspectable artifacts
+- **Skill accumulation**: repeated good patterns become durable Skills instead of vanishing into prior chats
+- **Gate enforcement**: rules inspect records and outputs, then block work that violates the expected pattern
 
-The key insight: CI/CD manages output quality at the team/system level. AI Ops manages process quality at the individual developer level — the methodology each developer follows (TDD, documentation, design review) is now transplanted into LLMs.
+The key insight: memory-based AI coding cannot be enforced, but record-based AI engineering can. Gates need evidence. Work records provide that evidence.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  Team/System Level: CI/CD, code review, linters             │
-│  → "Does the output meet standards?"                        │
+│  Chat / Memory-Only AI Coding                                │
+│  → fragile, hard to explain, easy to skip supporting work    │
 ├─────────────────────────────────────────────────────────────┤
-│  Individual Developer Level: TDD, docs, design reviews      │
-│  → "How does each developer work?"                          │
+│  Work Records + Skills + Gates                               │
+│  → intent is recorded, patterns accumulate, gates can enforce│
 ├─────────────────────────────────────────────────────────────┤
-│  ai-ops: Transplants this methodology into LLMs             │
+│  ReproGate                                                   │
+│  → reproducible AI engineering                               │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ## What Success Looks Like
 
-A team using AI Ops should be able to:
+A team using ReproGate should be able to:
 
 - restart work after context loss without losing intent
-- keep work packets, decisions, and verification traces aligned with implementation
-- move between toolchains without rewriting its operating model from scratch
-- adopt stricter or lighter workflows without abandoning the same core framework
+- inspect why a design changed course or where a workflow drift began
+- convert repeated lessons into durable Skills and enforcement rules
+- move between toolchains without rebuilding the same operating discipline from scratch
+- share a stronger team standard without relying on everyone to remember it manually
 
 ## Long-Term Direction
 
 The long-term direction is a portable framework with:
 
-- framework-owned operating docs and enforcement rules
+- framework-owned definitions for work records, Skills, and gates
 - repository-local adapters generated from configuration
-- a shared control-board and decision record model
-- optional integrations with other systems once the core operating surface is stable
+- team-shareable standards built from accumulated patterns
+- optional integrations only after the core record-and-gate surface is stable
 
 ## Design Commitments
 
-- process-first, not prompt-first
+- record-first, not memory-first
+- artifact-driven enforcement over hidden state tracking
 - framework and adapter separation
 - tool independence over vendor lock-in
-- explicit records over hidden chat-only state
 - verification before completion claims

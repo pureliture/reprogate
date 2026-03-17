@@ -1,6 +1,7 @@
 # Work Packet Specification
 
-Work packets are the durable delivery records for AI Ops work.
+Work packets are one kind of durable work record for ReproGate work.
+They are planning and execution artifacts, distinct from transient runtime state.
 
 ## Required Frontmatter Fields
 
@@ -19,7 +20,7 @@ Every work packet should include:
 - `created_at`
 - `last_updated`
 
-If the repository uses AI Ops program goals, also include:
+If the repository uses program goals, also include:
 
 - `goal_ids`
 
@@ -39,6 +40,18 @@ If the repository uses AI Ops program goals, also include:
 12. Decisions
 13. Follow-ups
 14. Timeline
+
+## Role in the ReproGate Model
+
+A work packet does not replace every form of record.
+It specifically captures delivery intent, scope, status, and execution planning so that later Skills, gates, decisions, and verification can be explained against a durable artifact.
+
+Use work packets when the work needs:
+
+- explicit scope control
+- traceable status and next steps
+- linkage to decisions and changelog entries
+- a durable record that outlives session memory
 
 ## Status Model
 

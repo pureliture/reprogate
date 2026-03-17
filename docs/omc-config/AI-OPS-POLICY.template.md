@@ -1,10 +1,10 @@
-# AI Ops Policy for OMC
+# ReproGate Policy for OMC
 
 ## Source of Truth
 
 - Framework docs live under `docs/`
 - Framework scripts live under `scripts/`
-- Project-specific record paths come from `ai-ops.config.yaml`
+- Project-specific record paths come from `dpc.config.yaml`
 
 ## Mandatory First Reads
 

@@ -18,6 +18,8 @@ track: "프레임워크 독립화"
 
 # WP-DPC-2026-03-003: ai-ops 프레임워크 추출 및 오픈소스화
 
+> Historical interpretation note: 이 문서는 ReproGate 이전 naming 단계의 framework extraction 기록이다. 현재는 **legacy surface를 정리하고 reusable framework surface를 남긴 historical migration packet**으로 해석한다.
+
 ## 1. Goal
 
 ncube-regression-verify 프로젝트에서 ai-ops 프레임워크를 추출하여 **프로젝트 무관한 독립 GitHub public 레포지토리**로 전환한다.

@@ -1,346 +1,241 @@
-# dpc Presets 시스템 명세
+# ReproGate Presets / Skills 명세
 
-> 프리셋은 재사용 가능한 방법론 패키지다. guidelines(의도)와 rules(보장)를 묶어 배포한다.
+> Canonical Definition: [final-definition.md](../strategy/final-definition.md)
+
+프리셋은 재사용 가능한 **Skill 묶음**이다.
+각 Skill은 `guidelines.md`(의도)와 `rules.rego`(강제)를 통해 기록 기반 패턴을 재사용 가능하게 만든다.
 
 ---
 
-## 1. 프리셋 디렉토리 구조
+## 1. 역할
 
-```
+Preset은 다음을 담당한다.
+
+1. 특정 작업 유형에 필요한 Skill 조합 정의
+2. 기록 기반 작업 패턴의 재사용
+3. Gate가 검사할 규칙 집합 제공
+
+즉 preset은 단순 템플릿이 아니라, **반복되는 작업 패턴의 번들**이다.
+
+---
+
+## 2. 디렉토리 구조
+
+```text
 presets/
 ├── <preset-name>/
-│   ├── preset.yaml          # 프리셋 메타데이터 (필수)
-│   ├── guidelines.md        # 방법론 설명 (필수)
-│   ├── rules.rego           # 강제 규칙 - OPA/Rego (선택)
-│   └── examples/            # 예시 파일 (선택)
-│       └── ...
+│   ├── preset.yaml
+│   ├── guidelines.md
+│   ├── rules.rego
+│   ├── records.yaml        # optional: 기대 기록 범주 설명
+│   └── examples/
 ```
 
-### 1.1 preset.yaml 스키마
+### 2.1 구성 의미
 
-```yaml
-# preset.yaml
-name: "tdd"                    # 프리셋 식별자 (필수)
-version: "1.0.0"               # 시맨틱 버전 (필수)
-description: "Test-Driven Development methodology"  # 설명 (필수)
-author: "dpc"                  # 작성자 (선택)
-tags: ["testing", "quality"]   # 태그 (선택)
-extends: null                  # 상속할 프리셋 (선택)
-```
-
-| 필드 | 타입 | 필수 | 설명 |
-|------|------|------|------|
-| `name` | string | Y | 프리셋 식별자 |
-| `version` | string | Y | 시맨틱 버전 |
-| `description` | string | Y | 프리셋 설명 |
-| `author` | string | N | 작성자 |
-| `tags` | string[] | N | 검색/분류용 태그 |
-| `extends` | string | N | 상속할 부모 프리셋 |
+| 파일 | 역할 |
+|---|---|
+| `preset.yaml` | 메타데이터 및 조합 정보 |
+| `guidelines.md` | AI가 따라야 할 기대 행동 |
+| `rules.rego` | Gate가 검사하는 강제 규칙 |
+| `records.yaml` | 어떤 기록 범주가 필요한지 문서화하는 선택 표면 |
 
 ---
 
-## 2. guidelines.md 포맷
+## 3. Skill 모델
 
-guidelines.md는 LLM이 이해하고 따를 방법론을 자연어로 정의한다.
+Preset 내부에서 실질적 핵심은 Skill이다.
 
-> 상세 근거: [llm-document-format-reference.md](./references/llm-document-format-reference.md)
+### 3.1 Skill의 최소 단위
 
-### 2.1 포맷 제약 (공식 근거)
+```text
+skill/
+├── guidelines.md
+└── rules.rego
+```
 
-> 출처: [Anthropic 공식 문서](https://code.claude.com/docs/en/memory)
+### 3.2 Skill의 의미
 
-| 항목 | 제약 | 공식 인용 |
-|------|------|----------|
-| 길이 | < 200줄 | "target under 200 lines per CLAUDE.md file" |
-| 구조 | 헤딩 + 불릿 | "use markdown headers and bullets to group related instructions" |
-| 구체성 | 검증 가능 | "write instructions that are concrete enough to verify" |
-| 일관성 | 충돌 제거 | "if two rules contradict each other, Claude may pick one arbitrarily" |
+- `guidelines.md`는 왜/어떻게 일해야 하는지 설명
+- `rules.rego`는 어떤 증거가 없으면 차단할지 정의
 
-### 2.2 필수 섹션
+### 3.3 Skill과 기록의 관계
+
+Skill은 기록 없이 성립하지 않는다.
+
+예:
+- 설계 기록이 있어야 설계 우선 Skill을 강제할 수 있다
+- 의사결정 기록이 있어야 판단 근거 기록 Skill을 강제할 수 있다
+- 검증 기록이 있어야 verification Skill을 강제할 수 있다
+
+---
+
+## 4. preset.yaml
+
+```yaml
+name: "feature-standard"
+version: "1.0.0"
+description: "Feature delivery with required records and verification"
+author: "reprogate"
+tags: ["feature", "records", "gate"]
+extends: "minimal"
+skills:
+  - "planning"
+  - "decision-log"
+  - "verification"
+```
+
+### 4.1 주요 필드
+
+| 필드 | 설명 |
+|---|---|
+| `name` | 프리셋 식별자 |
+| `version` | 버전 |
+| `description` | 프리셋 설명 |
+| `extends` | 부모 프리셋 |
+| `skills` | 적용할 Skill 목록 |
+
+---
+
+## 5. guidelines.md 포맷
+
+guidelines는 LLM이 이해하고 따를 기대 행동을 정의한다.
+
+### 5.1 포맷 원칙
+
+- 짧고 구체적일 것
+- 기록 요구사항을 모호하게 쓰지 않을 것
+- 검증 가능한 문장으로 작성할 것
+- 서로 충돌하는 규칙을 넣지 않을 것
+
+### 5.2 권장 섹션
 
 ```markdown
 # {Preset Name} Guidelines
 
-> 한 줄 요약 (핵심 철학)
+## Goal
+- 이 preset이 무엇을 보장하려는가
 
-## Philosophy
-- 핵심 원칙 1
-- 핵심 원칙 2
-- 핵심 원칙 3
+## Required Records
+- 어떤 종류의 기록이 필요한가
 
-## Workflow
-1. 단계 1
-2. 단계 2
-3. 단계 3
+## Workflow Expectations
+- 어떤 순서와 판단 기준을 기대하는가
 
-## Conventions
-### 카테고리 A
-- 규칙 1
-- 규칙 2
-
-### 카테고리 B
-- 규칙 1
-
-## Examples
-### Good
-```python
-# 좋은 예시
+## Verification
+- 어떤 검증 흔적이 필요하나
 ```
 
-### Bad
-```python
-# 나쁜 예시
-```
-```
+### 5.3 중요한 점
 
-### 2.3 권장 섹션 (선택)
-
-```markdown
-## When Not to Apply
-- 예외 상황 1
-- 예외 상황 2
-
-## References
-- [상세 문서](path): 설명
-```
-
-### 2.4 피해야 할 것 (공식 근거)
-
-| 안티패턴 | 공식 인용 |
-|----------|----------|
-| 200줄 초과 | "Longer files consume more context and reduce adherence" |
-| 모호한 지시 | "Format properly" → "Use 2-space indentation" |
-| 규칙 간 충돌 | "if two rules contradict each other, Claude may pick one arbitrarily" |
-| 긴 단락 | "use markdown headers and bullets" |
+guidelines는 “문서를 많이 써라”가 아니라  
+**Gate가 나중에 검사할 수 있는 증거를 남겨라**를 설명해야 한다.
 
 ---
 
-## 3. rules.rego (OPA/Rego)
+## 6. rules.rego
 
-> [ADR-DPC-007](./adr/ADR-DPC-007-rules-engine-selection.md)에서 OPA/Rego 채택.
-> 자체 DSL 대신 검증된 정책 엔진을 사용하여 파서 구현 부담 제거.
+OPA/Rego는 preset이 요구하는 패턴을 실제 강제한다.
+
+### 6.1 예시
 
 ```rego
-# rules.rego
 package dpc.rules
 
 import rego.v1
 
-# TDD: 테스트 파일 요구
 deny contains msg if {
-    input.trigger == "write"
-    endswith(input.file, ".py")
-    not startswith(file.basename(input.file), "test_")
-    not file_exists(sprintf("tests/test_%s.py", [file.stem(input.file)]))
-    msg := sprintf("TDD: %s 작성 전에 테스트를 먼저 작성하세요", [input.file])
-}
-
-# README 동기화 경고
-warn contains msg if {
     input.trigger == "commit"
-    input.files_modified[_] == "src/"
-    not input.files_modified[_] == "README.md"
-    msg := "README.md를 업데이트하세요"
+    not input.records.decision_log
+    msg := "의사결정 기록이 필요합니다"
 }
-```
-
-### 3.1 Gate 호출
-
-```python
-import subprocess, json
-
-def evaluate_rules(trigger: str, context: dict) -> dict:
-    input_data = {"trigger": trigger, **context}
-    result = subprocess.run(
-        ["opa", "eval", "--data", "rules.rego",
-         "--input", "-", "data.dpc.rules.deny"],
-        input=json.dumps(input_data),
-        capture_output=True, text=True
-    )
-    denies = json.loads(result.stdout).get("result", [{}])[0].get("expressions", [{}])[0].get("value", [])
-    return {"allowed": False, "messages": denies} if denies else {"allowed": True}
-```
-
-### 3.2 테스트
-
-```bash
-# OPA 내장 테스트
-opa test rules.rego rules_test.rego
-```
-
----
-
-## 4. 프리셋 로딩
-
-### 4.1 Resolution Order
-
-프리셋은 다음 순서로 탐색한다:
-
-```
-1. 빌트인 프리셋: <dpc-package>/presets/{name}/
-2. 글로벌 프리셋: ~/.dpc/presets/{name}/
-3. 로컬 프리셋:   .dpc/presets/{name}/
-4. npm 프리셋:    node_modules/{name}/ (prefix: @, dpc-preset-)
-```
-
-먼저 발견된 경로를 사용한다.
-
-### 4.2 로딩 알고리즘
-
-```
-load_preset(name):
-  1. resolve_preset_path(name) → 경로 결정
-  2. preset.yaml 로드 및 검증
-  3. guidelines.md 로드
-  4. rules.rego 로드 (있으면)
-  5. extends가 있으면 부모 로드 후 머지
-  6. Preset 객체 반환
-```
-
-### 4.3 extends (상속)
-
-프리셋은 다른 프리셋을 상속할 수 있다:
-
-```yaml
-# presets/tdd/preset.yaml
-name: "tdd"
-extends: "minimal"
-```
-
-상속 시 머지 규칙:
-- `guidelines`: 부모 뒤에 자식 append
-- `rules`: ID 기준 머지 (자식이 부모 덮어씀)
-
----
-
-## 5. 오버라이드 우선순위
-
-`.dpc/config.yaml`에서 프리셋을 사용할 때 오버라이드 가능:
-
-```yaml
-# .dpc/config.yaml
-preset: "tdd"
-override:
-  guidelines: |
-    TDD 따르되, 유틸 함수는 테스트 생략 허용.
-  rules:
-    - id: "require-test"
-      pattern: "src/core/**/*.py"  # 범위 축소
-```
-
-### 5.1 우선순위
-
-```
-methodology > override > preset > default
-```
-
-| 레벨 | 설명 |
-|------|------|
-| `default` | 아무것도 없을 때 빈 상태 |
-| `preset` | 프리셋에서 로드 |
-| `override` | 프리셋 위에 추가/수정 |
-| `methodology` | 프리셋 무시하고 완전 커스텀 |
-
-### 5.2 머지 전략
-
-| 필드 | 머지 방식 |
-|------|----------|
-| `guidelines` | **Append** - 하위 레벨이 상위에 추가됨 |
-| `rules` | **Merge by ID** - 같은 ID는 덮어쓰기, 새 ID는 추가 |
-
-### 5.3 rules 머지 로직
-
-```
-merge_rules_by_id(base, overlay):
-  result = {r.id: r for r in base}
-
-  for rule in overlay:
-    if rule.skip == true:
-      del result[rule.id]    # 해당 규칙 제거
-    else:
-      result[rule.id] = rule # 덮어쓰기 또는 추가
-
-  return list(result.values())
-```
-
-`skip: true`로 부모 규칙 비활성화 가능:
-
-```yaml
-override:
-  rules:
-    - id: "require-test"
-      skip: true              # 이 규칙 비활성화
-```
-
----
-
-## 6. 공식 프리셋
-
-### 6.1 minimal
-
-가장 단순한 프리셋. 강제 규칙 없음.
-
-```yaml
-# preset.yaml
-name: "minimal"
-version: "1.0.0"
-description: "최소한의 방법론 - 자유롭게 개발하되 기본 품질만 유지"
-```
-
-```markdown
-# guidelines.md (요약)
-- 복잡한 프로세스 없이 빠르게 개발
-- 필수적인 것만 요구, 나머지는 자율
-```
-
-```rego
-# rules.rego
-package dpc.rules
-import rego.v1
-# 강제 규칙 없음 - deny/warn 정의 없음
-```
-
-### 6.2 tdd
-
-Test-Driven Development 프리셋.
-
-```yaml
-# preset.yaml
-name: "tdd"
-version: "1.0.0"
-description: "Test-Driven Development - 테스트 먼저, 구현은 나중에"
-extends: "minimal"
-```
-
-```markdown
-# guidelines.md (요약)
-- Red → Green → Refactor
-- 테스트는 문서이자 안전망
-```
-
-```rego
-# rules.rego
-package dpc.rules
-import rego.v1
 
 deny contains msg if {
-    input.trigger == "write"
-    regex.match(`src/.*\.(py|ts|js)$`, input.file)
-    not file_exists(test_file_for(input.file))
-    msg := sprintf("TDD: %s에 대응하는 테스트 파일이 필요합니다", [input.file])
+    input.trigger == "commit"
+    not input.records.verification
+    msg := "검증 기록이 필요합니다"
 }
+```
+
+### 6.2 ReproGate 관점의 규칙 원칙
+
+- 규칙은 가능한 한 **기록과 산출물**을 본다
+- 런타임 상태만을 단독 근거로 삼지 않는다
+- 차단 메시지는 무엇이 빠졌는지 설명해야 한다
+
+---
+
+## 7. 로딩 모델
+
+### 7.1 Resolution Order
+
+```text
+1. built-in presets
+2. global presets
+3. local presets
+4. external package presets
+```
+
+### 7.2 머지 원칙
+
+```text
+guidelines  → append
+rules       → merge by rule identity
+skills      → union with override support
+records     → additive expectations unless explicitly disabled
+```
+
+### 7.3 우선순위
+
+```text
+custom methodology > override > preset > default
 ```
 
 ---
 
-## 7. 관련 문서
+## 8. 예시 프리셋
 
-- [architecture.md](./design/architecture.md) - dpc 전체 아키텍처
-- [ADR-DPC-007](./adr/ADR-DPC-007-rules-engine-selection.md) - OPA/Rego 채택 결정
-- [OPA 공식 문서](https://www.openpolicyagent.org/docs) - Rego 언어 레퍼런스
-- [ADR-DPC-006](./adr/ADR-DPC-006-dpc-config-schema.md) - config.yaml 스키마
+### 8.1 minimal
 
-### 레퍼런스
+- 최소한의 기록과 기본 gate만 요구
+- 도입 비용이 낮음
 
-- [preset-system-reference.md](./references/preset-system-reference.md) - 프리셋 시스템 설계 근거 (ESLint)
-- [llm-document-format-reference.md](./references/llm-document-format-reference.md) - guidelines.md 포맷 근거 (Anthropic, OpenAI, llms.txt)
+### 8.2 tdd
+
+- 테스트 우선 패턴
+- 구현 전/후 검증 흔적 요구
+
+### 8.3 feature-standard
+
+- 작업 계획 기록
+- 의사결정 기록
+- 검증 기록
+- 변경 기록
+
+---
+
+## 9. Team 확장
+
+Preset과 Skill은 개인 설정에 머무르지 않는다.
+
+팀 리드가 다듬은 패턴은:
+- preset으로 묶이고
+- 저장소에 커밋되며
+- 팀원 도구에서 동일하게 적용된다
+
+이렇게 개인 노하우가 팀 운영 표준으로 확장된다.
+
+---
+
+## 10. 설계 요약
+
+- preset은 Skill 묶음이다
+- Skill은 기록 기반 패턴이다
+- rules.rego는 기록과 산출물을 검사한다
+- preset의 목적은 템플릿 배포가 아니라 반복 가능한 방법론 배포다
+
+## Related
+
+- [architecture.md](./architecture.md)
+- [product-spec.md](./product-spec.md)
+- [ADR-DPC-007](../adr/ADR-DPC-007-rules-engine-selection.md)

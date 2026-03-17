@@ -5,7 +5,7 @@
 
 ## Purpose
 
-This directory defines portable enforcement points for AI Ops-aware tooling.
+This directory defines portable enforcement points for ReproGate-aware tooling.
 A tool hook exists to turn process rules into runtime behavior.
 
 ## Hook Categories

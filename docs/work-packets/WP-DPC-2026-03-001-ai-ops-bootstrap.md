@@ -1,6 +1,6 @@
 ---
 packet_id: "WP-DPC-2026-03-001"
-title: "AI 협업 운영체계 구축 부트스트랩"
+title: "ReproGate 기록 기반 엔지니어링 부트스트랩"
 goal_ids: ["DPC-G1", "DPC-G2", "DPC-G3", "DPC-G4", "DPC-G5"]
 status: "IN_REFINEMENT"
 work_type: "DOCUMENTATION"
@@ -11,24 +11,28 @@ current_process: "P1"
 next_process: "P3"
 owner: "SHARED"
 created_at: "2026-03-07"
-last_updated: "2026-03-12"
+last_updated: "2026-03-17"
 ---
-# WP-DPC-2026-03-001 AI 협업 운영체계 구축 부트스트랩
+# WP-DPC-2026-03-001 ReproGate 기록 기반 엔지니어링 부트스트랩
+
+> Current interpretation: 이 부모 WP는 과거 `ai-ops` 운영체계 구축 문서이지만, 현재는 **ReproGate의 기록 기반 compiler/gatekeeper 정체성을 저장소 문서/계획/기록 체계에 정착시키는 상위 부트스트랩 작업**으로 읽는다.
 
 ## 1. Background
 - `ai-collaboration-guide.md`에 운영 원칙이 집중되어 있어 실행 시 참조 비용이 높다.
 - 운영체계 구축 작업 자체도 WP/ADR 기반으로 진행해야 한다는 요구가 명확해졌다.
 - 기존 마이그레이션 과정에서 작성된 WP/ADR 템플릿을 버리지 않고 표준으로 재사용해야 한다.
+- 현재 기준 정의는 `docs/strategy/final-definition.md`이며, bootstrap 작업도 ReproGate 정체성에 맞게 재정렬되어야 한다.
 
 ## 2. Goal
-- 운영체계 구축의 초기 설계를 단계별로 확정한다.
+- ReproGate의 기록 기반 엔지니어링 철학을 저장소 운영/설계/계획 문서에 정착시킨다.
 - 구축 작업 자체를 부모 WP로 관리하고, 요구사항 변경 시 강제 동기화 규칙을 적용한다.
 - 향후 `ai-collaboration-guide.md`를 분해/퇴역해도 운영이 유지되도록 산출물 구조를 준비한다.
-- `ai-ops`를 개별 엔진 개발이 아니라, 지속적으로 등장하는 AI 실행 엔진/도구를 활용하는 운영체계 레이어로 정립한다.
+- 제품 정체성이 runtime state 중심 도구가 아니라 **작업 기록 → Skill → Rule/Gate** 구조라는 점을 control-board에 반영한다.
 
 ## 3. Scope
 - 운영체계 구축 초기 설계(Phase/Gate) 수립
 - 운영체계 구축 상위 계획 문서(Program Plan) 별도 관리
+- 기준 문서(`final-definition.md`)와 control-board 문서의 정렬
 - 기존 WP/ADR 포맷을 `v1 표준`으로 동결
 - `work-packets/index.md`, `CHANGELOG.md` 생성
 - 요구사항 변경 시 계획/산출물 강제 갱신 규칙 정의(ADR 연계)
@@ -57,12 +61,13 @@ last_updated: "2026-03-12"
 
 ## 7. Related References
 ### 7.1 Related Docs
-- [AI Ops Constitution](../governance/constitution.md)
+- [ReproGate Constitution](../governance/constitution.md)
 - [AI 협업 가이드](../../project-ops/ai-collaboration-guide.md)
 - [ADR-DPC-001: 요구사항 변경 동기화 강제 규칙](../adr/ADR-DPC-001-bootstrap-requirement-change-sync.md)
-- [운영체계 구축 상위 계획](../governance/ops-bootstrap-master-plan.md)
+- [ReproGate Governance Master Plan](../governance/ops-bootstrap-master-plan.md)
+- [ReproGate 최종 정의](../strategy/final-definition.md)
 - [work-packets index](./index.md)
-- [AI Ops CHANGELOG](../CHANGELOG.md)
+- [Integrated CHANGELOG](../CHANGELOG.md)
 
 ### 7.2 Related Code
 - N/A (문서 운영체계 구축 작업)
@@ -115,15 +120,12 @@ last_updated: "2026-03-12"
 - 훅 변경이 발생하면 `ADR-DPC-001`, `index.md`, `CHANGELOG.md`, 상위 계획 문서를 같은 세션에서 동기화한다.
 
 ## 10. Deliverables
-- `docs/ai-ops/work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md`
-- `docs/ai-ops/ops-bootstrap-master-plan.md`
-- `docs/ai-ops/constitution.md`
-- `docs/ai-ops/work-packets/WP-DPC-2026-03-002-ai-tool-hook-enforcement.md`
-- `docs/ai-ops/work-packets/WP-DPC-2026-03-003-git-hook-output-compliance-gate.md`
-- `docs/ai-ops/adr/ADR-DPC-001-bootstrap-requirement-change-sync.md`
-- `docs/ai-ops/work-packets/index.md`
-- `docs/ai-ops/CHANGELOG.md`
-- `scripts/ai-ops/check_ai_ops_compliance.py`
+- `docs/work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md`
+- `docs/governance/ops-bootstrap-master-plan.md`
+- `docs/governance/constitution.md`
+- `docs/work-packets/index.md`
+- `docs/CHANGELOG.md`
+- `docs/strategy/final-definition.md`
 
 ## 11. Review Notes
 - 기존 WP/ADR 누적 포맷과 충돌 없는지 검토 필요
@@ -135,7 +137,7 @@ last_updated: "2026-03-12"
 | 템플릿 전략 | 기존 WP/ADR 템플릿 유지(v1 동결) | 누적 자산과 즉시 호환 |
 | 계획 저장 위치 | 부모 WP 중심 | 실행/상태/이력 동시 추적 가능 |
 | 요구사항 변경 대응 | 동기화 프로토콜 하드 게이트 | 계획-산출물 불일치 방지 |
-| ai-ops 정체성 | 엔진 재구현이 아닌 운영체계 레이어 | Codex/Claude/향후 엔진을 공통 프로세스/기록/검증 규칙 아래 정렬하기 위함 |
+| ReproGate 정체성 | 기록 기반 compiler/gatekeeper | 작업 기록을 증거로 삼아 Skill과 Gate를 강제하는 방향을 고정하기 위함 |
 | 운영 문서 기술 방식 | capability-first | 도구 고유 기능/명령보다 장기 유지되는 운영 계약을 우선하기 위함 |
 | 프로세스 이력 보존 방식 | 종료 시 커밋 여부 질의 | 프로세스별 변경이 뒤섞인 채 누적되는 것을 줄이기 위함 |
 | 도구 경로 정렬 원칙 | 얇은 어댑터 + SoT 중심 구조 | Codex+OMX에서 먼저 정립하고, 추후 Claude+OMC 개편에도 동일 원칙을 적용하기 위함 |
@@ -167,3 +169,5 @@ last_updated: "2026-03-12"
 - [2026-03-09] WP-DPC-2026-03-002 설계 보강: `$ai-ops`를 Codex+OMX 전용으로 유지하고, JetBrains AI Assistant 일반 경로는 `AGENTS.md` + SoT로 정리하는 방향과 ADR-DPC-005를 추가
 - [2026-03-09] WP-DPC-2026-03-002 구현 반영: `.codex/jetbrains-ai-assistant-rules.md` 제거, `$ai-ops` skill 참조 축소, Codex 선택 전 Team 금지 규칙을 직접 반영
 - [2026-03-09] WP-DPC-2026-03-002 round 기록 고정: Codex entrypoint ownership 재정렬 round를 `S4`까지 완료
+- [2026-03-17] Wave 5 보조 문서 정렬(`docs/commands/*`, `docs/tool-hooks/*`, `docs/guide/dpc-intro.md`, `docs/omc-config/*`) 완료. S1/S4 판정으로 historical WP 본문은 소급 수정하지 않고 신규 변경 이력만 기록하기로 확정
+- [2026-03-17] `final-definition` 주입 계획 Wave 1~5 완료 확정 후 `docs/strategy/final-definition-injection-plan.md` 문서를 제거하고 완료 상태만 상위 문서에 유지

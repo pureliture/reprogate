@@ -5,7 +5,7 @@
 
 ## Purpose
 
-This directory defines portable command contracts for AI Ops entrypoints.
+This directory defines portable command contracts for ReproGate entrypoints.
 The documents here describe what an entry command must do, not how a specific tool implements it.
 
 ## Scope
@@ -25,4 +25,4 @@ Those belong in adapter-owned assets.
 
 | Document | Purpose |
 |---|---|
-| [ai-ops.md](./ai-ops.md) | Portable process-first entrypoint contract |
+| [dpc.md](./dpc.md) | Portable process-first entrypoint contract (legacy command alias support) |
