@@ -27,6 +27,11 @@ Scope:
   - 모든 `rules.yaml` → `rules.rego`
   - 섹션 9 요약: DSL → Rego
 
+- **REMOVED**: `docs/archive/` 디렉토리 제거
+  - 완료된 WP-002~009 및 migration-review 문서 제거
+  - 핵심 결정은 ADR/CHANGELOG에 보존됨
+  - 퍼블릭 릴리스용 클린업
+
 ## 2026-03-12
 
 - **STARTED**: [WP-DPC-2026-03-013](./work-packets/WP-DPC-2026-03-013-public-strategy-docs.md) external public strategy docs

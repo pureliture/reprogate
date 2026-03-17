@@ -33,18 +33,9 @@
 
 - 없음
 
-## 3. Historical / Recent Done
+## 3. Historical / Done
 
-> Closed historical packets are now archived under `docs/archive/ai-ops/work-packets/`; legacy `docs/ai-ops/work-packets/*` paths remain thin redirect stubs only.
-
-- [WP-DPC-2026-03-009 Claude+OMC SoT 구조 적용](../archive/ai-ops/work-packets/WP-DPC-2026-03-009-claude-omc-sot-application.md) **DONE**
-- [WP-DPC-2026-03-010 ai-ops 프레임워크 추출 및 오픈소스화](./WP-DPC-2026-03-010-framework-extraction.md) **DONE** (final deletion readiness PASS, legacy namespace sunset complete)
-- [WP-DPC-2026-03-004 문서 구조 전환](../archive/ai-ops/work-packets/WP-DPC-2026-03-004-document-structure-transition.md)
-- [WP-DPC-2026-03-003 Git hook output compliance gate](../archive/ai-ops/work-packets/WP-DPC-2026-03-003-git-hook-output-compliance-gate.md)
-- [WP-DPC-2026-03-002 AI tool hook enforcement](../archive/ai-ops/work-packets/WP-DPC-2026-03-002-ai-tool-hook-enforcement.md)
-- [WP-DPC-2026-03-007 AI 도구 산출물 경계 정렬](../archive/ai-ops/work-packets/WP-DPC-2026-03-007-ai-tool-artifact-separation.md) **DONE**
-- [WP-DPC-2026-03-006 파일럿 검증](../archive/ai-ops/work-packets/WP-DPC-2026-03-006-pilot-verification.md) **DONE**
-- [WP-DPC-2026-03-005 프로세스 기반 협업 전환](../archive/ai-ops/work-packets/WP-DPC-2026-03-005-process-based-collaboration.md) **DONE**
+- WP-DPC-2026-03-002 ~ 009: **DONE** (archived, see CHANGELOG)
 
 ## 4. High Priority Queue
 
@@ -54,17 +45,11 @@
 ## 5. Parent / Child Topology
 
 - Parent: [WP-DPC-2026-03-001](./WP-DPC-2026-03-001-ai-ops-bootstrap.md)
-  - Child(Track 1, Phase 1): [WP-DPC-2026-03-002](../archive/ai-ops/work-packets/WP-DPC-2026-03-002-ai-tool-hook-enforcement.md) **DONE**
-  - Child(Track 2, Phase 1): [WP-DPC-2026-03-003](../archive/ai-ops/work-packets/WP-DPC-2026-03-003-git-hook-output-compliance-gate.md) **DONE**
-  - Child(Track 3, Phase 2): [WP-DPC-2026-03-004](../archive/ai-ops/work-packets/WP-DPC-2026-03-004-document-structure-transition.md) **DONE** (문서 구조 전환 + 운영 문서 생성)
-  - Child(Track 4, Phase 3): [WP-DPC-2026-03-005](../archive/ai-ops/work-packets/WP-DPC-2026-03-005-process-based-collaboration.md) **DONE** (프로세스 기반 협업 전환)
-  - Child(Phase 4): [WP-DPC-2026-03-006](../archive/ai-ops/work-packets/WP-DPC-2026-03-006-pilot-verification.md) **DONE** (파일럿 검증 - 프레임워크 완성 판정)
-  - Child(Track 6, Phase 5): [WP-DPC-2026-03-007](../archive/ai-ops/work-packets/WP-DPC-2026-03-007-ai-tool-artifact-separation.md) **DONE** (AI 도구 산출물 경계 정렬)
-  - Child(Track 7, Phase 6): [WP-DPC-2026-03-008](./WP-DPC-2026-03-008-codex-omx-alignment.md) (Codex+OMX 운영 정렬)
-  - Child(Track 8, Phase 6): [WP-DPC-2026-03-009](../archive/ai-ops/work-packets/WP-DPC-2026-03-009-claude-omc-sot-application.md) **DONE** (Claude+OMC SoT 구조 적용)
-  - Child(Track 9): [WP-DPC-2026-03-010](./WP-DPC-2026-03-010-framework-extraction.md) (ai-ops 프레임워크 추출 및 오픈소스화)
-  - Child(Track 10): [WP-DPC-2026-03-011](./WP-DPC-2026-03-011-public-history-replay-plan.md) (public repo replay history 재구성 계획)
-  - Child(Track 11): [WP-DPC-2026-03-012](./WP-DPC-2026-03-012-external-canonical-migration-inventory.md) (external canonical 기준 migration target 재분석)
+  - Phase 1-5: WP-002 ~ 007 **DONE**
+  - Phase 6: [WP-DPC-2026-03-008](./WP-DPC-2026-03-008-codex-omx-alignment.md) (Codex+OMX 운영 정렬)
+  - Track 9: [WP-DPC-2026-03-010](./WP-DPC-2026-03-010-framework-extraction.md) **DONE**
+  - Track 10: [WP-DPC-2026-03-011](./WP-DPC-2026-03-011-public-history-replay-plan.md)
+  - Track 11: [WP-DPC-2026-03-012](./WP-DPC-2026-03-012-external-canonical-migration-inventory.md)
 
 ## 6. Hard Rules (Mandatory)
 

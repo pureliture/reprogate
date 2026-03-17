@@ -87,7 +87,7 @@
 
 ### Track 8. ai-ops framework extraction / legacy surface sunset
 - source repo의 canonical AI Ops surface를 root `docs/*`, `scripts/*`로 고정한다.
-- legacy `docs/ai-ops/*`, `scripts/ai-ops/*`는 sunset 대상이었고, P3에서 제거 후 historical trace만 `docs/archive/ai-ops/*`에 남긴다.
+- legacy `docs/ai-ops/*`, `scripts/ai-ops/*`는 sunset 완료. archive 제거됨 (핵심 결정은 ADR/CHANGELOG에 보존).
 - discussion helper / frozen discussion / migration-review docs / shim / hook-source의 최종 처리 정책을 분리한다.
 - P3에서 legacy bridge/shim 제거와 archive relocation을 수행했고, 다음 S1에서 최종 deletion readiness PASS/NO-GO를 판정한다.
 - 작업 WP: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md)
