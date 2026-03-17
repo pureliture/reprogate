@@ -1,5 +1,5 @@
 ---
-packet_id: "WP-DPC-2026-03-015"
+packet_id: "WP-DPC-2026-03-008"
 title: "rules DSL 설계"
 goal_ids: ["DPC-G1", "DPC-G2", "DPC-G4"]
 status: "SUPERSEDED"
@@ -17,7 +17,7 @@ parent: null
 track: "dpc core design"
 ---
 
-# WP-DPC-2026-03-015: rules DSL 설계
+# WP-DPC-2026-03-008: rules DSL 설계
 
 > **SUPERSEDED**: OPA/Rego 채택으로 자체 DSL 설계가 대체되었습니다.
 > [ADR-DPC-007](../adr/ADR-DPC-007-rules-engine-selection.md) 참조.
@@ -90,5 +90,5 @@ rules DSL의 구체적인 설계를 정의한다:
 ## 7. Related
 
 - [architecture.md](../architecture.md)
-- [WP-DPC-2026-03-014](./WP-DPC-2026-03-014-presets-system-design.md)
+- [WP-DPC-2026-03-007](./WP-DPC-2026-03-007-presets-system-design.md)
 - [claude_pretooluse_guard.py](../../scripts/hooks/claude_pretooluse_guard.py)

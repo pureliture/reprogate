@@ -22,12 +22,12 @@
 | Packet ID | Title | Status | Current | Next | Priority | Updated |
 |------|------|------|------|------|------|------|
 | [WP-DPC-2026-03-001](./WP-DPC-2026-03-001-ai-ops-bootstrap.md) | AI 협업 운영체계 구축 부트스트랩 | IN_REFINEMENT | P1 | P3 | P0 | 2026-03-07 |
-| [WP-DPC-2026-03-008](./WP-DPC-2026-03-008-codex-omx-alignment.md) | Codex+OMX 조합 정렬 | IN_DEVELOPMENT | P3 | S1 | P0 | 2026-03-09 |
-| [WP-DPC-2026-03-011](./WP-DPC-2026-03-011-public-history-replay-plan.md) | ai-ops public repo replay history plan | IN_REFINEMENT | P1 | P3 | P1 | 2026-03-11 |
-| [WP-DPC-2026-03-013](./WP-DPC-2026-03-013-public-strategy-docs.md) | external ai-ops public strategy docs | IN_DEVELOPMENT | P3 | S1 | P1 | 2026-03-12 |
-| [WP-DPC-2026-03-012](./WP-DPC-2026-03-012-external-canonical-migration-inventory.md) | external ai-ops canonical migration inventory | IN_REFINEMENT | P1 | P3 | P0 | 2026-03-12 |
-| [WP-DPC-2026-03-014](./WP-DPC-2026-03-014-presets-system-design.md) | presets 시스템 설계 | DONE | P2 | - | P1 | 2026-03-17 |
-| [WP-DPC-2026-03-015](./WP-DPC-2026-03-015-rules-dsl-design.md) | rules DSL 설계 | SUPERSEDED | - | - | - | 2026-03-17 |
+| [WP-DPC-2026-03-002](./WP-DPC-2026-03-002-codex-omx-alignment.md) | Codex+OMX 조합 정렬 | IN_DEVELOPMENT | P3 | S1 | P0 | 2026-03-09 |
+| [WP-DPC-2026-03-004](./WP-DPC-2026-03-004-public-history-replay-plan.md) | ai-ops public repo replay history plan | IN_REFINEMENT | P1 | P3 | P1 | 2026-03-11 |
+| [WP-DPC-2026-03-006](./WP-DPC-2026-03-006-public-strategy-docs.md) | external ai-ops public strategy docs | IN_DEVELOPMENT | P3 | S1 | P1 | 2026-03-12 |
+| [WP-DPC-2026-03-005](./WP-DPC-2026-03-005-external-canonical-migration-inventory.md) | external ai-ops canonical migration inventory | IN_REFINEMENT | P1 | P3 | P0 | 2026-03-12 |
+| [WP-DPC-2026-03-007](./WP-DPC-2026-03-007-presets-system-design.md) | presets 시스템 설계 | DONE | P2 | - | P1 | 2026-03-17 |
+| [WP-DPC-2026-03-002](./WP-DPC-2026-03-008-rules-dsl-design.md) | rules DSL 설계 | SUPERSEDED | - | - | - | 2026-03-17 |
 
 ## 2. On Hold
 
@@ -40,16 +40,16 @@
 ## 4. High Priority Queue
 
 - [WP-DPC-2026-03-001](./WP-DPC-2026-03-001-ai-ops-bootstrap.md) (P0): 운영체계 구축 기준선 확정 및 단계 실행
-- [WP-DPC-2026-03-008](./WP-DPC-2026-03-008-codex-omx-alignment.md) (P3): Claude+OMC SoT 구조 적용 구현
+- [WP-DPC-2026-03-002](./WP-DPC-2026-03-002-codex-omx-alignment.md) (P3): Claude+OMC SoT 구조 적용 구현
 
 ## 5. Parent / Child Topology
 
 - Parent: [WP-DPC-2026-03-001](./WP-DPC-2026-03-001-ai-ops-bootstrap.md)
   - Phase 1-5: WP-002 ~ 007 **DONE**
-  - Phase 6: [WP-DPC-2026-03-008](./WP-DPC-2026-03-008-codex-omx-alignment.md) (Codex+OMX 운영 정렬)
-  - Track 9: [WP-DPC-2026-03-010](./WP-DPC-2026-03-010-framework-extraction.md) **DONE**
-  - Track 10: [WP-DPC-2026-03-011](./WP-DPC-2026-03-011-public-history-replay-plan.md)
-  - Track 11: [WP-DPC-2026-03-012](./WP-DPC-2026-03-012-external-canonical-migration-inventory.md)
+  - Phase 6: [WP-DPC-2026-03-002](./WP-DPC-2026-03-002-codex-omx-alignment.md) (Codex+OMX 운영 정렬)
+  - Track 9: [WP-DPC-2026-03-003](./WP-DPC-2026-03-003-framework-extraction.md) **DONE**
+  - Track 10: [WP-DPC-2026-03-004](./WP-DPC-2026-03-004-public-history-replay-plan.md)
+  - Track 11: [WP-DPC-2026-03-005](./WP-DPC-2026-03-005-external-canonical-migration-inventory.md)
 
 ## 6. Hard Rules (Mandatory)
 

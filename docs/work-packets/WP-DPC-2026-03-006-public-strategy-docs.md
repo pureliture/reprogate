@@ -1,5 +1,5 @@
 ---
-packet_id: "WP-DPC-2026-03-013"
+packet_id: "WP-DPC-2026-03-006"
 title: "external ai-ops public strategy docs"
 goal_ids: ["DPC-G1", "DPC-G4", "DPC-G5"]
 status: "IN_DEVELOPMENT"
@@ -16,7 +16,7 @@ parent: "WP-DPC-2026-03-001"
 track: "public strategy docs"
 ---
 
-# WP-DPC-2026-03-013: external ai-ops public strategy docs
+# WP-DPC-2026-03-006: external ai-ops public strategy docs
 
 ## 1. Background
 

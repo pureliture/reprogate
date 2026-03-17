@@ -1,5 +1,5 @@
 ---
-packet_id: "WP-DPC-2026-03-014"
+packet_id: "WP-DPC-2026-03-007"
 title: "presets 시스템 설계"
 goal_ids: ["DPC-G1", "DPC-G4"]
 status: "DONE"
@@ -16,7 +16,7 @@ parent: null
 track: "dpc core design"
 ---
 
-# WP-DPC-2026-03-014: presets 시스템 설계
+# WP-DPC-2026-03-007: presets 시스템 설계
 
 ## 1. Background
 

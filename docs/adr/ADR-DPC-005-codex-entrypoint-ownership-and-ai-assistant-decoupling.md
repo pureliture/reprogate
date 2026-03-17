@@ -6,14 +6,14 @@
 
 ## Context
 
-`WP-DPC-2026-03-008`에서 Codex+OMX parity를 맞추기 위해 `$ai-ops` named entrypoint와
+`WP-DPC-2026-03-002`에서 Codex+OMX parity를 맞추기 위해 `$ai-ops` named entrypoint와
 `.codex/jetbrains-ai-assistant-rules.md` 기반 보조 규칙을 함께 강화했다.
 
 하지만 실제 운영에서 다음 문제가 드러났다.
 
 1. JetBrains AI Assistant 일반 경로와 Codex+OMX 경로의 소유 경계가 흐려졌다.
 2. hidden local rule-pack(`.codex/jetbrains-ai-assistant-rules.md`)이 canonical 정책 경로처럼 취급됐다.
-3. `$ai-ops` skill이 active WP(`WP-DPC-2026-03-008`)를 직접 참조하면서 thin adapter 원칙과 토큰 효율을 해쳤다.
+3. `$ai-ops` skill이 active WP(`WP-DPC-2026-03-002`)를 직접 참조하면서 thin adapter 원칙과 토큰 효율을 해쳤다.
 4. Codex SoT에는 사용자 프로세스 선택 전 Team 금지 규칙이 Claude 쪽만큼 직접적으로 드러나지 않았다.
 
 또한 사용자는 JetBrains AI Assistant 일반 경로에서 더 이상 `$ai-ops`를 사용하지 않겠다고 명확히 했다.
@@ -62,11 +62,11 @@
 ### 완화 조치
 
 - `AGENTS.md`, `commands/ai-ops.md`, `process-enforcement-matrix.md`에 같은 규칙을 직접 반영한다.
-- `WP-DPC-2026-03-008` P3/S1에서 실제 동작과 문서 정합성을 다시 검증한다.
+- `WP-DPC-2026-03-002` P3/S1에서 실제 동작과 문서 정합성을 다시 검증한다.
 
 ## Related
 
-- [WP-DPC-2026-03-008](../work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md)
+- [WP-DPC-2026-03-002](../work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md)
 - [ADR-DPC-003](./ADR-DPC-003-conditional-team-activation-and-optout.md)
 - [ADR-DPC-004](./ADR-DPC-004-ai-tool-artifact-boundary.md)
 - [ai-ops command](../commands/ai-ops.md)

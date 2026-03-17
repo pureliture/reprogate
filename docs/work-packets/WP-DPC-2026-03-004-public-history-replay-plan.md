@@ -1,5 +1,5 @@
 ---
-packet_id: "WP-DPC-2026-03-011"
+packet_id: "WP-DPC-2026-03-004"
 title: "ai-ops public repository replay history plan"
 goal_ids: ["DPC-G1", "DPC-G4", "DPC-G5"]
 status: "IN_REFINEMENT"
@@ -16,11 +16,11 @@ parent: "WP-DPC-2026-03-001"
 track: "public-history replay"
 ---
 
-# WP-DPC-2026-03-011: ai-ops public repository replay history plan
+# WP-DPC-2026-03-004: ai-ops public repository replay history plan
 
 ## 1. Background
 
-- `WP-DPC-2026-03-010`을 통해 source repo의 legacy namespace sunset과 external `ai-ops` framework repo bootstrap completeness는 완료되었다.
+- `WP-DPC-2026-03-003`을 통해 source repo의 legacy namespace sunset과 external `ai-ops` framework repo bootstrap completeness는 완료되었다.
 - 그러나 external repo ``ai-ops` (this repository)`의 현재 git history는 `C1~C7 + bootstrap completion` 중심이며,
   **"ai-ops를 처음부터 독립 framework로 구축해온 것 같은 서사"**를 충분히 보여주지 못한다.
 - 사용자 의도는 단순한 추출 이력 보존이 아니라, 기존 ai-ops의 framework 진화 과정을
@@ -70,8 +70,8 @@ track: "public-history replay"
 
 ### 7.1 Related Docs
 - [WP-DPC-2026-03-001](./WP-DPC-2026-03-001-ai-ops-bootstrap.md)
-- [WP-DPC-2026-03-008](./WP-DPC-2026-03-008-codex-omx-alignment.md)
-- [WP-DPC-2026-03-010](./WP-DPC-2026-03-010-framework-extraction.md)
+- [WP-DPC-2026-03-002](./WP-DPC-2026-03-002-codex-omx-alignment.md)
+- [WP-DPC-2026-03-003](./WP-DPC-2026-03-003-framework-extraction.md)
 - [AI Ops CHANGELOG](../CHANGELOG.md)
 - [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
 - [ADR-DPC-001](../adr/ADR-DPC-001-bootstrap-requirement-change-sync.md)
@@ -127,10 +127,10 @@ Replay commit은 source repo의 WP/ADR **문서 자체**를 옮기는 것이 아
 - `ADR-DPC-003` conditional team activation / opt-out
 - `WP-DPC-2026-03-007` AI tool artifact boundary preparation
 - `ADR-DPC-004` AI tool artifact boundary
-- `WP-DPC-2026-03-008` Codex+OMX alignment (framework-relevant subset)
+- `WP-DPC-2026-03-002` Codex+OMX alignment (framework-relevant subset)
 - `WP-DPC-2026-03-009` Claude+OMC SoT application (template/adapter-relevant subset)
 - `ADR-DPC-005` codex entrypoint ownership / AI assistant decoupling
-- `WP-DPC-2026-03-010` framework extraction + portable bootstrap completion
+- `WP-DPC-2026-03-003` framework extraction + portable bootstrap completion
 
 #### 제외 대상
 

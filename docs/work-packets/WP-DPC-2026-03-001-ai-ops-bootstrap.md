@@ -146,12 +146,12 @@ last_updated: "2026-03-12"
 - WP-DPC-2026-03-003: 최종 산출물 준수 검토 Git hook 적용(트랙2)
 - WP-DPC-2026-03-004: 문서 재배치/분해 실행(Phase 2)
 - WP-DPC-2026-03-005: 파일럿 운영 사이클 검증(Phase 3)
-- WP-DPC-2026-03-008: Codex+OMX 운영 정렬 임시 프로세스(2회) 수행 및 G6 판정(Phase 6)
-- WP-DPC-2026-03-008: soft baseline 이후 Codex+OMX hard guarantee feasibility와 외부 wrapper/native hook 의존 경계 재분석
-- WP-DPC-2026-03-008: OMX-centered launch wrapper/gateway 요구사항 정의 및 구현 반영
-- WP-DPC-2026-03-011: external `ai-ops` public repo history를 framework evolution narrative 기준으로 replay
-- WP-DPC-2026-03-012: external canonical 전제하에 must-move / archive-only 자산 재분류
-- WP-DPC-2026-03-012: source archive-only cutoff와 external live control-board 이관 정책 실행
+- WP-DPC-2026-03-002: Codex+OMX 운영 정렬 임시 프로세스(2회) 수행 및 G6 판정(Phase 6)
+- WP-DPC-2026-03-002: soft baseline 이후 Codex+OMX hard guarantee feasibility와 외부 wrapper/native hook 의존 경계 재분석
+- WP-DPC-2026-03-002: OMX-centered launch wrapper/gateway 요구사항 정의 및 구현 반영
+- WP-DPC-2026-03-004: external `ai-ops` public repo history를 framework evolution narrative 기준으로 replay
+- WP-DPC-2026-03-005: external canonical 전제하에 must-move / archive-only 자산 재분류
+- WP-DPC-2026-03-005: source archive-only cutoff와 external live control-board 이관 정책 실행
 - 장기적으로는 오픈소스 + 간단 명령/마켓플레이스형 프로덕트 방향을 유지하되, 현재는 운영체계 레이어 정렬을 우선한다.
 
 ## 14. Timeline
@@ -160,10 +160,10 @@ last_updated: "2026-03-12"
 - [2026-03-07] 강제 동기화 ADR 등록
 - [2026-03-07] index/CHANGELOG 생성 및 관제 시작
 - [2026-03-07] 강제 메커니즘을 트랙1/트랙2로 분리 확정
-- [2026-03-08] WP-DPC-2026-03-008 추가: Codex+OMX 운영 정렬(Track 7, Phase 6/G6)
+- [2026-03-08] WP-DPC-2026-03-002 추가: Codex+OMX 운영 정렬(Track 7, Phase 6/G6)
 - [2026-03-08] `ai-ops` 정체성 보강: 엔진 재구현이 아닌 운영체계 레이어 + 장기 제품화 방향 메모 반영
-- [2026-03-08] WP-DPC-2026-03-008 재개: soft guarantee baseline 이후 hard guarantee feasibility를 별도 분석하도록 범위 보강
-- [2026-03-08] WP-DPC-2026-03-008 설계 보강: 외부 소규모 wrapper는 개념 참고만 하고 OMX-centered hard gate 요구사항으로 정리
-- [2026-03-09] WP-DPC-2026-03-008 설계 보강: `$ai-ops`를 Codex+OMX 전용으로 유지하고, JetBrains AI Assistant 일반 경로는 `AGENTS.md` + SoT로 정리하는 방향과 ADR-DPC-005를 추가
-- [2026-03-09] WP-DPC-2026-03-008 구현 반영: `.codex/jetbrains-ai-assistant-rules.md` 제거, `$ai-ops` skill 참조 축소, Codex 선택 전 Team 금지 규칙을 직접 반영
-- [2026-03-09] WP-DPC-2026-03-008 round 기록 고정: Codex entrypoint ownership 재정렬 round를 `S4`까지 완료
+- [2026-03-08] WP-DPC-2026-03-002 재개: soft guarantee baseline 이후 hard guarantee feasibility를 별도 분석하도록 범위 보강
+- [2026-03-08] WP-DPC-2026-03-002 설계 보강: 외부 소규모 wrapper는 개념 참고만 하고 OMX-centered hard gate 요구사항으로 정리
+- [2026-03-09] WP-DPC-2026-03-002 설계 보강: `$ai-ops`를 Codex+OMX 전용으로 유지하고, JetBrains AI Assistant 일반 경로는 `AGENTS.md` + SoT로 정리하는 방향과 ADR-DPC-005를 추가
+- [2026-03-09] WP-DPC-2026-03-002 구현 반영: `.codex/jetbrains-ai-assistant-rules.md` 제거, `$ai-ops` skill 참조 축소, Codex 선택 전 Team 금지 규칙을 직접 반영
+- [2026-03-09] WP-DPC-2026-03-002 round 기록 고정: Codex entrypoint ownership 재정렬 round를 `S4`까지 완료

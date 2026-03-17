@@ -12,10 +12,10 @@ Scope:
   - 파서 구현 부담 제거, 테스트 프레임워크 내장
   - `rules.yaml` → `rules.rego`로 전환
 
-- **SUPERSEDED**: [WP-DPC-2026-03-015](./work-packets/WP-DPC-2026-03-015-rules-dsl-design.md) rules DSL 설계
+- **SUPERSEDED**: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-008-rules-dsl-design.md) rules DSL 설계
   - ADR-DPC-007 채택으로 자체 DSL 설계 대체됨
 
-- **UPDATED**: [WP-DPC-2026-03-014](./work-packets/WP-DPC-2026-03-014-presets-system-design.md) presets 시스템 설계
+- **UPDATED**: [WP-DPC-2026-03-007](./work-packets/WP-DPC-2026-03-007-presets-system-design.md) presets 시스템 설계
   - OPA/Rego 반영: `rules.yaml` → `rules.rego`
   - status: DONE
 
@@ -34,7 +34,7 @@ Scope:
 
 ## 2026-03-12
 
-- **STARTED**: [WP-DPC-2026-03-013](./work-packets/WP-DPC-2026-03-013-public-strategy-docs.md) external public strategy docs
+- **STARTED**: [WP-DPC-2026-03-006](./work-packets/WP-DPC-2026-03-006-public-strategy-docs.md) external public strategy docs
   - added first public-facing strategy layer:
     - `docs/vision.md`
     - `docs/roadmap.md`
@@ -43,7 +43,7 @@ Scope:
   - next process: `S1`
     - review whether the curated strategy layer is sufficient for the external canonical repo
 
-- **UPDATED**: [WP-DPC-2026-03-012](./work-packets/WP-DPC-2026-03-012-external-canonical-migration-inventory.md) P1 fixes the external canonical migration policy
+- **UPDATED**: [WP-DPC-2026-03-005](./work-packets/WP-DPC-2026-03-005-external-canonical-migration-inventory.md) P1 fixes the external canonical migration policy
   - fixed external repo target structure:
     - framework surface
     - live control-board
@@ -66,7 +66,7 @@ Scope:
 
 ## 2026-03-11
 
-- **STARTED**: [WP-DPC-2026-03-012](./work-packets/WP-DPC-2026-03-012-external-canonical-migration-inventory.md) external canonical migration inventory
+- **STARTED**: [WP-DPC-2026-03-005](./work-packets/WP-DPC-2026-03-005-external-canonical-migration-inventory.md) external canonical migration inventory
   - assumption changed:
     - future ai-ops work will happen only in external repo ``ai-ops` (this repository)`
     - `ncube-regression-verify-ai-ops` becomes archive/source-of-origin only
@@ -78,7 +78,7 @@ Scope:
   - next process: `P1`
     - fix the external canonical migration policy and target structure
 
-- **STARTED**: [WP-DPC-2026-03-011](./work-packets/WP-DPC-2026-03-011-public-history-replay-plan.md) public repo replay history planning
+- **STARTED**: [WP-DPC-2026-03-004](./work-packets/WP-DPC-2026-03-004-public-history-replay-plan.md) public repo replay history planning
   - user intent clarified:
     - external `ai-ops` repo should not only contain extracted framework files
     - its git history should read like ai-ops was built as an independent framework from the start
@@ -91,7 +91,7 @@ Scope:
   - next process: `P3`
     - rewrite the external `ai-ops` repo history according to the replay plan
 
-- **COMPLETED**: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md) final deletion readiness PASS / packet DONE
+- **COMPLETED**: [WP-DPC-2026-03-003](./work-packets/WP-DPC-2026-03-003-framework-extraction.md) final deletion readiness PASS / packet DONE
   - S1 final review verdict: **PASS**
     - no tracked live files remain under `docs/ai-ops/*` or `scripts/ai-ops/*`
     - required historical discussion/migration-review materials are preserved under `docs/archive/ai-ops/*`
@@ -105,7 +105,7 @@ Scope:
     - root `docs/*`, `scripts/*` are the only live AI Ops canonical surface
     - legacy namespace survives only as frozen archive history under `docs/archive/ai-ops/*`
 
-- **UPDATED**: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md) P3 executes the legacy namespace sunset round
+- **UPDATED**: [WP-DPC-2026-03-003](./work-packets/WP-DPC-2026-03-003-framework-extraction.md) P3 executes the legacy namespace sunset round
   - archived migration-era materials:
     - `docs/archive/ai-ops/discussions/future-direction-discussion-2026-03-09.md`
     - `docs/archive/ai-ops/migration-review/legacy-dependency-inventory.md`
@@ -124,7 +124,7 @@ Scope:
     - live root canonical surface no longer depends on the legacy namespace
     - next process is `S1` for final deletion-readiness PASS/NO-GO review
 
-- **UPDATED**: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md) P1 fixes the final legacy-removal policy
+- **UPDATED**: [WP-DPC-2026-03-003](./work-packets/WP-DPC-2026-03-003-framework-extraction.md) P1 fixes the final legacy-removal policy
   - final disposition fixed:
     - `docs/ai-ops/CONTINUE-DISCUSSION-PROMPT.md` → delete in next P3
     - `docs/ai-ops/future-direction-discussion-2026-03-09.md` → archive to `docs/archive/ai-ops/discussions/`
@@ -140,10 +140,10 @@ Scope:
   - note:
     - `scripts/ai-ops/claude_prompthouse_qa.py` was not found in the current repository snapshot/history and is not treated as a current blocker; if introduced later, it must not live under the legacy namespace
 
-- **UPDATED**: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md) S4 records the post-P3 S1 re-review
+- **UPDATED**: [WP-DPC-2026-03-003](./work-packets/WP-DPC-2026-03-003-framework-extraction.md) S4 records the post-P3 S1 re-review
   - re-reviewed the latest consistency fixes on root/live surfaces:
     - `docs/CHANGELOG.md` archive/product relative links
-    - `WP-DPC-2026-03-010` references
+    - `WP-DPC-2026-03-003` references
     - `WORKSPACE-PROFILE.md`
     - `docs/omc-config/AI-OPS-POLICY.template.md` / `.omc/AI-OPS-POLICY.md`
     - `ADR-DPC-003`, `ADR-DPC-005`
@@ -159,7 +159,7 @@ Scope:
     - discussion/review exception treatment finalization
     - shim/supporting-asset removal criteria definition
 
-- **UPDATED**: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md) P3 root non-record SoT promotion / implementation collapse / archive disposition
+- **UPDATED**: [WP-DPC-2026-03-003](./work-packets/WP-DPC-2026-03-003-framework-extraction.md) P3 root non-record SoT promotion / implementation collapse / archive disposition
   - root non-record AI Ops SoT를 canonical root namespace로 승격:
     - `docs/constitution.md`
     - `docs/ops-bootstrap-master-plan.md`
@@ -194,7 +194,7 @@ Scope:
     - root canonical SoT 승격 범위와 legacy bridge/shim/archive 예외의 충분성 재검토
     - source repo deletion readiness 최종 pass/no-go 재판정
 
-- **UPDATED**: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md) S1 review of root canonical cutover
+- **UPDATED**: [WP-DPC-2026-03-003](./work-packets/WP-DPC-2026-03-003-framework-extraction.md) S1 review of root canonical cutover
   - 판정:
     - root live control-board cutover 자체는 **Approve**
     - source repo `docs/ai-ops/` deletion readiness는 아직 **No-Go**
@@ -211,12 +211,12 @@ Scope:
     - `scripts/ai-ops/*` implementation layer 축소/제거
     - historical retained material final archive 정리
 
-- **UPDATED**: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md) P3 root live control-board cutover
+- **UPDATED**: [WP-DPC-2026-03-003](./work-packets/WP-DPC-2026-03-003-framework-extraction.md) P3 root live control-board cutover
   - live AI Ops control-board path를 root canonical namespace로 승격:
     - `docs/work-packets/index.md`
     - `docs/work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md`
-    - `docs/work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md`
-    - `docs/work-packets/WP-DPC-2026-03-010-framework-extraction.md`
+    - `docs/work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md`
+    - `docs/work-packets/WP-DPC-2026-03-003-framework-extraction.md`
     - `docs/adr/ADR-DPC-001..005`
     - `docs/CHANGELOG.md`
   - 대응 legacy path는 thin bridge/archive surface로 전환:
@@ -235,11 +235,11 @@ Scope:
   - Claude guard source/copy가 root stable command path(`scripts/check_compliance.py`, `scripts/set_process_context.py`)를 허용하도록 정렬
   - compliance rule을 root canonical record path 기준으로 전환하고, deletion-readiness inventory/checklist를 새 canonical 상태로 갱신
   - 검증:
-    - `python3 scripts/check_compliance.py --mode none --wp-file docs/work-packets/WP-DPC-2026-03-010-framework-extraction.md` pass
+    - `python3 scripts/check_compliance.py --mode none --wp-file docs/work-packets/WP-DPC-2026-03-003-framework-extraction.md` pass
     - `python3 -m py_compile scripts/ai-ops/check_ai_ops_compliance.py scripts/ai-ops/claude_pretooluse_guard.py .claude/hooks/pretooluse-ai-ops-guard.py` pass
     - `python3 scripts/launch_ai_ops_session.py --dry-run --launcher omx -- --model gpt-5` pass (`team_mode=single`)
 
-- **UPDATED**: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md) P1 canonical policy refinement
+- **UPDATED**: [WP-DPC-2026-03-003](./work-packets/WP-DPC-2026-03-003-framework-extraction.md) P1 canonical policy refinement
   - canonical record path를 root live control board로 고정:
     - `docs/work-packets/`
     - `docs/adr/`
@@ -263,7 +263,7 @@ Scope:
 
 ## 2026-03-10
 
-- **IN_PROGRESS**: [WP-DPC-2026-03-010](./work-packets/WP-DPC-2026-03-010-framework-extraction.md) ai-ops 프레임워크 추출 및 오픈소스화
+- **IN_PROGRESS**: [WP-DPC-2026-03-003](./work-packets/WP-DPC-2026-03-003-framework-extraction.md) ai-ops 프레임워크 추출 및 오픈소스화
   - 목표: ncube-regression-verify에서 ai-ops 프레임워크 추출 → 독립 GitHub public 레포지토리
   - P0 분석 완료:
     - 자산 분류 맵 작성 (Framework/Project/Template/Runtime 분류)
@@ -357,10 +357,10 @@ Scope:
     - `.gitignore` config/policy 추적 허용, runtime state 제외
   - S1 리뷰 결과: PASS (AGENTS.md와 정렬 확인)
   - Done Criteria 6/6 충족
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) 범위 조정
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) 범위 조정
   - Claude+OMC SoT 적용을 WP-009로 분리
   - WP-008은 Codex+OMX 정렬에 집중
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P3 Claude+OMC SoT 구조 적용 구현
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P3 Claude+OMC SoT 구조 적용 구현
   - 상태 반영: `IN_ANALYSIS/P0` -> `IN_DEVELOPMENT/P3`, `next_process=S1`
   - 구현 내용:
     - `.claude/CLAUDE.md` AI Ops Local Overlay 섹션을 AGENTS.md와 동등 수준으로 확장
@@ -371,7 +371,7 @@ Scope:
     - P3 Soft Execution Contract 추가
     - `.gitignore` 수정으로 `.claude/.codex/.omc` 설정/정책 파일 tracking 활성화
   - 후속 프로세스: `S1` (리뷰)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P0 Claude+OMC SoT 구조 적용 갭 분석 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P0 Claude+OMC SoT 구조 적용 갭 분석 완료
   - 상태 반영: `IN_RECORDING/S4` -> `IN_ANALYSIS/P0`, `next_process=P3`
   - 분석 내용:
     - `.claude/CLAUDE.md`와 `AGENTS.md`의 SoT 구조 비교
@@ -379,27 +379,27 @@ Scope:
     - Named Entrypoint Parity, Capability-First Rules, Soft Execution Contract 섹션 부재 확인
     - PreToolUse hook은 변경 없이 유지 확인
   - 후속 프로세스: `P3` (.claude/CLAUDE.md AI Ops Local Overlay 섹션 확장)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S4 Codex entrypoint ownership 기록 고정
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S4 Codex entrypoint ownership 기록 고정
   - 상태 반영: `IN_REVIEW/S1` -> `IN_RECORDING/S4`, `next_process=P0`
   - 고정한 핵심 판단:
     - `$ai-ops`는 Codex+OMX 전용 named entrypoint로 유지
     - JetBrains AI Assistant 일반 경로는 `AGENTS.md` + SoT 직접 진입으로 정리
     - `.codex/jetbrains-ai-assistant-rules.md` 제거와 선택 전 Team 금지 규칙 반영을 round 결과로 고정
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S1 Codex entrypoint ownership 리뷰 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S1 Codex entrypoint ownership 리뷰 완료
   - 상태 반영: `IN_DEVELOPMENT/P3` -> `IN_REVIEW/S1`, `next_process=S4`
   - 리뷰 결과:
     - `$ai-ops`의 역할이 Codex+OMX 전용으로 다시 좁혀졌고, JetBrains AI Assistant 일반 경로와의 소유 경계가 문서상 일관되게 반영됨
     - `WP-008` 직접 참조 제거와 선택 전 Team 금지 규칙이 SoT/adapter 문서에 모두 반영됨
     - `check_ai_ops_compliance.py --mode working_tree` 통과
   - 승인 판단: Approve
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P3 Codex entrypoint ownership 반영
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P3 Codex entrypoint ownership 반영
   - 상태 반영: `IN_REFINEMENT/P1` -> `IN_DEVELOPMENT/P3`, `next_process=S1`
   - 구현 내용:
     - `.codex/jetbrains-ai-assistant-rules.md` 제거
     - `AGENTS.md`에 JetBrains AI Assistant 일반 경로 분리와 선택 전 Team 금지 규칙 반영
     - `$ai-ops` skill의 `WP-008` 직접 참조 제거
     - `.codex/README.md`를 `AGENTS.md` + SoT 직접 참조 구조로 단순화
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P1 Codex entrypoint ownership 재정렬
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P1 Codex entrypoint ownership 재정렬
   - 상태 반영: `IN_REVIEW/S1` -> `IN_REFINEMENT/P1`, `next_process=P3`
   - 사용자 명확화:
     - JetBrains AI Assistant 일반 경로는 더 이상 `$ai-ops`를 진입점으로 사용하지 않는다
@@ -414,7 +414,7 @@ Scope:
     - `work-packets/index.md`
     - `commands/ai-ops.md`
     - `tool-hooks/process-enforcement-matrix.md`
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S1 리뷰 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S1 리뷰 완료
   - 상태 반영: `IN_RECORDING/S4` -> `IN_REVIEW/S1`, `next_process=P0`
   - 리뷰 결과:
     - retro recovery round는 authoritative evidence 기반 post-hoc reconstruction으로 충분히 정직하고 재검토 가능함
@@ -422,7 +422,7 @@ Scope:
     - `.agents/skills/ai-ops/SKILL.md` stray diff는 별도 변경으로 분리 권장
   - 승인 판단: Approve
   - 다음 프로세스: `P0` (실제 pilot #1 대상 작업이 정해지면 새 분석 체인으로 재진입)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S4 기록 고정
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S4 기록 고정
   - 상태 반영: `IN_ANALYSIS/P2` -> `IN_RECORDING/S4`, `next_process=S1`
   - 고정한 핵심 판단:
     - retro recovery round는 authoritative evidence 기반 post-hoc reconstruction으로 기록한다
@@ -435,7 +435,7 @@ Scope:
     - `S1`에서 기록의 정직성/충분성 검토
     - stray diff 분리 여부 판단
   - 다음 프로세스: `S1`
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P2 수행
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P2 수행
   - 상태 반영: `IN_ANALYSIS/P0` -> `IN_ANALYSIS/P2`, `next_process=S4`
   - 문제 정의:
     - 이미 ad-hoc하게 실행된 결과물에 대해 process trace를 남기고 싶으나, 원래 staged mutation sequence는 복원 불가
@@ -452,7 +452,7 @@ Scope:
   - 남은 정리 항목:
     - `.agents/skills/ai-ops/SKILL.md`의 현재 quoting diff를 이번 retro round 범위에 포함할지 별도 변경으로 분리할지 결정 필요
   - 다음 프로세스: `S4` (복원 전략과 제외 근거를 기록으로 고정)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P0 재진입
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P0 재진입
   - 상태 반영: `IN_RECORDING/S4` -> `IN_ANALYSIS/P0`, `next_process=P2`
   - 분석 목적:
     - ad-hoc하게 생성된 산출물을 어떤 근거와 한계 안에서 process trace로 복원할 수 있는지 판단
@@ -463,7 +463,7 @@ Scope:
   - 결정:
     - 이번 라운드는 "처음부터 준수했던 실행"을 꾸미는 것이 아니라, evidence 기반의 post-hoc reconstruction으로 기록
   - 다음 프로세스: `P2` (소급 복원 전략 비교 및 선택)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S4 기록 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S4 기록 완료
   - 상태 반영: `IN_REVIEW/S1` -> `IN_RECORDING/S4`, `next_process=S1`
   - 현재 라운드 체인 고정:
     - `P1(entrypoint parity) -> P3($ai-ops skill 구현) -> S1(parity 승인) -> S4`
@@ -474,7 +474,7 @@ Scope:
   - 남은 TODO:
     - 실제 pilot #1에서 discoverability/사용 체감 검증
     - `$ai-ops` + launch gate + 종료 보고의 한 흐름 검증
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S1 리뷰 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S1 리뷰 완료
   - 상태 반영: `IN_DEVELOPMENT/P3` -> `IN_REVIEW/S1`, `next_process=S4`
   - 리뷰 결과:
     - `$ai-ops`를 Codex+OMX의 named entrypoint parity로 승인
@@ -483,7 +483,7 @@ Scope:
   - 잔여 리스크:
     - `/ai-ops`와 `$ai-ops`의 문법 차이
     - 실제 pilot #1에서 discoverability/사용 체감 재검증 필요
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P3 구현
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P3 구현
   - 상태 반영: `IN_REFINEMENT/P1` -> `IN_DEVELOPMENT/P3`, `next_process=S1`
   - entrypoint parity 구현:
     - `.agents/skills/ai-ops/SKILL.md` 추가
@@ -492,7 +492,7 @@ Scope:
   - 구현 원칙:
     - skill 본문은 얇은 어댑터로 유지
     - `docs/ai-ops/*`, `scripts/ai-ops/*`를 SoT로 참조
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) entrypoint parity 요구 반영
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) entrypoint parity 요구 반영
   - 상태 반영: `IN_RECORDING/S4` -> `IN_REFINEMENT/P1`, `next_process=P3`
   - 추가 판단:
     - launch gate만으로는 WP-006과 동등한 파일럿으로 보기 어렵다
@@ -503,7 +503,7 @@ Scope:
 
 ## 2026-03-08
 
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S4 기록 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S4 기록 완료
   - 상태 반영: `IN_REVIEW/S1` -> `IN_RECORDING/S4`, `next_process=S1`
   - 현재 라운드 체인 고정:
     - `P0(보강) -> P2 -> P1 -> P3 -> S1 -> S4`
@@ -515,7 +515,7 @@ Scope:
     - wrapper 미사용 직접 진입 우회 가능성 검증
     - launch gate의 실제 파일럿 유도력/UX 검증
     - tool-call hard gate parity 부재에 대한 문서/기대치 관리
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S1 리뷰 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S1 리뷰 완료
   - 상태 반영: `IN_DEVELOPMENT/P3` -> `IN_REVIEW/S1`, `next_process=S4`
   - 리뷰 결과:
     - launch gate 4개 프로필 반영 확인
@@ -527,7 +527,7 @@ Scope:
   - 잔여 리스크:
     - wrapper 미사용 직접 진입 우회 가능성
     - tool-call hard gate parity 부재
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P3 구현
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P3 구현
   - 상태 반영: `IN_REFINEMENT/P1` -> `IN_DEVELOPMENT/P3`, `next_process=S1`
   - launch gate 구현:
     - `scripts/ai-ops/launch_ai_ops_session.py` 추가
@@ -547,7 +547,7 @@ Scope:
 - Updated: Claude+OMC 후속 정렬 방향 명시
   - Codex+OMX에서 먼저 정립한 얇은 어댑터 + `docs/ai-ops` SoT 중심 구조를 추후 Claude+OMC 개편에도 동일 적용하도록 기록
   - 저장 위치: WP-008, 상위 계획, 부모 WP
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P1 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P1 완료
   - 상태 반영: `IN_ANALYSIS/P2` -> `IN_REFINEMENT/P1`, `next_process=P3`
   - OMX-centered hard gate 요구사항 정의:
     - launch entrypoint wrapper / gateway
@@ -558,7 +558,7 @@ Scope:
     - `Codex-Wrapper` 등은 개념만 참고
     - 저장소 구현은 `OMX-centered wrapper + hook telemetry + Git gate` 기준으로 설계
   - 다음 프로세스: `P3` (wrapper/gateway 구현)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P2 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P2 완료
   - 상태 반영: `IN_ANALYSIS/P0` -> `IN_ANALYSIS/P2`, `next_process=P1`
   - hard guarantee 우회 전략 3안 비교:
     - process-aware launch wrapper / gateway
@@ -575,7 +575,7 @@ Scope:
     - derived watcher보다 brittle하지 않고 capability-first 원칙에 부합
     - `OMX` launch/hook surface를 운영체계 게이트에 편입하는 방향이라 현재 아키텍처와도 맞음
   - 다음 프로세스: `P1` (wrapper/gateway 요구사항 구체화)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) hard guarantee용 P0 보강 시작
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) hard guarantee용 P0 보강 시작
   - 상태 반영: `IN_RECORDING/S4` -> `IN_ANALYSIS/P0`, `next_process=P2`
   - P0는 도구-중립 분석 프로세스이며 `OMX` team 활용 단계가 아님을 명시
   - team-capable 프로세스는 `P3`, `P4`, `S3`, 필요 시 `S1`로 재확인
@@ -585,7 +585,7 @@ Scope:
     - OMX hook plugin은 dispatch/log 중심이며 차단 contract를 제공하지 않음
     - `pre-tool-use`/`post-tool-use`는 opt-in derived watcher가 세션 로그를 폴링해 추론하는 사후 신호임
   - 후속 권장 프로세스: `P2` (외부 wrapper / 우회 enforcement 전략 도출)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S4 기록 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S4 기록 완료
   - 상태 반영: `IN_REVIEW/S1` -> `IN_RECORDING/S4`, `next_process=S1`
   - 현재 라운드 `P0 -> P1 -> P3 -> S1 -> S4` 변경/의사결정/관련 커밋 고정
   - WP 전체는 파일럿 #1/#2 미완료 상태이므로 `DONE` 전이하지 않음
@@ -593,7 +593,7 @@ Scope:
     - soft guarantee 유도력
     - `NONE` 분기 증빙
     - 프로세스 코드 가독성 개선 필요 여부
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) S1 리뷰 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) S1 리뷰 완료
   - 상태 반영: `IN_DEVELOPMENT/P3` -> `IN_REVIEW/S1`, `next_process=S4`
   - 리뷰 결과: P3 soft guarantee 구현 승인
   - 보정 사항:
@@ -602,7 +602,7 @@ Scope:
   - 후속 메모:
     - soft guarantee 실제 유도력은 파일럿에서 추가 검증 필요
     - 프로세스 코드(`P0`, `P1`, `S1`) 가독성 개선 여부는 후속 검토
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P3 soft guarantee 구현
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P3 soft guarantee 구현
   - 상태 반영: `IN_REFINEMENT/P1` -> `IN_DEVELOPMENT/P3`, `next_process=S1`
   - Codex+OMX adapter 반영:
     - `AGENTS.md`에 AI Ops Local Overlay 추가
@@ -614,7 +614,7 @@ Scope:
   - 다음 프로세스 전이 전 현재 변경을 별도 커밋으로 남길지 사용자에게 반드시 확인
   - 프로세스 종료 보고에 커밋 후보 범위를 함께 제시하도록 Codex adapter 규칙 보강
   - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md), [work-packets/index.md](./work-packets/index.md)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P1 설계 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P1 설계 완료
   - 상태 반영: `IN_ANALYSIS/P0` -> `IN_REFINEMENT/P1`, `next_process=P3`
   - 목표 구조 확정:
     - `docs/ai-ops` + `scripts/ai-ops`를 SoT로 유지
@@ -625,13 +625,13 @@ Scope:
 - Updated: capability-first 문서화 원칙 반영
   - `ai-ops` 운영 규칙은 도구 고유 기능명/명령어보다 capability 계약 중심으로 기술
   - Codex/Claude adapter 문서는 현재 기능 매핑을 예시/adapter 수준으로만 유지
-  - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md), [work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) 방향성 메모 기록
+  - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md), [work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md)
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) 방향성 메모 기록
   - 현재 우선순위를 `Codex+OMX` 정렬/G6 완료 우선으로 명시
   - `CLAUDE.md` 개편 및 marker block / sync script / installer / marketplace 전략은 후순위로 보류
   - 장기 방향: `ai-ops`를 오픈소스 + 간단 명령/마켓플레이스형 프로덕트로 발전
   - 동기화: [WP-DPC-2026-03-001](./work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md), [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md), [work-packets/index.md](./work-packets/index.md)
-- Updated: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) P0 분석 완료
+- Updated: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) P0 분석 완료
   - 상태 반영: `READY` -> `IN_ANALYSIS`, `current_process=P0`, `next_process=P1` 유지
   - Codex+OMX vs Claude+OMC 비교 결과 4개 핵심 gap 식별
     - generic `AGENTS.md`와 AI Ops 프로세스 게이트의 경계 불명확
@@ -639,7 +639,7 @@ Scope:
     - OMC는 SoT+sync 경로가 명확하지만 Codex는 런타임 반영 경계가 약함
     - stale process context에 대한 Codex 런타임 탐지/차단이 약함
   - 동기화: [work-packets/index.md](./work-packets/index.md) Active 상태 `IN_ANALYSIS` 반영
-- Added: [WP-DPC-2026-03-008](./work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md) (READY)
+- Added: [WP-DPC-2026-03-002](./work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md) (READY)
   - Codex 도구 조합을 `codex + omx`로 정렬하고 `claude + omc` 성공패턴 이식 범위를 정의
   - WP-008 범위 한정 임시 프로세스(2회) 체크리스트 추가
 - Updated: [ops-bootstrap-master-plan.md](./ops-bootstrap-master-plan.md)

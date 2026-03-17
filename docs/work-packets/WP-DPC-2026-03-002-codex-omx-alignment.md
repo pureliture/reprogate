@@ -1,5 +1,5 @@
 ---
-packet_id: "WP-DPC-2026-03-008"
+packet_id: "WP-DPC-2026-03-002"
 title: "Codex+OMX 조합 정렬 및 Claude+OMC 성공패턴 이식"
 goal_ids: ["DPC-G3", "DPC-G5"]
 status: "IN_RECORDING"
@@ -13,7 +13,7 @@ owner: "SHARED"
 created_at: "2026-03-08"
 last_updated: "2026-03-09"
 ---
-# WP-DPC-2026-03-008 Codex+OMX 조합 정렬 및 Claude+OMC 성공패턴 이식
+# WP-DPC-2026-03-002 Codex+OMX 조합 정렬 및 Claude+OMC 성공패턴 이식
 
 ## 1. Background
 - `AGENTS.md`가 `oh-my-codex` 템플릿으로 교체되며 프로젝트 어댑터 규칙과 런타임 템플릿 간 경계가 불명확해졌다.
@@ -161,7 +161,7 @@ last_updated: "2026-03-09"
 - 점검 시점: `P0` 시작 시점
 - North Star 연결: `DPC-G3`(추적 가능성 유지), `DPC-G5`(AI 운영 문서와 런타임 산출물 경계 분리)
 - 현재 Phase / Gate: `Phase 6 / G6`
-- 작업 대상 WP: `WP-DPC-2026-03-008` / `READY` / `P0`
+- 작업 대상 WP: `WP-DPC-2026-03-002` / `READY` / `P0`
 - 목표 drift: 없음
 - 누락 Track/WP: 없음
 - 암묵적 작업: 없음
@@ -661,7 +661,7 @@ last_updated: "2026-03-09"
 - 분석 목적:
   - AI Ops 프로세스 선택 이전 또는 프로세스 준수 없이 생성된 산출물을, 어떤 근거와 한계 안에서 추적 가능한 기록으로 복원할 수 있는지 판단한다.
 - 분석 대상:
-  - `WP-DPC-2026-03-008` 최근 라운드 산출물
+  - `WP-DPC-2026-03-002` 최근 라운드 산출물
   - 현재 Git working tree / index 상태
   - `docs/ai-ops/CHANGELOG.md`, `work-packets/index.md`, 최근 커밋 이력
   - `.omc/ai-ops-process-context.json` 컨텍스트 상태
@@ -674,13 +674,13 @@ last_updated: "2026-03-09"
   3. `.omx/*`는 Local Runtime 산출물이므로 공식 증빙/커밋 대상이 아니다.
      - AI Ops 정책상 `.codex/.omx/.omc`는 원격 추적용 산출물이 아니라 local-only 실행 영역이다.
   4. 반면, 공식적으로 복원 가능한 근거는 이미 존재한다.
-     - WP 기록: `WP-DPC-2026-03-008`의 `9.15 ~ 9.18`
+     - WP 기록: `WP-DPC-2026-03-002`의 `9.15 ~ 9.18`
      - 통합 변경이력: `docs/ai-ops/CHANGELOG.md`의 2026-03-09 WP-008 parity round 기록
      - 관련 커밋: `eccea3d`, `d4fe1c6`, `0b686ac`
      - 현재 프로세스 컨텍스트: `.omc/ai-ops-process-context.json`
 - 주요 구성요소 맵:
   - authoritative trace:
-    - `docs/ai-ops/work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md`
+    - `docs/ai-ops/work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md`
     - `docs/ai-ops/work-packets/index.md`
     - `docs/ai-ops/CHANGELOG.md`
   - supplementary evidence:
@@ -731,7 +731,7 @@ last_updated: "2026-03-09"
 - 증상 / 재현 조건:
   1. 현재 Git index에는 복원 가능한 staged diff가 없다.
   2. 남아 있는 워킹트리 변화는 `.agents/skills/ai-ops/SKILL.md` 1건과 `.omx/*` local runtime 파일들이다.
-  3. 반면 `WP-DPC-2026-03-008`, `docs/ai-ops/CHANGELOG.md`, 최근 커밋 이력에는 실제 라운드의 공식 흔적이 남아 있다.
+  3. 반면 `WP-DPC-2026-03-002`, `docs/ai-ops/CHANGELOG.md`, 최근 커밋 이력에는 실제 라운드의 공식 흔적이 남아 있다.
 - 영향 범위:
   - WP-008의 추적성 품질
   - 이후 pilot #1 증빙 신뢰도
@@ -822,7 +822,7 @@ last_updated: "2026-03-09"
   - `P0` 커밋 `9533044`
   - `P2` 커밋 `929b44a`
   - `S4` 커밋 `52ee5bf`
-  - `WP-DPC-2026-03-008`의 `9.19 ~ 9.21`
+  - `WP-DPC-2026-03-002`의 `9.19 ~ 9.21`
   - `docs/ai-ops/CHANGELOG.md`, `docs/ai-ops/work-packets/index.md`
 - 검토 결과:
   - retro recovery round는 "사후 복원"이라는 성격을 숨기지 않고 명시하고 있다.
@@ -893,7 +893,7 @@ last_updated: "2026-03-09"
   - `docs/ai-ops/tool-hooks/README.md`
   - `docs/ai-ops/ops-bootstrap-master-plan.md`
   - `docs/ai-ops/work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md`
-  - `docs/ai-ops/work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md`
+  - `docs/ai-ops/work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md`
   - `docs/ai-ops/work-packets/index.md`
   - `docs/ai-ops/CHANGELOG.md`
   - `docs/ai-ops/adr/ADR-DPC-005-codex-entrypoint-ownership-and-ai-assistant-decoupling.md`
@@ -930,7 +930,7 @@ last_updated: "2026-03-09"
   - `docs/ai-ops/tool-hooks/README.md`
   - `docs/ai-ops/ops-bootstrap-master-plan.md`
   - `docs/ai-ops/work-packets/WP-DPC-2026-03-001-ai-ops-bootstrap.md`
-  - `docs/ai-ops/work-packets/WP-DPC-2026-03-008-codex-omx-alignment.md`
+  - `docs/ai-ops/work-packets/WP-DPC-2026-03-002-codex-omx-alignment.md`
   - `docs/ai-ops/work-packets/index.md`
   - `docs/ai-ops/CHANGELOG.md`
 - 잔여 TODO:
@@ -1013,14 +1013,14 @@ last_updated: "2026-03-09"
 ## 14. Timeline
 - [2026-03-08] WP 생성 (READY)
 - [2026-03-08] 임시 프로세스(2회 한정) 정의
-- [2026-03-08] `P0` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P0 --wp WP-DPC-2026-03-008 --team-mode auto`
+- [2026-03-08] `P0` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P0 --wp WP-DPC-2026-03-002 --team-mode auto`
 - [2026-03-08] `P0` 분석 완료: Codex+OMX vs Claude+OMC 구조/강제 지점/gap 정리, 후속 권장 프로세스 `P1`
 - [2026-03-08] 장기 방향 메모 기록: `Codex+OMX` 완성 우선, `CLAUDE.md` 개편/제품화 전략은 후순위로 보류
-- [2026-03-08] `P1` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P1 --wp WP-DPC-2026-03-008 --team-mode auto`
+- [2026-03-08] `P1` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P1 --wp WP-DPC-2026-03-002 --team-mode auto`
 - [2026-03-08] `P1` 설계 완료: Codex+OMX 목표 운영 구조, 임시 가드 증빙 형식, P3 구현 범위 확정
 - [2026-03-08] `P1` 설계 보강: 도구 고유 기능명이 아닌 capability-first 문구로 정리
-- [2026-03-08] `P3` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-008 --team-mode auto`
-- [2026-03-08] `P3` 실행 경로 확정: `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-008 --team-mode single`
+- [2026-03-08] `P3` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-002 --team-mode auto`
+- [2026-03-08] `P3` 실행 경로 확정: `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-002 --team-mode single`
 - [2026-03-08] `P3` 구현: Codex+OMX soft guarantee를 위한 adapter 오버레이, single fallback logical role 유지, capability-first Codex 문서 보강
 - [2026-03-08] 프로세스 종료 규칙 보강: 다음 프로세스 전이 전 커밋 여부 질의 필수
 - [2026-03-08] `S1` 리뷰 완료: P3 승인, 문서 불일치 2건 보정, 후속 프로세스 `S4`
@@ -1041,23 +1041,23 @@ last_updated: "2026-03-09"
 - [2026-03-09] `S4` 기록 완료: `$ai-ops` parity round의 체인/결정/잔여 리스크를 고정하고, 실제 pilot #1 재진입 조건 충족으로 정리
 - [2026-03-09] 사용자 요청으로 WP-008을 `P0`에 재진입: ad-hoc 산출물의 소급 프로세스 복원 가능 범위를 분석하기 위해 컨텍스트를 `P0`로 재설정
 - [2026-03-09] `P0` 분석 결과: recoverable staged diff는 비어 있고, 공식 복원 근거는 WP/CHANGELOG/commit/context에 한정되며 `.omx/*`는 local-only runtime 산출물로 분리해야 함을 확인, 후속 권장 프로세스 `P2`
-- [2026-03-09] `P2` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P2 --wp WP-DPC-2026-03-008 --team-mode auto`
+- [2026-03-09] `P2` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P2 --wp WP-DPC-2026-03-002 --team-mode auto`
 - [2026-03-09] `P2` 전략 선택: ad-hoc 산출물 소급 복원은 authoritative evidence만 사용하는 증거 기반 재구성 전략을 채택, 후속 권장 프로세스 `S4`
-- [2026-03-09] `S4` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process S4 --wp WP-DPC-2026-03-008 --team-mode auto`
+- [2026-03-09] `S4` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process S4 --wp WP-DPC-2026-03-002 --team-mode auto`
 - [2026-03-09] `S4` 기록 고정: retro recovery round를 authoritative evidence 기반 post-hoc reconstruction으로 확정, 후속 권장 프로세스 `S1`
-- [2026-03-09] `S1` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process S1 --wp WP-DPC-2026-03-008 --team-mode single`
+- [2026-03-09] `S1` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process S1 --wp WP-DPC-2026-03-002 --team-mode single`
 - [2026-03-09] `S1` 리뷰 완료: retro recovery round를 승인하고, stray diff는 별도 변경으로 분리 권장, 후속 권장 프로세스 `P0`
-- [2026-03-09] `P1` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P1 --wp WP-DPC-2026-03-008 --team-mode auto`
+- [2026-03-09] `P1` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P1 --wp WP-DPC-2026-03-002 --team-mode auto`
 - [2026-03-09] `P1` 설계: JetBrains AI Assistant 일반 경로는 `$ai-ops`를 사용하지 않고, `$ai-ops`는 Codex+OMX 전용으로 유지하며, `.codex/jetbrains-ai-assistant-rules.md` 제거와 선택 전 Team 금지 규칙을 다음 `P3` 범위로 고정
-- [2026-03-09] `P3` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-008 --team-mode single`
+- [2026-03-09] `P3` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-002 --team-mode single`
 - [2026-03-09] `P3` 구현: `.codex/jetbrains-ai-assistant-rules.md` 제거, `AGENTS.md` 선택 전 Team 금지 보강, `$ai-ops` skill의 `WP-008` 직접 참조 제거
-- [2026-03-09] `S1` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process S1 --wp WP-DPC-2026-03-008 --team-mode single`
+- [2026-03-09] `S1` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process S1 --wp WP-DPC-2026-03-002 --team-mode single`
 - [2026-03-09] `S1` 리뷰 완료: Codex entrypoint ownership 반영을 승인하고, 다음 프로세스를 `S4`로 권장
-- [2026-03-09] `S4` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process S4 --wp WP-DPC-2026-03-008 --team-mode auto`
+- [2026-03-09] `S4` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process S4 --wp WP-DPC-2026-03-002 --team-mode auto`
 - [2026-03-09] `S4` 기록 고정: Codex entrypoint ownership round의 설계/구현/리뷰 결과를 고정하고, 후속 권장 프로세스를 `P0`로 정리
-- [2026-03-09] `P0` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P0 --wp WP-DPC-2026-03-008 --team-mode single`
+- [2026-03-09] `P0` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P0 --wp WP-DPC-2026-03-002 --team-mode single`
 - [2026-03-09] `P0` 분석 완료: Claude+OMC SoT 구조 적용 갭 분석 - AGENTS.md 대비 .claude/CLAUDE.md에서 Mandatory References 2개 누락, Named Entrypoint Parity/Capability-First Rules/Soft Execution Contract 섹션 부재 확인, 후속 권장 프로세스 `P3`
-- [2026-03-09] `P3` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-008 --team-mode single`
+- [2026-03-09] `P3` 선택 및 컨텍스트 기록: `python3 scripts/ai-ops/set_process_context.py --process P3 --wp WP-DPC-2026-03-002 --team-mode single`
 - [2026-03-09] `P3` 구현: .claude/CLAUDE.md AI Ops Local Overlay 섹션을 AGENTS.md와 동등 수준으로 확장 - Named Entrypoint Parity, Mandatory References 6개, Capability-First Rules, Process Context 상세 절차, P3 Soft Execution Contract 추가
 - [2026-03-09] `P3` 구현 보강: .gitignore 수정으로 .claude/.codex/.omc 설정/정책 파일 tracking 활성화 (runtime state 제외)
 

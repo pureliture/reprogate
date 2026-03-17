@@ -6,7 +6,7 @@
 
 ## Context
 
-dpc의 핵심 기능은 Gate를 통한 규칙 강제이다. WP-DPC-2026-03-015에서 자체 DSL을 설계했으나, 다음 문제가 제기되었다:
+dpc의 핵심 기능은 Gate를 통한 규칙 강제이다. WP-DPC-2026-03-008에서 자체 DSL을 설계했으나, 다음 문제가 제기되었다:
 
 1. **파서 구현 부담**: 자체 DSL은 파서를 직접 구현해야 함
 2. **유지보수 비용**: 문법 확장, 버그 수정, 테스트 프레임워크 모두 직접 개발
@@ -141,7 +141,7 @@ def evaluate_rules(trigger: str, context: dict) -> dict:
 
 ## Related
 
-- [WP-DPC-2026-03-015](../work-packets/WP-DPC-2026-03-015-rules-dsl-design.md) - Rules DSL 설계 (superseded)
+- [WP-DPC-2026-03-008](../work-packets/WP-DPC-2026-03-008-rules-dsl-design.md) - Rules DSL 설계 (superseded)
 - [rules-dsl-spec.md](../rules-dsl-spec.md) - 자체 DSL 명세 (deprecated)
 - [OPA 공식 문서](https://www.openpolicyagent.org/docs)
 - [Rego 언어 레퍼런스](https://www.openpolicyagent.org/docs/latest/policy-language/)

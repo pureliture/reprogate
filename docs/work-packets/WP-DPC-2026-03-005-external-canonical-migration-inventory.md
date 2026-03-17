@@ -1,5 +1,5 @@
 ---
-packet_id: "WP-DPC-2026-03-012"
+packet_id: "WP-DPC-2026-03-005"
 title: "external ai-ops canonical migration inventory"
 goal_ids: ["DPC-G1", "DPC-G4", "DPC-G5"]
 status: "IN_REFINEMENT"
@@ -16,7 +16,7 @@ parent: "WP-DPC-2026-03-001"
 track: "external canonical migration"
 ---
 
-# WP-DPC-2026-03-012: external ai-ops canonical migration inventory
+# WP-DPC-2026-03-005: external ai-ops canonical migration inventory
 
 ## 1. Background
 
@@ -67,8 +67,8 @@ track: "external canonical migration"
 
 ### 7.1 Related Docs
 - [WP-DPC-2026-03-001](./WP-DPC-2026-03-001-ai-ops-bootstrap.md)
-- [WP-DPC-2026-03-010](./WP-DPC-2026-03-010-framework-extraction.md)
-- [WP-DPC-2026-03-011](./WP-DPC-2026-03-011-public-history-replay-plan.md)
+- [WP-DPC-2026-03-003](./WP-DPC-2026-03-003-framework-extraction.md)
+- [WP-DPC-2026-03-004](./WP-DPC-2026-03-004-public-history-replay-plan.md)
 - [AI Ops CHANGELOG](../CHANGELOG.md)
 - [운영체계 구축 상위 계획](../ops-bootstrap-master-plan.md)
 - [future-direction discussion archive](../archive/ai-ops/discussions/future-direction-discussion-2026-03-09.md)
@@ -156,7 +156,7 @@ track: "external canonical migration"
      - `docs/why-ai-ops.md` 또는 `docs/positioning.md`
 2. **replay-history plan의 external-facing subset**
    - source raw material:
-     - `docs/work-packets/WP-DPC-2026-03-011-public-history-replay-plan.md`
+     - `docs/work-packets/WP-DPC-2026-03-004-public-history-replay-plan.md`
    - target shape:
      - release note / history note / maintainers doc
 
@@ -166,7 +166,7 @@ track: "external canonical migration"
 #### C. source archive에만 남겨야 하는 것 (Archive Only)
 
 1. source repo 내부 migration history 자체
-   - `WP-DPC-2026-03-010` source cleanup detail
+   - `WP-DPC-2026-03-003` source cleanup detail
    - old legacy sunset review traces
 2. raw discussion transcript
    - `docs/archive/ai-ops/discussions/future-direction-discussion-2026-03-09.md`
@@ -266,9 +266,9 @@ external repo는 아래 구조를 가져야 한다.
 - `docs/work-packets/index.md`
 - active/future AI Ops WP files
   - `WP-DPC-2026-03-001`
-  - `WP-DPC-2026-03-008`
-  - `WP-DPC-2026-03-011`
-  - `WP-DPC-2026-03-012`
+  - `WP-DPC-2026-03-002`
+  - `WP-DPC-2026-03-004`
+  - `WP-DPC-2026-03-005`
 - `docs/CHANGELOG.md`
 - `docs/adr/ADR-DPC-001..005`
 - `docs/ops-bootstrap-master-plan.md`
@@ -294,7 +294,7 @@ external repo는 아래 구조를 가져야 한다.
 
 #### Replay/public history explanation
 - source material:
-  - `docs/work-packets/WP-DPC-2026-03-011-public-history-replay-plan.md`
+  - `docs/work-packets/WP-DPC-2026-03-004-public-history-replay-plan.md`
 - target docs:
   - `docs/history.md` 또는 maintainer-facing replay note
 
@@ -306,7 +306,7 @@ external repo는 아래 구조를 가져야 한다.
 
 다음은 source repo archive에만 남긴다.
 
-- `WP-DPC-2026-03-010` source cleanup / legacy sunset 상세 trace
+- `WP-DPC-2026-03-003` source cleanup / legacy sunset 상세 trace
 - raw discussion transcript 원본
 - source repo 내부에서만 의미 있는 migration review detail
 - legacy namespace sunset review/decision trace 원본

@@ -103,5 +103,5 @@ methodology > override > preset > default
 ## Related
 
 - [architecture.md](../architecture.md)
-- [WP-DPC-2026-03-014](../work-packets/WP-DPC-2026-03-014-presets-system-design.md)
-- [WP-DPC-2026-03-015](../work-packets/WP-DPC-2026-03-015-rules-dsl-design.md)
+- [WP-DPC-2026-03-007](../work-packets/WP-DPC-2026-03-007-presets-system-design.md)
+- [WP-DPC-2026-03-008](../work-packets/WP-DPC-2026-03-008-rules-dsl-design.md)
