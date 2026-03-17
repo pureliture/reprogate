@@ -21,3 +21,7 @@ dist/
 
 # Misc
 *.log
+
+# IDE and local config
+.idea/
+.ai-ops/
