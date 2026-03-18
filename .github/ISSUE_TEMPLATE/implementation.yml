@@ -15,9 +15,9 @@ body:
     id: scenario_link
     attributes:
       label: Scenario Link
-      description: 관련 SC-* 또는 product-boundary section
+      description: 관련 SC-* 또는 product-boundary section (없으면 N/A 가능)
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: change_scope
