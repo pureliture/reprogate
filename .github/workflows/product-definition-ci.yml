@@ -1,0 +1,37 @@
+name: product-definition-ci
+
+on:
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  validate-product-definition:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Collect changed files
+        run: |
+          git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" > changed_files.txt
+          cat changed_files.txt
+
+      - name: Save PR body
+        run: |
+          cat > pr_body.md <<'EOF'
+          ${{ github.event.pull_request.body }}
+          EOF
+
+      - name: Validate product definition workflow
+        run: |
+          python scripts/validate_product_definition.py \
+            --changed-file-list changed_files.txt \
+            --pr-body-file pr_body.md
