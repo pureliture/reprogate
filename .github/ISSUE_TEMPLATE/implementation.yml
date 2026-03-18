@@ -1,0 +1,34 @@
+name: Implementation
+description: 닫힌 spec을 구현하는 작업
+title: "[impl] "
+labels: ["implementation", "ready-for-dev"]
+body:
+  - type: input
+    id: spec_link
+    attributes:
+      label: Spec Link
+      description: docs/spec/... 또는 ADR/RFC 링크
+    validations:
+      required: true
+
+  - type: input
+    id: scenario_link
+    attributes:
+      label: Scenario Link
+      description: 관련 SC-* 또는 product-boundary section
+    validations:
+      required: true
+
+  - type: textarea
+    id: change_scope
+    attributes:
+      label: Change Scope
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification Plan
+    validations:
+      required: true
