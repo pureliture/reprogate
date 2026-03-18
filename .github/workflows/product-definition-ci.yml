@@ -21,7 +21,7 @@ jobs:
 
       - name: Collect changed files
         run: |
-          git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.sha }}" > changed_files.txt
+          git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" > changed_files.txt
           cat changed_files.txt
 
       - name: Save PR body

@@ -21,7 +21,7 @@ IMPLEMENTATION_PATH_PREFIXES = (
     "scripts/",
     "skills/",
     "templates/",
-    ".github/workflows/",
+    ".github/",
 )
 
 DOC_OR_DECISION_PREFIXES = (
@@ -34,31 +34,59 @@ DOC_OR_DECISION_PREFIXES = (
 
 
 def read_lines(path: Path) -> list[str]:
-    return [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return [line.rstrip("\n") for line in path.read_text(encoding="utf-8").splitlines()]
 
 
 def contains_any_prefix(paths: list[str], prefixes: tuple[str, ...]) -> bool:
     return any(path.startswith(prefixes) for path in paths)
 
 
-def validate_pr_body(pr_body: str, errors: list[str]) -> None:
+def extract_section(pr_body: str, heading: str) -> str:
+    if heading not in pr_body:
+        return ""
+    return pr_body.split(heading, 1)[1].split("\n## ", 1)[0].strip()
+
+
+def extract_markdown_paths(block: str) -> list[str]:
+    paths: list[str] = []
+    for line in block.splitlines():
+        line = line.strip()
+        if not line.startswith("- "):
+            continue
+        candidate = line[2:].strip()
+        if candidate.startswith("docs/") or candidate.startswith("records/"):
+            paths.append(candidate)
+    return paths
+
+
+def validate_pr_body(repo_root: Path, pr_body: str, errors: list[str]) -> None:
     for section in REQUIRED_PR_SECTIONS:
         if section not in pr_body:
             errors.append(f"PR body missing required section: {section}")
 
     weak_markers = ["TBD", "todo", "N/A", "n/a", "없음"]
-    if "## Related Docs" in pr_body:
-        related_docs_block = pr_body.split("## Related Docs", 1)[1].split("##", 1)[0].strip()
-        if not related_docs_block or any(marker in related_docs_block for marker in weak_markers):
-            errors.append("PR body has weak or empty Related Docs section.")
 
-    if "## Verification" in pr_body:
-        verification_block = pr_body.split("## Verification", 1)[1].split("##", 1)[0].strip()
-        if not verification_block or any(marker in verification_block for marker in weak_markers):
-            errors.append("PR body has weak or empty Verification section.")
+    related_docs_block = extract_section(pr_body, "## Related Docs")
+    verification_block = extract_section(pr_body, "## Verification")
+
+    if not related_docs_block or any(marker in related_docs_block for marker in weak_markers):
+        errors.append("PR body has weak or empty Related Docs section.")
+
+    if not verification_block or any(marker in verification_block for marker in weak_markers):
+        errors.append("PR body has weak or empty Verification section.")
+
+    related_paths = extract_markdown_paths(related_docs_block)
+    if not related_paths:
+        errors.append("Related Docs section does not contain repository paths.")
+    else:
+        missing_paths = [p for p in related_paths if not (repo_root / p).exists()]
+        if missing_paths:
+            errors.append(
+                "Related Docs contains non-existent paths: " + ", ".join(sorted(missing_paths))
+            )
 
 
-def validate_changed_files(changed_files: list[str], errors: list[str]) -> None:
+def validate_changed_files(repo_root: Path, changed_files: list[str], pr_body: str, errors: list[str]) -> None:
     changed = set(changed_files)
 
     if "docs/strategy/final-definition.md" in changed:
@@ -82,8 +110,17 @@ def validate_changed_files(changed_files: list[str], errors: list[str]) -> None:
     if contains_any_prefix(changed_files, IMPLEMENTATION_PATH_PREFIXES):
         if not contains_any_prefix(changed_files, DOC_OR_DECISION_PREFIXES):
             errors.append(
-                "Implementation-layer files changed without related spec/strategy/design/ADR/RFC changes."
+                "Implementation/governance files changed without related spec/strategy/design/ADR/RFC changes."
             )
+
+    related_docs_block = extract_section(pr_body, "## Related Docs")
+    related_paths = extract_markdown_paths(related_docs_block)
+    missing_from_repo = [p for p in related_paths if not (repo_root / p).exists()]
+    if missing_from_repo:
+        errors.append(
+            "PR body references docs that are missing in repository state: "
+            + ", ".join(sorted(missing_from_repo))
+        )
 
 
 def validate_scenarios_file(repo_root: Path, changed_files: list[str], errors: list[str]) -> None:
@@ -114,13 +151,13 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_root = Path.cwd()
-    changed_files = read_lines(Path(args.changed_file_list))
+    changed_files = [line.strip() for line in read_lines(Path(args.changed_file_list)) if line.strip()]
     pr_body = Path(args.pr_body_file).read_text(encoding="utf-8")
 
     errors: list[str] = []
 
-    validate_pr_body(pr_body, errors)
-    validate_changed_files(changed_files, errors)
+    validate_pr_body(repo_root, pr_body, errors)
+    validate_changed_files(repo_root, changed_files, pr_body, errors)
     validate_scenarios_file(repo_root, changed_files, errors)
 
     if errors:
