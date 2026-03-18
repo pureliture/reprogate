@@ -11,16 +11,16 @@ ReproGate is now at the point where:
 
 ## Near-Term Priorities
 
-### 1. Canonical definition injection
+### 1. Canonical definition & Product boundary
 
-Inject the final definition into the living documentation surface so the product reads consistently everywhere.
+Inject the final definition and product boundary into the living documentation surface so the product reads consistently everywhere.
 
 Focus areas:
 
 - README and strategy docs
+- Boundary definitions (In/Out scope, Core/Flexible/Integration layers)
 - governance and master-plan docs
 - design and implementation planning docs
-- historical alignment notes where needed
 
 ### 2. Record-backed core implementation
 
@@ -45,16 +45,16 @@ Focus areas:
 
 ## Mid-Term Direction
 
-### Lightweight adoption path
+### Multi-entry & Late binding (Lightweight adoption)
 
-Define a lighter path for teams or individuals that want record-backed enforcement without the full surrounding framework surface on day one.
+Define a flexible path for teams or individuals that want record-backed enforcement without committing to a full workflow structure on day one.
 
 Expected characteristics:
 
-- fewer default records
-- fewer default Skills
-- smaller adapter footprint
-- lower adoption friction
+- **Freeform-first & Skill-first support**: start with raw traces or single skills
+- **Late structure binding**: allow users to elevate raw traces into structured records later
+- **Storage agnosticism**: support external storage backends while maintaining the record metadata contract
+- lower adoption friction by not enforcing workflows strictly
 
 ### Stronger adapter surfaces
 

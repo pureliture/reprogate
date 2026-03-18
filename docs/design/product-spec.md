@@ -44,19 +44,27 @@ Gate      = 필수 증거가 없으면 차단
 | 모든 도구 직접 통합 | adapter boundary를 유지해야 함 |
 | 문서 양산 자체 | 목적은 기록의 양이 아니라 강제 가능한 증거 |
 
-### 0.5 legacy naming note
+### 0.5 legacy naming note (Deprecated)
 
-현재 문서와 저장소에는 `dpc` CLI/경로가 남아 있다.
-이 문서에서는 제품명은 ReproGate로 설명하되, CLI 예시는 현재 호환 표면을 반영해 `dpc`를 병기한다.
+기존 문서와 저장소에 남아 있던 `dpc` CLI/경로는 이제 공식적으로 `reprogate`로 통합된다. 이 문서부터 `reprogate` 명칭을 일관되게 적용한다.
 
 ---
 
-## 1. 사용자 여정
+## 1. 사용자 여정 (Multi-entry 지원)
 
-### 1.1 전체 흐름
+### 1.1 유연한 진입로
+
+사용자는 **어떤 구조로 시작할지** 자유롭게 선택할 수 있다.
+
+- **Workflow-first**: 준비된 워크플로를 따르며 시작
+- **Skill-first**: 필요할 때 특정 Skill 1~N개만 호출하여 적용
+- **Freeform-first**: 의식적 구조 없이 대화로 시작 (나중에 기록/Skill로 승격)
+- **External-first**: 기존 외부 도구나 저장소를 활용하며 시작
+
+### 1.2 전체 흐름 (표준 경로 예시)
 
 ```text
-설치 → 초기화 → 기록/Skill 적용 → AI 작업 → Gate 검증
+설치 → 초기화 → [자유 대화 / Skill 적용 / Workflow 진행] → 기록/승격(Late Binding) → Gate 검증
 ```
 
 ### 1.2 기대 UX
@@ -88,9 +96,7 @@ Gate      = 필수 증거가 없으면 차단
 
 ## 2. 핵심 명령 표면
 
-> 아래 명령명은 현재 legacy CLI 표면을 기준으로 기록한다.
-
-### 2.1 `dpc init`
+### 2.1 `reprogate init`
 
 프로젝트에 ReproGate 실행 표면을 초기화한다.
 
@@ -100,12 +106,12 @@ Gate      = 필수 증거가 없으면 차단
 - adapter scaffold 생성
 
 예상 결과:
-- `.dpc/config.yaml`
-- `.dpc/methodology/guidelines.md`
-- `.dpc/methodology/rules.rego`
+- `.reprogate/config.yaml`
+- `.reprogate/methodology/guidelines.md`
+- `.reprogate/methodology/rules.rego`
 - tool adapter files
 
-### 2.2 `dpc generate`
+### 2.2 `reprogate generate`
 
 선택한 설정을 기준으로 adapter와 bootstrap 파일을 생성한다.
 
@@ -113,7 +119,7 @@ Gate      = 필수 증거가 없으면 차단
 - target repository에 문서/스크립트/템플릿 복사
 - 도구별 연결 표면 생성
 
-### 2.3 `dpc check`
+### 2.3 `reprogate check`
 
 현재 규칙과 기록이 요구하는 증거가 충족되는지 검사한다.
 
@@ -150,13 +156,15 @@ Gate      = 필수 증거가 없으면 차단
 | 변경 기록 | 무엇이 바뀌었는가? |
 | 검증 기록 | 무엇이 증명되었는가? |
 
-### 3.3 상태 저장과의 차이
+### 3.3 상태 저장과의 차이 및 Storage Agnosticism
 
 런타임 상태는 재개를 돕지만, 판단을 설명하지 못한다.
 
 ReproGate 설계에서:
 - runtime state = 보조
-- work records = 강제와 설명의 기준선
+- work records = 강제와 설명의 기준선 (**Record Identity**)
+
+또한, 이 기록들이 **어디에 어떻게 저장되는가(built-in vs Notion/Git 등)**는 부차적이다. 핵심은 메타데이터 계약(누가, 언제, 왜 결정했는가)을 유지하는 것이다.
 
 ---
 
@@ -238,6 +246,7 @@ context:
 - hook 시점 차단
 - commit 전 차단
 - 명시적 `check` 시 차단 이유 보고
+- **Reproducibility-first**: 차단은 워크플로 사용 여부가 아닌 증거(기록/결정/검증) 누락을 기준으로 발생한다.
 
 ---
 
@@ -247,11 +256,11 @@ context:
 
 같은 Skill / Rule / Record 모델을 여러 도구에 연결한다.
 
-### 6.2 원칙
+### 6.2 3층 바운더리 모델에 따른 위상
 
-- 제품 정의는 도구 기능명보다 상위여야 한다
-- adapter는 연결 표면이지 제품 핵심이 아니다
-- 특정 도구 종속성이 제품 정체성을 지배하면 안 된다
+- **Layer 1 (Core)**: 기록 단위, Skill 이력, Rule 평가는 Adapter 단에서 무시할 수 없다.
+- **Layer 2 (Flexible)**: Adapter는 도구 편의성에 맞춰 저장소 구조, 세션 UX를 유연하게 제공할 수 있다.
+- **Layer 3 (Integration)**: 도구 고유 기능(IDE, LLM Runtime)은 Adapter에 흡수하지 않고 연결만 한다.
 
 ### 6.3 지원 형태
 

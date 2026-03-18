@@ -72,23 +72,24 @@ reprogate/
 
 ```text
 my-project/
-├── .dpc/                     # legacy config namespace (current compatibility surface)
+├── .reprogate/               # 제품 설정 및 구조적 정의체 (Layer 2)
 │   ├── config.yaml
 │   ├── methodology/
 │   │   ├── guidelines.md
 │   │   └── rules.rego
 │   ├── presets/
-│   └── context/              # runtime support only
-├── docs/                     # 작업 기록 / 설계 / 의사결정 / 변경 기록
-├── .claude/
-├── .codex/
+│   └── context/              # runtime support
+├── records/                  # 작업 기록 / 설계 / 의사결정 / 변경 기록 (Layer 1 Core 증거)
+├── .claude/                  # Integration 표면 (Layer 3)
+├── .codex/                   # Integration 표면 (Layer 3)
 └── src/
 ```
 
-중요한 구분:
+중요한 구분 (3층 바운더리 기준):
 
-- `.dpc/context/` 같은 런타임 상태는 **재개용 보조 정보**
-- `docs/`나 동등한 경로의 작업 기록은 **판단과 강제를 위한 증거**
+- `.reprogate/context/` 같은 런타임 상태는 **재개용 보조 정보**
+- `records/` 구조의 작업 기록은 **판단과 강제를 위한 불변 증거 (Core)**
+- 저장 위치 자체는 사용자가 커스텀 가능 (Storage Agnosticism)
 
 ---
 
@@ -160,21 +161,21 @@ Gate가 다음 작업/커밋/변경을 허용 또는 차단
 ## 7. Artifact-Driven Workflow 예시
 
 ```text
+자유 대화로 구현 시작 (Freeform-first)
+  → 작업 중 설계/결정 내림
+  → 나중에 기록/Skill로 승격 (Late Entry)
+  
 코드 작성 시도
   → 설계 기록 없음
-  → Gate 차단
+  → Gate 차단 (재현성 결손 차단)
 
 코드 수정 완료
-  → 검증 기록 없음
-  → Gate 차단
-
-마무리/공유 시도
-  → 변경/의사결정 기록 없음
-  → Gate 차단
+  → 필수 워크플로 단계 생략 (Deviation Awareness)
+  → 편차 기록 후, 검증 기록 등 필수 증거 확인 시 패스 가능
 ```
 
-ReproGate는 내부적으로는 단순히 규칙을 검사하지만,
-밖에서 보면 **작업 순서가 자연스럽게 강제되는 효과**를 만든다.
+ReproGate는 내부적으로 규칙과 증거만 평가하지만,
+밖에서 보면 **작업 순서가 억압 없이도 자연스럽게 재현 가능한 방향으로 유도되는 효과**를 만든다.
 
 ---
 
@@ -198,18 +199,16 @@ Adapter의 책임은:
 현재 설계상 노출되는 핵심 표면은 다음과 같다.
 
 ```bash
-# legacy compatibility examples
-dpc init
-dpc generate
-dpc check
+reprogate init
+reprogate generate
+reprogate check
 ```
 
-이 명령 표면은 현재 legacy 이름을 유지할 수 있지만,
-제품 의미는 다음과 같이 읽어야 한다.
+이 명령 표면의 의미는 다음과 같이 정의된다.
 
 - `init` — 기록/Skill/Gate 적용을 위한 초기 구조 생성
 - `generate` — adapter와 bootstrap surface 생성
-- `check` — 기록과 규칙의 정합성 검증
+- `check` — 기록과 규칙의 정합성 검증 (최소 불변 계약 기반)
 
 ---
 

@@ -62,10 +62,12 @@ The long-term direction is a portable framework with:
 - team-shareable standards built from accumulated patterns
 - optional integrations only after the core record-and-gate surface is stable
 
-## Design Commitments
+## Design Commitments (Product Principles)
 
-- record-first, not memory-first
-- artifact-driven enforcement over hidden state tracking
-- framework and adapter separation
-- tool independence over vendor lock-in
-- verification before completion claims
+- **Record Identity**: All work must have a traceable record unit, regardless of its format.
+- **Late Entry**: Structure can be introduced late; freeform traces can be elevated to records/skills later.
+- **Deviation Awareness**: Workflow bypasses are allowed, but the deviation itself must be recorded.
+- **Storage Agnosticism**: Storage backends are flexible as long as the record contract holds.
+- **Reproducibility Gate**: Gates block based on reproducibility gaps (missing records/decisions/verification), not on whether a specific tool or workflow was used.
+- **Skill Independence**: Skills are standalone methodology units, not just cogs in a larger workflow.
+- **Emergent Flow**: Even without an explicit workflow, the system can derive the current state and next candidates from the record/skill chain.
