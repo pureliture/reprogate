@@ -1,0 +1,39 @@
+name: Spec Definition
+description: 구현 가능한 spec 정의
+title: "[spec] "
+labels: ["spec", "needs-triage"]
+body:
+  - type: dropdown
+    id: spec_area
+    attributes:
+      label: Spec Area
+      options:
+        - record-contract
+        - rule-gate
+        - skill-workflow-object-model
+        - storage-adapter
+        - governance-scope
+    validations:
+      required: true
+
+  - type: textarea
+    id: source_docs
+    attributes:
+      label: Source Docs
+      description: 어떤 strategy/boundary/scenario 문서에서 파생되는가?
+    validations:
+      required: true
+
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Decisions To Close
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of Scope
+    validations:
+      required: true
