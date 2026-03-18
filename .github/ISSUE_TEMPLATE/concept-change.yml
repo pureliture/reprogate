@@ -1,0 +1,35 @@
+name: Concept Change
+description: 제품 정체성/핵심 정의 변경 제안
+title: "[concept] "
+labels: ["concept", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: 지금 정의가 어떤 한계를 가지는가?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed Change
+      description: 제품 컨셉을 어떻게 바꾸려는가?
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected Impact
+      description: final-definition / vision / roadmap / boundary 중 무엇이 영향받는가?
+    validations:
+      required: true
+
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: Non-goals
+    validations:
+      required: true
