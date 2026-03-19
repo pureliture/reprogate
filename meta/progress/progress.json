@@ -1,6 +1,6 @@
 {
-  "overall_percent": 79,
-  "overall_status": "In progress",
+  "overall_percent": 42,
+  "overall_status": "Drafted",
   "stages": [
     {
       "id": "foundation",
@@ -29,7 +29,35 @@
       "score": 1.0,
       "percent": 100,
       "status": "Closed"
+    },
+    {
+      "id": "multi-entry-late-binding",
+      "title": "Multi-entry & late-binding",
+      "score": 0.0,
+      "percent": 0,
+      "status": "Not started"
+    },
+    {
+      "id": "stronger-adapter-surfaces",
+      "title": "Stronger adapter surfaces",
+      "score": 0.0,
+      "percent": 0,
+      "status": "Not started"
+    },
+    {
+      "id": "team-operating-standard",
+      "title": "Team operating standard",
+      "score": 0.0,
+      "percent": 0,
+      "status": "Not started"
+    },
+    {
+      "id": "optional-integrations",
+      "title": "Optional integrations",
+      "score": 0.0,
+      "percent": 0,
+      "status": "Not started"
     }
   ],
-  "generated_at": "2026-03-19T01:45:59.480588+00:00"
+  "generated_at": "2026-03-19T08:04:27.549634+00:00"
 }

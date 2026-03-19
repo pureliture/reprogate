@@ -6,7 +6,7 @@ default_branch: master
 stages:
   - id: foundation
     title: Foundation
-    weight: 15
+    weight: 10
     items:
       - id: pr-1-bootstrap
         kind: pr
@@ -27,7 +27,7 @@ stages:
 
   - id: canonical-definition-boundary
     title: Canonical definition & Product boundary
-    weight: 20
+    weight: 15
     items:
       - id: roadmap-doc
         kind: file
@@ -45,7 +45,7 @@ stages:
 
   - id: record-backed-core
     title: Record-backed core
-    weight: 22
+    weight: 20
     items:
       - id: issue-3-record-contract
         kind: issue
@@ -79,7 +79,7 @@ stages:
 
   - id: identity-transition
     title: ReproGate identity transition
-    weight: 12
+    weight: 10
     items:
       - id: pr-8-docs-layering
         kind: pr
@@ -94,3 +94,27 @@ stages:
         path: docs/spec/preset-bundle-spec.md
         substantive:
           min_chars: 1500
+
+  - id: multi-entry-late-binding
+    title: Multi-entry & late-binding
+    weight: 15
+    score: 0.20
+    kind: manual_placeholder
+
+  - id: stronger-adapter-surfaces
+    title: Stronger adapter surfaces
+    weight: 10
+    score: 0.10
+    kind: manual_placeholder
+
+  - id: team-operating-standard
+    title: Team operating standard
+    weight: 12
+    score: 0.20
+    kind: manual_placeholder
+
+  - id: optional-integrations
+    title: Optional integrations
+    weight: 8
+    score: 0.05
+    kind: manual_placeholder
