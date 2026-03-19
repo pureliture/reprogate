@@ -1,0 +1,9 @@
+[project]
+name = "reprogate-repo-tooling"
+version = "0.1.0"
+description = "Repository tooling for ReproGate"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.reprogate]
+python_toolchain = "uv"
