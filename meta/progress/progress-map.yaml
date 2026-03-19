@@ -98,23 +98,35 @@ stages:
   - id: multi-entry-late-binding
     title: Multi-entry & late-binding
     weight: 15
-    score: 0.20
-    kind: manual_placeholder
+    items:
+      - id: placeholder-multi-entry
+        kind: manual_placeholder
+        score: 0.20
+        weight: 1
 
   - id: stronger-adapter-surfaces
     title: Stronger adapter surfaces
     weight: 10
-    score: 0.10
-    kind: manual_placeholder
+    items:
+      - id: placeholder-adapter
+        kind: manual_placeholder
+        score: 0.10
+        weight: 1
 
   - id: team-operating-standard
     title: Team operating standard
     weight: 12
-    score: 0.20
-    kind: manual_placeholder
+    items:
+      - id: placeholder-team
+        kind: manual_placeholder
+        score: 0.20
+        weight: 1
 
   - id: optional-integrations
     title: Optional integrations
     weight: 8
-    score: 0.05
-    kind: manual_placeholder
+    items:
+      - id: placeholder-integrations
+        kind: manual_placeholder
+        score: 0.05
+        weight: 1
