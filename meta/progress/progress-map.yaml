@@ -1,0 +1,96 @@
+version: 1
+
+repo: pureliture/reprogate
+default_branch: master
+
+stages:
+  - id: foundation
+    title: Foundation
+    weight: 15
+    items:
+      - id: pr-1-bootstrap
+        kind: pr
+        number: 1
+        weight: 6
+      - id: pr-8-docs-layering
+        kind: pr
+        number: 8
+        weight: 5
+      - id: issue-2-validator-hardening
+        kind: issue
+        number: 2
+        weight: 2
+      - id: issue-9-node20-runtime
+        kind: issue
+        number: 9
+        weight: 2
+
+  - id: canonical-definition-boundary
+    title: Canonical definition & Product boundary
+    weight: 20
+    items:
+      - id: roadmap-doc
+        kind: file
+        path: docs/strategy/roadmap.md
+        substantive:
+          min_chars: 1200
+      - id: boundary-doc
+        kind: file
+        path: docs/strategy/product-boundary.md
+        substantive:
+          min_chars: 2500
+      - id: pr-8-docs-layering
+        kind: pr
+        number: 8
+
+  - id: record-backed-core
+    title: Record-backed core
+    weight: 22
+    items:
+      - id: issue-3-record-contract
+        kind: issue
+        number: 3
+        weight: 6
+      - id: issue-4-rule-gate
+        kind: issue
+        number: 4
+        weight: 4
+      - id: issue-5-skill-workflow
+        kind: issue
+        number: 5
+        weight: 4
+      - id: issue-6-governance-scope
+        kind: issue
+        number: 6
+        weight: 4
+      - id: issue-7-storage-adapter
+        kind: issue
+        number: 7
+        weight: 4
+      - id: record-contract-file
+        kind: file
+        path: docs/spec/record-contract.md
+        weight: 4
+        substantive:
+          min_chars: 1800
+          forbidden:
+            - "TODO"
+            - "skeleton"
+
+  - id: identity-transition
+    title: ReproGate identity transition
+    weight: 12
+    items:
+      - id: pr-8-docs-layering
+        kind: pr
+        number: 8
+      - id: product-surface-spec
+        kind: file
+        path: docs/spec/product-surface-spec.md
+        substantive:
+          min_chars: 2000
+      - id: preset-bundle-spec
+        kind: file
+        path: docs/spec/preset-bundle-spec.md
+        substantive:
+          min_chars: 1500

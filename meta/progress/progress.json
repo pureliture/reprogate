@@ -1,0 +1,35 @@
+{
+  "overall_percent": 79,
+  "overall_status": "In progress",
+  "stages": [
+    {
+      "id": "foundation",
+      "title": "Foundation",
+      "score": 1.0,
+      "percent": 100,
+      "status": "Closed"
+    },
+    {
+      "id": "canonical-definition-boundary",
+      "title": "Canonical definition & Product boundary",
+      "score": 1.0,
+      "percent": 100,
+      "status": "Closed"
+    },
+    {
+      "id": "record-backed-core",
+      "title": "Record-backed core",
+      "score": 0.3346153846153846,
+      "percent": 33,
+      "status": "Seeded"
+    },
+    {
+      "id": "identity-transition",
+      "title": "ReproGate identity transition",
+      "score": 1.0,
+      "percent": 100,
+      "status": "Closed"
+    }
+  ],
+  "generated_at": "2026-03-19T01:45:59.480588+00:00"
+}
