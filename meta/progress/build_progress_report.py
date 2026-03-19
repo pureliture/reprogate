@@ -118,6 +118,12 @@ def get_status_label(percent: float) -> str:
     return "Closed"
 
 
+def get_health_indicator(percent: float) -> str:
+    if percent >= 70: return "🟢"
+    if percent >= 40: return "🟡"
+    return "🔴"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", required=True)
@@ -185,7 +191,7 @@ def main() -> None:
         "> Generated from roadmap + issue/PR/file state.",
         "> Do not edit manually.\n",
         "## Snapshot\n",
-        f"- Overall: **{overall_percent}%**",
+        f"- Overall: **{overall_percent}%** {get_health_indicator(overall_percent)}",
         f"- Status: **{overall_status}**",
         f"- Last updated: `{datetime.now(timezone.utc).isoformat()}`\n",
         "```mermaid",
@@ -199,13 +205,14 @@ def main() -> None:
     md_lines.extend([
         "```\n",
         "## Stage Board\n",
-        "| Area | Status | Progress | Bar |",
-        "| ---- | ------ | -------: | --- |"
+        "| Area | Health | Status | Progress | Bar |",
+        "| ---- | :----: | ------ | -------: | --- |"
     ])
-    
+
     for s in stages_result:
         bar = generate_progress_bar(s["percent"])
-        md_lines.append(f'| {s["title"]} | {s["status"]} | {s["percent"]}% | `{bar}` |')
+        health = get_health_indicator(s["percent"])
+        md_lines.append(f'| {s["title"]} | {health} | {s["status"]} | {s["percent"]}% | `{bar}` |')
 
     with open(args.output_md, "w", encoding="utf-8") as f:
         f.write("\n".join(md_lines) + "\n")
