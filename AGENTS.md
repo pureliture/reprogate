@@ -27,6 +27,42 @@ ReproGate is an **artifact-driven compiler/gatekeeper**, not a state-tracking or
 - Before starting code changes, confirm whether the user wants the work performed in an isolated workspace or worktree when branch isolation could matter. If the user prefers isolation, or if concurrent work makes isolation the safer default, use a separate workspace/worktree instead of modifying the current checkout directly.
 - When addressing pull request review feedback, reply on each resolved review thread and mark the thread resolved using the platform's available mechanism when possible. Do not treat code changes alone as sufficient closure when review-state evidence can also be recorded in the PR.
 
+## Pull Request Requirements
+
+PR 생성 시 `validate_product_definition.py` CI가 실행되므로 다음 규칙을 **반드시** 준수:
+
+### PR Body 필수 섹션
+모든 섹션을 채워야 하며, `TBD`, `N/A`, `todo`, `없음` 또는 빈 `-`는 **금지**:
+
+1. **Related Docs**: `docs/` 또는 `records/`로 시작하는 **실제 존재하는 파일 경로** 기재
+   ```
+   - docs/strategy/final-definition.md
+   - records/adr/007-uv-toolchain.md
+   ```
+2. **Decision Record**: 관련 ADR/RFC 경로 또는 구체적인 변경 이유 기재
+3. **Verification**: 실제 수행한 검증 내용 구체적으로 기재
+
+### 구현 파일 변경 시 문서 동반 필수
+`scripts/`, `skills/`, `templates/`, `.github/` 변경 시:
+→ `docs/spec/`, `docs/strategy/`, `docs/design/`, `docs/governance/`, `records/adr/`, `records/rfc/` 중 하나를 **반드시 함께 변경/추가**
+
+### 연관 문서 정합성
+- `final-definition.md` 변경 시 → `vision.md`, `roadmap.md`, `product-boundary.md` 함께 변경
+- `product-boundary.md` 변경 시 → `scenarios.md` 함께 변경
+
+### PR 머지 전 코드 리뷰 처리 (필수)
+머지 시도 전 **반드시** 다음 절차 수행:
+
+1. **리뷰 코멘트 확인**: `gh pr view <PR번호> --comments` 또는 `gh api repos/{owner}/{repo}/pulls/{pr}/comments`로 미해결 코멘트 확인
+2. **미해결 코멘트 있으면 머지 중단**: 코멘트가 있으면 머지 진행하지 않고 조치 먼저
+3. **코멘트 조치**: 코드 수정 또는 설명으로 피드백 반영
+4. **대댓글 작성**: 해당 리뷰 코멘트에 조치 내용 대댓글
+5. **Resolved 처리**: GraphQL API로 리뷰 스레드 resolved 처리
+   ```bash
+   gh api graphql -f query='mutation { resolveReviewThread(input: {threadId: "THREAD_ID"}) { thread { isResolved } } }'
+   ```
+6. **모든 코멘트 해결 후 머지**: 미해결 코멘트가 0개일 때만 머지 진행
+
 ## Python Execution Standard
 
 This repository uses `uv` as the Python execution standard.
