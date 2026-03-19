@@ -24,6 +24,8 @@ ReproGate is an **artifact-driven compiler/gatekeeper**, not a state-tracking or
 
 - Do not rely solely on conversational memory; if it matters, it should exist as an inspectable artifact.
 - Follow the workflow dictated by the presence or absence of required outputs (Artifact-Driven Workflow). If a required artifact (like a design doc) is missing, create or request it before proceeding.
+- Before starting code changes, confirm whether the user wants the work performed in an isolated workspace or worktree when branch isolation could matter. If the user prefers isolation, or if concurrent work makes isolation the safer default, use a separate workspace/worktree instead of modifying the current checkout directly.
+- When addressing pull request review feedback, reply on each resolved review thread and mark the thread resolved using the platform's available mechanism when possible. Do not treat code changes alone as sufficient closure when review-state evidence can also be recorded in the PR.
 
 ## Python Execution Standard
 
