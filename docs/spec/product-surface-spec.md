@@ -1,7 +1,6 @@
-# ReproGate Product Surface Spec
+# ReproGate 제품 상세 설계
 
-> Legacy source: `docs/design/product-spec.md`
-> Canonical Definition: [final-definition.md](../strategy/final-definition.md)
+> WP-009 산출물 정렬본 | Canonical Definition: [final-definition.md](../strategy/final-definition.md)
 
 ---
 
@@ -71,12 +70,12 @@ Gate      = 필수 증거가 없으면 차단
 ### 1.2 기대 UX
 
 | 단계 | 사용자 액션 | 시스템 동작 | 결과 |
-|---|---|---|
+|---|---|---|---|
 | 설치 | CLI 설치 | bootstrap surface 준비 | 실행 가능 |
-| 초기화 | `dpc init` | 설정/기록/adapter 구조 생성 | 기록 가능한 프로젝트 |
+| 초기화 | `reprogate init` | 설정/기록/adapter 구조 생성 | 기록 가능한 프로젝트 |
 | 적용 | preset 또는 custom Skill 구성 | rules.rego 연결 | gateable workflow |
 | 작업 | AI 도구 사용 | 기록과 규칙 참조 | 재현 가능한 작업 |
-| 검증 | `dpc check` / hook 실행 | 누락 증거 검사 | 허용/차단 |
+| 검증 | `reprogate check` / hook 실행 | 누락 증거 검사 | 허용/차단 |
 
 ### 1.3 핵심 경험
 
@@ -328,4 +327,4 @@ ReproGate 제품 설계의 핵심은 다음이다.
 - [final-definition.md](../strategy/final-definition.md)
 - [vision.md](../strategy/vision.md)
 - [preset-bundle-spec.md](./preset-bundle-spec.md)
-- [architecture.md](../design/architecture.md)
+- [ADR-002-rules-engine-selection.md](../../records/adr/ADR-002-rules-engine-selection.md)

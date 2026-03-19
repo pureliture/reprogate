@@ -1,6 +1,5 @@
-# ReproGate Preset Bundle Spec
+# ReproGate Presets / Skills 명세
 
-> Legacy source: `docs/design/presets-spec.md`
 > Canonical Definition: [final-definition.md](../strategy/final-definition.md)
 
 프리셋은 재사용 가능한 **Skill 묶음**이다.
@@ -141,7 +140,7 @@ OPA/Rego는 preset이 요구하는 패턴을 실제 강제한다.
 ### 6.1 예시
 
 ```rego
-package dpc.rules
+package reprogate.rules
 
 import rego.v1
 
@@ -239,3 +238,4 @@ Preset과 Skill은 개인 설정에 머무르지 않는다.
 
 - [architecture.md](../design/architecture.md)
 - [product-surface-spec.md](./product-surface-spec.md)
+- [ADR-002-rules-engine-selection.md](../../records/adr/ADR-002-rules-engine-selection.md)

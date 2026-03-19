@@ -53,10 +53,10 @@ ReproGate는 기록 기반 엔지니어링을 지향하므로, 이 저장소 자
 - 목적: 제품 철학과 저장소 운영 규칙의 역할 분리를 명시한다.
 - 현재 상태: 진행 중
 
-### Track C. 설계 문서 정렬
-- 대상: `docs/design/*`
-- 목적: 기록 → Skill → Rule → Gate 구조가 구현 관점에서도 일관되게 읽히도록 한다.
-- 현재 상태: 예정
+### Track C. 명세 문서 정렬
+- 대상: `docs/spec/*`
+- 목적: 기록 → Skill → Rule → Gate 구조가 구현 관점의 명세(Contract)로 정착되도록 한다.
+- 현재 상태: 진행 중
 
 ### Track D. 실행 계획 / historical alignment
 - 대상: `docs/work-packets/*`, 관련 ADR, changelog
@@ -81,10 +81,10 @@ ReproGate는 기록 기반 엔지니어링을 지향하므로, 이 저장소 자
 - `docs/governance/goal-alignment-checklist.md`
 - `docs/governance/work-packet-spec.md`
 
-### Wave 3. 설계 문서
+### Wave 3. 명세 문서 (Spec)
 - `docs/design/architecture.md`
-- `docs/design/product-spec.md`
-- `docs/design/presets-spec.md`
+- `docs/spec/product-surface-spec.md`
+- `docs/spec/preset-bundle-spec.md`
 
 ### Wave 4. 실행 계획 / 기록 문서
 - `docs/work-packets/index.md`

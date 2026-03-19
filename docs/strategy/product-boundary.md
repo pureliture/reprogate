@@ -184,9 +184,9 @@
 | 문서 | 관계 |
 |---|---|
 | [final-definition.md](final-definition.md) | Core Identity 유지. 바운더리는 적용 범위를 추가 |
-| [product-spec.md](../design/product-spec.md) | 기능 설계의 적용 경계를 이 문서가 정의 |
+| [product-surface-spec.md](../spec/product-surface-spec.md) | 기능 설계의 적용 경계를 이 문서가 정의 |
 | [architecture.md](../design/architecture.md) | 3층 모델이 아키텍처 확장 가능성을 정의 |
-| [presets-spec.md](../design/presets-spec.md) | Skill/Preset은 Flexible 층에 위치 |
+| [preset-bundle-spec.md](../spec/preset-bundle-spec.md) | Skill/Preset은 Flexible 층에 위치 |
 
 ---
 
@@ -198,7 +198,7 @@
    - [roadmap.md](roadmap.md) — Near-Term에 바운더리 반영, Mid-Term을 Multi-entry/Late binding 관점으로 재정의
    - [vision.md](vision.md) — Design Commitments에 원칙 P-1~P-5 반영
 2. **설계 문서 정합성**
-   - [product-spec.md](../design/product-spec.md) — legacy `dpc` 정리 + 바운더리 정합
+   - [product-surface-spec.md](../spec/product-surface-spec.md) — legacy `dpc` 정리 + 바운더리 정합
    - [architecture.md](../design/architecture.md) — 3층 모델 반영
 3. **시나리오 카탈로그** — 15개 구체 시나리오 축적
 
