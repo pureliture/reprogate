@@ -1,0 +1,98 @@
+name: update-progress-report
+
+on:
+  issues:
+    types: [opened, edited, reopened, closed]
+  pull_request:
+    types: [opened, edited, reopened, synchronize, closed]
+  push:
+    branches: [master]
+    paths:
+      - "docs/strategy/roadmap.md"
+      - "meta/progress/progress-map.yaml"
+      - "meta/progress/build_progress_report.py"
+  workflow_dispatch:
+  schedule:
+    - cron: "17 0 * * 1"
+
+permissions:
+  contents: write
+  issues: read
+  pull-requests: read
+
+concurrency:
+  group: progress-report-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-progress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml requests
+
+      - name: Build progress report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python meta/progress/build_progress_report.py \
+            --config meta/progress/progress-map.yaml \
+            --output-md meta/progress/progress.md \
+            --output-json meta/progress/progress.json
+
+      - name: Detect meaningful changes
+        id: diff
+        run: |
+          # Use jq to compare the generated JSON ignoring the 'generated_at' timestamp
+          # If we don't have a previous version, we assume it changed.
+          git fetch origin master || true
+          git checkout -B master origin/master || true
+          
+          if [ ! -f meta/progress/progress.json ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # We need to compare the newly generated json against the last committed one
+          # So we stash the current generation, checkout the committed one, compare, then pop
+          cp meta/progress/progress.json /tmp/new_progress.json
+          
+          if git cat-file -e HEAD:meta/progress/progress.json 2>/dev/null; then
+            git show HEAD:meta/progress/progress.json > /tmp/old_progress.json
+            
+            OLD_HASH=$(jq 'del(.generated_at)' /tmp/old_progress.json | sha256sum | awk '{print $1}')
+            NEW_HASH=$(jq 'del(.generated_at)' /tmp/new_progress.json | sha256sum | awk '{print $1}')
+            
+            if [ "$OLD_HASH" != "$NEW_HASH" ]; then
+              echo "changed=true" >> $GITHUB_OUTPUT
+            else
+              echo "changed=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+          
+          # Restore the newly generated files
+          cp /tmp/new_progress.json meta/progress/progress.json
+
+      - name: Commit changes
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add meta/progress/progress.md meta/progress/progress.json
+          git commit -m "meta(progress): update generated progress report"
+          # Push to the branch that triggered the workflow (or master if issue/schedule)
+          git push origin HEAD:${{ github.ref_name }}
