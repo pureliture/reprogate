@@ -9,6 +9,8 @@
 - implementation은 spec 없이 직접 merge하지 않는다
 
 현재 spec 문서:
+- product-surface-spec.md: CLI 명령어 및 제품 노출 표면 명세
+- preset-bundle-spec.md: 프리셋 및 Skill 번들링 구조 명세
 - record-contract.md
 - rule-gate-spec.md
 - skill-workflow-object-model.md
