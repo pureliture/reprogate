@@ -5,9 +5,9 @@
 
 ## Snapshot
 
-- Overall: **42%** 🟡
+- Overall: **48%** 🟡
 - Status: **Drafted**
-- Last updated: `2026-03-19T08:04:27.550881+00:00`
+- Last updated: `2026-03-19T08:13:35.982564+00:00`
 
 ```mermaid
 pie showData
@@ -16,10 +16,10 @@ pie showData
     "Canonical definition & Product boundary" : 100
     "Record-backed core" : 33
     "ReproGate identity transition" : 100
-    "Multi-entry & late-binding" : 0
-    "Stronger adapter surfaces" : 0
-    "Team operating standard" : 0
-    "Optional integrations" : 0
+    "Multi-entry & late-binding" : 20
+    "Stronger adapter surfaces" : 10
+    "Team operating standard" : 20
+    "Optional integrations" : 5
 ```
 
 ## Stage Board
@@ -30,7 +30,7 @@ pie showData
 | Canonical definition & Product boundary | 🟢 | Closed | 100% | `██████████` |
 | Record-backed core | 🔴 | Seeded | 33% | `███░░░░░░░` |
 | ReproGate identity transition | 🟢 | Closed | 100% | `██████████` |
-| Multi-entry & late-binding | 🔴 | Not started | 0% | `░░░░░░░░░░` |
-| Stronger adapter surfaces | 🔴 | Not started | 0% | `░░░░░░░░░░` |
-| Team operating standard | 🔴 | Not started | 0% | `░░░░░░░░░░` |
-| Optional integrations | 🔴 | Not started | 0% | `░░░░░░░░░░` |
+| Multi-entry & late-binding | 🔴 | Seeded | 20% | `██░░░░░░░░` |
+| Stronger adapter surfaces | 🔴 | Seeded | 10% | `█░░░░░░░░░` |
+| Team operating standard | 🔴 | Seeded | 20% | `██░░░░░░░░` |
+| Optional integrations | 🔴 | Seeded | 5% | `░░░░░░░░░░` |
