@@ -24,3 +24,32 @@ ReproGate is an **artifact-driven compiler/gatekeeper**, not a state-tracking or
 
 - Do not rely solely on conversational memory; if it matters, it should exist as an inspectable artifact.
 - Follow the workflow dictated by the presence or absence of required outputs (Artifact-Driven Workflow). If a required artifact (like a design doc) is missing, create or request it before proceeding.
+
+## Python Execution Standard
+
+This repository uses `uv` as the Python execution standard.
+
+### Required
+
+- Use `uv run python3 <script>` for all Python execution
+- Declare persistent dependencies in `pyproject.toml` and lock them in `uv.lock`
+
+### Forbidden
+
+- `python3 -m venv` - Do not create virtual environments manually
+- `source venv/bin/activate` - Do not activate virtual environments
+- `pip install` / `pip3 install` - Do not use pip directly
+- `uv run --with ...` in committed code - Use `pyproject.toml` for persistent dependencies
+
+### Examples
+
+```bash
+# Run a script
+uv run python3 scripts/validate_product_definition.py --help
+
+# One-liner
+uv run python3 -c "print('hello')"
+
+# Install dependencies (CI or first-time setup)
+uv sync --frozen
+```
