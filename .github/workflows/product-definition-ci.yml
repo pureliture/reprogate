@@ -10,12 +10,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5.2.0
+        uses: actions/setup-python@v6.2.0
         with:
           python-version: "3.11"
 
@@ -26,8 +26,10 @@ jobs:
 
       - name: Save PR body
         run: |
-          # Use printf for safer body handling
-          printf "%s" "${{ github.event.pull_request.body }}" > pr_body.md
+          # Use single-quoted heredoc for safety against shell interpolation
+          cat <<'EOF' > pr_body.md
+          ${{ github.event.pull_request.body }}
+          EOF
 
       - name: Validate product definition workflow
         run: |
