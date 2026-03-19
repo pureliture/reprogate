@@ -33,6 +33,17 @@ DOC_OR_DECISION_PREFIXES = (
     "records/rfc/",
 )
 
+# Phase 1 SDD non-trivial path prefixes
+SDD_NONTRIVIAL_PATH_PREFIXES = (
+    "scripts/",
+    "skills/",
+    "templates/",
+    ".github/",
+)
+
+# SDD routing options
+SDD_ROUTING_OPTIONS = ("in-scope", "sdd-exempt", "reprogate-waiver")
+
 
 def read_lines(path: Path) -> list[str]:
     return [line.rstrip("\n") for line in path.read_text(encoding="utf-8").splitlines()]
@@ -58,6 +69,128 @@ def extract_markdown_paths(block: str) -> list[str]:
         if candidate.startswith("docs/") or candidate.startswith("records/"):
             paths.append(candidate)
     return paths
+
+
+def parse_sdd_routing(pr_body: str) -> str | None:
+    """Parse SDD routing checkbox from PR body. Returns routing option or None."""
+    routing_section = extract_section(pr_body, "### Routing")
+    if not routing_section:
+        return None
+
+    for option in SDD_ROUTING_OPTIONS:
+        # Match checked checkbox: - [x] option or - [X] option
+        pattern = rf"-\s*\[x\]\s*{re.escape(option)}"
+        if re.search(pattern, routing_section, re.IGNORECASE):
+            return option
+    return None
+
+
+def extract_spec_artifact_paths(pr_body: str) -> dict[str, str]:
+    """Extract spec artifact paths from PR body."""
+    artifacts_section = extract_section(pr_body, "### Spec Artifacts")
+    if not artifacts_section:
+        return {}
+
+    result: dict[str, str] = {}
+    for line in artifacts_section.splitlines():
+        line = line.strip()
+        if line.startswith("- Spec:"):
+            result["spec"] = line[7:].strip()
+        elif line.startswith("- Plan:"):
+            result["plan"] = line[7:].strip()
+        elif line.startswith("- Tasks:"):
+            result["tasks"] = line[8:].strip()
+    return result
+
+
+def extract_waiver_record_paths(pr_body: str) -> list[str]:
+    """Extract waiver/deviation record paths from PR body."""
+    waiver_section = extract_section(pr_body, "### Waiver/Deviation Record")
+    if not waiver_section:
+        return []
+
+    paths: list[str] = []
+    for line in waiver_section.splitlines():
+        line = line.strip()
+        if line.startswith("- ") and line[2:].strip().startswith("records/"):
+            paths.append(line[2:].strip())
+    return paths
+
+
+def has_nontrivial_changes(changed_files: list[str]) -> bool:
+    """Check if any changed files are non-trivial (require SDD routing)."""
+    for path in changed_files:
+        # .specify/ changes do not trigger SDD requirements
+        if path.startswith(".specify/"):
+            continue
+        if path.startswith(SDD_NONTRIVIAL_PATH_PREFIXES):
+            return True
+    return False
+
+
+def validate_sdd_workflow(
+    repo_root: Path, pr_body: str, changed_files: list[str], warnings: list[str]
+) -> None:
+    """Validate SDD workflow routing, presence, and linkage (Phase 1 advisory mode)."""
+
+    # Check if PR has non-trivial changes
+    nontrivial = has_nontrivial_changes(changed_files)
+    if not nontrivial:
+        # No non-trivial changes, SDD validation not needed
+        return
+
+    # Parse routing
+    routing = parse_sdd_routing(pr_body)
+
+    if routing is None:
+        warnings.append(
+            "SDD Workflow: Non-trivial changes detected but no routing option selected. "
+            "Please check one of: in-scope, sdd-exempt, reprogate-waiver."
+        )
+        return
+
+    if routing == "sdd-exempt":
+        # Exempt routing selected, no further checks
+        return
+
+    if routing == "in-scope":
+        # Check spec artifact linkage
+        artifacts = extract_spec_artifact_paths(pr_body)
+        missing_artifacts: list[str] = []
+
+        for key in ("spec", "plan", "tasks"):
+            path = artifacts.get(key, "")
+            if not path:
+                missing_artifacts.append(key)
+            elif not (repo_root / path).exists():
+                warnings.append(
+                    f"SDD Workflow: Spec artifact '{key}' path does not exist: {path}"
+                )
+
+        if missing_artifacts:
+            warnings.append(
+                f"SDD Workflow: in-scope routing selected but missing spec artifacts: "
+                f"{', '.join(missing_artifacts)}. "
+                "Please provide paths to .specify/specs/<feature>/spec.md, plan.md, tasks.md."
+            )
+        return
+
+    if routing == "reprogate-waiver":
+        # Check waiver record linkage
+        waiver_paths = extract_waiver_record_paths(pr_body)
+
+        if not waiver_paths:
+            warnings.append(
+                "SDD Workflow: reprogate-waiver routing selected but no records/* path provided. "
+                "Please provide a records/* reference documenting the deviation."
+            )
+            return
+
+        for path in waiver_paths:
+            if not (repo_root / path).exists():
+                warnings.append(
+                    f"SDD Workflow: Waiver record path does not exist: {path}"
+                )
 
 
 def validate_pr_body(repo_root: Path, pr_body: str, errors: list[str]) -> None:
@@ -163,16 +296,32 @@ def main() -> int:
     pr_body = Path(args.pr_body_file).read_text(encoding="utf-8")
 
     errors: list[str] = []
+    warnings: list[str] = []
 
     validate_pr_body(repo_root, pr_body, errors)
     validate_changed_files(repo_root, changed_files, pr_body, errors)
     validate_scenarios_file(repo_root, changed_files, errors)
 
+    # Phase 1 SDD validation (advisory mode - warnings only)
+    validate_sdd_workflow(repo_root, pr_body, changed_files, warnings)
+
     if errors:
         print("🔴 product-definition-ci FAILED")
         for error in errors:
             print(f"- {error}")
+        # Print warnings even on failure
+        if warnings:
+            print("\n🟡 SDD Workflow Warnings (Phase 1 - advisory):")
+            for warning in warnings:
+                print(f"  - {warning}")
         return 1
+
+    # Print warnings (advisory mode - does not fail)
+    if warnings:
+        print("🟡 SDD Workflow Warnings (Phase 1 - advisory):")
+        for warning in warnings:
+            print(f"  - {warning}")
+        print()
 
     print("🟢 product-definition-ci PASSED")
     return 0

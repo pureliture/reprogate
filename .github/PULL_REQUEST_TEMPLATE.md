@@ -34,7 +34,25 @@
 
 ## Scope Notes
 <!-- 이번 PR에서 일부러 하지 않은 것 -->
-- 
+-
+
+## SDD Workflow (Phase 1)
+
+### Routing
+<!-- 아래 셋 중 하나만 체크하라. 자세한 정의는 .github/SDD-LABELS.md 참고 -->
+- [ ] in-scope
+- [ ] sdd-exempt
+- [ ] reprogate-waiver
+
+### Spec Artifacts (in-scope인 경우)
+<!-- .specify/specs/<feature>/spec.md, plan.md, tasks.md 경로를 적어라 -->
+- Spec:
+- Plan:
+- Tasks:
+
+### Waiver/Deviation Record (reprogate-waiver인 경우)
+<!-- records/* 경로를 적어라. waiver 근거가 되는 ADR/RFC 등 -->
+-
 
 ## Checklist
 - [ ] 상위 문서와의 관계를 확인했다
