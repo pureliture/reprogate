@@ -33,7 +33,7 @@ def fetch_github_state_cli(repo: str, kind: str, number: int) -> str:
         cmd = ["gh", kind, "view", str(number), "--repo", repo, "--json", "state", "-q", ".state"]
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
         return result.stdout.strip().lower()
-    except subprocess.CalledProcessError:
+    except (subprocess.CalledProcessError, FileNotFoundError):
         return "not_found"
 
 
