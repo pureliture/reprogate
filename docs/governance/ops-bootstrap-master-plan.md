@@ -131,3 +131,4 @@ ReproGate는 기록 기반 엔지니어링을 지향하므로, 이 저장소 자
 ## 9. 다음 액션
 
 현재 다음 액션은 **Wave 2 거버넌스 문서 정렬 완료**다.
+- Validator rule hardened to prevent empty Decision Records (PR #11)
