@@ -28,6 +28,7 @@ DOC_OR_DECISION_PREFIXES = (
     "docs/spec/",
     "docs/strategy/",
     "docs/design/",
+    "docs/governance/",
     "records/adr/",
     "records/rfc/",
 )
@@ -67,10 +68,14 @@ def validate_pr_body(repo_root: Path, pr_body: str, errors: list[str]) -> None:
     weak_markers = ["TBD", "todo", "N/A", "n/a", "없음"]
 
     related_docs_block = extract_section(pr_body, "## Related Docs")
+    decision_record_block = extract_section(pr_body, "## Decision Record")
     verification_block = extract_section(pr_body, "## Verification")
 
     if not related_docs_block or any(marker in related_docs_block for marker in weak_markers):
         errors.append("PR body has weak or empty Related Docs section.")
+
+    if not decision_record_block or any(marker in decision_record_block for marker in weak_markers):
+        errors.append("PR body has weak or empty Decision Record section.")
 
     if not verification_block or any(marker in verification_block for marker in weak_markers):
         errors.append("PR body has weak or empty Verification section.")
