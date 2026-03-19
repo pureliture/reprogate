@@ -71,13 +71,16 @@ def validate_pr_body(repo_root: Path, pr_body: str, errors: list[str]) -> None:
     decision_record_block = extract_section(pr_body, "## Decision Record")
     verification_block = extract_section(pr_body, "## Verification")
 
-    if not related_docs_block or any(marker in related_docs_block for marker in weak_markers):
+    def is_weak(block: str) -> bool:
+        return not block or block.strip() == "-" or any(marker in block for marker in weak_markers)
+
+    if is_weak(related_docs_block):
         errors.append("PR body has weak or empty Related Docs section.")
 
-    if not decision_record_block or any(marker in decision_record_block for marker in weak_markers):
+    if is_weak(decision_record_block):
         errors.append("PR body has weak or empty Decision Record section.")
 
-    if not verification_block or any(marker in verification_block for marker in weak_markers):
+    if is_weak(verification_block):
         errors.append("PR body has weak or empty Verification section.")
 
     related_paths = extract_markdown_paths(related_docs_block)
