@@ -55,7 +55,7 @@ def extract_markdown_paths(block: str) -> list[str]:
         if not line.startswith("- "):
             continue
         candidate = line[2:].strip()
-        if candidate.startswith("docs/") or candidate.startswith("records/"):
+        if candidate.startswith(("docs/", "records/", ".specify/")):
             paths.append(candidate)
     return paths
 

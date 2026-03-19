@@ -28,10 +28,12 @@ Each feature follows a directory-based convention:
 
 ## Lifecycle
 
-1. Create `<feature-slug>/spec.md` when starting a feature
-2. Add `plan.md` after spec approval
-3. Add `tasks.md` for execution tracking
-4. After completion, record durable decisions in `records/adr/` if needed
+> **Prerequisite:** The `record-required` gate requires an RFC or ADR under `records/` before meaningful implementation changes. Create the decision record first.
+
+1. Create RFC/ADR in `records/` to satisfy gate requirements
+2. Create `<feature-slug>/spec.md` when starting feature work
+3. Add `plan.md` after spec approval
+4. Add `tasks.md` for execution tracking
 5. Post-merge retention or archival policy is determined by repository workflow rules in later phases
 
 ## Notes
