@@ -33,13 +33,13 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| CORE-01 | | Pending |
-| CORE-02 | | Pending |
-| CORE-03 | | Pending |
-| CORE-04 | | Pending |
-| CORE-05 | | Pending |
-| INTEG-01 | | Pending |
-| INTEG-02 | | Pending |
-| AUTO-01 | | Pending |
-| AUTO-02 | | Pending |
-| UI-01 | | Pending |
+| CORE-01 | Phase 1 | Pending |
+| CORE-02 | Phase 1 | Pending |
+| CORE-03 | Phase 1 | Pending |
+| CORE-04 | Phase 1 | Pending |
+| CORE-05 | Phase 1 | Pending |
+| INTEG-01 | Phase 2 | Pending |
+| INTEG-02 | Phase 2 | Pending |
+| AUTO-01 | Phase 3 | Pending |
+| AUTO-02 | Phase 3 | Pending |
+| UI-01 | Phase 4 | Pending |
