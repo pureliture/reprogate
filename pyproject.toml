@@ -10,3 +10,8 @@ dependencies = [
 
 [tool.reprogate]
 python_toolchain = "uv"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
