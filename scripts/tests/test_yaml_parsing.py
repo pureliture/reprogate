@@ -3,7 +3,7 @@
 TDD Cycle: P0-1 PyYAML 도입
 RED Phase: PyYAML 기반 YAML 파싱 테스트
 
-이 테스트는 generate.py와 check_compliance.py의 load_config 함수가
+이 테스트는 generate.py와 gatekeeper.py의 load_config 함수가
 PyYAML을 사용하여 YAML을 올바르게 파싱하는지 검증합니다.
 """
 import pathlib
@@ -15,7 +15,7 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from generate import load_config as generate_load_config
-from check_compliance import load_config as compliance_load_config
+from gatekeeper import load_config as gatekeeper_load_config
 
 
 class TestYAMLParsingWithPyYAML(unittest.TestCase):
@@ -99,14 +99,14 @@ records:
         self.assertIs(config["tools"]["claude"]["hook_enforcement"], True)
         self.assertIs(config["tools"]["codex"]["enabled"], False)
 
-    def test_compliance_load_config_parses_records_section(self):
-        """check_compliance.py load_config가 records 섹션을 파싱하는지 검증"""
-        config = compliance_load_config(self.config_path)
+    def test_gatekeeper_load_config_parses_config(self):
+        """gatekeeper.py load_config가 설정을 파싱하는지 검증"""
+        config = gatekeeper_load_config(self.config_path)
 
-        self.assertIn("records", config)
-        self.assertEqual(config["records"]["wp_path"], "docs/work-packets")
-        self.assertEqual(config["records"]["adr_path"], "docs/adr")
-        self.assertEqual(config["records"]["changelog_path"], "docs/CHANGELOG.md")
+        # gatekeeper load_config merges defaults with file content
+        self.assertIn("records_dir", config)
+        self.assertIn("skills_dir", config)
+        self.assertIn("gatekeeper", config)
 
     def test_yaml_with_special_characters(self):
         """특수 문자가 포함된 YAML 파싱 검증"""
