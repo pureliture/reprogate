@@ -3,9 +3,8 @@
 ## Phases
 
 - [ ] **Phase 1: Foundation & Governance** - Establish core repository initialization and policy enforcement.
-- [ ] **Phase 2: AI Orchestrator Integration (MCP)** - Expose ReproGate artifacts and tools to AI agents via MCP.
-- [ ] **Phase 3: Harness-Agnostic Workflow Automation** - Automate the end-to-end workflow lifecycle through durable artifacts and adapter ingress.
-- [ ] **Phase 4: Visibility & Monitoring (HUD)** - Provide real-time status and progress tracking via a terminal dashboard.
+- [ ] **Phase 2: Harness-Agnostic Workflow Automation** - Automate the end-to-end workflow lifecycle through durable artifacts and adapter ingress.
+- [ ] **Phase 3: Visibility & Monitoring (HUD)** - Provide real-time status and progress tracking via a terminal dashboard.
 
 ## Phase Details
 
@@ -25,19 +24,9 @@ Plans:
 - [x] 01-02-PLAN.md — OPA-wrapper gatekeeper with structural fallback (per ADR-002), PyYAML config, fail-closed enforcement
 - [ ] 01-03-PLAN.md — Bootstrap test fixes and end-to-end integration tests for full init->create->check pipeline
 
-### Phase 2: AI Orchestrator Integration (MCP)
-**Goal**: Expose ReproGate's governance artifacts and tools to external AI agents via MCP.
-**Depends on**: Phase 1
-**Requirements**: INTEG-01, INTEG-02
-**Success Criteria**:
-  1. An AI agent (e.g., Claude Desktop) can connect to the ReproGate MCP server.
-  2. The AI agent can list and read available ADRs, RFCs, and Skills as MCP resources.
-  3. The AI agent can trigger record creation and validation tools via MCP tool calls.
-**Plans**: TBD
-
-### Phase 3: Harness-Agnostic Workflow Automation
+### Phase 2: Harness-Agnostic Workflow Automation
 **Goal**: Automate the end-to-end research-strategy-execution lifecycle using durable artifacts and harness-neutral adapter ingress.
-**Depends on**: Phase 2
+**Depends on**: Phase 1
 **Requirements**: AUTO-01, AUTO-02
 **Success Criteria**:
   1. User can trigger an automated workflow cycle that progresses from research to plan execution through supported adapters.
@@ -45,9 +34,9 @@ Plans:
   3. Automated tasks are subject to the same gatekeeper checks as manual ones.
 **Plans**: TBD
 
-### Phase 4: Visibility & Monitoring (HUD)
+### Phase 3: Visibility & Monitoring (HUD)
 **Goal**: Provide real-time visibility into gate status and project progress via a terminal dashboard.
-**Depends on**: Phase 3
+**Depends on**: Phase 2
 **Requirements**: UI-01
 **Success Criteria**:
   1. User can view a real-time, terminal-based dashboard showing the status of all gates (pass/fail).
@@ -60,6 +49,5 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Governance | 0/3 | Planned    |  |
-| 2. AI Orchestrator Integration (MCP) | 0/1 | Not started | - |
-| 3. Harness-Agnostic Workflow Automation | 0/1 | Not started | - |
-| 4. Visibility & Monitoring (HUD) | 0/1 | Not started | - |
+| 2. Harness-Agnostic Workflow Automation | 0/1 | Not started | - |
+| 3. Visibility & Monitoring (HUD) | 0/1 | Not started | - |

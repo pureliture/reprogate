@@ -4,14 +4,10 @@
 
 ### CORE: Repository Governance
 - [x] **CORE-01**: Support mandatory work record creation (ADRs, RFCs) via CLI.
-- [ ] **CORE-02**: Enforce work record presence and structure via `scripts/gatekeeper.py`.
-- [ ] **CORE-03**: Validate work records against "Skills" (OPA/Rego policies) in `skills/`.
+- [x] **CORE-02**: Enforce work record presence and structure via `scripts/gatekeeper.py`.
+- [x] **CORE-03**: Validate work records against "Skills" (OPA/Rego policies) in `skills/`.
 - [x] **CORE-04**: Support repository initialization and framework porting via `scripts/init.py` and `scripts/generate.py`.
 - [x] **CORE-05**: Provide a unified CLI entry point via `scripts/cli.py`.
-
-### INTEG: AI Orchestrator Integration
-- [ ] **INTEG-01**: Implement a Model Context Protocol (MCP) server to expose ReproGate records and skills to AI agents (Claude, Gemini).
-- [ ] **INTEG-02**: Support "Skill" discovery and documentation-first architecture visibility for AI orchestrators.
 
 ### AUTO: Harness-Agnostic Workflow Automation
 - [ ] **AUTO-01**: Automate the basic research -> strategy -> execution lifecycle within the framework without coupling to a single external harness.
@@ -21,9 +17,11 @@
 - [ ] **UI-01**: Provide a terminal-based HUD (Heads-Up Display) for real-time gate status and progress tracking using Textual.
 
 ## v2 Requirements (Deferred)
+- [ ] **INTEG-01**: Implement a Model Context Protocol (MCP) server to expose ReproGate records and skills to AI agents (Claude, Gemini).
+- [ ] **INTEG-02**: Support "Skill" discovery and documentation-first architecture visibility for AI orchestrators.
+- [ ] **INTEG-03**: Support for additional AI orchestrator protocols beyond MCP.
 - [ ] **SCALE-01**: Support for remote policy synchronization via OCI registries.
 - [ ] **SCALE-02**: Team-wide "Skill" sharing and hierarchical policy management.
-- [ ] **INTEG-03**: Support for additional AI orchestrator protocols beyond MCP.
 
 ## Out of Scope
 - [ ] **STATE-01**: Centralized server-side state tracking (prioritize local, Git-resident state).
@@ -34,12 +32,12 @@
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
 | CORE-01 | Phase 1 | Complete |
-| CORE-02 | Phase 1 | Pending |
-| CORE-03 | Phase 1 | Pending |
+| CORE-02 | Phase 1 | Complete |
+| CORE-03 | Phase 1 | Complete |
 | CORE-04 | Phase 1 | Complete |
 | CORE-05 | Phase 1 | Complete |
-| INTEG-01 | Phase 2 | Pending |
-| INTEG-02 | Phase 2 | Pending |
-| AUTO-01 | Phase 3 | Pending |
-| AUTO-02 | Phase 3 | Pending |
-| UI-01 | Phase 4 | Pending |
+| INTEG-01 | v2 (Deferred) | Deferred |
+| INTEG-02 | v2 (Deferred) | Deferred |
+| AUTO-01 | Phase 2 | Pending |
+| AUTO-02 | Phase 2 | Pending |
+| UI-01 | Phase 3 | Pending |
