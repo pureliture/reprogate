@@ -21,9 +21,9 @@
 **Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — CLI entry point with reprogate branding and record creation command
-- [ ] 01-02-PLAN.md — Python-native skill evaluator and gatekeeper refactoring
-- [ ] 01-03-PLAN.md — Config schema expansion, init.py update, and integration tests
+- [ ] 01-01-PLAN.md — Canonical config schema, record creation with sequential IDs, CLI rebranding and console-script entry point
+- [ ] 01-02-PLAN.md — OPA-wrapper gatekeeper with structural fallback (per ADR-002), PyYAML config, fail-closed enforcement
+- [ ] 01-03-PLAN.md — Bootstrap test fixes and end-to-end integration tests for full init->create->check pipeline
 
 ### Phase 2: AI Orchestrator Integration (MCP)
 **Goal**: Expose ReproGate's governance artifacts and tools to external AI agents via MCP.
