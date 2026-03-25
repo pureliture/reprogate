@@ -3,19 +3,19 @@
 ## v1 Requirements
 
 ### CORE: Repository Governance
-- [ ] **CORE-01**: Support mandatory work record creation (ADRs, RFCs) via CLI.
+- [x] **CORE-01**: Support mandatory work record creation (ADRs, RFCs) via CLI.
 - [ ] **CORE-02**: Enforce work record presence and structure via `scripts/gatekeeper.py`.
 - [ ] **CORE-03**: Validate work records against "Skills" (OPA/Rego policies) in `skills/`.
-- [ ] **CORE-04**: Support repository initialization and framework porting via `scripts/init.py` and `scripts/generate.py`.
-- [ ] **CORE-05**: Provide a unified CLI entry point via `scripts/cli.py`.
+- [x] **CORE-04**: Support repository initialization and framework porting via `scripts/init.py` and `scripts/generate.py`.
+- [x] **CORE-05**: Provide a unified CLI entry point via `scripts/cli.py`.
 
 ### INTEG: AI Orchestrator Integration
 - [ ] **INTEG-01**: Implement a Model Context Protocol (MCP) server to expose ReproGate records and skills to AI agents (Claude, Gemini).
 - [ ] **INTEG-02**: Support "Skill" discovery and documentation-first architecture visibility for AI orchestrators.
 
-### AUTO: GSD Workflow Automation
-- [ ] **AUTO-01**: Automate the basic "Research -> Strategy -> Execution" (GSD) lifecycle within the framework.
-- [ ] **AUTO-02**: Support plan generation and execution tracking through durable artifacts.
+### AUTO: Harness-Agnostic Workflow Automation
+- [ ] **AUTO-01**: Automate the basic research -> strategy -> execution lifecycle within the framework without coupling to a single external harness.
+- [ ] **AUTO-02**: Support plan generation and execution tracking through durable artifacts and harness-neutral adapter ingress.
 
 ### UI: Progress & Visibility
 - [ ] **UI-01**: Provide a terminal-based HUD (Heads-Up Display) for real-time gate status and progress tracking using Textual.
@@ -33,11 +33,11 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| CORE-01 | Phase 1 | Pending |
+| CORE-01 | Phase 1 | Complete |
 | CORE-02 | Phase 1 | Pending |
 | CORE-03 | Phase 1 | Pending |
-| CORE-04 | Phase 1 | Pending |
-| CORE-05 | Phase 1 | Pending |
+| CORE-04 | Phase 1 | Complete |
+| CORE-05 | Phase 1 | Complete |
 | INTEG-01 | Phase 2 | Pending |
 | INTEG-02 | Phase 2 | Pending |
 | AUTO-01 | Phase 3 | Pending |

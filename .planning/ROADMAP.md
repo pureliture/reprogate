@@ -18,7 +18,7 @@
   2. User can generate work records (ADRs/RFCs) via the CLI.
   3. The gatekeeper blocks commits/operations if required records are missing or invalid according to Skill rules.
   4. All core tools are accessible through a single `reprogate` CLI entry point.
-**Plans:** 3 plans
+**Plans:** 0/3 plans executed
 
 Plans:
 - [ ] 01-01-PLAN.md — Canonical config schema, record creation with sequential IDs, CLI rebranding and console-script entry point
@@ -59,7 +59,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Governance | 0/3 | Planning complete | - |
+| 1. Foundation & Governance | 0/3 | Planned    |  |
 | 2. AI Orchestrator Integration (MCP) | 0/1 | Not started | - |
 | 3. Harness-Agnostic Workflow Automation | 0/1 | Not started | - |
 | 4. Visibility & Monitoring (HUD) | 0/1 | Not started | - |
