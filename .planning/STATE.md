@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to execute
-last_updated: "2026-03-25T00:44:30.070Z"
+status: Ready to plan
+last_updated: "2026-03-25T01:45:39.432Z"
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 0
+  completed_plans: 3
 ---
 
 # Project State
@@ -21,8 +21,8 @@ progress:
 
 ## Current Position
 
-Phase: 01 (foundation-governance) — EXECUTING
-Plan: 2 of 3
+Phase: 2
+Plan: Not started
 
 ## Performance Metrics
 
@@ -36,6 +36,10 @@ Plan: 2 of 3
 
 - 2026-03-24: Use 4 phases (Foundation, MCP, Workflow Automation, HUD) based on research recommendations and requirement clusters.
 - [Phase 01]: Canonical config uses flat structure with record_types and active_skills; generate.py reconciliation deferred
+- [Phase 01]: Structural fallback performs only basic checks (record presence, frontmatter, Verification) -- not a Rego parser per ADR-002
+- [Phase 01]: OPA eval failures treated as deny (fail-closed per D-08); pytest added as dev optional dependency
+- [Phase 01]: Skip generate-dependent smoke tests (generate.py expects old nested config format)
+- [Phase 01]: Use monkeypatch for gatekeeper isolation instead of subprocess (ROOT is module-level constant)
 
 ### Todos
 
@@ -48,7 +52,7 @@ Plan: 2 of 3
 ## Session Continuity
 
 **Last Session:**
-2026-03-25T00:44:30.068Z
+2026-03-25T01:41:33.494Z
 
 - Initialized STATE.md
 - Updated REQUIREMENTS.md traceability

@@ -21,8 +21,8 @@
 **Plans:** 0/3 plans executed
 
 Plans:
-- [ ] 01-01-PLAN.md — Canonical config schema, record creation with sequential IDs, CLI rebranding and console-script entry point
-- [ ] 01-02-PLAN.md — OPA-wrapper gatekeeper with structural fallback (per ADR-002), PyYAML config, fail-closed enforcement
+- [x] 01-01-PLAN.md — Canonical config schema, record creation with sequential IDs, CLI rebranding and console-script entry point
+- [x] 01-02-PLAN.md — OPA-wrapper gatekeeper with structural fallback (per ADR-002), PyYAML config, fail-closed enforcement
 - [ ] 01-03-PLAN.md — Bootstrap test fixes and end-to-end integration tests for full init->create->check pipeline
 
 ### Phase 2: AI Orchestrator Integration (MCP)
