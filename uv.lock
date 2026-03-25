@@ -273,19 +273,18 @@ dependencies = [
     { name = "requests" },
 ]
 
-[package.dev-dependencies]
+[package.optional-dependencies]
 dev = [
     { name = "pytest" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0" },
     { name = "pyyaml", specifier = ">=6.0" },
     { name = "requests", specifier = ">=2.28" },
 ]
-
-[package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=9.0.2" }]
+provides-extras = ["dev"]
 
 [[package]]
 name = "requests"
