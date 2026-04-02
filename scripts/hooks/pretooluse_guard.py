@@ -17,7 +17,7 @@ def _read_payload() -> dict:
     try:
         raw = sys.stdin.read()
         return json.loads(raw) if raw.strip() else {}
-    except Exception:
+    except (json.JSONDecodeError, OSError):
         return {}
 
 
@@ -61,7 +61,7 @@ def main(session_data: pathlib.Path | None = None) -> int:
                 current_session_path.write_text(
                     json.dumps(session, indent=2), encoding="utf-8"
                 )
-            except Exception:
+            except (json.JSONDecodeError, OSError):
                 pass  # advisory -- never block on logging failure
 
     _allow()

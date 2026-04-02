@@ -17,16 +17,29 @@ import subprocess
 import sys
 from typing import Any, Dict, List, Tuple
 
+import yaml  # type: ignore[import]
+
 VERSION = "0.2.0"
+DIVIDER_WIDTH = 50
+REQUIRED_ADR_SECTIONS = ["Context", "Decision", "Consequences"]
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
+def _merge_config_defaults(loaded: Dict[str, Any], defaults: Dict[str, Any]) -> None:
+    """Merge defaults into loaded config in-place (one level deep for dict values)."""
+    for key, default_value in defaults.items():
+        if key not in loaded:
+            loaded[key] = default_value
+        elif isinstance(default_value, dict) and isinstance(loaded.get(key), dict):
+            for sub_key, sub_default in default_value.items():
+                if sub_key not in loaded[key]:
+                    loaded[key][sub_key] = sub_default
+
+
 def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
     """reprogate.yaml에서 설정을 로딩한다 (PyYAML 사용)."""
-    import yaml  # type: ignore[import]
-    if config_path is None:
-        config_path = ROOT / "reprogate.yaml"
+    config_path = config_path or (ROOT / "reprogate.yaml")
     defaults: Dict[str, Any] = {
         "records_dir": "records",
         "skills_dir": "skills",
@@ -38,13 +51,7 @@ def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
         return defaults
     text = config_path.read_text(encoding="utf-8")
     loaded = yaml.safe_load(text) or {}
-    for key, default_value in defaults.items():
-        if key not in loaded:
-            loaded[key] = default_value
-        elif isinstance(default_value, dict) and isinstance(loaded.get(key), dict):
-            for sub_key, sub_default in default_value.items():
-                if sub_key not in loaded[key]:
-                    loaded[key][sub_key] = sub_default
+    _merge_config_defaults(loaded, defaults)
     return loaded
 
 
@@ -218,13 +225,13 @@ def evaluate_gate(strict: bool = False, config: Dict[str, Any] | None = None) ->
         else:
             for path, fm, secs in adr_records:
                 relative = path.relative_to(ROOT)
-                if "Context" not in secs:
-                    errors.append(f"❌ [decision-documented] {relative}에 Context 섹션이 누락되었습니다.")
-                if "Decision" not in secs:
-                    errors.append(f"❌ [decision-documented] {relative}에 Decision 섹션이 누락되었습니다.")
-                if "Consequences" not in secs:
-                    errors.append(f"❌ [decision-documented] {relative}에 Consequences 섹션이 누락되었습니다.")
-            if not any("Context" not in secs or "Decision" not in secs or "Consequences" not in secs for _, _, secs in adr_records):
+                for section in REQUIRED_ADR_SECTIONS:
+                    if section not in secs:
+                        errors.append(f"❌ [decision-documented] {relative}에 {section} 섹션이 누락되었습니다.")
+            if all(
+                all(section in secs for section in REQUIRED_ADR_SECTIONS)
+                for _, _, secs in adr_records
+            ):
                 print("✅ [decision-documented] 통과")
 
     # Rule 3: verification-present (모든 기록에 Verification 섹션)
@@ -266,19 +273,19 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    print("=" * 50)
+    print("=" * DIVIDER_WIDTH)
     print(f"  ReproGate Gatekeeper v{VERSION} (Stage 1)")
-    print("=" * 50)
+    print("=" * DIVIDER_WIDTH)
     print()
 
     exit_code, messages = evaluate_gate(strict=args.strict)
 
     print()
     if messages:
-        print("─" * 50)
+        print("─" * DIVIDER_WIDTH)
         for msg in messages:
             print(f"  {msg}")
-        print("─" * 50)
+        print("─" * DIVIDER_WIDTH)
 
     print()
     if exit_code == 0:

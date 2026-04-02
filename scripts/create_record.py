@@ -36,7 +36,7 @@ def _load_record_types() -> Dict[str, Dict[str, Any]]:
             data = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
             if data and "record_types" in data:
                 return data["record_types"]
-        except Exception:
+        except (yaml.YAMLError, OSError, UnicodeDecodeError):
             pass
     return DEFAULT_RECORD_TYPES
 
@@ -74,6 +74,34 @@ def next_id(record_dir: pathlib.Path, prefix: str) -> str:
                 max_num = num
 
     return f"{prefix}-{max_num + 1:03d}"
+
+
+def _build_record_content(title: str, record_type: str, record_id: str, required_sections: List[str]) -> str:
+    """Build the full Markdown content for a new record.
+
+    Args:
+        title: Human-readable record title.
+        record_type: Record type key (e.g. ``"adr"``).
+        record_id: Sequential ID (e.g. ``"ADR-001"``).
+        required_sections: Section names to scaffold.
+
+    Returns:
+        Full Markdown string including YAML frontmatter.
+    """
+    frontmatter = {
+        "record_id": record_id,
+        "title": title,
+        "type": record_type,
+        "status": "DRAFT",
+        "created_at": date.today().isoformat(),
+    }
+    yaml_block = yaml.dump(frontmatter, default_flow_style=False, allow_unicode=True, sort_keys=False)
+
+    lines: List[str] = ["---", yaml_block.rstrip(), "---", ""]
+    for section in required_sections:
+        lines.extend([f"# {section}", "", f"<!-- TODO: Fill in {section} -->", ""])
+
+    return "\n".join(lines)
 
 
 def create_record(
@@ -114,26 +142,8 @@ def create_record(
     filename = f"{record_id}-{slug}.md"
     file_path = target_dir / filename
 
-    today_iso = date.today().isoformat()
-
-    frontmatter = {
-        "record_id": record_id,
-        "title": title,
-        "type": record_type,
-        "status": "DRAFT",
-        "created_at": today_iso,
-    }
-    yaml_block = yaml.dump(frontmatter, default_flow_style=False, allow_unicode=True, sort_keys=False)
-
-    lines: List[str] = ["---", yaml_block.rstrip(), "---", ""]
-
-    for section in required_sections:
-        lines.append(f"# {section}")
-        lines.append("")
-        lines.append(f"<!-- TODO: Fill in {section} -->")
-        lines.append("")
-
-    file_path.write_text("\n".join(lines), encoding="utf-8")
+    content = _build_record_content(title, record_type, record_id, required_sections)
+    file_path.write_text(content, encoding="utf-8")
     return file_path
 
 

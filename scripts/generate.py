@@ -76,6 +76,26 @@ def render_template(text: str, context: Dict[str, str]) -> str:
     return rendered
 
 
+def _build_codex_notes_block(enabled: bool) -> str:
+    if not enabled:
+        return "- Codex adapter generation is disabled in this project configuration."
+    return (
+        "- Follow this file, `AGENTS.md`, and the copied framework docs for Codex or JetBrains AI Assistant work.\n"
+        "- If a launch gate is installed, prefer it for new writable sessions."
+    )
+
+
+def _build_claude_notes_block(enabled: bool, hook_enabled: bool) -> str:
+    if not enabled:
+        return "- Claude adapter generation is disabled in this project configuration."
+    hook_note = (
+        "- The generated `.claude/settings.json` and hook wrapper already point to `scripts/hooks/claude_pretooluse_guard.py`."
+        if hook_enabled
+        else "- Claude hook enforcement is disabled in this project configuration."
+    )
+    return "- Claude adapters should follow the same process flow and use the same tracking artifacts.\n" + hook_note
+
+
 def context_from_config(config: Dict[str, Any]) -> Dict[str, str]:
     project = config["project"]
     primary = config["workspaces"]["primary"]
@@ -112,22 +132,8 @@ def context_from_config(config: Dict[str, Any]) -> Dict[str, str]:
         "wp_path": str(records["wp_path"]),
         "adr_path": str(records["adr_path"]),
         "changelog_path": str(records["changelog_path"]),
-        "codex_notes_block": (
-            "- Follow this file, `AGENTS.md`, and the copied framework docs for Codex or JetBrains AI Assistant work.\n"
-            "- If a launch gate is installed, prefer it for new writable sessions."
-            if codex_enabled
-            else "- Codex adapter generation is disabled in this project configuration."
-        ),
-        "claude_notes_block": (
-            "- Claude adapters should follow the same process flow and use the same tracking artifacts.\n"
-            + (
-                "- The generated `.claude/settings.json` and hook wrapper already point to `scripts/hooks/claude_pretooluse_guard.py`."
-                if claude_hook_enabled
-                else "- Claude hook enforcement is disabled in this project configuration."
-            )
-            if claude_enabled
-            else "- Claude adapter generation is disabled in this project configuration."
-        ),
+        "codex_notes_block": _build_codex_notes_block(codex_enabled),
+        "claude_notes_block": _build_claude_notes_block(claude_enabled, claude_hook_enabled),
         "claude_hook_block": (
             "When Claude hook enforcement is enabled, the generated `.claude/settings.json` and "
             "`.claude/hooks/pretooluse-dpc-guard.py` route to `scripts/hooks/claude_pretooluse_guard.py`."
