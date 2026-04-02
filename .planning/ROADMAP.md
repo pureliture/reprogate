@@ -48,11 +48,12 @@ Plans:
   3. Ending a session saves session summary and generates a session observation YAML draft in `.claude/session-data/`
   4. Pre-compact state is automatically preserved to `.claude/session-data/pre-compact-state.json`
   5. Tool-use governance is captured at standard+ profiles (advisory during execution, hard gate at `git commit`), and gate failures are logged to `records/gate-failures/`
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
+- [ ] 02-01-PLAN.md — REPROGATE_HOOK_PROFILE gating: get_profile() + VALID_PROFILES in reprogate_hook_base (HOOK-01)
+- [ ] 02-02-PLAN.md — Session lifecycle hooks: session_start, session_stop, pretooluse_guard PreCompact (HOOK-02, HOOK-03, HOOK-04)
+- [ ] 02-03-PLAN.md — Governance hooks: failure_logger + pretooluse advisory governance (HOOK-05, HOOK-06)
 
 ### Phase 3: Skill Evolution
 **Goal**: Developer can evolve session observations into reusable prose skills through a structured observation→instinct→skill pipeline
@@ -117,7 +118,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Harness Bootstrap | 3/3 | Complete   | 2026-04-02 |
-| 2. Hook Lifecycle | 0/2 | Not started | - |
+| 2. Hook Lifecycle | 0/3 | Not started | - |
 | 3. Skill Evolution | 0/1 | Not started | - |
 | 4. Specialist Agents | 0/1 | Not started | - |
 | 5. Phase Workflow | 0/2 | Not started | - |
