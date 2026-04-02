@@ -29,6 +29,15 @@ ECC와 GSD의 핵심 기제를 과부하 없이 조합해, 1인 개발자가 Cla
 - ✓ **FOUND-04**: Skill 정책 구조 (`skills/*/rules.rego` + `guidelines.md`) — Phase 1에서 완성
 - ✓ **FOUND-05**: pre-commit hook으로 gatekeeper 자동 실행 — Phase 1에서 완성
 
+### Validated in Phase 1 (Harness Bootstrap — 2026-04-02)
+
+- ✓ **INIT-01**: `reprogate init` injects hooks into `.claude/settings.json` + creates `.claude/session-data/`
+- ✓ **INIT-02**: `REPROGATE_DISABLED=1` disables hook layer via `check_disabled()` in `reprogate_hook_base.py`
+- ✓ **INIT-03**: `reprogate disable` removes `_reprogate`-tagged hook entries from `.claude/settings.json`
+- ✓ **INIT-04**: `record_triggers` path patterns gate record requirements in `gatekeeper.py`
+- ✓ **INIT-05**: `generate.py` schema aligned with canonical fields; `load_config()` uses PyYAML
+- ✓ **INIT-06**: Template files (`AGENTS.md.j2`, `CLAUDE.md.j2`) updated to harness identity (ADR-009)
+
 ### Active
 
 - [ ] **HOOK-01**: ECC 방식 hook lifecycle 구현 — pre/post-tool, session persistence hook
@@ -95,4 +104,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-02 — milestone v1.0 harness pivot started*
+*Last updated: 2026-04-02 — Phase 1 (Harness Bootstrap) complete*
