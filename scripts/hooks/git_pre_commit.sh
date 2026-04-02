@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 set -euo pipefail
-python3 scripts/gatekeeper.py
+uv run python3 scripts/gatekeeper.py
