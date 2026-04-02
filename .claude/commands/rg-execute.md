@@ -53,10 +53,23 @@ Do NOT rewrite PLAN.md to match what you actually did. Record the deviation in E
 ## Execute
 
 1. Read `.rg/$ARGUMENTS/PLAN.md` fully
-2. Create `.rg/$ARGUMENTS/EXECUTION-LOG.md` with `## Status: IN_PROGRESS`
+2. Create `.rg/$ARGUMENTS/EXECUTION-LOG.md` with:
+   ```markdown
+   ## Status
+   IN_PROGRESS
+   ```
 3. For each task (in order): implement → verify → record checkpoint in EXECUTION-LOG.md
-4. On completion: set `## Status: COMPLETE`
-5. On unrecoverable error: set `## Status: FAILED`, record in `## Failed Tasks`, stop
+4. On completion: set status section to:
+   ```markdown
+   ## Status
+   COMPLETE
+   ```
+5. On unrecoverable error: set status section to:
+   ```markdown
+   ## Status
+   FAILED
+   ```
+   then record in `## Failed Tasks`, stop
 
 ## Completion
 

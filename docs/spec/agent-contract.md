@@ -27,7 +27,7 @@ EXECUTION-LOG.md
 VERIFICATION.md
 ```
 
-Each agent is **stateless**: it reads its designated input files and produces its designated output files. A phase directory (`.planning/<phase>/`) holds all artifacts for one unit of work.
+Each agent is **stateless**: it reads its designated input files and produces its designated output files. A phase directory (`.rg/<phase-name>/`) holds all artifacts for one unit of work.
 
 ---
 
