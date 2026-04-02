@@ -17,9 +17,9 @@
 
 ### INIT — 하네스 설치 및 활성화 (ADR-013, ADR-015)
 
-- [ ] **INIT-01**: `reprogate init`이 `.claude/settings.json`에 hook 설정을 주입하고 `.claude/session-data/` 디렉토리를 생성한다.
-- [ ] **INIT-02**: `REPROGATE_DISABLED=1` 환경 변수로 hook layer를 임시 비활성화할 수 있다.
-- [ ] **INIT-03**: `reprogate disable`이 `.claude/settings.json`에서 hook 설정을 제거한다.
+- [x] **INIT-01**: `reprogate init`이 `.claude/settings.json`에 hook 설정을 주입하고 `.claude/session-data/` 디렉토리를 생성한다.
+- [x] **INIT-02**: `REPROGATE_DISABLED=1` 환경 변수로 hook layer를 임시 비활성화할 수 있다.
+- [x] **INIT-03**: `reprogate disable`이 `.claude/settings.json`에서 hook 설정을 제거한다.
 - [x] **INIT-04**: `reprogate.yaml`의 `record_triggers` 경로 패턴 기반으로 레코드 요구 여부를 판단한다 (ADR-014).
 - [x] **INIT-05**: `generate.py` 스키마 불일치 해소 — `init.py` 출력 스키마와 정렬 (Asset Inventory blocker).
 - [x] **INIT-06**: `AGENTS.md.j2`·`CLAUDE.md.j2` 템플릿의 구버전 정체성("compiler/gatekeeper") 문구를 harness 정체성으로 교체.
@@ -101,9 +101,9 @@
 | FOUND-03 | Foundation (pre-v1.0) | Complete |
 | FOUND-04 | Foundation (pre-v1.0) | Complete |
 | FOUND-05 | Foundation (pre-v1.0) | Complete |
-| INIT-01 | Phase 1 | Pending |
-| INIT-02 | Phase 1 | Pending |
-| INIT-03 | Phase 1 | Pending |
+| INIT-01 | Phase 1 | Complete |
+| INIT-02 | Phase 1 | Complete |
+| INIT-03 | Phase 1 | Complete |
 | INIT-04 | Phase 1 | Complete |
 | INIT-05 | Phase 1 | Complete |
 | INIT-06 | Phase 1 | Complete |

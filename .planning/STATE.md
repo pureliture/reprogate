@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 01-harness-bootstrap/01-03-PLAN.md
-last_updated: "2026-04-02T05:28:29.673Z"
+stopped_at: Completed 01-harness-bootstrap/01-02-PLAN.md
+last_updated: "2026-04-02T05:28:46.551Z"
 last_activity: 2026-04-02
 progress:
   total_phases: 6
@@ -71,6 +71,8 @@ Recent decisions affecting current work:
 - [Phase 01-harness-bootstrap]: compiler/gatekeeper identity replaced with delivery harness in AGENTS.md.j2 and CLAUDE.md.j2 (ADR-009 alignment)
 - [Phase 01-harness-bootstrap]: Use fnmatch with explicit ** prefix check for Python 3.10/3.11 compatibility in matches_trigger()
 - [Phase 01-harness-bootstrap]: is_record_required() takes config dict to enable unit testing without file I/O
+- [Phase 01-harness-bootstrap]: REPROGATE_HOOKS constant in init.py with _reprogate tag pattern for surgical hook removal via disable command
+- [Phase 01-harness-bootstrap]: check_disabled() convention in reprogate_hook_base.py — Phase 2 hooks call this at startup for REPROGATE_DISABLED=1 early exit
 
 ### Pending Todos
 
@@ -82,6 +84,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-02T05:28:16.972Z
-Stopped at: Completed 01-harness-bootstrap/01-03-PLAN.md
+Last session: 2026-04-02T05:28:46.546Z
+Stopped at: Completed 01-harness-bootstrap/01-02-PLAN.md
 Resume file: None

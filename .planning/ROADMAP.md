@@ -12,7 +12,7 @@ ReproGate v1.0은 ECC 코어(hook lifecycle, skill evolution)와 GSD 플로우(d
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Harness Bootstrap** - `reprogate init/disable` 명령과 설정 인프라로 하네스를 설치·활성화·비활성화할 수 있게 한다
+- [x] **Phase 1: Harness Bootstrap** - `reprogate init/disable` 명령과 설정 인프라로 하네스를 설치·활성화·비활성화할 수 있게 한다 (completed 2026-04-02)
 - [ ] **Phase 2: Hook Lifecycle** - ECC 방식의 session/compact/tool-use/failure hook으로 자동 상태 캡처·거버넌스를 구현한다
 - [ ] **Phase 3: Skill Evolution** - session observation에서 instinct → prose skill까지의 구조화된 진화 파이프라인을 구현한다
 - [ ] **Phase 4: Specialist Agents** - executor, verifier, planner 3종 에이전트를 CC 서브프로세스로 스폰 가능하게 한다
@@ -116,7 +116,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Harness Bootstrap | 1/3 | In Progress|  |
+| 1. Harness Bootstrap | 3/3 | Complete   | 2026-04-02 |
 | 2. Hook Lifecycle | 0/2 | Not started | - |
 | 3. Skill Evolution | 0/1 | Not started | - |
 | 4. Specialist Agents | 0/1 | Not started | - |
