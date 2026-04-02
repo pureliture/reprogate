@@ -61,6 +61,20 @@ ECC와 GSD의 핵심 기제를 과부하 없이 조합해, 1인 개발자가 Cla
 | OMC 제외 | 현재 참조 범위 축소로 범위 명확화; 필요시 이후 ADR로 재도입 | — Pending |
 | CC를 orchestrator로 고정 | 토큰 효율화를 위해 CC가 중심에서 다른 CLI를 sub-agent로 라우팅 | — Pending |
 
+## Current Milestone: v1.0 ReproGate Delivery Harness
+
+**Goal:** ECC 코어(hook lifecycle, skill evolution)와 GSD 플로우(discuss→plan→execute→verify)를 통합한 1인 개발자용 artifact-driven delivery harness 완성
+
+**Target features:**
+- 하네스 설치/활성화/비활성화 (INIT)
+- Hook lifecycle — session, compact, tool-use, failure capture (HOOK)
+- Skill evolution — observation → instinct → prose skill (SKILL-EVO)
+- Phase workflow — CC slash command 기반 discuss/plan/execute/verify (PHASE)
+- 전문 에이전트 MVP — executor, verifier, planner (AGENT)
+- Artifact lifecycle — phase summary, harness health check (LIFECYCLE)
+
+**Foundation (validated):** FOUND-01~05 — CLI, record creation, gatekeeper, skill policy, pre-commit hook
+
 ## Evolution
 
 This document evolves at phase transitions and milestone boundaries.
@@ -79,4 +93,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-02 after harness pivot (ADR-009)*
+*Last updated: 2026-04-02 — milestone v1.0 harness pivot started*

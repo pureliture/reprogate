@@ -1,49 +1,49 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.0
-milestone_name: milestone
-status: Ready to plan
-last_updated: "2026-03-25T02:05:09.882Z"
+milestone_name: ReproGate Delivery Harness
+status: Defining requirements
+last_updated: "2026-04-02T03:50:00.000Z"
 progress:
-  total_phases: 3
-  completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-**Core Value:** ReproGate ensures that AI-assisted development remains rigorous and reproducible by centering the workflow around durable artifacts (Records and Skills) rather than ephemeral chat context.
+**Core Value:** ECC와 GSD의 핵심 기제를 과부하 없이 조합해, 1인 개발자가 Claude Code 위에서 재현 가능하고 기록 기반의 AI 보조 개발을 할 수 있게 한다.
 
-**Current Focus:** Phase 01 — foundation-governance
+**Current Focus:** Defining requirements for harness v1.0
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-04-02 — Milestone v1.0 started (harness pivot)
 
 ## Performance Metrics
 
 - **Velocity:** 0 tasks/session
-- **Health:** 100% (New project)
+- **Health:** 100% (New milestone)
 - **Bottlenecks:** None
 
 ## Accumulated Context
 
 ### Decisions
 
-- 2026-03-24: Use 4 phases (Foundation, MCP, Workflow Automation, HUD) based on research recommendations and requirement clusters.
-- [Phase 01]: Canonical config uses flat structure with record_types and active_skills; generate.py reconciliation deferred
-- [Phase 01]: Structural fallback performs only basic checks (record presence, frontmatter, Verification) -- not a Rego parser per ADR-002
-- [Phase 01]: OPA eval failures treated as deny (fail-closed per D-08); pytest added as dev optional dependency
-- [Phase 01]: Skip generate-dependent smoke tests (generate.py expects old nested config format)
-- [Phase 01]: Use monkeypatch for gatekeeper isolation instead of subprocess (ROOT is module-level constant)
+- 2026-04-02: Compiler/gatekeeper → delivery harness pivot (ADR-009)
+- 2026-04-02: ECC 코어 + GSD 플로우 채택
+- 2026-04-02: OMC 제외, CC를 orchestrator로 고정
+- Phase 1 기술 기반 (FOUND-01~05) validated — record, gatekeeper, CLI, skill, pre-commit hook
 
 ### Todos
 
-- [ ] Initialize Phase 1 plan
+- [ ] Create roadmap from new requirements
 
 ### Blockers
 
@@ -52,11 +52,11 @@ Plan: Not started
 ## Session Continuity
 
 **Last Session:**
-2026-03-25T01:41:33.494Z
+2026-04-02T03:50:00.000Z
 
-- Initialized STATE.md
-- Updated REQUIREMENTS.md traceability
+- Cleaned old milestone artifacts
+- Starting new v1.0 milestone for harness pivot
 
 **Next Steps:**
 
-- `/gsd:plan-phase 1`
+- Create ROADMAP.md from REQUIREMENTS.md
