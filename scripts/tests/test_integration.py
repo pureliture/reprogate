@@ -222,9 +222,11 @@ def test_gatekeeper_fails_with_no_records(tmp_path: pathlib.Path, monkeypatch) -
 
     assert exit_code == 1, f"Gate should fail but got exit {exit_code}: {messages}"
     combined = " ".join(messages).lower()
-    assert "deny" in combined or "fail" in combined or "no records" in combined, (
-        f"Expected deny/fail message, got: {messages}"
-    )
+    # Messages may be in Korean or English — check for record-required failure markers
+    assert (
+        "deny" in combined or "fail" in combined or "no records" in combined
+        or "record-required" in combined or "작업 기록" in combined
+    ), f"Expected deny/fail message, got: {messages}"
 
 
 # ---------------------------------------------------------------------------

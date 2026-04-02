@@ -23,7 +23,8 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
 def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
-    """reprogate.yaml에서 설정을 로딩한다 (PyYAML 의존 없이)."""
+    """reprogate.yaml에서 설정을 로딩한다 (PyYAML 사용)."""
+    import yaml  # type: ignore[import]
     if config_path is None:
         config_path = ROOT / "reprogate.yaml"
     defaults: Dict[str, Any] = {
@@ -36,17 +37,15 @@ def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
     if not config_path.exists():
         return defaults
     text = config_path.read_text(encoding="utf-8")
-    for line in text.splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        if ":" in line and not line.startswith(" "):
-            key, _, value = line.partition(":")
-            key = key.strip()
-            value = value.strip().strip('"').strip("'")
-            if key in ("records_dir", "skills_dir", "project_name"):
-                defaults[key] = value
-    return defaults
+    loaded = yaml.safe_load(text) or {}
+    for key, default_value in defaults.items():
+        if key not in loaded:
+            loaded[key] = default_value
+        elif isinstance(default_value, dict) and isinstance(loaded.get(key), dict):
+            for sub_key, sub_default in default_value.items():
+                if sub_key not in loaded[key]:
+                    loaded[key][sub_key] = sub_default
+    return loaded
 
 
 _config = load_config()
@@ -171,12 +170,13 @@ def is_record_required(config: Dict[str, Any]) -> bool:
     return False
 
 
-def evaluate_gate(strict: bool = False) -> Tuple[int, List[str]]:
+def evaluate_gate(strict: bool = False, config: Dict[str, Any] | None = None) -> Tuple[int, List[str]]:
     """현재 산출물과 기록을 규칙에 대조하여 gate 평가를 수행한다."""
     errors: List[str] = []
     warnings: List[str] = []
 
-    config = load_config()
+    if config is None:
+        config = load_config()
 
     # INIT-04: Check if any staged file triggers a record requirement.
     # If record_triggers are defined and no staged file matches, skip enforcement.
