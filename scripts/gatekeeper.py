@@ -19,22 +19,13 @@ from typing import Any, Dict, List, Tuple
 
 import yaml  # type: ignore[import]
 
+from _config import merge_config_defaults
+
 VERSION = "0.2.0"
 DIVIDER_WIDTH = 50
 REQUIRED_ADR_SECTIONS = ["Context", "Decision", "Consequences"]
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-
-
-def _merge_config_defaults(loaded: Dict[str, Any], defaults: Dict[str, Any]) -> None:
-    """Merge defaults into loaded config in-place (one level deep for dict values)."""
-    for key, default_value in defaults.items():
-        if key not in loaded:
-            loaded[key] = default_value
-        elif isinstance(default_value, dict) and isinstance(loaded.get(key), dict):
-            for sub_key, sub_default in default_value.items():
-                if sub_key not in loaded[key]:
-                    loaded[key][sub_key] = sub_default
 
 
 def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
@@ -51,7 +42,7 @@ def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
         return defaults
     text = config_path.read_text(encoding="utf-8")
     loaded = yaml.safe_load(text) or {}
-    _merge_config_defaults(loaded, defaults)
+    merge_config_defaults(loaded, defaults)
     return loaded
 
 

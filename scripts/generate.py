@@ -8,6 +8,7 @@ from typing import Any, Dict, Iterable, List, Sequence, Tuple
 
 import yaml
 
+from _config import merge_config_defaults
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "reprogate.yaml"
@@ -57,15 +58,7 @@ def load_config(path: pathlib.Path) -> Dict[str, Any]:
     if loaded is None:
         return default_data
 
-    # Merge loaded data with defaults
-    for key, default_value in default_data.items():
-        if key not in loaded:
-            loaded[key] = default_value
-        elif isinstance(default_value, dict) and isinstance(loaded.get(key), dict):
-            for sub_key, sub_default in default_value.items():
-                if sub_key not in loaded[key]:
-                    loaded[key][sub_key] = sub_default
-
+    merge_config_defaults(loaded, default_data)
     return loaded
 
 
