@@ -56,6 +56,6 @@ Operationally, this decision means:
 - [x] The decision explicitly states why the existing milestone continuity is no longer sufficient.
 - [x] `docs/strategy/final-definition.md` is updated to reflect the harness-centered identity.
 - [x] `docs/strategy/vision.md`, `docs/strategy/roadmap.md`, and `docs/strategy/product-boundary.md` are updated to align with the new identity.
-- [ ] `docs/strategy/scenarios.md` is updated if the product boundary changes user flows materially.
+- [x] `docs/strategy/scenarios.md` is updated if the product boundary changes user flows materially.
 - [x] Existing milestone/planning artifacts are archived, superseded, or reset in a traceable way.
 - [x] A new project planning cycle is initialized from the new strategy baseline.
