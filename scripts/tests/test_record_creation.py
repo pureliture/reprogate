@@ -48,11 +48,15 @@ class TestCreateRecord:
     def test_create_adr_frontmatter(self, tmp_path: pathlib.Path) -> None:
         path = create_record("adr", "Test Decision", output_dir=tmp_path)
         content = path.read_text(encoding="utf-8")
-        assert "record_id: \"ADR-001\"" in content
-        assert "type: \"adr\"" in content
-        assert "status: \"DRAFT\"" in content
-        assert "title: \"Test Decision\"" in content
-        assert "created_at:" in content
+        # Verify frontmatter is valid YAML by parsing it
+        import yaml as _yaml
+        fm_text = content.split("---")[1]
+        fm = _yaml.safe_load(fm_text)
+        assert fm["record_id"] == "ADR-001"
+        assert fm["type"] == "adr"
+        assert fm["status"] == "DRAFT"
+        assert fm["title"] == "Test Decision"
+        assert "created_at" in fm
 
     def test_create_adr_sections(self, tmp_path: pathlib.Path) -> None:
         path = create_record("adr", "Test Decision", output_dir=tmp_path)
@@ -88,3 +92,13 @@ class TestCreateRecord:
     def test_slug_generation(self, tmp_path: pathlib.Path) -> None:
         path = create_record("adr", "My Test Decision", output_dir=tmp_path)
         assert "my-test-decision" in path.name
+
+    def test_title_with_special_yaml_characters(self, tmp_path: pathlib.Path) -> None:
+        """Titles with quotes, colons, or newlines must produce valid YAML frontmatter."""
+        import yaml as _yaml
+        tricky_title = 'Fix "quoted": edge case'
+        path = create_record("adr", tricky_title, output_dir=tmp_path)
+        content = path.read_text(encoding="utf-8")
+        fm_text = content.split("---")[1]
+        fm = _yaml.safe_load(fm_text)
+        assert fm["title"] == tricky_title

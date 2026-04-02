@@ -116,16 +116,16 @@ def create_record(
 
     today_iso = date.today().isoformat()
 
-    lines: List[str] = [
-        "---",
-        f'record_id: "{record_id}"',
-        f'title: "{title}"',
-        f'type: "{record_type}"',
-        f'status: "DRAFT"',
-        f'created_at: "{today_iso}"',
-        "---",
-        "",
-    ]
+    frontmatter = {
+        "record_id": record_id,
+        "title": title,
+        "type": record_type,
+        "status": "DRAFT",
+        "created_at": today_iso,
+    }
+    yaml_block = yaml.dump(frontmatter, default_flow_style=False, allow_unicode=True, sort_keys=False)
+
+    lines: List[str] = ["---", yaml_block.rstrip(), "---", ""]
 
     for section in required_sections:
         lines.append(f"# {section}")
