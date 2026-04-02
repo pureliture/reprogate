@@ -13,8 +13,10 @@ dist/
 *.egg-info/
 
 # Local AI runtime state
-.claude/
+.claude/*
 .claude/session-data/
+!.claude/agents/
+!.claude/agents/**
 .codex/
 .dpc/
 .omc/
