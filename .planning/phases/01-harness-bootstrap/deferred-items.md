@@ -35,3 +35,14 @@ Discovered during execution of plan 01-01. These failures existed before plan 01
 - **Impact:** Claude adapter is always generated even when disabled.
 
 *Deferred on: 2026-04-02 during plan 01-01 execution*
+
+### 5. test_gatekeeper.py::TestLoadConfig::test_uses_yaml_safe_load — active_skills not parsed from YAML
+
+- **File:** `scripts/tests/test_gatekeeper.py:45`
+- **Error:** `AssertionError: assert [] == ['record-required', 'decision-documented']`
+- **Cause:** `gatekeeper.py load_config()` uses a primitive line-by-line parser that only extracts `records_dir`, `skills_dir`, and `project_name` keys. It does not parse YAML lists like `active_skills`.
+- **Impact:** `load_config()` always returns `active_skills: []` regardless of what reprogate.yaml contains.
+- **Suggested fix:** Replace the custom line parser with `yaml.safe_load()` for proper YAML parsing.
+- **Note:** This failure was observed during plan 01-02 execution. Not caused by plan 01-02 changes.
+
+*Deferred on: 2026-04-02 during plan 01-02 execution*

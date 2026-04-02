@@ -24,7 +24,7 @@ def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="ReproGate CLI - repository governance tooling.")
     parser.add_argument(
         "command",
-        choices=["init", "generate", "check", "gate", "create", "search", "search-content", "print"],
+        choices=["init", "generate", "check", "gate", "create", "search", "search-content", "print", "disable"],
         help="Subcommand to run.",
     )
     parser.add_argument("extra", nargs=argparse.REMAINDER)
@@ -51,6 +51,8 @@ def main(argv: List[str] | None = None) -> int:
         return run_search(["search-content", *extra])
     if args.command == "print":
         return run_search(["print", *extra])
+    if args.command == "disable":
+        return run_script("disable.py", extra)
     return 1
 
 

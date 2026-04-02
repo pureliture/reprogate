@@ -14,6 +14,7 @@ dist/
 
 # Local AI runtime state
 .claude/
+.claude/session-data/
 .codex/
 .dpc/
 .omc/
