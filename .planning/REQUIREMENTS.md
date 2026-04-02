@@ -26,7 +26,7 @@
 
 ### HOOK — Layer 1: 하네스 코어 (ECC 방식, ADR-011, ADR-013)
 
-- [ ] **HOOK-01**: hook 인프라 — `REPROGATE_HOOK_PROFILE=minimal|standard|strict` 프로파일 게이팅. 모든 hook이 이 프로파일을 준수한다.
+- [x] **HOOK-01**: hook 인프라 — `REPROGATE_HOOK_PROFILE=minimal|standard|strict` 프로파일 게이팅. 모든 hook이 이 프로파일을 준수한다.
 - [ ] **HOOK-02**: SessionStart hook — `.claude/session-data/current-session.json` 초기화 (프로젝트 로컬).
 - [ ] **HOOK-03**: Stop hook — 세션 요약을 `.claude/session-data/`에 저장; session observation YAML 초안 생성.
 - [ ] **HOOK-04**: PreCompact hook — `.claude/session-data/pre-compact-state.json` 저장.
@@ -107,7 +107,7 @@
 | INIT-04 | Phase 1 | Complete |
 | INIT-05 | Phase 1 | Complete |
 | INIT-06 | Phase 1 | Complete |
-| HOOK-01 | Phase 2 | Pending |
+| HOOK-01 | Phase 2 | Complete |
 | HOOK-02 | Phase 2 | Pending |
 | HOOK-03 | Phase 2 | Pending |
 | HOOK-04 | Phase 2 | Pending |

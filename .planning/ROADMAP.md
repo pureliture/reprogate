@@ -51,7 +51,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — REPROGATE_HOOK_PROFILE gating: get_profile() + VALID_PROFILES in reprogate_hook_base (HOOK-01)
+- [x] 02-01-PLAN.md — REPROGATE_HOOK_PROFILE gating: get_profile() + VALID_PROFILES in reprogate_hook_base (HOOK-01)
 - [ ] 02-02-PLAN.md — Session lifecycle hooks: session_start, session_stop, pretooluse_guard PreCompact (HOOK-02, HOOK-03, HOOK-04)
 - [ ] 02-03-PLAN.md — Governance hooks: failure_logger + pretooluse advisory governance (HOOK-05, HOOK-06)
 
@@ -118,7 +118,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Harness Bootstrap | 3/3 | Complete   | 2026-04-02 |
-| 2. Hook Lifecycle | 0/3 | Not started | - |
+| 2. Hook Lifecycle | 1/3 | Executing | - |
 | 3. Skill Evolution | 0/1 | Not started | - |
 | 4. Specialist Agents | 0/1 | Not started | - |
 | 5. Phase Workflow | 0/2 | Not started | - |

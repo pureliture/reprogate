@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 01-harness-bootstrap/01-02-PLAN.md
-last_updated: "2026-04-02T05:39:07.094Z"
-last_activity: 2026-04-02
+status: executing
+stopped_at: Completed 02-hook-lifecycle/02-01-PLAN.md
+last_updated: "2026-04-02T06:30:00.000Z"
+last_activity: 2026-04-02 -- Phase 02 Plan 01 (HOOK-01 profile gating) complete
 progress:
   total_phases: 6
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
-  percent: 0
+  total_plans: 6
+  completed_plans: 4
+  percent: 17
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-02)
 
 **Core value:** ECC와 GSD의 핵심 기제를 과부하 없이 조합해, 1인 개발자가 Claude Code 위에서 재현 가능하고 기록 기반의 AI 보조 개발을 할 수 있게 한다.
-**Current focus:** Phase 01 — harness-bootstrap
+**Current focus:** Phase 02 — hook-lifecycle
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
-Status: Phase complete — ready for verification
-Last activity: 2026-04-02
+Phase: 02 (hook-lifecycle) — EXECUTING
+Plan: 2 of 3
+Status: Executing Phase 02 (Plan 01 complete)
+Last activity: 2026-04-02 -- Phase 02 Plan 01 complete (HOOK-01 profile gating)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█░░░░░░░░░] 17%
 
 ## Performance Metrics
 
@@ -55,6 +55,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01-harness-bootstrap P01 | 4 | 2 tasks | 8 files |
 | Phase 01-harness-bootstrap P03 | 5 | 2 tasks | 6 files |
 | Phase 01-harness-bootstrap P02 | 6 | 2 tasks | 7 files |
+| Phase 02-hook-lifecycle P01 | 8 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -73,6 +74,8 @@ Recent decisions affecting current work:
 - [Phase 01-harness-bootstrap]: is_record_required() takes config dict to enable unit testing without file I/O
 - [Phase 01-harness-bootstrap]: REPROGATE_HOOKS constant in init.py with _reprogate tag pattern for surgical hook removal via disable command
 - [Phase 01-harness-bootstrap]: check_disabled() convention in reprogate_hook_base.py — Phase 2 hooks call this at startup for REPROGATE_DISABLED=1 early exit
+- [Phase 02-hook-lifecycle P01]: VALID_PROFILES as frozenset; get_profile() defaults to 'minimal' for unknown/unset values (fail-safe); .lower() normalization for case-insensitive env var
+- [Phase 02-hook-lifecycle P01]: HOOK-01 satisfied — get_profile() available for Plans 02-02 and 02-03 import
 
 ### Pending Todos
 
@@ -84,6 +87,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-02T05:28:46.546Z
-Stopped at: Completed 01-harness-bootstrap/01-02-PLAN.md
+Last session: 2026-04-02T06:30:00.000Z
+Stopped at: Completed 02-hook-lifecycle/02-01-PLAN.md
 Resume file: None
