@@ -1,59 +1,123 @@
-# Roadmap
+# Roadmap: ReproGate Delivery Harness
+
+## Overview
+
+ReproGate v1.0은 ECC 코어(hook lifecycle, skill evolution)와 GSD 플로우(discuss→plan→execute→verify)를 통합한 1인 개발자용 artifact-driven delivery harness다. Phase 1 기술 기반(CLI, gatekeeper, records, skills)이 이미 작동 중이며, 이 위에 하네스 설치/활성화(INIT) → hook lifecycle(HOOK) → skill evolution(SKILL-EVO) → specialist agents(AGENT) → phase workflow(PHASE) → artifact lifecycle(LIFECYCLE) 순으로 구축한다.
 
 ## Phases
 
-- [ ] **Phase 1: Foundation & Governance** - Establish core repository initialization and policy enforcement.
-- [ ] **Phase 2: Claude Code Workflow Integration** - Automate the end-to-end workflow lifecycle through durable artifacts and Claude Code adapter commands.
-- [ ] **Phase 3: Visibility & Monitoring (HUD)** - Provide real-time status and progress tracking via a terminal dashboard.
+**Phase Numbering:**
+- Integer phases (1, 2, 3): Planned milestone work
+- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+
+Decimal phases appear between their surrounding integers in numeric order.
+
+- [ ] **Phase 1: Harness Bootstrap** - `reprogate init/disable` 명령과 설정 인프라로 하네스를 설치·활성화·비활성화할 수 있게 한다
+- [ ] **Phase 2: Hook Lifecycle** - ECC 방식의 session/compact/tool-use/failure hook으로 자동 상태 캡처·거버넌스를 구현한다
+- [ ] **Phase 3: Skill Evolution** - session observation에서 instinct → prose skill까지의 구조화된 진화 파이프라인을 구현한다
+- [ ] **Phase 4: Specialist Agents** - executor, verifier, planner 3종 에이전트를 CC 서브프로세스로 스폰 가능하게 한다
+- [ ] **Phase 5: Phase Workflow** - discuss→plan→execute→verify 슬래시 커맨드와 phase artifact packet 구조를 구현한다
+- [ ] **Phase 6: Artifact Lifecycle** - 완료된 phase 요약·공유와 하네스 상태 점검 명령을 구현한다
 
 ## Phase Details
 
-### Phase 1: Foundation & Governance
-**Goal**: Establish the core framework for repository initialization, record creation, and policy enforcement.
-**Depends on**: Nothing
-**Requirements**: CORE-01, CORE-02, CORE-03, CORE-04, CORE-05
-**Success Criteria**:
-  1. User can initialize a new repository with ReproGate using `scripts/init.py`.
-  2. User can generate work records (ADRs/RFCs) via the CLI.
-  3. The gatekeeper blocks commits/operations if required records are missing or invalid according to Skill rules.
-  4. All core tools are accessible through a single `reprogate` CLI entry point.
-**Plans:** 0/3 plans executed
-
-Plans:
-- [x] 01-01-PLAN.md — Canonical config schema, record creation with sequential IDs, CLI rebranding and console-script entry point
-- [x] 01-02-PLAN.md — OPA-wrapper gatekeeper with structural fallback (per ADR-002), PyYAML config, fail-closed enforcement
-- [ ] 01-03-PLAN.md — Bootstrap test fixes and end-to-end integration tests for full init->create->check pipeline
-
-### Phase 2: Claude Code Workflow Integration
-**Goal**: Automate the research→strategy→execution lifecycle using durable artifacts and Claude Code as the primary harness. Establish the artifact contract that future harnesses can adopt without changing core semantics.
-**Depends on**: Phase 1
-**Requirements**: AUTO-01, AUTO-02
-**Success Criteria**:
-  1. User can trigger a workflow cycle via Claude Code commands that progresses from research to plan execution, leaving inspectable artifacts at each stage.
-  2. The system generates and tracks progress via durable `ROADMAP.md` and `STATE.md` artifacts; any session can resume from these artifacts.
-  3. Automated workflow tasks are subject to the same gatekeeper checks as manual ones.
-  4. Claude Code adapter commands are generated via `scripts/generate.py` and live under `.claude/commands/`, keeping core logic harness-independent.
-**Plans:** 3 plans
-
-Plans:
-- [ ] 02-01-PLAN.md — Wave 0 test scaffolds: failing stubs for workflow.py and generate extension (AUTO-01, AUTO-02)
-- [ ] 02-02-PLAN.md — scripts/workflow.py lifecycle coordinator and three Claude Code command templates (AUTO-01, AUTO-02)
-- [ ] 02-03-PLAN.md — cli.py and generate.py extension wiring, run generator to produce .claude/commands/ artifacts (AUTO-01, AUTO-02)
-
-### Phase 3: Visibility & Monitoring (HUD)
-**Goal**: Provide real-time visibility into gate status and project progress via a terminal dashboard.
-**Depends on**: Phase 2
-**Requirements**: UI-01
-**Success Criteria**:
-  1. User can view a real-time, terminal-based dashboard showing the status of all gates (pass/fail).
-  2. The HUD displays project progress based on the current `STATE.md` and `ROADMAP.md`.
+### Phase 1: Harness Bootstrap
+**Goal**: Developer can install, activate, configure, and deactivate the ReproGate harness with a single command
+**Depends on**: Nothing (builds on FOUND-01~05 foundation)
+**Requirements**: INIT-01, INIT-02, INIT-03, INIT-04, INIT-05, INIT-06
+**Success Criteria** (what must be TRUE):
+  1. Running `reprogate init` creates hook configuration in `.claude/settings.json` and initializes `.claude/session-data/` directory
+  2. Setting `REPROGATE_DISABLED=1` disables all hook-layer behavior without uninstalling
+  3. Running `reprogate disable` cleanly removes hook configuration from `.claude/settings.json`
+  4. `reprogate.yaml` `record_triggers` path patterns correctly determine when a record is required
+  5. Template files (`AGENTS.md.j2`, `CLAUDE.md.j2`) reflect harness identity, and `generate.py` output schema aligns with `init.py`
 **Plans**: TBD
-**UI hint**: yes
 
-## Progress Table
+Plans:
+- [ ] 01-01: TBD
+- [ ] 01-02: TBD
+
+### Phase 2: Hook Lifecycle
+**Goal**: Harness automatically captures session state, governance events, and gate failures through the ECC hook lifecycle
+**Depends on**: Phase 1 (init injects hook configuration)
+**Requirements**: HOOK-01, HOOK-02, HOOK-03, HOOK-04, HOOK-05, HOOK-06
+**Success Criteria** (what must be TRUE):
+  1. Hook behavior varies by `REPROGATE_HOOK_PROFILE` (minimal/standard/strict) — all hooks respect the active profile
+  2. Starting a Claude Code session initializes `current-session.json` in `.claude/session-data/`
+  3. Ending a session saves session summary and generates a session observation YAML draft in `.claude/session-data/`
+  4. Pre-compact state is automatically preserved to `.claude/session-data/pre-compact-state.json`
+  5. Tool-use governance is captured at standard+ profiles (advisory during execution, hard gate at `git commit`), and gate failures are logged to `records/gate-failures/`
+**Plans**: TBD
+
+Plans:
+- [ ] 02-01: TBD
+- [ ] 02-02: TBD
+
+### Phase 3: Skill Evolution
+**Goal**: Developer can evolve session observations into reusable prose skills through a structured observation→instinct→skill pipeline
+**Depends on**: Phase 2 (Stop hook generates session observations)
+**Requirements**: SKILL-EVO-01, SKILL-EVO-02, SKILL-EVO-03, SKILL-EVO-04
+**Success Criteria** (what must be TRUE):
+  1. Stop hook automatically generates instinct YAML drafts from session observations
+  2. Running `/rg:learn-eval` evaluates instinct quality and returns a Save/Improve/Absorb/Drop verdict
+  3. Running `/rg:evolve` clusters related instincts and generates a prose skill draft
+  4. Developer can manually author `.rego` rules from prose skills (automated rego conversion is explicitly v2)
+**Plans**: TBD
+
+Plans:
+- [ ] 03-01: TBD
+
+### Phase 4: Specialist Agents
+**Goal**: Three specialist agents (executor, verifier, planner) can run as independent CC sub-processes with clear input/output contracts
+**Depends on**: Phase 1 (CLI infrastructure)
+**Requirements**: AGENT-01, AGENT-02, AGENT-03
+**Success Criteria** (what must be TRUE):
+  1. `gsd-executor` accepts a plan file, executes tasks with atomic commits, and records deviations
+  2. `gsd-verifier` performs goal-backward verification against `must_haves` and produces `VERIFICATION.md`
+  3. `gsd-planner` decomposes work into tasks, derives `must_haves` (truths/artifacts/key_links), and produces `PLAN.md`
+**Plans**: TBD
+
+Plans:
+- [ ] 04-01: TBD
+
+### Phase 5: Phase Workflow
+**Goal**: Developer can run the full discuss→plan→execute→verify cycle through `/rg:*` slash commands with all artifacts organized in phase packets
+**Depends on**: Phase 4 (phase commands spawn specialist agents)
+**Requirements**: PHASE-01, PHASE-02, PHASE-03, PHASE-04, PHASE-05, PHASE-06
+**Success Criteria** (what must be TRUE):
+  1. `/rg:discuss-phase N` runs an interactive discussion and produces `CONTEXT.md` in the phase directory
+  2. `/rg:plan-phase N` spawns gsd-planner and produces `{N}-{M}-PLAN.md` with `must_haves` frontmatter
+  3. `/rg:execute-phase N` spawns gsd-executor sequentially and produces `{N}-{M}-SUMMARY.md`
+  4. `/rg:verify-phase N` spawns gsd-verifier and produces `VERIFICATION.md` checked against must_haves
+  5. `/rg:next` auto-detects current state from STATE.md and routes to the correct next step; all artifacts live in `.planning/phases/{NN}-{slug}/`
+**Plans**: TBD
+
+Plans:
+- [ ] 05-01: TBD
+- [ ] 05-02: TBD
+
+### Phase 6: Artifact Lifecycle
+**Goal**: Developer can summarize completed work for sharing and monitor harness health at a glance
+**Depends on**: Phase 5 (needs phase artifacts to summarize), Phase 2 (needs hooks to check)
+**Requirements**: LIFECYCLE-01, LIFECYCLE-02
+**Success Criteria** (what must be TRUE):
+  1. `/rg:phase-summary` generates a readable summary/share document from completed phase artifacts
+  2. `/rg:harness-check` reports hook activation status, skill policy validity, and lists unresolved gate failures
+**Plans**: TBD
+
+Plans:
+- [ ] 06-01: TBD
+
+## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Governance | 0/3 | Planned    |  |
-| 2. Claude Code Workflow Integration | 0/3 | Planned | - |
-| 3. Visibility & Monitoring (HUD) | 0/1 | Not started | - |
+| 1. Harness Bootstrap | 0/2 | Not started | - |
+| 2. Hook Lifecycle | 0/2 | Not started | - |
+| 3. Skill Evolution | 0/1 | Not started | - |
+| 4. Specialist Agents | 0/1 | Not started | - |
+| 5. Phase Workflow | 0/2 | Not started | - |
+| 6. Artifact Lifecycle | 0/1 | Not started | - |

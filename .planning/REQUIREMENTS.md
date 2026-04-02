@@ -96,23 +96,50 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| FOUND-01 ~ FOUND-05 | Phase 1 | Complete |
-| INIT-01 ~ INIT-06 | Phase 2 | Pending |
-| HOOK-01 ~ HOOK-06 | Phase 2 | Pending |
-| SKILL-EVO-01 ~ SKILL-EVO-04 | Phase 3 | Pending |
-| PHASE-01 ~ PHASE-06 | Phase 3 | Pending |
-| AGENT-01 ~ AGENT-03 | Phase 3 | Pending |
-| LIFECYCLE-01 ~ LIFECYCLE-02 | Phase 4 | Pending |
+| FOUND-01 | Foundation (pre-v1.0) | Complete |
+| FOUND-02 | Foundation (pre-v1.0) | Complete |
+| FOUND-03 | Foundation (pre-v1.0) | Complete |
+| FOUND-04 | Foundation (pre-v1.0) | Complete |
+| FOUND-05 | Foundation (pre-v1.0) | Complete |
+| INIT-01 | Phase 1 | Pending |
+| INIT-02 | Phase 1 | Pending |
+| INIT-03 | Phase 1 | Pending |
+| INIT-04 | Phase 1 | Pending |
+| INIT-05 | Phase 1 | Pending |
+| INIT-06 | Phase 1 | Pending |
+| HOOK-01 | Phase 2 | Pending |
+| HOOK-02 | Phase 2 | Pending |
+| HOOK-03 | Phase 2 | Pending |
+| HOOK-04 | Phase 2 | Pending |
+| HOOK-05 | Phase 2 | Pending |
+| HOOK-06 | Phase 2 | Pending |
+| SKILL-EVO-01 | Phase 3 | Pending |
+| SKILL-EVO-02 | Phase 3 | Pending |
+| SKILL-EVO-03 | Phase 3 | Pending |
+| SKILL-EVO-04 | Phase 3 | Pending |
+| AGENT-01 | Phase 4 | Pending |
+| AGENT-02 | Phase 4 | Pending |
+| AGENT-03 | Phase 4 | Pending |
+| PHASE-01 | Phase 5 | Pending |
+| PHASE-02 | Phase 5 | Pending |
+| PHASE-03 | Phase 5 | Pending |
+| PHASE-04 | Phase 5 | Pending |
+| PHASE-05 | Phase 5 | Pending |
+| PHASE-06 | Phase 5 | Pending |
+| LIFECYCLE-01 | Phase 6 | Pending |
+| LIFECYCLE-02 | Phase 6 | Pending |
 | SKILL-EVO-AUTO-01 | v2 | Deferred |
 | VIS-01 | v2 | Deferred |
-| INTEG-01 ~ INTEG-02 | v2 | Deferred |
+| INTEG-01 | v2 | Deferred |
+| INTEG-02 | v2 | Deferred |
 | SCALE-01 | v2 | Deferred |
 
 **Coverage:**
-- v1 requirements: 29개 (FOUND 5 완료 + 미완 24개)
-- Mapped to phases: 29
+- v1 active requirements: 27 (INIT 6 + HOOK 6 + SKILL-EVO 4 + AGENT 3 + PHASE 6 + LIFECYCLE 2)
+- Foundation (complete): 5 (FOUND-01~05)
+- Mapped to phases: 32/32 ✓
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-02*
-*Last updated: 2026-04-02 after harness pivot research (ADR-009 ~ ADR-015)*
+*Last updated: 2026-04-02 — roadmap created, full traceability table*
