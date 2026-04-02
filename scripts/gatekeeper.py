@@ -177,6 +177,99 @@ def is_record_required(config: Dict[str, Any]) -> bool:
     return False
 
 
+RecordList = List[Tuple[pathlib.Path, Dict[str, Any], List[str]]]
+
+
+def _check_record_required(
+    records: RecordList,
+    skill_names: List[str],
+    errors: List[str],
+) -> None:
+    """Rule 1: 기록 존재 검사."""
+    if "record-required" not in skill_names:
+        return
+    if len(records) == 0:
+        errors.append("❌ [record-required] 작업 기록이 필요합니다. records/에 RFC 또는 ADR을 작성해 주세요.")
+    else:
+        print("✅ [record-required] 통과")
+
+
+def _check_frontmatter(records: RecordList, errors: List[str]) -> None:
+    """Frontmatter 필수 필드 검사 (모든 레코드)."""
+    for path, fm, _ in records:
+        relative = path.relative_to(ROOT)
+        if not fm:
+            errors.append(f"❌ {relative}: YAML Frontmatter가 없습니다.")
+            continue
+        for field in REQUIRED_FRONTMATTER_FIELDS:
+            if field not in fm:
+                errors.append(f"❌ {relative}: 필수 필드 '{field}'가 누락되었습니다.")
+
+
+def _check_decision_documented(
+    records: RecordList,
+    skill_names: List[str],
+    errors: List[str],
+    warnings: List[str],
+) -> None:
+    """Rule 2: ADR 존재 여부 및 섹션 검사."""
+    if "decision-documented" not in skill_names:
+        return
+    adr_records = [r for r in records if r[1].get("type") == "adr"]
+    if len(adr_records) == 0:
+        warnings.append("⚠️  [decision-documented] 의사결정 기록(ADR)이 없습니다. 중요한 기술적 결정이 있다면 records/adr/에 작성해 주세요.")
+        return
+    for path, _, secs in adr_records:
+        relative = path.relative_to(ROOT)
+        for section in REQUIRED_ADR_SECTIONS:
+            if section not in secs:
+                errors.append(f"❌ [decision-documented] {relative}에 {section} 섹션이 누락되었습니다.")
+    if all(
+        all(section in secs for section in REQUIRED_ADR_SECTIONS)
+        for _, _, secs in adr_records
+    ):
+        print("✅ [decision-documented] 통과")
+
+
+def _check_verification_present(
+    records: RecordList,
+    skill_names: List[str],
+    errors: List[str],
+) -> None:
+    """Rule 3: 모든 기록에 Verification 섹션."""
+    if "verification-present" not in skill_names:
+        return
+    passed = True
+    for path, _, secs in records:
+        if "Verification" not in secs:
+            errors.append(f"❌ [verification-present] {path.relative_to(ROOT)}에 Verification 섹션이 누락되었습니다.")
+            passed = False
+    if passed and len(records) > 0:
+        print("✅ [verification-present] 통과")
+
+
+def _check_scope_defined(
+    records: RecordList,
+    skill_names: List[str],
+    errors: List[str],
+) -> None:
+    """Rule 4: RFC 기록에 Summary 및 Design/Proposal 섹션."""
+    if "scope-defined" not in skill_names:
+        return
+    rfc_records = [r for r in records if r[1].get("type") == "rfc"]
+    passed = True
+    for path, _, secs in rfc_records:
+        relative = path.relative_to(ROOT)
+        if "Summary" not in secs:
+            errors.append(f"❌ [scope-defined] {relative}에 Summary 섹션이 누락되었습니다.")
+            passed = False
+        if "Design" not in secs and "Design / Proposal" not in secs:
+            errors.append(f"❌ [scope-defined] {relative}에 Design 또는 Design / Proposal 섹션이 누락되었습니다.")
+            passed = False
+    if passed and len(rfc_records) > 0:
+        print("✅ [scope-defined] 통과")
+
+
 def evaluate_gate(strict: bool = False, config: Dict[str, Any] | None = None) -> Tuple[int, List[str]]:
     """현재 산출물과 기록을 규칙에 대조하여 gate 평가를 수행한다."""
     errors: List[str] = []
@@ -200,64 +293,11 @@ def evaluate_gate(strict: bool = False, config: Dict[str, Any] | None = None) ->
     print(f"🛠  Skills:  {len(skills)}개 발견")
     print()
 
-    # Rule 1: record-required (기록 존재 검사)
-    if "record-required" in skill_names:
-        if len(records) == 0:
-            errors.append("❌ [record-required] 작업 기록이 필요합니다. records/에 RFC 또는 ADR을 작성해 주세요.")
-        else:
-            print("✅ [record-required] 통과")
-
-    # Frontmatter 필수 필드 검사 (기본 룰)
-    for path, fm, _ in records:
-        relative = path.relative_to(ROOT)
-        if not fm:
-            errors.append(f"❌ {relative}: YAML Frontmatter가 없습니다.")
-            continue
-        for field in REQUIRED_FRONTMATTER_FIELDS:
-            if field not in fm:
-                errors.append(f"❌ {relative}: 필수 필드 '{field}'가 누락되었습니다.")
-
-    # Rule 2: decision-documented (ADR 존재 여부 및 섹션 검사)
-    if "decision-documented" in skill_names:
-        adr_records = [r for r in records if r[1].get("type") == "adr"]
-        if len(adr_records) == 0:
-            warnings.append("⚠️  [decision-documented] 의사결정 기록(ADR)이 없습니다. 중요한 기술적 결정이 있다면 records/adr/에 작성해 주세요.")
-        else:
-            for path, fm, secs in adr_records:
-                relative = path.relative_to(ROOT)
-                for section in REQUIRED_ADR_SECTIONS:
-                    if section not in secs:
-                        errors.append(f"❌ [decision-documented] {relative}에 {section} 섹션이 누락되었습니다.")
-            if all(
-                all(section in secs for section in REQUIRED_ADR_SECTIONS)
-                for _, _, secs in adr_records
-            ):
-                print("✅ [decision-documented] 통과")
-
-    # Rule 3: verification-present (모든 기록에 Verification 섹션)
-    if "verification-present" in skill_names:
-        passed = True
-        for path, fm, secs in records:
-            if "Verification" not in secs:
-                errors.append(f"❌ [verification-present] {path.relative_to(ROOT)}에 Verification 섹션이 누락되었습니다.")
-                passed = False
-        if passed and len(records) > 0:
-            print("✅ [verification-present] 통과")
-
-    # Rule 4: scope-defined (RFC 기록에 Summary 및 Design/Proposal 섹션)
-    if "scope-defined" in skill_names:
-        rfc_records = [r for r in records if r[1].get("type") == "rfc"]
-        passed = True
-        for path, fm, secs in rfc_records:
-            relative = path.relative_to(ROOT)
-            if "Summary" not in secs:
-                errors.append(f"❌ [scope-defined] {relative}에 Summary 섹션이 누락되었습니다.")
-                passed = False
-            if "Design" not in secs and "Design / Proposal" not in secs:
-                errors.append(f"❌ [scope-defined] {relative}에 Design 또는 Design / Proposal 섹션이 누락되었습니다.")
-                passed = False
-        if passed and len(rfc_records) > 0:
-            print("✅ [scope-defined] 통과")
+    _check_record_required(records, skill_names, errors)
+    _check_frontmatter(records, errors)
+    _check_decision_documented(records, skill_names, errors, warnings)
+    _check_verification_present(records, skill_names, errors)
+    _check_scope_defined(records, skill_names, errors)
 
     return (1 if errors else 0), errors + warnings
 
