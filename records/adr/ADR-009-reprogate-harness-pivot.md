@@ -54,8 +54,8 @@ Operationally, this decision means:
 ## Verification
 - [x] The pivot note is captured in a durable decision record.
 - [x] The decision explicitly states why the existing milestone continuity is no longer sufficient.
-- [ ] `docs/strategy/final-definition.md` is updated to reflect the harness-centered identity.
-- [ ] `docs/strategy/vision.md`, `docs/strategy/roadmap.md`, and `docs/strategy/product-boundary.md` are updated to align with the new identity.
+- [x] `docs/strategy/final-definition.md` is updated to reflect the harness-centered identity.
+- [x] `docs/strategy/vision.md`, `docs/strategy/roadmap.md`, and `docs/strategy/product-boundary.md` are updated to align with the new identity.
 - [ ] `docs/strategy/scenarios.md` is updated if the product boundary changes user flows materially.
-- [ ] Existing milestone/planning artifacts are archived, superseded, or reset in a traceable way.
-- [ ] A new project planning cycle is initialized from the new strategy baseline.
+- [x] Existing milestone/planning artifacts are archived, superseded, or reset in a traceable way.
+- [x] A new project planning cycle is initialized from the new strategy baseline.

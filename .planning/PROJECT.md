@@ -10,7 +10,7 @@ ECC와 GSD의 핵심 기제를 과부하 없이 조합해, 1인 개발자가 Cla
 
 ## Context
 
-이 정의는 2026-04-02 피벗 노트(`.github/notes/2026-04-02-reprogate-harness-ecc-gsd.md`)와 ADR-009를 기반으로 한다. 이전 milestone의 compiler/gatekeeper framing은 superseded 처리되었고, Phase 1의 기술 산출물(record 구조, gatekeeper 기반)은 기술 기반으로 유지하되 제품 정체성은 harness로 재정의한다.
+이 정의는 ADR-009(`records/adr/ADR-009-reprogate-harness-pivot.md`)를 기반으로 한다. 이전 milestone의 compiler/gatekeeper framing은 superseded 처리되었고, Phase 1의 기술 산출물(record 구조, gatekeeper 기반)은 기술 기반으로 유지하되 제품 정체성은 harness로 재정의한다.
 
 **하네스 구조:**
 - **Layer 1 — 하네스 코어 (ECC 방식)**: hook lifecycle, state persistence, audit/gate surface, skill generation/evolution
@@ -23,9 +23,11 @@ ECC와 GSD의 핵심 기제를 과부하 없이 조합해, 1인 개발자가 Cla
 
 ### Validated
 
-- ✓ **CORE-01**: 작업 기록(ADR, RFC) 생성 및 gatekeeper 검증 기반 — Phase 1에서 완성
-- ✓ **CORE-02**: OPA/Rego 기반 Skill 정책 평가 구조 — Phase 1에서 완성
-- ✓ **CORE-03**: 통합 CLI 진입점(`reprogate`) — Phase 1에서 완성
+- ✓ **FOUND-01**: `reprogate` CLI 통합 진입점 (`scripts/cli.py`) — Phase 1에서 완성
+- ✓ **FOUND-02**: 작업 기록(ADR/RFC) 생성·시퀀셜 ID 부여 — Phase 1에서 완성
+- ✓ **FOUND-03**: OPA/Rego 기반 gatekeeper 검증 — Phase 1에서 완성
+- ✓ **FOUND-04**: Skill 정책 구조 (`skills/*/rules.rego` + `guidelines.md`) — Phase 1에서 완성
+- ✓ **FOUND-05**: pre-commit hook으로 gatekeeper 자동 실행 — Phase 1에서 완성
 
 ### Active
 

@@ -7,6 +7,8 @@
 
 ## Executive Summary
 
+> **⚠️ Staleness Notice (2026-04-03):** This research was conducted BEFORE the harness pivot (ADR-009). Approximately 40-50% of stack and architecture recommendations are now stale. OPA/Rego, artifact-driven philosophy, and pitfall warnings remain current. LangGraph, MCP, Pydantic AI stack recommendations are superseded by the CC-centered harness model. See `.planning/MILESTONE-REVIEWS.md` for detailed staleness assessment.
+
 ReproGate is a reproducible AI engineering framework designed to move repository governance from "vibe checks" to formal, policy-driven verification. It addresses the growing challenge of "AI slop" and inconsistent engineering standards in AI-collaborative environments by enforcing mandatory work records (ADRs/RFCs) and validating them against machine-readable "Skills" using Open Policy Agent (OPA). Experts build these systems by decoupling policy from execution and using durable, stateful agent orchestration.
 
 The recommended approach centers on an "Artifact-driven" philosophy where all state is stored in Git-resident Markdown files. Technical implementation relies on LangGraph for resilient multi-agent workflows, Pydantic AI for structured data integrity, and the Model Context Protocol (MCP) to provide a standardized interface for external AI tools. This architecture ensures that governance is not a "black box" but a transparent, version-controlled part of the codebase.

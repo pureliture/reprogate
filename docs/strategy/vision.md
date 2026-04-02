@@ -2,7 +2,7 @@
 
 ## Summary
 
-> **작업 기록을 기반으로 AI 협업을 재현 가능한 엔지니어링 체계로 바꾸는 방법론 컴파일러이자 Gatekeeper**
+> **작업 기록을 기반으로 AI 협업을 재현 가능한 엔지니어링 체계로 바꾸는 artifact-driven delivery harness**
 
 ## Tagline
 

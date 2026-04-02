@@ -6,9 +6,11 @@
 
 ## Core Identity
 
-> **ReproGate는 작업 기록을 필수 산출물로 삼아, AI와 협업하며 얻은 작업 패턴을 Skill로 누적하고 이를 규칙으로 강제하는 개인·팀용 방법론 컴파일러다.**
+> **ReproGate는 ECC 코어(hook lifecycle, skill evolution)와 GSD 플로우(discuss→plan→execute→verify)를 하나로 묶어, 1인 개발자가 Claude Code 위에서 재현 가능하고 기록 기반의 AI 보조 개발을 할 수 있게 하는 delivery harness다.**
 
-ReproGate의 핵심은 단순한 프롬프트 모음도, 무거운 상태 추적 오케스트레이터도 아니다. ReproGate는 **작업 패턴을 기록 가능한 형태로 자산화하고**, 그 기록 위에서 **규칙을 평가하고 강제하는 Compiler + Gatekeeper**다.
+ReproGate의 핵심은 단순한 프롬프트 모음도, 무거운 상태 추적 오케스트레이터도 아니다. ReproGate는 **작업 패턴을 기록 가능한 형태로 자산화하고**, 그 기록 위에서 **hook으로 자동 캡처하고, phase 워크플로우로 작업을 구조화하며, gate로 재현성을 강제하는 artifact-driven delivery harness**다.
+
+> **참조:** 이 정의는 ADR-009(하네스 피벗)에 의해 기존 "방법론 컴파일러/gatekeeper" 정체성에서 재정의되었다.
 
 ## 왜 기록이 중심인가
 
@@ -127,7 +129,7 @@ ReproGate는 “지금 몇 단계인가” 같은 무거운 상태 추적 자체
 
 결과적으로 ReproGate 코어는 단순히 규칙만 평가하지만, 밖에서 보면 **작업 순서가 강제되는 것처럼 보이는 오케스트레이션 효과**가 나타난다.
 
-즉 ReproGate는 **state-driven orchestrator**라기보다 **artifact-driven compiler/gatekeeper**다.
+즉 ReproGate는 **state-driven orchestrator**라기보다 **artifact-driven delivery harness**다. hook이 자동으로 상태를 캡처하고, phase 워크플로우가 작업을 구조화하며, gate가 재현성 결손을 차단한다.
 
 ## 팀 레벨의 의미
 
@@ -171,4 +173,4 @@ ReproGate가 집중하는 것은 다섯 가지다:
 
 ## 최종 정의
 
-> **ReproGate는 작업 기록을 필수 산출물로 남기게 하고, 그 기록에서 얻은 작업 패턴을 Skill로 누적하며, 이를 규칙으로 강제함으로써, 개념과 기억에 의존하는 AI 코딩을 기록으로 증명하는 AI 엔지니어링으로 전환하는 방법론 컴파일러다.**
+> **ReproGate는 작업 기록을 필수 산출물로 남기게 하고, 그 기록에서 얻은 작업 패턴을 Skill로 누적하며, hook으로 자동 캡처하고 phase 워크플로우로 구조화하여, 개념과 기억에 의존하는 AI 코딩을 기록으로 증명하는 AI 엔지니어링으로 전환하는 delivery harness다.**
