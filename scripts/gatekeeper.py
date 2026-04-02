@@ -10,8 +10,10 @@ Stage 0: 파일 존재 검사만 수행
 Stage 1: reprogate.yaml 로딩 + 섹션 레벨 검사 + Git Hook 연동
 """
 import argparse
+import fnmatch
 import pathlib
 import re
+import subprocess
 import sys
 from typing import Any, Dict, List, Tuple
 
@@ -112,10 +114,76 @@ def collect_skills() -> List[pathlib.Path]:
     return skills
 
 
+def get_changed_files() -> List[str]:
+    """Return list of staged file paths from git diff --cached --name-only.
+
+    Returns empty list if git is unavailable or not in a repo.
+    Uses --cached (staged) rather than HEAD so pre-commit hooks see correct scope.
+    """
+    result = subprocess.run(
+        ["git", "diff", "--cached", "--name-only"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        return []
+    return [f.strip() for f in result.stdout.splitlines() if f.strip()]
+
+
+def matches_trigger(filepath: str, pattern: str) -> bool:
+    """Return True if filepath matches the given glob pattern.
+
+    Uses fnmatch for Python 3.10/3.11 compatibility (pathlib.match() does not
+    support ** cross-directory matching before Python 3.12).
+
+    Examples:
+        matches_trigger("scripts/foo.py", "scripts/**")  -> True
+        matches_trigger("scripts/sub/bar.py", "scripts/**")  -> True
+        matches_trigger("README.md", "scripts/**")  -> False
+    """
+    normalized = filepath.replace("\\", "/")
+    if "**" in pattern:
+        # Split on ** and check that filepath starts with the prefix segment
+        prefix = pattern.split("**")[0].rstrip("/")
+        return normalized.startswith(prefix + "/") or normalized == prefix
+    return fnmatch.fnmatch(normalized, pattern)
+
+
+def is_record_required(config: Dict[str, Any]) -> bool:
+    """Return True if the current staged commit touches any record-trigger paths.
+
+    Reads record_triggers from config. If no triggers are defined, returns False
+    (no-trigger == no record required). If triggers are defined, checks staged
+    files against each pattern using matches_trigger().
+
+    Used by evaluate_gate() to scope enforcement to commits that actually
+    warrant a decision record.
+    """
+    triggers = config.get("record_triggers", [])
+    if not triggers:
+        return False
+    changed = get_changed_files()
+    for filepath in changed:
+        for trigger in triggers:
+            if matches_trigger(filepath, trigger["pattern"]):
+                return True
+    return False
+
+
 def evaluate_gate(strict: bool = False) -> Tuple[int, List[str]]:
     """현재 산출물과 기록을 규칙에 대조하여 gate 평가를 수행한다."""
     errors: List[str] = []
     warnings: List[str] = []
+
+    config = load_config()
+
+    # INIT-04: Check if any staged file triggers a record requirement.
+    # If record_triggers are defined and no staged file matches, skip enforcement.
+    triggers = config.get("record_triggers", [])
+    if triggers and not is_record_required(config):
+        print("No record-trigger paths in staged changes. Gate skipped.")
+        return 0, []
 
     records = collect_records()
     skills = collect_skills()
