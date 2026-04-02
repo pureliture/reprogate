@@ -1,13 +1,14 @@
 ---
 record_id: "ADR-017"
-title: "Claude agents gitignore policy: track agent definitions in repository"
+title: "Claude delivery artifacts gitignore policy: track agents and rg-commands in repository"
 type: "adr"
-status: "Accepted"
+status: "Accepted (amended by phase-workflow review)"
 created_at: "2026-04-02"
-tags: ["gitignore", "agents", "claude-code", "specialist-agents", "delivery-harness"]
+amended_at: "2026-04-02"
+tags: ["gitignore", "agents", "commands", "claude-code", "specialist-agents", "phase-workflow", "delivery-harness"]
 ---
 
-# ADR-017: Claude agents gitignore policy: track agent definitions in repository
+# ADR-017: Claude delivery artifacts gitignore policy: track agents and rg-commands in repository
 
 ## Status
 Accepted
@@ -31,22 +32,33 @@ Accepted
 
 ## Decision
 
-**Option A를 채택한다.** `.gitignore`에서 `.claude/agents/` 경로를 예외 처리하여 에이전트 정의 파일을 레포에 추적한다.
+**Option A를 채택하되, Phase 05 리뷰에서 `/rg:*` 커맨드 파일도 포함하도록 확장한다.**
 
 ```gitignore
-.claude/
-!.claude/agents/
-!.claude/agents/**
+# root .gitignore: ignore session data and known local-only .claude files
+.claude/session-data/
+.claude/settings.json
+.claude/gsd-file-manifest.json
+.claude/package.json
+.claude/hooks/
+
+# .claude/commands/.gitignore: ignore all commands except /rg:* delivery commands
+*
+!rg-discuss.md
+!rg-plan.md
+!rg-execute.md
+!rg-verify.md
 ```
 
-`learn-eval.md`와 같은 개인 커맨드(`commands/`)는 계속 gitignored 상태로 유지한다.
+`learn-eval.md`와 같은 개인 커맨드는 `.claude/commands/.gitignore`의 `*` 패턴으로 계속 gitignored 상태로 유지된다. `/rg:*` 커맨드는 delivery pipeline의 필수 진입점이므로 명시적 예외로 tracked한다.
 
 ## Consequences
 
 - `.claude/agents/planner.md`, `executor.md`, `verifier.md` — 레포에 커밋됨, 팀 전파 가능
+- `.claude/commands/rg-discuss.md`, `rg-plan.md`, `rg-execute.md`, `rg-verify.md` — 레포에 커밋됨 (Phase 05 추가)
 - `.claude/commands/learn-eval.md` — 계속 gitignored (개인 학습 도구)
 - `.claude/settings.json`, 기타 `.claude/` 파일 — 계속 gitignored
 
 ## Rationale
 
-ReproGate의 핵심 원칙은 "기록 가능한 것은 기록해야 한다"이다. specialist agents는 delivery pipeline의 필수 컴포넌트이므로 레포에 추적해야 한다. 반면 `/rg:learn-eval` 커맨드는 개발자 개인의 성장 도구이며, 팀마다 다를 수 있으므로 로컬 전용이 적합하다.
+ReproGate의 핵심 원칙은 "기록 가능한 것은 기록해야 한다"이다. specialist agents와 `/rg:*` 커맨드는 모두 delivery pipeline의 필수 컴포넌트이다 — 에이전트가 있지만 커맨드가 없으면 팀원이 파이프라인을 실행할 수 없다. 반면 `/rg:learn-eval` 커맨드는 개발자 개인의 성장 도구이며, 팀마다 다를 수 있으므로 로컬 전용이 적합하다.

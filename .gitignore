@@ -13,14 +13,20 @@ dist/
 *.egg-info/
 
 # Local AI runtime state
-.claude/*
+# Ignore all .claude/ contents by default, but allow specific delivery artifacts
 .claude/session-data/
-!.claude/agents/
-!.claude/agents/**
+.claude/settings.json
+.claude/gsd-file-manifest.json
+.claude/package.json
+.claude/package-lock.json
+.claude/hooks/
 .codex/
 .dpc/
 .omc/
 .omx/
+
+# ReproGate phase artifact packets (session-local working state)
+.rg/
 
 # Misc
 *.log

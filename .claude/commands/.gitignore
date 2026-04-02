@@ -1,0 +1,7 @@
+# Ignore all commands by default — only /rg:* commands are tracked
+*
+!rg-discuss.md
+!rg-plan.md
+!rg-execute.md
+!rg-verify.md
+!.gitignore

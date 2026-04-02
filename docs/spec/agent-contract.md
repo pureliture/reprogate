@@ -185,3 +185,41 @@ PASS | FAIL
    - Planner: MUST NOT modify code or non-PLAN.md files
    - Executor: MUST NOT rewrite PLAN.md; MUST record all deviations
    - Verifier: MUST NOT modify code; MUST review all deviations from EXECUTION-LOG.md
+
+---
+
+## Phase Workflow Integration
+
+The `/rg:*` commands drive the full cycle. Each command operates on a **phase artifact packet** stored at `.rg/<phase-name>/`.
+
+### Directory Convention
+
+```
+.rg/                          ← gitignored (session-local working state)
+  <phase-name>/
+    CONTEXT.md                ← created by /rg:discuss
+    PLAN.md                   ← created by /rg:plan
+    EXECUTION-LOG.md          ← created and updated by /rg:execute
+    VERIFICATION.md           ← created by /rg:verify
+```
+
+### Command Sequence
+
+```
+/rg:discuss <phase>   →  creates .rg/<phase>/CONTEXT.md
+/rg:plan <phase>      →  reads CONTEXT.md, creates PLAN.md
+/rg:execute <phase>   →  reads PLAN.md, writes code + EXECUTION-LOG.md
+/rg:verify <phase>    →  reads all artifacts + code, creates VERIFICATION.md
+```
+
+Each command checks for its prerequisite artifact and refuses to run if it is missing.
+
+### Agent Files
+
+Commands embed their agent's rules via prompt:
+- `/rg:plan` embeds `.claude/agents/planner.md`
+- `/rg:execute` embeds `.claude/agents/executor.md`
+- `/rg:verify` embeds `.claude/agents/verifier.md`
+
+`/rg:discuss` has no agent file — it conducts the conversation directly.
+
