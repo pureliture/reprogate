@@ -68,15 +68,17 @@ def test_session_stop_creates_summary(tmp_path, monkeypatch):
 
 
 def test_session_stop_creates_observation(tmp_path, monkeypatch):
-    """session_stop.main() creates a session-*-observation.yaml file with observation_id key."""
+    """session_stop.main() creates a session-*-observation.yaml with instinct YAML schema keys."""
     monkeypatch.delenv("REPROGATE_DISABLED", raising=False)
     monkeypatch.delenv("REPROGATE_HOOK_PROFILE", raising=False)
     import session_stop
-    session_stop.main(session_data=tmp_path)
+    session_stop.main(session_data=tmp_path, instincts_dir=tmp_path / "instincts")
     observations = list(tmp_path.glob("session-*-observation.yaml"))
     assert len(observations) == 1, f"Expected 1 observation file, found {len(observations)}"
     content = observations[0].read_text(encoding="utf-8")
-    assert "observation_id:" in content, "observation YAML must contain 'observation_id:' key"
+    # Verify instinct YAML schema fields (SKILL-EVO-01)
+    for key in ("id:", "session_id:", "captured_at:", "observations:", "confidence:", "reviewed:"):
+        assert key in content, f"observation YAML must contain '{key}'"
 
 
 def test_session_stop_disabled(tmp_path, monkeypatch):

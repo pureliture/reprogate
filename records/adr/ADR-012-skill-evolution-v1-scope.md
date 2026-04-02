@@ -36,6 +36,6 @@ ReproGate의 gate layer는 OPA `.rego` 파일을 요구한다. 현재 evolved in
 - Negative: evolved instinct → gate 반영까지 수동 단계가 존재해 자동화 루프가 완전히 닫히지 않는다.
 
 ## Verification
-- [ ] `/learn-eval` 커맨드 구현 시 prose skill 저장 위치가 명시됨.
-- [ ] `SKILL-EVO-01` 요구사항에 "prose instinct까지" 범위가 문서화됨.
-- [ ] v2 backlog에 `reprogate evolve-to-rego` 항목이 등록됨.
+- [x] `/learn-eval` 커맨드 구현 시 prose skill 저장 위치가 명시됨 — `.claude/commands/learn-eval.md` Step 5: `~/.claude/homunculus/evolved/skills/<name>.md`.
+- [x] `SKILL-EVO-01` 요구사항에 "prose instinct까지" 범위가 문서화됨 — `session_stop.py` docstring 및 `specs/session-observation-capture/spec.md` 참조.
+- [x] v2 backlog에 `reprogate evolve-to-rego` 항목이 등록됨 — `records/backlog/BACKLOG-001-evolve-to-rego.md`.
