@@ -2,7 +2,37 @@
 project_name: "{{ project_name }}"
 reprogate_version: "1.0.0"
 
-# Record storage
+# Project identity (used by generate.py)
+project:
+  name: "{{ project_name }}"
+  description: ""
+
+# Workspace configuration (used by generate.py)
+workspaces:
+  primary:
+    name: "{{ project_name }}"
+    branch: "main"
+    runtime: ""
+
+# Processes (used by generate.py)
+processes:
+  enabled: []
+
+# Tool adapters (used by generate.py)
+tools:
+  claude:
+    enabled: true
+    hook_enforcement: true
+  codex:
+    enabled: false
+
+# Record paths (used by generate.py)
+records:
+  wp_path: "records/work-packets"
+  adr_path: "records/adr"
+  changelog_path: "CHANGELOG.md"
+
+# Record storage (used by gatekeeper.py)
 records_dir: "records"
 record_types:
   adr:
@@ -14,7 +44,7 @@ record_types:
     prefix: "RFC"
     required_sections: ["Summary", "Design / Proposal", "Verification"]
 
-# Skill definitions
+# Skill definitions (used by gatekeeper.py)
 skills_dir: "skills"
 active_skills:
   - record-required
@@ -22,8 +52,17 @@ active_skills:
   - scope-defined
   - verification-present
 
-# Gatekeeper behavior
+# Gatekeeper behavior (used by gatekeeper.py)
 gatekeeper:
   engine: "opa"
   strict_mode: true
   fail_closed: true
+
+# Record triggers: path patterns that require an ADR/RFC when changed (INIT-04)
+record_triggers:
+  - pattern: "scripts/**"
+    record_type: "adr"
+    reason: "Core script changes require a decision record"
+  - pattern: "skills/**"
+    record_type: "adr"
+    reason: "Skill policy changes require a decision record"

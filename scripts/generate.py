@@ -40,6 +40,15 @@ def load_config(path: pathlib.Path) -> Dict[str, Any]:
         "processes": {"enabled": []},
         "tools": {"claude": {}, "codex": {}},
         "records": {},
+        # Harness fields (gatekeeper.py consumers)
+        "records_dir": "records",
+        "record_types": {},
+        "skills_dir": "skills",
+        "active_skills": [],
+        "gatekeeper": {"engine": "opa", "strict_mode": True, "fail_closed": True},
+        "reprogate_version": "1.0.0",
+        # INIT-04 trigger patterns
+        "record_triggers": [],
     }
 
     text = path.read_text(encoding="utf-8")
