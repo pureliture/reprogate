@@ -13,7 +13,7 @@ ReproGate v1.0은 ECC 코어(hook lifecycle, skill evolution)와 GSD 플로우(d
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Harness Bootstrap** - `reprogate init/disable` 명령과 설정 인프라로 하네스를 설치·활성화·비활성화할 수 있게 한다 (completed 2026-04-02)
-- [ ] **Phase 2: Hook Lifecycle** - ECC 방식의 session/compact/tool-use/failure hook으로 자동 상태 캡처·거버넌스를 구현한다
+- [x] **Phase 2: Hook Lifecycle** - ECC 방식의 session/compact/tool-use/failure hook으로 자동 상태 캡처·거버넌스를 구현한다 (completed 2026-04-02)
 - [ ] **Phase 3: Skill Evolution** - session observation에서 instinct → prose skill까지의 구조화된 진화 파이프라인을 구현한다
 - [ ] **Phase 4: Specialist Agents** - executor, verifier, planner 3종 에이전트를 CC 서브프로세스로 스폰 가능하게 한다
 - [ ] **Phase 5: Phase Workflow** - discuss→plan→execute→verify 슬래시 커맨드와 phase artifact packet 구조를 구현한다
@@ -53,7 +53,7 @@ Plans:
 Plans:
 - [x] 02-01-PLAN.md — REPROGATE_HOOK_PROFILE gating: get_profile() + VALID_PROFILES in reprogate_hook_base (HOOK-01)
 - [x] 02-02-PLAN.md — Session lifecycle hooks: session_start, session_stop, pretooluse_guard PreCompact (HOOK-02, HOOK-03, HOOK-04)
-- [ ] 02-03-PLAN.md — Governance hooks: failure_logger + pretooluse advisory governance (HOOK-05, HOOK-06)
+- [x] 02-03-PLAN.md — Governance hooks: failure_logger + pretooluse advisory governance (HOOK-05, HOOK-06)
 
 ### Phase 3: Skill Evolution
 **Goal**: Developer can evolve session observations into reusable prose skills through a structured observation→instinct→skill pipeline
@@ -118,7 +118,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Harness Bootstrap | 3/3 | Complete   | 2026-04-02 |
-| 2. Hook Lifecycle | 1/3 | Executing | - |
+| 2. Hook Lifecycle | 3/3 | Complete   | 2026-04-02 |
 | 3. Skill Evolution | 0/1 | Not started | - |
 | 4. Specialist Agents | 0/1 | Not started | - |
 | 5. Phase Workflow | 0/2 | Not started | - |
