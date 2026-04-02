@@ -73,11 +73,16 @@ class TestRgCommandsExistence:
         assert "Goal" in content and "Requirements" in content, \
             "rg-discuss.md must ask for Goal and Requirements"
 
-    def test_rg_commands_tracked_in_gitignore(self):
-        content = GITIGNORE.read_text()
+    def test_rg_commands_tracked_in_commands_gitignore(self):
+        # Tracked via .claude/commands/.gitignore (local gitignore), not root .gitignore
+        # See ADR-017: gitignore negation inside ignored directories requires a local .gitignore
+        commands_gitignore = COMMANDS_DIR / ".gitignore"
+        assert commands_gitignore.exists(), \
+            ".claude/commands/.gitignore must exist to allowlist rg-*.md commands"
+        content = commands_gitignore.read_text()
         for cmd in RG_COMMANDS:
-            assert f"{cmd}.md" in content, \
-                f".gitignore must have exception for .claude/commands/{cmd}.md"
+            assert f"!{cmd}.md" in content, \
+                f".claude/commands/.gitignore must have !{cmd}.md to track it"
 
 
 class TestAgentEmbeddingPattern:
