@@ -21,8 +21,8 @@
 - [ ] **INIT-02**: `REPROGATE_DISABLED=1` 환경 변수로 hook layer를 임시 비활성화할 수 있다.
 - [ ] **INIT-03**: `reprogate disable`이 `.claude/settings.json`에서 hook 설정을 제거한다.
 - [ ] **INIT-04**: `reprogate.yaml`의 `record_triggers` 경로 패턴 기반으로 레코드 요구 여부를 판단한다 (ADR-014).
-- [ ] **INIT-05**: `generate.py` 스키마 불일치 해소 — `init.py` 출력 스키마와 정렬 (Asset Inventory blocker).
-- [ ] **INIT-06**: `AGENTS.md.j2`·`CLAUDE.md.j2` 템플릿의 구버전 정체성("compiler/gatekeeper") 문구를 harness 정체성으로 교체.
+- [x] **INIT-05**: `generate.py` 스키마 불일치 해소 — `init.py` 출력 스키마와 정렬 (Asset Inventory blocker).
+- [x] **INIT-06**: `AGENTS.md.j2`·`CLAUDE.md.j2` 템플릿의 구버전 정체성("compiler/gatekeeper") 문구를 harness 정체성으로 교체.
 
 ### HOOK — Layer 1: 하네스 코어 (ECC 방식, ADR-011, ADR-013)
 
@@ -105,8 +105,8 @@
 | INIT-02 | Phase 1 | Pending |
 | INIT-03 | Phase 1 | Pending |
 | INIT-04 | Phase 1 | Pending |
-| INIT-05 | Phase 1 | Pending |
-| INIT-06 | Phase 1 | Pending |
+| INIT-05 | Phase 1 | Complete |
+| INIT-06 | Phase 1 | Complete |
 | HOOK-01 | Phase 2 | Pending |
 | HOOK-02 | Phase 2 | Pending |
 | HOOK-03 | Phase 2 | Pending |

@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Canonical schema alignment (INIT-05) and harness identity text (INIT-06)
+- [x] 01-01-PLAN.md — Canonical schema alignment (INIT-05) and harness identity text (INIT-06)
 - [ ] 01-02-PLAN.md — Hook injection (`reprogate init`), hook removal (`reprogate disable`), REPROGATE_DISABLED base (INIT-01, INIT-02, INIT-03)
 - [ ] 01-03-PLAN.md — record_triggers path-pattern gating in gatekeeper.py (INIT-04)
 
@@ -116,7 +116,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Harness Bootstrap | 0/3 | Planned | - |
+| 1. Harness Bootstrap | 1/3 | In Progress|  |
 | 2. Hook Lifecycle | 0/2 | Not started | - |
 | 3. Skill Evolution | 0/1 | Not started | - |
 | 4. Specialist Agents | 0/1 | Not started | - |
