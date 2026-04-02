@@ -52,7 +52,7 @@ Plans:
 
 Plans:
 - [x] 02-01-PLAN.md — REPROGATE_HOOK_PROFILE gating: get_profile() + VALID_PROFILES in reprogate_hook_base (HOOK-01)
-- [ ] 02-02-PLAN.md — Session lifecycle hooks: session_start, session_stop, pretooluse_guard PreCompact (HOOK-02, HOOK-03, HOOK-04)
+- [x] 02-02-PLAN.md — Session lifecycle hooks: session_start, session_stop, pretooluse_guard PreCompact (HOOK-02, HOOK-03, HOOK-04)
 - [ ] 02-03-PLAN.md — Governance hooks: failure_logger + pretooluse advisory governance (HOOK-05, HOOK-06)
 
 ### Phase 3: Skill Evolution
