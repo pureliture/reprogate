@@ -35,8 +35,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md — Canonical schema alignment (INIT-05) and harness identity text (INIT-06)
-- [ ] 01-02-PLAN.md — Hook injection (`reprogate init`), hook removal (`reprogate disable`), REPROGATE_DISABLED base (INIT-01, INIT-02, INIT-03)
-- [ ] 01-03-PLAN.md — record_triggers path-pattern gating in gatekeeper.py (INIT-04)
+- [x] 01-02-PLAN.md — Hook injection (`reprogate init`), hook removal (`reprogate disable`), REPROGATE_DISABLED base (INIT-01, INIT-02, INIT-03)
+- [x] 01-03-PLAN.md — record_triggers path-pattern gating in gatekeeper.py (INIT-04)
 
 ### Phase 2: Hook Lifecycle
 **Goal**: Harness automatically captures session state, governance events, and gate failures through the ECC hook lifecycle
