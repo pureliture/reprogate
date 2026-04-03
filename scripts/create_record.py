@@ -4,7 +4,7 @@ import argparse
 import pathlib
 import re
 import sys
-from datetime import date, timezone
+from datetime import date
 from typing import Any, Dict, List
 
 import yaml

@@ -34,7 +34,15 @@ def remove_reprogate_hooks(settings_path: pathlib.Path) -> None:
     """
     if not settings_path.exists():
         return
-    data: Dict[str, Any] = json.loads(settings_path.read_text(encoding="utf-8"))
+    raw = settings_path.read_text(encoding="utf-8")
+    try:
+        data: Dict[str, Any] = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        print(
+            f"Warning: {settings_path} contains invalid JSON ({exc}); no hooks removed.",
+            file=sys.stderr,
+        )
+        return
     hooks = data.get("hooks", {})
     for event in list(hooks.keys()):
         filtered_groups = []

@@ -113,11 +113,13 @@ def inject_reprogate_hooks(
     for event, groups in hooks_to_add.items():
         if event not in data["hooks"]:
             data["hooks"][event] = []
-        # Build set of already-registered commands for idempotency check
+        # Build set of already-registered commands for idempotency check.
+        # Use .get("command") to tolerate non-command hook entries gracefully.
         existing_commands: set[str] = {
-            h["command"]
+            h.get("command", "")
             for g in data["hooks"][event]
             for h in g.get("hooks", [])
+            if h.get("command")
         }
         for group in groups:
             new_commands = {h["command"] for h in group.get("hooks", [])}
