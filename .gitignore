@@ -13,11 +13,27 @@ dist/
 *.egg-info/
 
 # Local AI runtime state
-.claude/
+# Ignore all .claude/ contents by default, but allow specific delivery artifacts
+.claude/session-data/
+.claude/settings.json
+.claude/gsd-file-manifest.json
+.claude/package.json
+.claude/package-lock.json
+.claude/hooks/
+.claude/agents/gsd-*.md
 .codex/
 .dpc/
 .omc/
 .omx/
+
+# ReproGate phase artifact packets (session-local working state)
+.rg/
+
+# GSD workspace planning artifacts (session-local, not part of the product)
+.planning/
+
+# openspec change management artifacts (workspace-local tooling)
+openspec/
 
 # Misc
 *.log

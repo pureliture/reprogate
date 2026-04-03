@@ -2,96 +2,81 @@
 
 ## Current Stage
 
-ReproGate is now at the point where:
+ReproGate has pivoted from a methodology compiler/gatekeeper to a **Claude Code-centered, artifact-driven delivery harness** ([ADR-009](../../records/adr/ADR-009-reprogate-harness-pivot.md)).
 
-- the framework surface exists as an independent repository
-- the repository can bootstrap a self-contained target project
-- the canonical definition exists in `docs/strategy/final-definition.md`
-- the remaining work is to align the rest of the living docs and implementation surface to that definition
+The foundation layer is complete:
 
-## Near-Term Priorities
+- CLI (`cli.py`), record management, gatekeeper, and skills infrastructure are working
+- Pre-commit gate enforcement is active
+- Strategy documents are being aligned to the new harness identity
 
-### 1. Canonical definition & Product boundary
+The next cycle builds the harness runtime on top of this foundation.
 
-Inject the final definition and product boundary into the living documentation surface so the product reads consistently everywhere.
+## v1.0 Priorities
 
-Focus areas:
+The v1.0 milestone delivers a single-developer delivery harness integrating ECC-style operating primitives with GSD-style phase workflow. Six phases, executed in order (see `.planning/ROADMAP.md` for implementation detail):
 
-- README and strategy docs
-- Boundary definitions (In/Out scope, Core/Flexible/Integration layers)
-- governance and master-plan docs
-- design and implementation planning docs
+### 1. Harness Bootstrap
 
-### 2. Record-backed core implementation
+`reprogate init/disable` commands and settings injection. A developer can install, configure, and deactivate the harness with a single command.
 
-Harden the core around the final ReproGate thesis:
+### 2. Hook Lifecycle
 
-Focus areas:
+ECC-style session, compact, tool-use, and failure hooks. The harness automatically captures state, governance events, and gate failures through the hook lifecycle.
 
-- work records as mandatory artifacts
-- Skill accumulation as a first-class product concept
-- Rego-based gate enforcement
-- artifact-driven workflow instead of heavy state tracking
+### 3. Skill Evolution
 
-### 3. ReproGate identity transition
+Structured observation → instinct → prose skill pipeline. Session observations are progressively refined into reusable, enforceable skills.
 
-Complete the outward transition from legacy `dpc` wording to ReproGate while preserving historical IDs where needed.
+### 4. Specialist Agents
 
-Focus areas:
+Executor, verifier, and planner agents running as Claude Code sub-processes with clear input/output contracts.
 
-- product-facing naming updates
-- clear explanation of legacy `dpc` identifiers in code and records
-- docs and package surface consistency
+### 5. Phase Workflow
 
-## Mid-Term Direction
+`discuss → plan → execute → verify` slash commands with phase artifact packets. The full development cycle is driven through `/rg:*` commands.
 
-### Multi-entry & Late binding (Lightweight adoption)
+### 6. Artifact Lifecycle
 
-Define a flexible path for teams or individuals that want record-backed enforcement without committing to a full workflow structure on day one.
+Phase summary generation for sharing and harness health checks for operational awareness.
 
-Expected characteristics:
+## Mid-Term Direction (v2)
 
-- **Freeform-first & Skill-first support**: start with raw traces or single skills
-- **Late structure binding**: allow users to elevate raw traces into structured records later
-- **Storage agnosticism**: support external storage backends while maintaining the record metadata contract
-- lower adoption friction by not enforcing workflows strictly
+Once the v1.0 harness is stable, expansion focuses on automation, visibility, and integration:
 
-### Stronger adapter surfaces
+- **Skill evolution automation** — automated prose-to-rego conversion (`evolve-to-rego`)
+- **Terminal HUD** — real-time gate status and phase progress visibility
+- **MCP server** — expose records and skills as resources to external AI agents
+- **Deep search integration** — `reprogate search` backed by structured document indexing
+- **Team-scale skill sharing** — remote policy synchronization across repositories
 
-Improve first-class support for:
-
-- Codex and OMX
-- Claude and OMC
-- future toolchains through the same record-and-gate boundary model
+These are deferred to v2 to keep v1.0 focused on the core harness loop.
 
 ## Longer-Term Direction
 
 ### Team operating standard
 
-ReproGate should become usable as a shared team operating standard rather than only a solo workflow.
+ReproGate should become usable as a shared team operating standard:
 
-This requires:
+- reusable work records with predictable gate points
+- explicit skill extension and sharing rules
+- stable semantics across repositories and teams
 
-- reusable work records
-- predictable gate points
-- explicit Skill extension rules
-- stable semantics across repositories
+### Multi-runtime potential
 
-### Optional integrations
+The harness architecture should remain open to:
 
-Once the framework core is stable, ReproGate may grow optional integrations with:
+- MCP-based integration with non-Claude runtimes
+- multi-agent orchestration beyond the current CC sub-process model
+- enterprise audit and compliance surface extensions
 
-- external knowledge systems
-- pipelines
-- approval systems
-- shared reporting or audit layers
-
-Those are downstream integrations, not the current center of gravity.
+These are architectural options, not committed work.
 
 ## Non-Roadmap Warning
 
-ReproGate should not expand by chasing every tool feature. The roadmap should stay anchored to the product's core promise:
+ReproGate should not expand by chasing features outside the harness delivery loop. The roadmap stays anchored to:
 
-- make work records mandatory
-- turn repeated patterns into durable Skills
-- enforce those patterns through inspectable gates
+- hook-driven state capture and governance
+- structured skill evolution from session observations
+- artifact-backed phase workflow with specialist agents
+- inspectable gates at every stage

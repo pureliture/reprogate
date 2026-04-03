@@ -29,7 +29,7 @@
 
 | # | 구체적으로 | 이유 |
 |---|---|---|
-| **OUT-1** | Workflow를 강제로 밀어붙이지 않는다 | ReproGate는 workflow runner가 아니라 methodology compiler |
+| **OUT-1** | Workflow를 강제로 밀어붙이지 않는다 | ReproGate는 workflow runner가 아니라 artifact-driven delivery harness |
 | **OUT-2** | 코드 작성·실행 자체를 하지 않는다 | 실행기가 아님 |
 | **OUT-3** | 특정 저장 위치/포맷을 강제하지 않는다 | 저장 방식은 사용자 자유, record contract만 유지 |
 | **OUT-4** | 특정 AI 도구에 종속되지 않는다 | Adapter boundary 유지 |

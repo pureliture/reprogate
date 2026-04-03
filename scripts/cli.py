@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""ReproGate CLI - unified entry point for repository governance tooling."""
 import argparse
 import pathlib
 import subprocess
@@ -20,10 +21,10 @@ def run_search(args: List[str]) -> int:
 
 
 def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="dpc helper CLI.")
+    parser = argparse.ArgumentParser(description="ReproGate CLI - repository governance tooling.")
     parser.add_argument(
         "command",
-        choices=["init", "generate", "check", "search", "search-content", "print"],
+        choices=["init", "generate", "check", "gate", "create", "search", "search-content", "print", "disable"],
         help="Subcommand to run.",
     )
     parser.add_argument("extra", nargs=argparse.REMAINDER)
@@ -40,14 +41,18 @@ def main(argv: List[str] | None = None) -> int:
         return run_script("init.py", extra)
     if args.command == "generate":
         return run_script("generate.py", extra)
-    if args.command == "check":
-        return run_script("check_compliance.py", extra)
+    if args.command in ("check", "gate"):
+        return run_script("gatekeeper.py", extra)
+    if args.command == "create":
+        return run_script("create_record.py", extra)
     if args.command == "search":
         return run_search(["search", *extra])
     if args.command == "search-content":
         return run_search(["search-content", *extra])
     if args.command == "print":
         return run_search(["print", *extra])
+    if args.command == "disable":
+        return run_script("disable.py", extra)
     return 1
 
 

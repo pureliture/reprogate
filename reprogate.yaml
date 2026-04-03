@@ -1,16 +1,68 @@
 # ReproGate Configuration
-# 이 파일은 대상 프로젝트의 루트에 위치하며, 프레임워크 동작을 제어합니다.
-
 project_name: "ReproGate"
 reprogate_version: "1.0.0"
 
-# 강제할 규칙(Skill)들이 위치한 경로 (기본값: 저장소 내 skills/)
-skills_dir: "skills"
+# Project identity (used by generate.py)
+project:
+  name: "ReproGate"
+  description: "Artifact-driven delivery harness for AI-assisted development"
 
-# 작업 기록(Record)이 저장되는 경로 (기본값: 저장소 내 records/)
+# Workspace configuration (used by generate.py)
+workspaces:
+  primary:
+    name: "ReproGate"
+    branch: "master"
+    runtime: "Python 3.10+"
+
+# Processes (used by generate.py)
+processes:
+  enabled: []
+
+# Tool adapters (used by generate.py)
+tools:
+  claude:
+    enabled: true
+    hook_enforcement: true
+  codex:
+    enabled: false
+
+# Record paths (used by generate.py)
+records:
+  wp_path: "records/work-packets"
+  adr_path: "records/adr"
+  changelog_path: "CHANGELOG.md"
+
+# Record storage (used by gatekeeper.py)
 records_dir: "records"
+record_types:
+  adr:
+    dir: "adr"
+    prefix: "ADR"
+    required_sections: ["Context", "Decision", "Consequences", "Verification"]
+  rfc:
+    dir: "rfc"
+    prefix: "RFC"
+    required_sections: ["Summary", "Design / Proposal", "Verification"]
 
-# Gatekeeper 설정
+# Skill definitions (used by gatekeeper.py)
+skills_dir: "skills"
+active_skills:
+  - record-required
+  - decision-documented
+  - scope-defined
+  - verification-present
+
+# Gatekeeper behavior (used by gatekeeper.py)
 gatekeeper:
-  engine: "opa" # 추후 rego/opa 엔진 연동
-  strict_mode: true # 검증 실패 시 파이프라인/커밋 차단 여부
+  engine: "opa"
+  strict_mode: true
+  fail_closed: true
+
+# Record triggers: path patterns that require an ADR/RFC when changed (INIT-04)
+record_triggers:
+  - pattern: "scripts/**"
+    record_type: "adr"
+    reason: "Core script changes require a decision record"
+  - pattern: "skills/**"
+    record_type: "adr"
+    reason: "Skill policy changes require a decision record"

@@ -8,6 +8,7 @@ from typing import Any, Dict, Iterable, List, Sequence, Tuple
 
 import yaml
 
+from _config import merge_config_defaults
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "reprogate.yaml"
@@ -40,6 +41,15 @@ def load_config(path: pathlib.Path) -> Dict[str, Any]:
         "processes": {"enabled": []},
         "tools": {"claude": {}, "codex": {}},
         "records": {},
+        # Harness fields (gatekeeper.py consumers)
+        "records_dir": "records",
+        "record_types": {},
+        "skills_dir": "skills",
+        "active_skills": [],
+        "gatekeeper": {"engine": "opa", "strict_mode": True, "fail_closed": True},
+        "reprogate_version": "1.0.0",
+        # INIT-04 trigger patterns
+        "record_triggers": [],
     }
 
     text = path.read_text(encoding="utf-8")
@@ -48,15 +58,7 @@ def load_config(path: pathlib.Path) -> Dict[str, Any]:
     if loaded is None:
         return default_data
 
-    # Merge loaded data with defaults
-    for key, default_value in default_data.items():
-        if key not in loaded:
-            loaded[key] = default_value
-        elif isinstance(default_value, dict) and isinstance(loaded.get(key), dict):
-            for sub_key, sub_default in default_value.items():
-                if sub_key not in loaded[key]:
-                    loaded[key][sub_key] = sub_default
-
+    merge_config_defaults(loaded, default_data)
     return loaded
 
 
@@ -65,6 +67,26 @@ def render_template(text: str, context: Dict[str, str]) -> str:
     for key, value in context.items():
         rendered = rendered.replace(f"{{{{ {key} }}}}", value)
     return rendered
+
+
+def _build_codex_notes_block(enabled: bool) -> str:
+    if not enabled:
+        return "- Codex adapter generation is disabled in this project configuration."
+    return (
+        "- Follow this file, `AGENTS.md`, and the copied framework docs for Codex or JetBrains AI Assistant work.\n"
+        "- If a launch gate is installed, prefer it for new writable sessions."
+    )
+
+
+def _build_claude_notes_block(enabled: bool, hook_enabled: bool) -> str:
+    if not enabled:
+        return "- Claude adapter generation is disabled in this project configuration."
+    hook_note = (
+        "- The generated `.claude/settings.json` and hook wrapper already point to `scripts/hooks/claude_pretooluse_guard.py`."
+        if hook_enabled
+        else "- Claude hook enforcement is disabled in this project configuration."
+    )
+    return "- Claude adapters should follow the same process flow and use the same tracking artifacts.\n" + hook_note
 
 
 def context_from_config(config: Dict[str, Any]) -> Dict[str, str]:
@@ -103,22 +125,8 @@ def context_from_config(config: Dict[str, Any]) -> Dict[str, str]:
         "wp_path": str(records["wp_path"]),
         "adr_path": str(records["adr_path"]),
         "changelog_path": str(records["changelog_path"]),
-        "codex_notes_block": (
-            "- Follow this file, `AGENTS.md`, and the copied framework docs for Codex or JetBrains AI Assistant work.\n"
-            "- If a launch gate is installed, prefer it for new writable sessions."
-            if codex_enabled
-            else "- Codex adapter generation is disabled in this project configuration."
-        ),
-        "claude_notes_block": (
-            "- Claude adapters should follow the same process flow and use the same tracking artifacts.\n"
-            + (
-                "- The generated `.claude/settings.json` and hook wrapper already point to `scripts/hooks/claude_pretooluse_guard.py`."
-                if claude_hook_enabled
-                else "- Claude hook enforcement is disabled in this project configuration."
-            )
-            if claude_enabled
-            else "- Claude adapter generation is disabled in this project configuration."
-        ),
+        "codex_notes_block": _build_codex_notes_block(codex_enabled),
+        "claude_notes_block": _build_claude_notes_block(claude_enabled, claude_hook_enabled),
         "claude_hook_block": (
             "When Claude hook enforcement is enabled, the generated `.claude/settings.json` and "
             "`.claude/hooks/pretooluse-dpc-guard.py` route to `scripts/hooks/claude_pretooluse_guard.py`."
@@ -233,15 +241,19 @@ def main(argv: List[str] | None = None) -> int:
     config = load_config(config_path)
     context = context_from_config(config)
 
-    copy_framework_tree(output_root, force=args.force)
-    print("Copied framework directories: docs/, scripts/, skills/, templates/")
+    try:
+        copy_framework_tree(output_root, force=args.force)
+        print("Copied framework directories: docs/, scripts/, skills/, templates/")
 
-    for output_path in render_outputs(output_root, config_path, config, context, force=args.force):
-        try:
-            shown = output_path.relative_to(output_root)
-        except ValueError:
-            shown = output_path
-        print(f"Generated {shown}")
+        for output_path in render_outputs(output_root, config_path, config, context, force=args.force):
+            try:
+                shown = output_path.relative_to(output_root)
+            except ValueError:
+                shown = output_path
+            print(f"Generated {shown}")
+    except FileExistsError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
 
     return 0
 
