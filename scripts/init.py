@@ -40,7 +40,6 @@ REPROGATE_HOOKS: Dict[str, List[Dict[str, Any]]] = {
     ],
     "PreToolUse": [
         {
-            "matcher": "Bash",
             "hooks": [
                 {
                     "type": "command",

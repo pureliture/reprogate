@@ -45,8 +45,12 @@ def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
     }
     if not config_path.exists():
         return defaults
-    text = config_path.read_text(encoding="utf-8")
-    loaded = yaml.safe_load(text)
+    try:
+        text = config_path.read_text(encoding="utf-8")
+        loaded = yaml.safe_load(text)
+    except (OSError, UnicodeDecodeError, yaml.YAMLError) as exc:
+        print(f"Warning: could not parse {config_path} ({exc}); using defaults.", file=sys.stderr)
+        loaded = {}
     if not isinstance(loaded, dict):
         print(f"Warning: {config_path} did not parse as a YAML mapping; using defaults.", file=sys.stderr)
         loaded = {}
@@ -280,22 +284,27 @@ def evaluate_gate(strict: bool = False, config: Dict[str, Any] | None = None) ->
     records_dir = ROOT / config["records_dir"]
     skills_dir = ROOT / config["skills_dir"]
 
-    # INIT-04: Check if any staged file triggers a record requirement.
-    # If record_triggers are defined and no staged file matches, skip enforcement.
+    # INIT-04: record_required gates only the record-existence check.
+    # Frontmatter/verification/scope checks always run so CI and no-staged-changes
+    # contexts still catch structural issues in existing records.
     triggers = config.get("record_triggers", [])
-    if triggers and not is_record_required(config):
-        print("No record-trigger paths in staged changes. Gate skipped.")
-        return 0, []
+    record_required = (not triggers) or is_record_required(config)
+    if not record_required:
+        print("No record-trigger paths in staged changes. Skipping record-required check.")
 
     records = collect_records(records_dir)
     skills = collect_skills(skills_dir)
-    skill_names = [s.name for s in skills]
+
+    # Respect active_skills from config: if non-empty, restrict to listed skills only.
+    active_skills = config.get("active_skills", [])
+    skill_names = [s.name for s in skills if not active_skills or s.name in active_skills]
 
     print(f"📋 Records: {len(records)}개 발견")
-    print(f"🛠  Skills:  {len(skills)}개 발견")
+    print(f"🛠  Skills:  {len(skills)}개 발견 ({len(skill_names)}개 활성)")
     print()
 
-    _check_record_required(records, skill_names, errors)
+    if record_required:
+        _check_record_required(records, skill_names, errors)
     _check_frontmatter(records, errors)
     _check_decision_documented(records, skill_names, errors, warnings)
     _check_verification_present(records, skill_names, errors)
