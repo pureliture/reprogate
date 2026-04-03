@@ -22,7 +22,7 @@ def search_content(term: str, format_json: bool = False) -> List[Dict[str, Any]]
             continue
         try:
             content = md.read_text(encoding="utf-8")
-        except Exception:
+        except (OSError, PermissionError, UnicodeDecodeError):
             continue
 
         matches = []

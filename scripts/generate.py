@@ -241,15 +241,19 @@ def main(argv: List[str] | None = None) -> int:
     config = load_config(config_path)
     context = context_from_config(config)
 
-    copy_framework_tree(output_root, force=args.force)
-    print("Copied framework directories: docs/, scripts/, skills/, templates/")
+    try:
+        copy_framework_tree(output_root, force=args.force)
+        print("Copied framework directories: docs/, scripts/, skills/, templates/")
 
-    for output_path in render_outputs(output_root, config_path, config, context, force=args.force):
-        try:
-            shown = output_path.relative_to(output_root)
-        except ValueError:
-            shown = output_path
-        print(f"Generated {shown}")
+        for output_path in render_outputs(output_root, config_path, config, context, force=args.force):
+            try:
+                shown = output_path.relative_to(output_root)
+            except ValueError:
+                shown = output_path
+            print(f"Generated {shown}")
+    except FileExistsError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
 
     return 0
 

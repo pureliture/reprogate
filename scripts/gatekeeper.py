@@ -27,6 +27,11 @@ REQUIRED_ADR_SECTIONS = ["Context", "Decision", "Consequences"]
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
+# Module-level defaults — no I/O at import time.
+# evaluate_gate() overrides these from config; tests may monkeypatch them.
+RECORDS_DIR = ROOT / "records"
+SKILLS_DIR = ROOT / "skills"
+
 
 def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
     """reprogate.yaml에서 설정을 로딩한다 (PyYAML 사용)."""
@@ -45,10 +50,6 @@ def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
     merge_config_defaults(loaded, defaults)
     return loaded
 
-
-_config = load_config()
-RECORDS_DIR = ROOT / _config["records_dir"]
-SKILLS_DIR = ROOT / _config["skills_dir"]
 
 REQUIRED_FRONTMATTER_FIELDS = ["record_id", "type", "status"]
 
@@ -89,24 +90,24 @@ def parse_sections(path: pathlib.Path) -> List[str]:
     return sections
 
 
-def collect_records() -> List[Tuple[pathlib.Path, Dict[str, Any], List[str]]]:
+def collect_records(records_dir: pathlib.Path) -> List[Tuple[pathlib.Path, Dict[str, Any], List[str]]]:
     """records/ 디렉토리에서 .md 파일을 수집하고 frontmatter와 sections를 파싱한다."""
     records = []
-    if not RECORDS_DIR.exists():
+    if not records_dir.exists():
         return records
-    for md_file in sorted(RECORDS_DIR.rglob("*.md")):
+    for md_file in sorted(records_dir.rglob("*.md")):
         fm = parse_frontmatter(md_file)
         sections = parse_sections(md_file)
         records.append((md_file, fm, sections))
     return records
 
 
-def collect_skills() -> List[pathlib.Path]:
+def collect_skills(skills_dir: pathlib.Path) -> List[pathlib.Path]:
     """skills/ 디렉토리에서 guidelines.md가 있는 Skill을 수집한다."""
     skills = []
-    if not SKILLS_DIR.exists():
+    if not skills_dir.exists():
         return skills
-    for guidelines in sorted(SKILLS_DIR.rglob("guidelines.md")):
+    for guidelines in sorted(skills_dir.rglob("guidelines.md")):
         skills.append(guidelines.parent)
     return skills
 
@@ -269,6 +270,9 @@ def evaluate_gate(strict: bool = False, config: Dict[str, Any] | None = None) ->
     if config is None:
         config = load_config()
 
+    records_dir = ROOT / config["records_dir"]
+    skills_dir = ROOT / config["skills_dir"]
+
     # INIT-04: Check if any staged file triggers a record requirement.
     # If record_triggers are defined and no staged file matches, skip enforcement.
     triggers = config.get("record_triggers", [])
@@ -276,8 +280,8 @@ def evaluate_gate(strict: bool = False, config: Dict[str, Any] | None = None) ->
         print("No record-trigger paths in staged changes. Gate skipped.")
         return 0, []
 
-    records = collect_records()
-    skills = collect_skills()
+    records = collect_records(records_dir)
+    skills = collect_skills(skills_dir)
     skill_names = [s.name for s in skills]
 
     print(f"📋 Records: {len(records)}개 발견")
