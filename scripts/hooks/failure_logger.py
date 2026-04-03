@@ -7,6 +7,8 @@ import pathlib
 import secrets
 import sys
 
+import yaml
+
 sys.path.insert(0, os.path.dirname(__file__))
 from reprogate_hook_base import check_disabled, get_profile
 
@@ -36,16 +38,19 @@ def main(gate_failures_dir: pathlib.Path | None = None) -> int:
     command = tool_input.get("command", "") or tool_input.get("file_path", "")
     error = payload.get("error", "")
 
-    fm_sep = "---"
+    fm_data = {
+        "type": "gate-failure",
+        "captured_at": now,
+        "profile": profile,
+        "tool_name": tool_name,
+        "tool_input_command": command,
+        "hook_event": "PostToolUseFailure",
+    }
+    fm_yaml = yaml.safe_dump(fm_data, default_flow_style=False, allow_unicode=True).rstrip()
     content = (
-        f"{fm_sep}\n"
-        "type: gate-failure\n"
-        f"captured_at: \"{now}\"\n"
-        f"profile: {profile}\n"
-        f"tool_name: {tool_name}\n"
-        f"tool_input_command: \"{command}\"\n"
-        f"hook_event: PostToolUseFailure\n"
-        f"{fm_sep}\n\n"
+        f"---\n"
+        f"{fm_yaml}\n"
+        f"---\n\n"
         f"# Gate Failure: {tool_name}\n\n"
         f"**Captured at:** {now}  \n"
         f"**Profile:** {profile}  \n"

@@ -99,7 +99,15 @@ def inject_reprogate_hooks(
     """
     data: Dict[str, Any] = {}
     if settings_path.exists():
-        data = json.loads(settings_path.read_text(encoding="utf-8"))
+        raw = settings_path.read_text(encoding="utf-8")
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError as exc:
+            print(
+                f"Warning: {settings_path} contains invalid JSON ({exc}); treating as empty.",
+                file=sys.stderr,
+            )
+            data = {}
     if "hooks" not in data:
         data["hooks"] = {}
 

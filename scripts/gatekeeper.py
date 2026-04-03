@@ -46,7 +46,10 @@ def load_config(config_path: pathlib.Path | None = None) -> Dict[str, Any]:
     if not config_path.exists():
         return defaults
     text = config_path.read_text(encoding="utf-8")
-    loaded = yaml.safe_load(text) or {}
+    loaded = yaml.safe_load(text)
+    if not isinstance(loaded, dict):
+        print(f"Warning: {config_path} did not parse as a YAML mapping; using defaults.", file=sys.stderr)
+        loaded = {}
     merge_config_defaults(loaded, defaults)
     return loaded
 
@@ -118,12 +121,15 @@ def get_changed_files() -> List[str]:
     Returns empty list if git is unavailable or not in a repo.
     Uses --cached (staged) rather than HEAD so pre-commit hooks see correct scope.
     """
-    result = subprocess.run(
-        ["git", "diff", "--cached", "--name-only"],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    try:
+        result = subprocess.run(
+            ["git", "diff", "--cached", "--name-only"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except (FileNotFoundError, OSError):
+        return []
     if result.returncode != 0:
         return []
     return [f.strip() for f in result.stdout.splitlines() if f.strip()]
@@ -164,7 +170,8 @@ def is_record_required(config: Dict[str, Any]) -> bool:
     changed = get_changed_files()
     for filepath in changed:
         for trigger in triggers:
-            if matches_trigger(filepath, trigger["pattern"]):
+            pattern = trigger.get("pattern")
+            if pattern and matches_trigger(filepath, pattern):
                 return True
     return False
 

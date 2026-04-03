@@ -117,7 +117,7 @@ def evaluate_skill_opa(skill_dir: pathlib.Path, input_data: Dict[str, Any]) -> S
         deny_cmd = [
             "opa", "eval",
             "--data", str(rego_path),
-            "--input", "/dev/stdin",
+            "--stdin-input",
             "--format", "json",
             "data.reprogate.rules.deny",
         ]
@@ -152,7 +152,7 @@ def evaluate_skill_opa(skill_dir: pathlib.Path, input_data: Dict[str, Any]) -> S
         warn_cmd = [
             "opa", "eval",
             "--data", str(rego_path),
-            "--input", "/dev/stdin",
+            "--stdin-input",
             "--format", "json",
             "data.reprogate.rules.warn",
         ]
